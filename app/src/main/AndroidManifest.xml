@@ -10,10 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.My_App_Test1">
 
-        <activity android:name=".TitleActivity"
-            android:exported="true">
-        </activity>
-
         <activity
             android:name=".MainActivity"
             android:exported="true">

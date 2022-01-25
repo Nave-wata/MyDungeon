@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">My_App_Test1</string>
     <string name="start_button">Start!!</string>
+    <string name="img_title">img_title</string>
 </resources>
