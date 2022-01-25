@@ -11,6 +11,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setScreenTitle();
+    }
+
+    private void setScreenTitle() {
+        setContentView(R.layout.activity_title);
+
+        Button title_Button = findViewById(R.id.start_button);
+        title_Button.setOnClickListener(v -> setScreenMain());
+    }
+
+    private void setScreenMain() {
         setContentView(R.layout.activity_home);
     }
 }
