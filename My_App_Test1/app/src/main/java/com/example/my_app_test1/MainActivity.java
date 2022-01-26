@@ -8,7 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,5 +55,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void setScreenMain() {
         setContentView(R.layout.activity_home);
+
+        EditText editText = findViewById(R.id.Save_Text);
+        ImageButton saveButton = findViewById(R.id.save_Button);
+        TextView Text1 = findViewById(R.id.textView1);
+        TextView Text2 = findViewById(R.id.textView2);
+        TextView Text3 = findViewById(R.id.textView3);
+
+        saveButton.setOnClickListener(v -> {
+            String text = editText.getText().toString();
+            Text1.setText(text);
+        });
+
     }
 }
