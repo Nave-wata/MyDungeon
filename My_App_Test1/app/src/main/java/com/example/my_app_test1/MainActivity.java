@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title);
 
-
-        getBitmapFromAsset("title.png");
+        // タイトル
+        setScreenTitle();
     }
 
 
@@ -28,12 +28,29 @@ public class MainActivity extends AppCompatActivity {
         ImageView imageView = (ImageView)findViewById(R.id.image_view);
         AssetManager assetManager = getAssets();
         InputStream istr = null;
+
         try {
             istr = assetManager.open(strName);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
         Bitmap bitmap = BitmapFactory.decodeStream(istr);
         imageView.setImageBitmap(bitmap);
+    }
+
+    private void setScreenTitle() {
+        setContentView(R.layout.activity_title);
+
+        // 画像
+        getBitmapFromAsset("title/title.png");
+
+        // スタートボタン
+        Button title_Button = findViewById(R.id.start_button);
+        title_Button.setOnClickListener(v -> setScreenMain());
+    }
+
+    private void setScreenMain() {
+        setContentView(R.layout.activity_home);
     }
 }
