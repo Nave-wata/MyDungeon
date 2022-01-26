@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void getBitmapFromAsset(String strName) {
-        int ID = getResources().getIdentifier("image_view", "id", getPackageName());
+    private void getImageViewBitmapFromAsset(String strName, String strID) {
+        int ID = getResources().getIdentifier(strID, "id", getPackageName());
         ImageView imageView = (ImageView)findViewById(ID);
         AssetManager assetManager = getAssets();
         InputStream istr = null;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_title);
 
         // 画像
-        getBitmapFromAsset("title/title.png");
+        getImageViewBitmapFromAsset("title/title.png", "image_view");
 
         // スタートボタン
         Button title_Button = findViewById(R.id.start_button);
