@@ -3,5 +3,5 @@
     <string name="start_button">Start!!</string>
     <string name="img_description1">img_title</string>
     <string name="editText">Enter Hear!</string>
-    <string name="NullText"></string>
+    <string name="NullText">now</string>
 </resources>

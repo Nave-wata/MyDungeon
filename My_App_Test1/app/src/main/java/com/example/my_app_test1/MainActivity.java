@@ -64,7 +64,14 @@ public class MainActivity extends AppCompatActivity {
 
         saveButton.setOnClickListener(v -> {
             String text = editText.getText().toString();
-            Text1.setText(text);
+
+            if (Text1.getText().toString() == getString(R.string.NullText)) {
+                Text1.setText(text);
+            } else if (Text2.getText().toString() == getString(R.string.NullText)) {
+                Text2.setText(text);
+            } else if (Text3.getText().toString() == getString(R.string.NullText)) {
+                Text3.setText(text);
+            }
         });
 
     }
