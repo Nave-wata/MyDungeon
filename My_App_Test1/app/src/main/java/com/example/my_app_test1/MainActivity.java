@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void getBitmapFromAsset(String strName) {
-        ImageView imageView = (ImageView)findViewById(R.id.image_view);
+        int ID = getResources().getIdentifier("image_view", "id", getPackageName());
+        ImageView imageView = (ImageView)findViewById(ID);
         AssetManager assetManager = getAssets();
         InputStream istr = null;
 
