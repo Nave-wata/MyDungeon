@@ -10,13 +10,16 @@
         android:layout_width="143dp"
         android:layout_height="65dp"
         android:background="@android:color/transparent"
-        android:text="@string/start_button"
+        android:backgroundTint="@color/black"
         android:onClick="@string/start_button"
+        android:text="@string/start_button"
+        android:textColor="#FF0000"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.626" />
 
     <ImageView
         android:id="@+id/image_view"
@@ -26,5 +29,7 @@
         android:scaleType="centerCrop"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="186dp" />
+
+
 
 </android.support.constraint.ConstraintLayout>
