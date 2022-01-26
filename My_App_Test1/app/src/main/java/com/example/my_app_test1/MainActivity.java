@@ -25,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private Bitmap getBitmapFromAsset(String strName)
-    {
+    private Bitmap getBitmapFromAsset(String strName) {
         AssetManager assetManager = getAssets();
         InputStream istr = null;
         try {
