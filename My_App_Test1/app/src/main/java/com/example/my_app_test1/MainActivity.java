@@ -17,15 +17,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_title);
 
-        ImageView imageView = (ImageView)findViewById(R.id.image_view);
-        Bitmap image = getBitmapFromAsset("title.png");
-        imageView.setImageBitmap(image);
+
+        getBitmapFromAsset("title.png");
     }
 
 
-    private Bitmap getBitmapFromAsset(String strName) {
+    private void getBitmapFromAsset(String strName) {
+        ImageView imageView = (ImageView)findViewById(R.id.image_view);
         AssetManager assetManager = getAssets();
         InputStream istr = null;
         try {
@@ -34,6 +34,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Bitmap bitmap = BitmapFactory.decodeStream(istr);
-        return bitmap;
+        imageView.setImageBitmap(bitmap);
     }
 }
