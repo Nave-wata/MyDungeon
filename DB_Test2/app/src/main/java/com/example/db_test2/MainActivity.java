@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
         helper = new SampleDatabaseHelper(this);
 
         // データを表示
-        onShow();
+        //onShow();
     }
-
+/*
     // データを表示する
     protected void onShow() {
 
@@ -128,5 +128,5 @@ public class MainActivity extends AppCompatActivity {
         // データを表示
         onShow();
     }
-
+*/
 }
