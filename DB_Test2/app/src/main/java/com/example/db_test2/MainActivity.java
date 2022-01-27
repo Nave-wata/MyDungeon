@@ -1,16 +1,16 @@
 package com.example.db_test2;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import static com.example.db_test2.DBContract.DBEntry;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import static com.example.db_test2.DBContract.DBEntry;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
         helper = new SampleDatabaseHelper(this);
 
         // データを表示
-        //onShow();
+        onShow();
     }
-/*
+
     // データを表示する
     protected void onShow() {
 
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
             // データを取得するSQLを実行
             // 取得したデータがCursorオブジェクトに格納される
-            Cursor cursor = db.query(DBEntry.TABLE_NAME, cols, null,
+            @SuppressLint("Recycle") Cursor cursor = db.query(DBEntry.TABLE_NAME, cols, null,
                     null, null, null, null, null);
 
             // moveToFirstで、カーソルを検索結果セットの先頭行に移動
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             cv.put(DBEntry.COLUMN_NAME_CONTENTS, contents);
 
             // 現在テーブルに登録されているデータの_IDを取得
-            Cursor cursor = db.query(DBEntry.TABLE_NAME,  new String[] {DBEntry._ID}, null, null,
+            @SuppressLint("Recycle") Cursor cursor = db.query(DBEntry.TABLE_NAME,  new String[] {DBEntry._ID}, null, null,
                     null, null, null, null);
 
             // テーブルにデータが登録されていれば更新処理
@@ -128,5 +128,5 @@ public class MainActivity extends AppCompatActivity {
         // データを表示
         onShow();
     }
-*/
+
 }
