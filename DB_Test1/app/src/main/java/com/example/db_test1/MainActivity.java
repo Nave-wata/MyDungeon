@@ -1,16 +1,10 @@
 package com.example.db_test1;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-
-// import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,6 +12,8 @@ import android.widget.TextView;
 import java.lang.ref.WeakReference;
 import java.sql.Timestamp;
 import java.util.List;
+
+// import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private class ButtonClickListener implements View.OnClickListener {
-        private Activity activity;
-        private AppDatabase db;
-        private TextView tv;
+    private static class ButtonClickListener implements View.OnClickListener {
+        private final Activity activity;
+        private final AppDatabase db;
+        private final TextView tv;
 
         private ButtonClickListener(Activity activity, AppDatabase db, TextView tv) {
             this.activity = activity;
@@ -53,9 +49,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static class DataStoreAsyncTask extends AsyncTask<Void, Void, Integer> {
-        private WeakReference<Activity> weakActivity;
-        private AppDatabase db;
-        private TextView textView;
+        private final WeakReference<Activity> weakActivity;
+        private final AppDatabase db;
+        @SuppressLint("StaticFieldLeak")
+        private final TextView textView;
         private StringBuilder sb;
 
         public DataStoreAsyncTask(AppDatabase db, Activity activity, TextView textView) {
