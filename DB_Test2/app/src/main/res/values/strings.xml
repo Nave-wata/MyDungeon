@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">DB_Test2</string>
+    <string name="db_title">データベース登録内容</string>
+    <string name="reg_title">登録・編集</string>
+    <string name="title">タイトル</string>
+    <string name="input_title">タイトルを入力</string>
+    <string name="contents">内容</string>
+    <string name="input_contents">内容を入力</string>
+    <string name="reg">登録</string>
+    <string name="del">削除</string>
 </resources>
