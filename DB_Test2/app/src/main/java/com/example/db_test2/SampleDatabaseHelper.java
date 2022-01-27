@@ -30,7 +30,7 @@ public class SampleDatabaseHelper extends SQLiteOpenHelper {
                         DBEntry._ID + " INTEGER PRIMARY KEY, " +
                         DBEntry.COLUMN_NAME_TITLE + " TEXT default 'タイトル', " +
                         DBEntry.COLUMN_NAME_CONTENTS + " TEXT default '', " +
-                        DBEntry.COLUMN_NAME_UPDATE + " INTEGER DEFAULT (datetime(CURRENT_TIMESTAMP,'localtime'))) ");
+                        DBEntry.COLUMN_NAME_UPDATE + "INTEGER DEFAULT (datetime(CURRENT_TIMESTAMP,'localtime'))) ");
 
         // トリガーを作成
         db.execSQL(
