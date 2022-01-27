@@ -13,8 +13,6 @@ import java.lang.ref.WeakReference;
 import java.sql.Timestamp;
 import java.util.List;
 
-// import androidx.appcompat.app.AppCompatActivity;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
