@@ -23,15 +23,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //TextView tv = findViewById(R.id.index);
-        //Button bt = findViewById(R.id.button);
-        //AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
+        TextView tv = findViewById(R.id.index);
+        Button bt = findViewById(R.id.button);
+        AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
 
-        //bt.setOnClickListener(new ButtonClickListener(this, db, tv));
+        bt.setOnClickListener(new ButtonClickListener(this, db, tv));
 
     }
 
-    /*
     private class ButtonClickListener implements View.OnClickListener {
         private Activity activity;
         private AppDatabase db;
@@ -87,6 +86,4 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
-     */
 }
