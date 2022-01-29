@@ -23,18 +23,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView tv = findViewById(R.id.index);
-        Button bt = findViewById(R.id.button);
-        AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
+        //TextView tv = findViewById(R.id.index);
+        //Button bt = findViewById(R.id.button);
+        //AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
 
-        bt.setOnClickListener(new ButtonClickListener(this, db, tv));
+        //bt.setOnClickListener(new ButtonClickListener(this, db, tv));
 
     }
 
-    private static class ButtonClickListener implements View.OnClickListener {
-        private final Activity activity;
-        private final AppDatabase db;
-        private final TextView tv;
+    /*
+    private class ButtonClickListener implements View.OnClickListener {
+        private Activity activity;
+        private AppDatabase db;
+        private TextView tv;
 
         private ButtonClickListener(Activity activity, AppDatabase db, TextView tv) {
             this.activity = activity;
@@ -50,10 +51,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static class DataStoreAsyncTask extends AsyncTask<Void, Void, Integer> {
-        private final WeakReference<Activity> weakActivity;
-        private final AppDatabase db;
-        @SuppressLint("StaticFieldLeak")
-        private final TextView textView;
+        private WeakReference<Activity> weakActivity;
+        private AppDatabase db;
+        private TextView textView;
         private StringBuilder sb;
 
         public DataStoreAsyncTask(AppDatabase db, Activity activity, TextView textView) {
@@ -88,4 +88,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+     */
 }
