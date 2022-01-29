@@ -10,6 +10,9 @@
 
 ## DB_Test3 [Repository](https://github.com/Nave-wata/MyDungeon/tree/main/DB_Test3)
 
+- [[Android]Roomを使ったDB接続サンプル(Java)](http://tech-fill.net/android-room-sample/)
+- [Android Studio: AndroidX対応](http://mechsys.tec.u-ryukyu.ac.jp/~oshiro/SiteList/2020/07/09/67416/)
+
 ## My_App_Test1 [Repository](https://github.com/Nave-wata/MyDungeon/tree/main/My_App_Test1)
 
 - [[Android]アプリの画面を遷移させる](https://akira-watson.com/android/activity-1.html)
