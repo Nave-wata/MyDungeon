@@ -8,7 +8,7 @@ import androidx.room.Delete;
 @Dao
 public interface TextsDao {
     @Insert
-    void insert(Texts Text);
+    void insert(Texts... Text);
 
     @Update
     void update(Texts Text);
