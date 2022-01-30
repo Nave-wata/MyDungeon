@@ -69,11 +69,7 @@ public class MainActivity extends AppCompatActivity {
             sb = new StringBuilder();
 
             String text = editText.getText().toString();
-            textsDao.insert(new Texts().setText(text));
-
             List<Texts> Text = textsDao.getAll();
-            int[] ids = {1};
-            List<Texts> id_text = textsDao.loadAllByIds(ids);
 
             for (Texts ts: Text) {
                 sb.append(ts.getText()).append("\n");
@@ -88,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             if(activity == null) {
                 return;
             }
-            firstText.setText(sb.toString());
+            //firstText.setText(sb.toString());
         }
     }
 }
