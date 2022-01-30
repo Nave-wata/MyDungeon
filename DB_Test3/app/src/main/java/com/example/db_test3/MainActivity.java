@@ -71,11 +71,11 @@ public class MainActivity extends AppCompatActivity {
             String text = editText.getText().toString();
             textsDao.insert(new Texts().setText(text));
 
-            String deltx = "Waiting for input";
-            textsDao.deleteText(deltx);
-
             List<Texts> Text = textsDao.getAll();
-            for (Texts ts: Text) {
+            int[] ids = {1};
+            List<Texts> id_text = textsDao.loadAllByIds(ids);
+
+            for (Texts ts: id_text) {
                 sb.append(ts.getText()).append("\n");
             }
 
