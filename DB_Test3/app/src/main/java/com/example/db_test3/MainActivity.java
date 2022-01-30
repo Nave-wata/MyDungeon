@@ -21,12 +21,12 @@ public class MainActivity extends AppCompatActivity {
     private void test(AppDatabase db) {
         TextsDao textsDao = db.textsDao();
 
-        textsDao.insert(new Texts("Hello World!"));
-        Log.v("testsDao.insert", "OK!");
+        textsDao.insert(new Texts("Hello"));
+        //Log.v("testsDao.insert", "OK!");
 
-        List<Texts> texts = textsDao.getAll();
-        for(Texts text: texts) {
-            Log.v("textsDao.getAll()", "" + text);
-        }
+        //List<Texts> texts = textsDao.getAll();
+        //for(Texts text: texts) {
+        //    Log.v("textsDao.getAll()", "" + text);
+        //}
     }
 }

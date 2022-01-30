@@ -11,13 +11,13 @@ import java.util.List;
 @Dao
 public interface TextsDao {
     @Insert
-    void insert(Texts... Text);
+    void insert(Texts text);
 
     @Update
-    void update(Texts Text);
+    void update(Texts text);
 
     @Delete
-    void delete(Texts Text);
+    void delete(Texts text);
 
     @Query("SELECT * FROM TextData")
     List<Texts> getAll();
