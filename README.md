@@ -12,6 +12,8 @@
 
 - [[Android]Roomを使ったDB接続サンプル(Java)](http://tech-fill.net/android-room-sample/)
 - [Android Studio: AndroidX対応](http://mechsys.tec.u-ryukyu.ac.jp/~oshiro/SiteList/2020/07/09/67416/)
+- [[Android/Java]Roomでローカルデータベースを操作する](https://qiita.com/b_a_a_d_o/items/45bda89f49bf163144af)
+- [[Android] Room を使ったサンプルと解説](https://qiita.com/kaleidot725/items/34f29efaeb6d836e010e)
 
 ## My_App_Test1 [Repository](https://github.com/Nave-wata/MyDungeon/tree/main/My_App_Test1)
 
