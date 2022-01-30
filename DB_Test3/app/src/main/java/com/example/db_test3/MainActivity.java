@@ -6,8 +6,10 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
@@ -24,6 +26,15 @@ public class MainActivity extends AppCompatActivity {
         EditText editText = findViewById(R.id.editText);
         Button bt = findViewById(R.id.saveButton);
         AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        adapter.add("A");
+        adapter.add("B");
+
+        Spinner users = findViewById(R.id.users);
+        users.setAdapter(adapter);
 
         bt.setOnClickListener(new Test(this, db, firstText, editText));
     }
