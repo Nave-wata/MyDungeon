@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             sb = new StringBuilder();
 
             String text = editText.getText().toString();
-            textsDao.insert(new Texts(text));
+            textsDao.insert(new Texts().setText(text));
 
             List<Texts> Text = textsDao.getAll();
             for (Texts ts: Text) {

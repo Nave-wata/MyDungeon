@@ -12,16 +12,14 @@ public class Texts {
     @ColumnInfo(name = "Text")
     public String text;
 
-    public Texts (String text) {
-        this.text = text;
-    }
-
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setText(String text) {
+    public Texts setText(String text) {
         this.text = text;
+
+        return this;
     }
 
     public String getText() {
