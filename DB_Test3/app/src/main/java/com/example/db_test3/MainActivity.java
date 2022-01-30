@@ -6,8 +6,10 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
@@ -20,12 +22,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView firstText = findViewById(R.id.firstText);
-        EditText editText = findViewById(R.id.editText);
+        TextView firstText = findViewById(R.id.textOutName);
+
+        EditText editName = findViewById(R.id.editName);
+        EditText editYear = findViewById(R.id.editYear);
+        EditText editMonth = findViewById(R.id.editMonth);
+        EditText editDay = findViewById(R.id.editDay);
+
+        editName.setNextFocusDownId(R.id.editYear);
+        editYear.setNextFocusDownId(R.id.editMonth);
+        editMonth.setNextFocusDownId(R.id.editDay);
+
         Button bt = findViewById(R.id.saveButton);
         AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
 
-        bt.setOnClickListener(new Test(this, db, firstText, editText));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        adapter.add("A");
+        adapter.add("B");
+
+        Spinner users = findViewById(R.id.users);
+        users.setAdapter(adapter);
+
+        bt.setOnClickListener(new Test(this, db, firstText, editName));
     }
 
     private class Test implements View.OnClickListener {
@@ -69,11 +89,7 @@ public class MainActivity extends AppCompatActivity {
             sb = new StringBuilder();
 
             String text = editText.getText().toString();
-            textsDao.insert(new Texts().setText(text));
-
             List<Texts> Text = textsDao.getAll();
-            int[] ids = {1};
-            List<Texts> id_text = textsDao.loadAllByIds(ids);
 
             for (Texts ts: Text) {
                 sb.append(ts.getText()).append("\n");
@@ -88,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             if(activity == null) {
                 return;
             }
-            firstText.setText(sb.toString());
+            //firstText.setText(sb.toString());
         }
     }
 }
