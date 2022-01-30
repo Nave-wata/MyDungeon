@@ -6,4 +6,5 @@
     <string name="day">日</string>
     <string name="memo">一言</string>
     <string name="saveButton">保存</string>
+    <string name="deleteButton">削除</string>
 </resources>
