@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
@@ -20,28 +21,31 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView firstText = findViewById(R.id.firstText);
+        EditText editText = findViewById(R.id.editText);
         Button bt = findViewById(R.id.saveButton);
         AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
 
-        bt.setOnClickListener(new Test(this, db, firstText));
+        bt.setOnClickListener(new Test(this, db, firstText, editText));
     }
 
     private class Test implements View.OnClickListener {
         private Activity activity;
         private AppDatabase db;
         private TextView firstText;
+        private EditText editText;
 
-        private Test(Activity activity, AppDatabase db, TextView firstText) {
+        private Test(Activity activity, AppDatabase db, TextView firstText, EditText editText) {
             this.activity = activity;
             this.db = db;
             this.firstText = firstText;
+            this.editText = editText;
 
-            new DataStoreAsyncTask(db, activity, firstText);
+            new DataStoreAsyncTask(db, activity, firstText, editText);
         }
 
         @Override
         public void onClick(View view) {
-            new DataStoreAsyncTask(db, activity, firstText).execute();
+            new DataStoreAsyncTask(db, activity, firstText, editText).execute();
         }
     }
 
@@ -49,20 +53,24 @@ public class MainActivity extends AppCompatActivity {
         private WeakReference<Activity> weakActivity;
         private AppDatabase db;
         private TextView firstText;
+        private EditText editText;
         private StringBuilder sb;
 
-        public DataStoreAsyncTask(AppDatabase db, Activity activity, TextView firstText) {
+        public DataStoreAsyncTask(AppDatabase db, Activity activity, TextView firstText, EditText editText) {
             this.db = db;
             weakActivity = new WeakReference<>(activity);
             this.firstText = firstText;
+            this.editText = editText;
         }
 
         @Override
         protected Integer doInBackground(Void... params) {
             TextsDao textsDao = db.textsDao();
-            textsDao.insert(new Texts("Hello"));
-
             sb = new StringBuilder();
+
+            String text = editText.getText().toString();
+            textsDao.insert(new Texts(text));
+
             List<Texts> Text = textsDao.getAll();
             for (Texts ts: Text) {
                 sb.append(ts.getText()).append("\n");
