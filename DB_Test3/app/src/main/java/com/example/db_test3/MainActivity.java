@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
@@ -18,11 +20,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView firstText = findViewById(R.id.firstText);
+        Button bt = findViewById(R.id.saveButton);
         AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
-        Test tes = new Test(this, db, firstText);
+
+        bt.setOnClickListener(new Test(this, db, firstText));
     }
 
-    private class Test {
+    private class Test implements View.OnClickListener {
         private Activity activity;
         private AppDatabase db;
         private TextView firstText;
@@ -33,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
             this.firstText = firstText;
 
             new DataStoreAsyncTask(db, activity, firstText);
+        }
+
+        @Override
+        public void onClick(View view) {
+            new DataStoreAsyncTask(db, activity, firstText).execute();
         }
     }
 
