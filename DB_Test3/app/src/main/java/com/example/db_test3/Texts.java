@@ -10,5 +10,5 @@ public class Texts {
     public int id;
 
     @ColumnInfo(name = "Text")
-    public String Text;
+    public String text;
 }
