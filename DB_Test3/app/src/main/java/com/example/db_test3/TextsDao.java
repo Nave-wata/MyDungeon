@@ -19,6 +19,9 @@ public interface TextsDao {
     @Query("SELECT * FROM TextData")
     List<Texts> getAll();
 
+    @Query("SELECT * FROM TextData WHERE id IN (:ids)")
+    List<Texts> loadAllByIds(int[] ids);
+
     @Query("DELETE FROM TextData")
     void deleteAll();
 
