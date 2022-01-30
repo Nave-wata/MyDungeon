@@ -21,4 +21,7 @@ public interface TextsDao {
 
     @Query("SELECT * FROM TextData")
     List<Texts> getAll();
+
+    @Query("DELETE FROM TextData")
+    void deleteAll();
 }
