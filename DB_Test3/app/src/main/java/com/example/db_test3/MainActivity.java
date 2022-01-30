@@ -22,8 +22,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView firstText = findViewById(R.id.firstText);
-        EditText editText = findViewById(R.id.editText);
+        TextView firstText = findViewById(R.id.textOutName);
+
+        EditText editName = findViewById(R.id.editName);
+        EditText editYear = findViewById(R.id.editYear);
+        EditText editMonth = findViewById(R.id.editMonth);
+        EditText editDay = findViewById(R.id.editDay);
+
+        editName.setNextFocusDownId(R.id.editYear);
+        editYear.setNextFocusDownId(R.id.editMonth);
+        editMonth.setNextFocusDownId(R.id.editDay);
+
         Button bt = findViewById(R.id.saveButton);
         AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
 
@@ -36,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Spinner users = findViewById(R.id.users);
         users.setAdapter(adapter);
 
-        bt.setOnClickListener(new Test(this, db, firstText, editText));
+        bt.setOnClickListener(new Test(this, db, firstText, editName));
     }
 
     private class Test implements View.OnClickListener {

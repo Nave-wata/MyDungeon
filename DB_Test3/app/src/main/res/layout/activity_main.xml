@@ -7,15 +7,17 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/editMonth"
+        android:id="@+id/editYear"
         android:layout_width="67dp"
         android:layout_height="34dp"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="26dp"
         android:background="@drawable/frame_style"
+        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/saveButton"
-        app:layout_constraintStart_toEndOf="@+id/editYear"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/users"
-        app:layout_constraintVertical_bias="0.833"
+        app:layout_constraintVertical_bias="0.82"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -26,35 +28,24 @@
         android:text="@string/month"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/editDay"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toEndOf="@+id/editMonth"
         app:layout_constraintTop_toBottomOf="@+id/users"
-        app:layout_constraintVertical_bias="0.692"
+        app:layout_constraintVertical_bias="0.691"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/textYear"
-        android:layout_width="18dp"
-        android:layout_height="20dp"
-        android:text="@string/year"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editMonth"
-        app:layout_constraintHorizontal_bias="0.058"
-        app:layout_constraintStart_toEndOf="@+id/editYear"
-        app:layout_constraintTop_toBottomOf="@+id/users"
-        app:layout_constraintVertical_bias="0.688" />
-
     <EditText
-        android:id="@+id/editYear"
+        android:id="@+id/editDay"
         android:layout_width="67dp"
         android:layout_height="34dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="26dp"
         android:background="@drawable/frame_style"
+        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/saveButton"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.403"
+        app:layout_constraintStart_toEndOf="@+id/editMonth"
         app:layout_constraintTop_toBottomOf="@+id/users"
-        app:layout_constraintVertical_bias="0.822"
+        app:layout_constraintVertical_bias="0.831"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -67,24 +58,36 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/editDay"
         app:layout_constraintTop_toBottomOf="@+id/users"
-        app:layout_constraintVertical_bias="0.692"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/editDay"
-        android:layout_width="67dp"
-        android:layout_height="34dp"
-        android:background="@drawable/frame_style"
-        app:layout_constraintBottom_toTopOf="@+id/saveButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.418"
-        app:layout_constraintStart_toEndOf="@+id/editMonth"
-        app:layout_constraintTop_toBottomOf="@+id/users"
-        app:layout_constraintVertical_bias="0.833"
+        app:layout_constraintVertical_bias="0.689"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/firstText"
+        android:id="@+id/textYear"
+        android:layout_width="18dp"
+        android:layout_height="20dp"
+        android:text="@string/year"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editMonth"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toEndOf="@+id/editYear"
+        app:layout_constraintTop_toBottomOf="@+id/users"
+        app:layout_constraintVertical_bias="0.687" />
+
+    <EditText
+        android:id="@+id/editMonth"
+        android:layout_width="67dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="48dp"
+        android:background="@drawable/frame_style"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintStart_toEndOf="@+id/editYear"
+        app:layout_constraintTop_toBottomOf="@+id/users"
+        app:layout_constraintVertical_bias="0.831"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textOutName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/users"
@@ -96,7 +99,7 @@
         app:layout_constraintVertical_bias="0.687" />
 
     <TextView
-        android:id="@+id/firstText2"
+        android:id="@+id/textName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/users"
@@ -105,19 +108,22 @@
         app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.596" />
+        app:layout_constraintVertical_bias="0.596"
+        tools:ignore="InvalidId" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editName"
         android:layout_width="189dp"
         android:layout_height="40dp"
+        android:layout_marginStart="48dp"
         android:background="@drawable/frame_style"
+        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/saveButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.216"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.772"
+        app:layout_constraintVertical_bias="0.779"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -133,7 +139,7 @@
         app:layout_constraintVertical_bias="0.913" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/deleteButton"
