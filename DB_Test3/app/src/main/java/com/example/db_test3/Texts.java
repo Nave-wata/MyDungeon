@@ -6,6 +6,10 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "TextData")
 public class Texts {
+    Texts (String text) {
+        this.text = text;
+    }
+
     @PrimaryKey(autoGenerate = true)
     public int id;
 
