@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
             String text = editText.getText().toString();
             textsDao.insert(new Texts().setText(text));
 
+            String deltx = "Waiting for input";
+            textsDao.deleteText(deltx);
+
             List<Texts> Text = textsDao.getAll();
             for (Texts ts: Text) {
                 sb.append(ts.getText()).append("\n");

@@ -16,12 +16,12 @@ public interface TextsDao {
     @Update
     void update(Texts text);
 
-    @Delete
-    void delete(Texts text);
-
     @Query("SELECT * FROM TextData")
     List<Texts> getAll();
 
     @Query("DELETE FROM TextData")
     void deleteAll();
+
+    @Query("DELETE FROM TextData WHERE Text = (:text)")
+    void deleteText(String text);
 }
