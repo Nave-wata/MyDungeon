@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             int[] ids = {1};
             List<Texts> id_text = textsDao.loadAllByIds(ids);
 
-            for (Texts ts: id_text) {
+            for (Texts ts: Text) {
                 sb.append(ts.getText()).append("\n");
             }
 
