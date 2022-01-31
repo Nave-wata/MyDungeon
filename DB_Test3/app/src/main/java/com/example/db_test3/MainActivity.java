@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.regex.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView firstText = findViewById(R.id.textOutName);
+        TextView textOutName = findViewById(R.id.textOutName);
 
         EditText editName = findViewById(R.id.editName);
         EditText editYear = findViewById(R.id.editYear);
@@ -45,42 +46,116 @@ public class MainActivity extends AppCompatActivity {
         Spinner users = findViewById(R.id.users);
         users.setAdapter(adapter);
 
-        bt.setOnClickListener(new Test(this, db, firstText, editName));
+        bt.setOnClickListener(new Test(this, db, textOutName, editName, editYear, editMonth, editDay));
     }
 
     private class Test implements View.OnClickListener {
         private Activity activity;
         private AppDatabase db;
-        private TextView firstText;
-        private EditText editText;
+        private TextView textOutName;
+        private EditText editName;
+        private EditText editYear;
+        private EditText editMonth;
+        private EditText editDay;
 
-        private Test(Activity activity, AppDatabase db, TextView firstText, EditText editText) {
+        private Test(Activity activity, AppDatabase db, TextView textOutName, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
             this.activity = activity;
             this.db = db;
-            this.firstText = firstText;
-            this.editText = editText;
+            this.textOutName = textOutName;
+            this.editName = editName;
+            this.editYear = editYear;
+            this.editMonth = editMonth;
+            this.editDay = editDay;
 
-            new DataStoreAsyncTask(db, activity, firstText, editText);
+            new DataStoreAsyncTask(db, activity, textOutName, editName, editYear, editMonth, editDay);
         }
 
         @Override
         public void onClick(View view) {
-            new DataStoreAsyncTask(db, activity, firstText, editText).execute();
+            boolean[] flags = {true, true, true, true};
+
+            flags[0] = editTextError(editName, 1);
+            flags[1] = editTextError(editYear, 2);
+            flags[2] = editTextError(editMonth, 2);
+            flags[3] = editTextError(editDay, 2);
+
+            for (boolean flag : flags) {
+                if (flag) {
+                } else {
+                    textOutName.setText("NO");
+                    return;
+                }
+            }
+            textOutName.setText("Yes!");
+            new DataStoreAsyncTask(db, activity, textOutName, editName, editYear, editMonth, editDay).execute();
+        }
+
+        public boolean editTextError(EditText editText, int error) {
+            String regex = "(1|2|3|4|5|6|7|8|9|0)";
+            String splitText = "";
+            String text = editText.getText().toString();
+            String[] str = text.split(splitText);
+
+            if (text.length() == 0) {
+                editText.setError(getString(R.string.errorNotInput));
+                return false;
+            }
+            if (text.trim().isEmpty()) {
+                editText.setError(getString(R.string.errorSpaceOnly));
+                return  false;
+            }
+            if (str[0].trim().isEmpty() || str[str.length - 1].trim().isEmpty()) {
+                editText.setError(getString(R.string.errorSpaceHeadLast));
+                return false;
+            }
+            if (text.replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) {
+                editText.setError(getString(R.string.errorSpaceOnly));
+                return false;
+            }
+            if (str[0].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty() ||
+                    str[str.length - 1].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) {
+                editText.setError(getString(R.string.errorSpaceHeadLast));
+                return false;
+            }
+
+            if (error == 1) {
+                for (String s : str) {
+                    if (!s.matches(regex)) {
+                        return true;
+                    }
+                }
+                editText.setError(getString(R.string.errorNotString));
+                return false;
+            } else if (error == 2) {
+                for (String s : str) {
+                    if (!s.matches(regex)) {
+                        editText.setError(getString(R.string.errorNotNum));
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 
     private static class DataStoreAsyncTask extends AsyncTask<Void, Void, Integer> {
         private WeakReference<Activity> weakActivity;
         private AppDatabase db;
-        private TextView firstText;
-        private EditText editText;
+        private TextView textOutName;
         private StringBuilder sb;
+        private EditText editName;
+        private EditText editYear;
+        private EditText editMonth;
+        private EditText editDay;
 
-        public DataStoreAsyncTask(AppDatabase db, Activity activity, TextView firstText, EditText editText) {
+        public DataStoreAsyncTask(AppDatabase db, Activity activity, TextView textOutNamem, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
             this.db = db;
             weakActivity = new WeakReference<>(activity);
-            this.firstText = firstText;
-            this.editText = editText;
+            this.textOutName = textOutNamem;
+            this.editName = editName;
+            this.editYear = editYear;
+            this.editMonth = editMonth;
+            this.editDay = editDay;
         }
 
         @Override
@@ -88,12 +163,12 @@ public class MainActivity extends AppCompatActivity {
             TextsDao textsDao = db.textsDao();
             sb = new StringBuilder();
 
-            String text = editText.getText().toString();
+            String text = editName.getText().toString();
             List<Texts> Text = textsDao.getAll();
 
-            for (Texts ts: Text) {
-                sb.append(ts.getText()).append("\n");
-            }
+            //for (Texts ts: Text) {
+            //    sb.append(ts.getText()).append("\n");
+            //}
 
             return 0;
         }
@@ -104,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
             if(activity == null) {
                 return;
             }
-            //firstText.setText(sb.toString());
         }
     }
 }

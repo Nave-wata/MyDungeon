@@ -14,6 +14,9 @@
 - [Android Studio: AndroidX対応](http://mechsys.tec.u-ryukyu.ac.jp/~oshiro/SiteList/2020/07/09/67416/)
 - [[Android/Java]Roomでローカルデータベースを操作する](https://qiita.com/b_a_a_d_o/items/45bda89f49bf163144af)
 - [[Android] Room を使ったサンプルと解説](https://qiita.com/kaleidot725/items/34f29efaeb6d836e010e)
+- [[Android] プルダウンの実装方法](https://qiita.com/QiitaD/items/e7b7ed95d0abaa106337)
+- [RecyclerView EditText フォーカス 移動先を指定](https://teratail.com/questions/340347)
+- [みんな実はこまっていた？半角・全角空白をJavaではどうtirmすべきか](https://www.bold.ne.jp/engineer-club/java-trim#-stripCharacterisWhitespace)
 
 ## My_App_Test1 [Repository](https://github.com/Nave-wata/MyDungeon/tree/main/My_App_Test1)
 
