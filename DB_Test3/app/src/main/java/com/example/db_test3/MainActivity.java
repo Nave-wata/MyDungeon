@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.regex.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,24 +73,25 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             boolean flag = true;
+            String regex = "(1|2|3|4|5|6|7|8|9|0)";
             String name = editName.getText().toString();
             String year = editYear.getText().toString();
             String month = editMonth.getText().toString();
             String day = editDay.getText().toString();
 
-            if (name.matches("(1|2|3|4|5|6|7|8|9|0)")) {
+            if (name.matches(regex)) {
                 editName.setError(getString(R.string.errorNotString));
                 flag = false;
             }
-            if (!year.matches("(1|2|3|4|5|6|7|8|9|0)")) {
+            if (!year.matches(regex)) {
                 editYear.setError(getString(R.string.errorNotNum));
                 flag = false;
             }
-            if (!month.matches("(1|2|3|4|5|6|7|8|9|0)")) {
+            if (!month.matches(regex)) {
                 editMonth.setError(getString(R.string.errorNotNum));
                 flag = false;
             }
-            if (!day.matches("(1|2|3|4|5|6|7|8|9|0)")) {
+            if (!day.matches(regex)) {
                 editDay.setError(getString(R.string.errorNotNum));
                 flag = false;
             }
