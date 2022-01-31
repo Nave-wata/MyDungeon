@@ -16,6 +16,7 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    //EditText editName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,27 +46,38 @@ public class MainActivity extends AppCompatActivity {
         Spinner users = findViewById(R.id.users);
         users.setAdapter(adapter);
 
-        bt.setOnClickListener(new Test(this, db, firstText, editName));
+        bt.setOnClickListener(new Test(this, db, firstText, editName, editYear, editMonth, editDay));
     }
 
     private class Test implements View.OnClickListener {
         private Activity activity;
         private AppDatabase db;
         private TextView firstText;
-        private EditText editText;
+        private EditText editName;
+        private EditText editYear;
+        private EditText editMonth;
+        private EditText editDay;
 
-        private Test(Activity activity, AppDatabase db, TextView firstText, EditText editText) {
+        private Test(Activity activity, AppDatabase db, TextView firstText, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
             this.activity = activity;
             this.db = db;
             this.firstText = firstText;
-            this.editText = editText;
+            this.editName = editName;
+            this.editYear = editYear;
 
-            new DataStoreAsyncTask(db, activity, firstText, editText);
+
+            new DataStoreAsyncTask(db, activity, firstText, editName, editYear, editMonth, editDay);
         }
 
         @Override
         public void onClick(View view) {
-            new DataStoreAsyncTask(db, activity, firstText, editText).execute();
+            MainActivity mainActivity = new MainActivity();
+            String str =
+            if () {
+
+            } else {
+                new DataStoreAsyncTask(db, activity, firstText, editName, editYear, editMonth, editDay).execute();
+            }
         }
     }
 
@@ -73,14 +85,14 @@ public class MainActivity extends AppCompatActivity {
         private WeakReference<Activity> weakActivity;
         private AppDatabase db;
         private TextView firstText;
-        private EditText editText;
+        private EditText editName;
         private StringBuilder sb;
 
-        public DataStoreAsyncTask(AppDatabase db, Activity activity, TextView firstText, EditText editText) {
+        public DataStoreAsyncTask(AppDatabase db, Activity activity, TextView firstText, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
             this.db = db;
             weakActivity = new WeakReference<>(activity);
             this.firstText = firstText;
-            this.editText = editText;
+            this.editName = editName;
         }
 
         @Override
@@ -88,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             TextsDao textsDao = db.textsDao();
             sb = new StringBuilder();
 
-            String text = editText.getText().toString();
+            String text = editName.getText().toString();
             List<Texts> Text = textsDao.getAll();
 
             for (Texts ts: Text) {
