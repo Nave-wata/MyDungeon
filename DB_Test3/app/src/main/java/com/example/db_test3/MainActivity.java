@@ -84,9 +84,12 @@ public class MainActivity extends AppCompatActivity {
             String[] Month = month.split(splitText);
             String[] Day = day.split(splitText);
 
-            if (name.matches(regex)) {
-                editName.setError(getString(R.string.errorNotString));
-                flag = false;
+            for (String str: Name) {
+                if (str.matches(regex)) {
+                    editName.setError(getString(R.string.errorNotString));
+                    flag = false;
+                    break;
+                }
             }
             if (!year.matches(regex)) {
                 editYear.setError(getString(R.string.errorNotNum));
@@ -106,6 +109,30 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 textOutName.setText("NO");
             }
+        }
+
+        public boolean editTextError(EditText editText, int error) {
+            String regex = "(1|2|3|4|5|6|7|8|9|0)";
+            String splitText = "";
+            String text = editText.getText().toString();
+            String[] str = text.split(splitText);
+
+            if (error == 1) {
+                for (String s : str) {
+                    if (s.matches(regex)) {
+                        editText.setError(getString(R.string.errorNotString));
+                        return false;
+                    }
+                }
+            } else if (error == 2) {
+                for (String s : str) {
+                    if (s.matches(regex)) {
+                        editText.setError(getString(R.string.errorNotNum));
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 
