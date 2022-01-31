@@ -6,4 +6,5 @@
     <string name="day">日</string>
     <string name="saveButton">保存</string>
     <string name="deleteButton">削除</string>
+    <string name="errorNotNum">数字のみは認識できません</string>
 </resources>

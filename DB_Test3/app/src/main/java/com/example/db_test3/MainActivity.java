@@ -16,7 +16,6 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    //EditText editName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,17 +63,17 @@ public class MainActivity extends AppCompatActivity {
             this.firstText = firstText;
             this.editName = editName;
             this.editYear = editYear;
-
+            this.editMonth = editMonth;
+            this.editDay = editDay;
 
             new DataStoreAsyncTask(db, activity, firstText, editName, editYear, editMonth, editDay);
         }
 
         @Override
         public void onClick(View view) {
-            MainActivity mainActivity = new MainActivity();
-            String str =
-            if () {
-
+            String Name = editName.getText().toString();
+            if (Name.matches("(1|2|3|4|5|6|7|8|9|0)")) {
+                editName.setError(getString(R.string.errorNotNum));
             } else {
                 new DataStoreAsyncTask(db, activity, firstText, editName, editYear, editMonth, editDay).execute();
             }
@@ -85,14 +84,20 @@ public class MainActivity extends AppCompatActivity {
         private WeakReference<Activity> weakActivity;
         private AppDatabase db;
         private TextView firstText;
-        private EditText editName;
         private StringBuilder sb;
+        private EditText editName;
+        private EditText editYear;
+        private EditText editMonth;
+        private EditText editDay;
 
         public DataStoreAsyncTask(AppDatabase db, Activity activity, TextView firstText, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
             this.db = db;
             weakActivity = new WeakReference<>(activity);
             this.firstText = firstText;
             this.editName = editName;
+            this.editYear = editYear;
+            this.editMonth = editMonth;
+            this.editDay = editDay;
         }
 
         @Override
