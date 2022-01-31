@@ -100,6 +100,10 @@ public class MainActivity extends AppCompatActivity {
                 editText.setError(getString(R.string.errorNotInput));
                 return false;
             }
+            if (text.trim().isEmpty()) {
+                editText.setError(getString(R.string.errorSpaceOnly));
+                return  false;
+            }
             if (error == 1) {
                 for (String s : str) {
                     if (!s.matches(regex)) {
