@@ -6,6 +6,6 @@
     <string name="day">日</string>
     <string name="saveButton">保存</string>
     <string name="deleteButton">削除</string>
-    <string name="errorNotString">数字のみ入力して下さい</string>
-    <string name="errorNotNum">数字のみは認識できません</string>
+    <string name="errorNotString">数字のみは認識できません</string>
+    <string name="errorNotNum">数字のみ入力して下さい</string>
 </resources>
