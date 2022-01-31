@@ -104,6 +104,11 @@ public class MainActivity extends AppCompatActivity {
                 editText.setError(getString(R.string.errorSpaceOnly));
                 return  false;
             }
+            if (str[0].trim().isEmpty() || str[str.length - 1].trim().isEmpty()) {
+                editText.setError(getString(R.string.errorSpaceHeadLast));
+                return false;
+            }
+
             if (error == 1) {
                 for (String s : str) {
                     if (!s.matches(regex)) {
