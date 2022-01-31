@@ -74,10 +74,15 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view) {
             boolean flag = true;
             String regex = "(1|2|3|4|5|6|7|8|9|0)";
+            String splitText = "";
             String name = editName.getText().toString();
             String year = editYear.getText().toString();
             String month = editMonth.getText().toString();
             String day = editDay.getText().toString();
+            String[] Name = name.split(splitText);
+            String[] Year = year.split(splitText);
+            String[] Month = month.split(splitText);
+            String[] Day = day.split(splitText);
 
             if (name.matches(regex)) {
                 editName.setError(getString(R.string.errorNotString));
