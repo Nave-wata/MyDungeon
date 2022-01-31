@@ -72,19 +72,23 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            boolean flag = true;
+            boolean[] flags = {true, true, true, true};
+            int cnt = 0;
 
-            flag = editTextError(editName, 1);
-            flag = editTextError(editYear, 2);
-            flag = editTextError(editMonth, 2);
-            flag = editTextError(editDay, 2);
+            flags[0] = editTextError(editName, 1);
+            flags[1] = editTextError(editYear, 2);
+            flags[2] = editTextError(editMonth, 2);
+            flags[3] = editTextError(editDay, 2);
 
-            if (flag) {
-                new DataStoreAsyncTask(db, activity, textOutName, editName, editYear, editMonth, editDay).execute();
-                textOutName.setText("Yes!");
-            } else {
-                textOutName.setText("NO");
+            for (boolean flag : flags) {
+                if (flag) {
+                } else {
+                    textOutName.setText("NO");
+                    return;
+                }
             }
+            textOutName.setText("Yes!");
+            new DataStoreAsyncTask(db, activity, textOutName, editName, editYear, editMonth, editDay).execute();
         }
 
         public boolean editTextError(EditText editText, int error) {
@@ -92,14 +96,16 @@ public class MainActivity extends AppCompatActivity {
             String splitText = "";
             String text = editText.getText().toString();
             String[] str = text.split(splitText);
+            boolean flag = false;
 
             if (error == 1) {
                 for (String s : str) {
-                    if (s.matches(regex)) {
-                        editText.setError(getString(R.string.errorNotString));
-                        return false;
+                    if (!s.matches(regex)) {
+                        break;
                     }
                 }
+                editText.setError(getString(R.string.errorNotString));
+                return false;
             } else if (error == 2) {
                 for (String s : str) {
                     if (!s.matches(regex)) {
