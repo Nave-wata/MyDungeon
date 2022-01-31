@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             boolean[] flags = {true, true, true, true};
-            int cnt = 0;
 
             flags[0] = editTextError(editName, 1);
             flags[1] = editTextError(editYear, 2);
@@ -96,8 +95,11 @@ public class MainActivity extends AppCompatActivity {
             String splitText = "";
             String text = editText.getText().toString();
             String[] str = text.split(splitText);
-            boolean flag = false;
 
+            if (text.length() == 0) {
+                editText.setError(getString(R.string.errorNotInput));
+                return false;
+            }
             if (error == 1) {
                 for (String s : str) {
                     if (!s.matches(regex)) {
@@ -146,9 +148,9 @@ public class MainActivity extends AppCompatActivity {
             String text = editName.getText().toString();
             List<Texts> Text = textsDao.getAll();
 
-            for (Texts ts: Text) {
-                sb.append(ts.getText()).append("\n");
-            }
+            //for (Texts ts: Text) {
+            //    sb.append(ts.getText()).append("\n");
+            //}
 
             return 0;
         }
