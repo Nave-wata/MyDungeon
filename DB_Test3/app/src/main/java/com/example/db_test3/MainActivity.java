@@ -108,6 +108,15 @@ public class MainActivity extends AppCompatActivity {
                 editText.setError(getString(R.string.errorSpaceHeadLast));
                 return false;
             }
+            if (text.replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) {
+                editText.setError(getString(R.string.errorSpaceOnly));
+                return false;
+            }
+            if (str[0].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty() ||
+                    str[str.length - 1].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) {
+                editText.setError(getString(R.string.errorSpaceHeadLast));
+                return false;
+            }
 
             if (error == 1) {
                 for (String s : str) {
