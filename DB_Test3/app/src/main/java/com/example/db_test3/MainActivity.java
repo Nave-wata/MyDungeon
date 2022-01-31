@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else if (error == 2) {
                 for (String s : str) {
-                    if (s.matches(regex)) {
+                    if (!s.matches(regex)) {
                         editText.setError(getString(R.string.errorNotNum));
                         return false;
                     }
