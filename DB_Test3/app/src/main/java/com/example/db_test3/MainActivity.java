@@ -73,36 +73,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             boolean flag = true;
-            String regex = "(1|2|3|4|5|6|7|8|9|0)";
-            String splitText = "";
-            String name = editName.getText().toString();
-            String year = editYear.getText().toString();
-            String month = editMonth.getText().toString();
-            String day = editDay.getText().toString();
-            String[] Name = name.split(splitText);
-            String[] Year = year.split(splitText);
-            String[] Month = month.split(splitText);
-            String[] Day = day.split(splitText);
 
-            for (String str: Name) {
-                if (str.matches(regex)) {
-                    editName.setError(getString(R.string.errorNotString));
-                    flag = false;
-                    break;
-                }
-            }
-            if (!year.matches(regex)) {
-                editYear.setError(getString(R.string.errorNotNum));
-                flag = false;
-            }
-            if (!month.matches(regex)) {
-                editMonth.setError(getString(R.string.errorNotNum));
-                flag = false;
-            }
-            if (!day.matches(regex)) {
-                editDay.setError(getString(R.string.errorNotNum));
-                flag = false;
-            }
+            flag = editTextError(editName, 1);
+            flag = editTextError(editYear, 2);
+            flag = editTextError(editMonth, 2);
+            flag = editTextError(editDay, 2);
+
             if (flag) {
                 new DataStoreAsyncTask(db, activity, textOutName, editName, editYear, editMonth, editDay).execute();
                 textOutName.setText("Yes!");
