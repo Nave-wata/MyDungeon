@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             if (error == 1) {
                 for (String s : str) {
                     if (!s.matches(regex)) {
-                        break;
+                        return true;
                     }
                 }
                 editText.setError(getString(R.string.errorNotString));
