@@ -20,5 +20,12 @@ public class UsersInfo {
 
     @ColumnInfo(name = "Day")
     public int day;
+
+    public UsersInfo(String name, int year, int month, int day) {
+        this.name = name;
+        this.year = year;
+        this.month = month;
+        this.day = day;
+    }
 }
 
