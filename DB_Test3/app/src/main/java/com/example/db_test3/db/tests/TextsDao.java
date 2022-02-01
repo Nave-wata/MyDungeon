@@ -1,10 +1,11 @@
-package com.example.db_test3;
+package com.example.db_test3.db.tests;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-import androidx.room.Delete;
+
+import com.example.db_test3.db.tests.Texts;
 
 import java.util.List;
 
