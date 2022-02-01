@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,9 +11,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.db_test3.db.AppDatabase;
+import com.example.db_test3.db.AppDatabaseSingleton;
+import com.example.db_test3.db.tests.Texts;
+import com.example.db_test3.db.tests.TextsDao;
+
 import java.lang.ref.WeakReference;
 import java.util.List;
-import java.util.regex.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -86,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
             }
-            textOutName.setText("Yes!");
             new DataStoreAsyncTask(db, activity, textOutName, editName, editYear, editMonth, editDay).execute();
+            textOutName.setText("Yes!");
         }
 
         public boolean editTextError(EditText editText, int error) {
