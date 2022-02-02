@@ -9,7 +9,7 @@ import androidx.room.Update;
 @Dao
 public interface UsersInfoDao {
     @Insert
-    void insert(UsersInfo name, UsersInfo year, UsersInfo month, UsersInfo day);
+    void insert(UsersInfo usersInfo);
 
     @Query("DELETE FROM UsersInfo WHERE Name = :name")
     void deleteUserInfo(String name);
