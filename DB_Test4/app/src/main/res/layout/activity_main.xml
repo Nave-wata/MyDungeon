@@ -152,7 +152,7 @@
         app:layout_constraintVertical_bias="0.913" />
 
     <Spinner
-        android:id="@+id/usersName"
+        android:id="@+id/textOutName"
         android:layout_width="127dp"
         android:layout_height="34dp"
         android:layout_marginStart="48dp"
