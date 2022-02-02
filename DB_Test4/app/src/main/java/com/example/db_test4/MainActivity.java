@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -43,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
         editYear.setNextFocusDownId(R.id.editMonth);
         editMonth.setNextFocusDownId(R.id.editDay);
 
-        Button bt = findViewById(R.id.saveButton);
+        Button saveButton = findViewById(R.id.saveButton);
+        Button deleteButton = findViewById(R.id.deleteButton);
+
         AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
@@ -52,10 +55,11 @@ public class MainActivity extends AppCompatActivity {
 
         new AsyncTask_setName(db, this, adapter, users, textOutYear).execute();
 
-        bt.setOnClickListener(new Test(this, db, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
+        saveButton.setOnClickListener(new SaveButton(this, db, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
+        deleteButton.setOnClickListener(new DeleteButton());
     }
 
-    private class Test implements View.OnClickListener {
+    private class SaveButton implements View.OnClickListener {
         private final Activity activity;
         private final AppDatabase db;
         private final Spinner users;
@@ -68,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         private final EditText editMonth;
         private final EditText editDay;
 
-        private Test(Activity activity, AppDatabase db, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
+        private SaveButton(Activity activity, AppDatabase db, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
             this.activity = activity;
             this.db = db;
             this.users = users;
@@ -147,6 +151,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             return true;
+        }
+    }
+
+    private class DeleteButton implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Log.v("I'm", " DeleteButton !");
         }
     }
 }
