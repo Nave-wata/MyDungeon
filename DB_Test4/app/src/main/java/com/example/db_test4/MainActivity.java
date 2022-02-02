@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.db_test4.db.AppDatabase;
 import com.example.db_test4.db.AppDatabaseSingleton;
+import com.example.db_test4.db.usersinfo.AsyncTask_setName;
+import com.example.db_test4.db.usersinfo.DataStoreAsyncTask_Main;
 import com.example.db_test4.db.usersinfo.UsersInfo;
 import com.example.db_test4.db.usersinfo.UsersInfoDao;
 
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner users = findViewById(R.id.textOutName);
 
-        new DataStoreAsyncTask_getNames(db, this, adapter, users, textOutYear).execute();
+        new AsyncTask_setName(db, this, adapter, users, textOutYear).execute();
 
         bt.setOnClickListener(new Test(this, db, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
     }
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
             }
-            new DataStoreAsyncTask(db, activity, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay).execute();
+            new DataStoreAsyncTask_Main(db, activity, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay).execute();
         }
 
         public boolean editTextError(EditText editText, int error) {
@@ -146,122 +148,5 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         }
-    }
-
-    private static class DataStoreAsyncTask extends AsyncTask<Void, Void, Integer> {
-        private final WeakReference<Activity> weakActivity;
-        private final AppDatabase db;
-        @SuppressLint("StaticFieldLeak")
-        private final Spinner users;
-        private final ArrayAdapter<String> adapter;
-        @SuppressLint("StaticFieldLeak")
-        private final TextView textOutYear;
-        @SuppressLint("StaticFieldLeak")
-        private final TextView textOutMonth;
-        @SuppressLint("StaticFieldLeak")
-        private final TextView textOutDay;
-        @SuppressLint("StaticFieldLeak")
-        private final EditText editName;
-        @SuppressLint("StaticFieldLeak")
-        private final EditText editYear;
-        @SuppressLint("StaticFieldLeak")
-        private final EditText editMonth;
-        @SuppressLint("StaticFieldLeak")
-        private final EditText editDay;
-        private List<UsersInfo> ary;
-
-        @SuppressWarnings("deprecation")
-        public DataStoreAsyncTask(AppDatabase db, Activity activity, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
-            this.db = db;
-            this.users = users;
-            this.adapter = adapter;
-            weakActivity = new WeakReference<>(activity);
-            this.textOutYear = textOutYear;
-            this.textOutMonth = textOutMonth;
-            this.textOutDay = textOutDay;
-            this.editName = editName;
-            this.editYear = editYear;
-            this.editMonth = editMonth;
-            this.editDay = editDay;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... params) {
-            UsersInfoDao usersInfoDao = db.usersInfoDao();
-
-            String name = editName.getText().toString();
-            int year = Integer.parseInt(editYear.getText().toString());
-            int month = Integer.parseInt(editMonth.getText().toString());
-            int day = Integer.parseInt(editDay.getText().toString());
-
-            usersInfoDao.deleteAll();
-            usersInfoDao.insert(new UsersInfo(name, year, month, day));
-            ary = usersInfoDao.getAll();
-
-            return 0;
-        }
-
-        @Override
-        protected void onPostExecute(Integer code) {
-            Activity activity = weakActivity.get();
-            if(activity == null) {
-                return;
-            }
-            for (UsersInfo ui : ary) {
-                String name = ui.getName();
-                String year = Integer.valueOf(ui.getYear()).toString();
-                String month = Integer.valueOf(ui.getMonth()).toString();
-                String day = Integer.valueOf(ui.getDay()).toString();
-                adapter.add(name);
-                textOutYear.setText(year);
-                textOutMonth.setText(month);
-                textOutDay.setText(day);
-            }
-            users.setAdapter(adapter);
-        }
-    }
-
-
-    private static class DataStoreAsyncTask_getNames extends AsyncTask<Void, Void, Integer> {
-        private final WeakReference<Activity> weakActivity;
-        private final AppDatabase db;
-        private final ArrayAdapter<String> adapter;
-        @SuppressLint("StaticFieldLeak")
-        private final Spinner users;
-        @SuppressLint("StaticFieldLeak")
-        private final TextView textOutYear;
-        private List<UsersInfo> ary;
-
-        @SuppressWarnings("deprecation")
-        public DataStoreAsyncTask_getNames(AppDatabase db, Activity activity, ArrayAdapter<String> adapter, Spinner users, TextView textOutYear) {
-            this.db = db;
-            weakActivity = new WeakReference<>(activity);
-            this.adapter = adapter;
-            this.users = users;
-            this.textOutYear = textOutYear;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... params) {
-            UsersInfoDao usersInfoDao = db.usersInfoDao();
-
-            ary = usersInfoDao.getAll();
-
-            return 0;
-        }
-
-        @Override
-        protected void onPostExecute(Integer code) {
-            Activity activity = weakActivity.get();
-            if(activity == null) {
-                return;
-            }
-            for (UsersInfo ui : ary) {
-                String name = ui.getName();
-                adapter.add(name);
-            }
-            users.setAdapter(adapter);
-        }
-
     }
 }
