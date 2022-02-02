@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import com.example.db_test3.db.AppDatabase;
 import com.example.db_test3.db.AppDatabaseSingleton;
-import com.example.db_test3.db.tests.Texts;
-import com.example.db_test3.db.tests.TextsDao;
+import com.example.db_test3.db.texts.Texts;
+import com.example.db_test3.db.texts.TextsDao;
 
 import java.lang.ref.WeakReference;
 import java.util.List;

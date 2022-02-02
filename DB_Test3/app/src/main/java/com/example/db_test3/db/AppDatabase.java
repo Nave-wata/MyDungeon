@@ -3,8 +3,8 @@ package com.example.db_test3.db;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
-import com.example.db_test3.db.tests.Texts;
-import com.example.db_test3.db.tests.TextsDao;
+import com.example.db_test3.db.texts.Texts;
+import com.example.db_test3.db.texts.TextsDao;
 import com.example.db_test3.db.usersinfo.UsersInfo;
 import com.example.db_test3.db.usersinfo.UsersInfoDao;
 
