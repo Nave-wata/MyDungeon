@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.db_test4.db.AppDatabase;
 import com.example.db_test4.db.AppDatabaseSingleton;
+import com.example.db_test4.db.usersinfo.AsyncTask_deleteLine;
 import com.example.db_test4.db.usersinfo.AsyncTask_setName;
 import com.example.db_test4.db.usersinfo.DataStoreAsyncTask_Main;
 import com.example.db_test4.db.usersinfo.UsersInfo;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         new AsyncTask_setName(db, this, adapter, users).execute();
 
         saveButton.setOnClickListener(new SaveButton(this, db, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
-        deleteButton.setOnClickListener(new DeleteButton());
+        deleteButton.setOnClickListener(new DeleteButton(this, db, users, adapter));
     }
 
     private class SaveButton implements View.OnClickListener {
@@ -155,9 +156,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class DeleteButton implements View.OnClickListener {
+        private final Activity activity;
+        private final AppDatabase db;
+        private final Spinner users;
+        private final ArrayAdapter<String> adapter;
+
+        private DeleteButton(Activity activity, AppDatabase db, Spinner users, ArrayAdapter<String> adapter) {
+            this.activity = activity;
+            this.db = db;
+            this.users = users;
+            this.adapter = adapter;
+        }
+
         @Override
         public void onClick(View view) {
-
+            new AsyncTask_deleteLine(db, activity, adapter, users);
         }
     }
 }
