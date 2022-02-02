@@ -45,12 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        adapter.add("A");
-        adapter.add("B");
-
         Spinner users = findViewById(R.id.textOutName);
-        users.setAdapter(adapter);
+
+        new DataStoreAsyncTask_getNames(db, this, adapter, users);
 
         bt.setOnClickListener(new Test(this, db, textOutYear, editName, editYear, editMonth, editDay));
     }
@@ -186,6 +183,45 @@ public class MainActivity extends AppCompatActivity {
             }
 
             textOutName.setText(sb.toString());
+        }
+    }
+
+    private static class DataStoreAsyncTask_getNames extends AsyncTask<Void, Void, Integer> {
+        private WeakReference<Activity> weakActivity;
+        private AppDatabase db;
+        private ArrayAdapter<String> adapter;
+        private Spinner users;
+
+        public DataStoreAsyncTask_getNames(AppDatabase db, Activity activity, ArrayAdapter<String> adapter, Spinner users) {
+            this.db = db;
+            weakActivity = new WeakReference<>(activity);
+            this.adapter = adapter;
+            this.users = users;
+        }
+
+
+        @Override
+        protected Integer doInBackground(Void... params) {
+            UsersInfoDao usersInfoDao = db.usersInfoDao();
+
+            usersInfoDao.insert(new UsersInfo("Name", 2000, 1, 1));
+            List<UsersInfo> ary = usersInfoDao.getAll();
+
+            for (UsersInfo ui : ary) {
+                adapter.add(ui.getName());
+            }
+
+            return 0;
+        }
+
+        @Override
+        protected void onPostExecute(Integer code) {
+            Activity activity = weakActivity.get();
+
+            if(activity == null) {
+                return;
+            }
+            users.setAdapter(adapter);
         }
     }
 }
