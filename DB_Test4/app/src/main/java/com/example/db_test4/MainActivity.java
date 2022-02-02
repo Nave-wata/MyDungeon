@@ -27,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView textOutName = findViewById(R.id.textOutName);
+        TextView textOutYear = findViewById(R.id.textOutYear);
+        TextView textOutMonth = findViewById(R.id.textOutMonth);
+        TextView textOutDay = findViewById(R.id.textOutDay);
 
         EditText editName = findViewById(R.id.editName);
         EditText editYear = findViewById(R.id.editYear);
@@ -47,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
         adapter.add("A");
         adapter.add("B");
 
-        Spinner users = findViewById(R.id.users);
+        Spinner users = findViewById(R.id.textOutName);
         users.setAdapter(adapter);
 
-        bt.setOnClickListener(new Test(this, db, textOutName, editName, editYear, editMonth, editDay));
+        bt.setOnClickListener(new Test(this, db, textOutYear, editName, editYear, editMonth, editDay));
     }
 
     private class Test implements View.OnClickListener {
@@ -168,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
             sb = new StringBuilder();
 
             List<UsersInfo> ary = usersInfoDao.getAll();
+            usersInfoDao.deleteUserInfo("Name");
             for (UsersInfo ui : ary) {
                 sb.append(ui.getName());
             }
