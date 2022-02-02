@@ -13,25 +13,22 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class AsyncTask_setName extends AsyncTask<Void, Void, Integer> {
-    private WeakReference<Activity> weakActivity;
-    private AppDatabase db;
-    private ArrayAdapter<String> adapter;
     @SuppressLint("StaticFieldLeak")
     private Spinner users;
     @SuppressLint("StaticFieldLeak")
     private TextView textOutYear;
+    private WeakReference<Activity> weakActivity;
+    private AppDatabase db;
+    private ArrayAdapter<String> adapter;
     private List<UsersInfo> ary;
 
     @SuppressWarnings("deprecation")
-    public AsyncTask_setName(AppDatabase db, Activity activity, ArrayAdapter<String> adapter, Spinner users, TextView textOutYear) {
+    public AsyncTask_setName(AppDatabase db, Activity activity, ArrayAdapter<String> adapter, Spinner users) {
         this.db = db;
         weakActivity = new WeakReference<>(activity);
         this.adapter = adapter;
         this.users = users;
         this.textOutYear = textOutYear;
-    }
-
-    public AsyncTask_setName() {
     }
 
     @Override

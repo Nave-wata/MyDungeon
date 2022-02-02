@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner users = findViewById(R.id.textOutName);
 
-        new AsyncTask_setName(db, this, adapter, users, textOutYear).execute();
+        new AsyncTask_setName(db, this, adapter, users).execute();
 
         saveButton.setOnClickListener(new SaveButton(this, db, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
         deleteButton.setOnClickListener(new DeleteButton());
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
     private class DeleteButton implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Log.v("I'm", " DeleteButton !");
+
         }
     }
 }
