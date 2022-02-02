@@ -31,4 +31,16 @@ public class UsersInfo {
     public String getName() {
         return name;
     }
+
+    public int getYear() {
+        return  year;
+    }
+
+    public int getMonth() {
+        return  month;
+    }
+
+    public int getDay() {
+        return day;
+    }
 }

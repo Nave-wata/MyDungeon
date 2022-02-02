@@ -74,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
             this.editYear = editYear;
             this.editMonth = editMonth;
             this.editDay = editDay;
-
-            new DataStoreAsyncTask(db, activity, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay);
         }
 
         @Override
@@ -155,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
         private EditText editYear;
         private EditText editMonth;
         private EditText editDay;
+        private List<UsersInfo> ary;
 
         public DataStoreAsyncTask(AppDatabase db, Activity activity, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
             this.db = db;
@@ -173,11 +172,14 @@ public class MainActivity extends AppCompatActivity {
             UsersInfoDao usersInfoDao = db.usersInfoDao();
             sb = new StringBuilder();
 
-            List<UsersInfo> ary = usersInfoDao.getAll();
-            usersInfoDao.deleteUserInfo("Name");
-            for (UsersInfo ui : ary) {
-                sb.append(ui.getName());
-            }
+            String name = editName.getText().toString();
+            int year = Integer.parseInt(editYear.getText().toString());
+            int month = Integer.parseInt(editMonth.getText().toString());
+            int day = Integer.parseInt(editDay.getText().toString());
+
+            usersInfoDao.insert(new UsersInfo(name, year, month, day));
+
+            ary = usersInfoDao.getAll();
 
             return 0;
         }
@@ -188,8 +190,12 @@ public class MainActivity extends AppCompatActivity {
             if(activity == null) {
                 return;
             }
-
-            textOutYear.setText(sb.toString());
+            for (UsersInfo ui : ary) {
+                String year = Integer.valueOf(ui.getYear()).toString();
+                textOutYear.setText(year);
+                //textOutMonth.setText(ui.getMonth());
+                //textOutDay.setText(ui.getDay());
+            }
         }
     }
 
