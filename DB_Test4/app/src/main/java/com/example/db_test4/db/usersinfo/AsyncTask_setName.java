@@ -33,7 +33,6 @@ public class AsyncTask_setName extends AsyncTask<Void, Void, Integer> {
     protected Integer doInBackground(Void... params) {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
 
-        usersInfoDao.deleteAll();
         ary = usersInfoDao.getAll();
 
         return 0;

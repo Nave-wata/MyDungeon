@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         new AsyncTask_setName(db, this, adapter, users).execute();
 
         saveButton.setOnClickListener(new SaveButton(this, db, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
-        deleteButton.setOnClickListener(new DeleteButton(this, db, users, adapter));
+        deleteButton.setOnClickListener(new DeleteButton(this, db, users, adapter, textOutYear, textOutMonth, textOutDay));
         users.setOnItemSelectedListener(new UsersSpinner(this, db, users, adapter, textOutYear, textOutMonth, textOutDay));
     }
 
@@ -156,18 +156,24 @@ public class MainActivity extends AppCompatActivity {
         private final AppDatabase db;
         private final Spinner users;
         private final ArrayAdapter<String> adapter;
+        private TextView textOutYear;
+        private TextView textOutMonth;
+        private TextView textOutDay;
 
-        private DeleteButton(Activity activity, AppDatabase db, Spinner users, ArrayAdapter<String> adapter) {
+        private DeleteButton(Activity activity, AppDatabase db, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay) {
             this.activity = activity;
             this.db = db;
             this.users = users;
             this.adapter = adapter;
+            this.textOutYear = textOutYear;
+            this.textOutMonth = textOutMonth;
+            this.textOutDay = textOutDay;
         }
 
         @Override
         public void onClick(View view) {
             String item = users.getSelectedItem().toString();
-            new AsyncTask_deleteLine(db, activity, adapter, users, item).execute();
+            new AsyncTask_deleteLine(db, activity, adapter, users, textOutYear, textOutMonth, textOutDay, item).execute();
         }
     }
 
