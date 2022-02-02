@@ -3,6 +3,7 @@ package com.example.db_test4;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -191,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
         private AppDatabase db;
         private ArrayAdapter<String> adapter;
         private Spinner users;
+        private StringBuilder sb;
 
         public DataStoreAsyncTask_getNames(AppDatabase db, Activity activity, ArrayAdapter<String> adapter, Spinner users) {
             this.db = db;
@@ -203,12 +205,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(Void... params) {
             UsersInfoDao usersInfoDao = db.usersInfoDao();
+            sb = new StringBuilder();
 
             usersInfoDao.insert(new UsersInfo("Name", 2000, 1, 1));
             List<UsersInfo> ary = usersInfoDao.getAll();
 
             for (UsersInfo ui : ary) {
                 adapter.add(ui.getName());
+                Log.v("Name", " = " + ui.getName());
             }
 
             return 0;
