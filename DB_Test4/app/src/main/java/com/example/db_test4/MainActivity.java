@@ -1,10 +1,9 @@
 package com.example.db_test4;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.ArrayMap;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -45,27 +44,27 @@ public class MainActivity extends AppCompatActivity {
         Button bt = findViewById(R.id.saveButton);
         AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner users = findViewById(R.id.textOutName);
 
-        new DataStoreAsyncTask_getNames(db, this, adapter, users);
+        new DataStoreAsyncTask_getNames(db, this, adapter, users, textOutYear).execute();
 
         bt.setOnClickListener(new Test(this, db, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
     }
 
     private class Test implements View.OnClickListener {
-        private Activity activity;
-        private AppDatabase db;
-        private Spinner users;
-        private ArrayAdapter<String> adapter;
-        private TextView textOutYear;
-        private TextView textOutMonth;
-        private TextView textOutDay;
-        private EditText editName;
-        private EditText editYear;
-        private EditText editMonth;
-        private EditText editDay;
+        private final Activity activity;
+        private final AppDatabase db;
+        private final Spinner users;
+        private final ArrayAdapter<String> adapter;
+        private final TextView textOutYear;
+        private final TextView textOutMonth;
+        private final TextView textOutDay;
+        private final EditText editName;
+        private final EditText editYear;
+        private final EditText editMonth;
+        private final EditText editDay;
 
         private Test(Activity activity, AppDatabase db, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
             this.activity = activity;
@@ -81,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             this.editDay = editDay;
         }
 
+        @SuppressWarnings("StatementWithEmptyBody")
         @Override
         public void onClick(View view) {
             boolean[] flags = {true, true, true, true};
@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
             for (boolean flag : flags) {
                 if (flag) {
+
                 } else {
                     return;
                 }
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public boolean editTextError(EditText editText, int error) {
-            String regex = "(1|2|3|4|5|6|7|8|9|0)";
+            String regex = "([1234567890])";
             String splitText = "";
             String text = editText.getText().toString();
             String[] str = text.split(splitText);
@@ -148,20 +149,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static class DataStoreAsyncTask extends AsyncTask<Void, Void, Integer> {
-        private WeakReference<Activity> weakActivity;
-        private AppDatabase db;
-        private Spinner users;
-        private ArrayAdapter<String> adapter;
-        private TextView textOutYear;
-        private TextView textOutMonth;
-        private TextView textOutDay;
-        private StringBuilder sb;
-        private EditText editName;
-        private EditText editYear;
-        private EditText editMonth;
-        private EditText editDay;
+        private final WeakReference<Activity> weakActivity;
+        private final AppDatabase db;
+        @SuppressLint("StaticFieldLeak")
+        private final Spinner users;
+        private final ArrayAdapter<String> adapter;
+        @SuppressLint("StaticFieldLeak")
+        private final TextView textOutYear;
+        @SuppressLint("StaticFieldLeak")
+        private final TextView textOutMonth;
+        @SuppressLint("StaticFieldLeak")
+        private final TextView textOutDay;
+        @SuppressLint("StaticFieldLeak")
+        private final EditText editName;
+        @SuppressLint("StaticFieldLeak")
+        private final EditText editYear;
+        @SuppressLint("StaticFieldLeak")
+        private final EditText editMonth;
+        @SuppressLint("StaticFieldLeak")
+        private final EditText editDay;
         private List<UsersInfo> ary;
 
+        @SuppressWarnings("deprecation")
         public DataStoreAsyncTask(AppDatabase db, Activity activity, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
             this.db = db;
             this.users = users;
@@ -179,7 +188,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(Void... params) {
             UsersInfoDao usersInfoDao = db.usersInfoDao();
-            sb = new StringBuilder();
 
             String name = editName.getText().toString();
             int year = Integer.parseInt(editYear.getText().toString());
@@ -200,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             for (UsersInfo ui : ary) {
-                String name = ui.getName();;
+                String name = ui.getName();
                 String year = Integer.valueOf(ui.getYear()).toString();
                 String month = Integer.valueOf(ui.getMonth()).toString();
                 String day = Integer.valueOf(ui.getDay()).toString();
@@ -215,25 +223,27 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static class DataStoreAsyncTask_getNames extends AsyncTask<Void, Void, Integer> {
-        private WeakReference<Activity> weakActivity;
-        private AppDatabase db;
-        private ArrayAdapter<String> adapter;
-        private Spinner users;
-        private StringBuilder sb;
-        private TextView textOutYear;
+        private final WeakReference<Activity> weakActivity;
+        private final AppDatabase db;
+        private final ArrayAdapter<String> adapter;
+        @SuppressLint("StaticFieldLeak")
+        private final Spinner users;
+        @SuppressLint("StaticFieldLeak")
+        private final TextView textOutYear;
         private List<UsersInfo> ary;
 
-        public DataStoreAsyncTask_getNames(AppDatabase db, Activity activity, ArrayAdapter<String> adapter, Spinner users) {
+        @SuppressWarnings("deprecation")
+        public DataStoreAsyncTask_getNames(AppDatabase db, Activity activity, ArrayAdapter<String> adapter, Spinner users, TextView textOutYear) {
             this.db = db;
             weakActivity = new WeakReference<>(activity);
             this.adapter = adapter;
             this.users = users;
+            this.textOutYear = textOutYear;
         }
 
         @Override
         protected Integer doInBackground(Void... params) {
             UsersInfoDao usersInfoDao = db.usersInfoDao();
-            sb = new StringBuilder();
 
             ary = usersInfoDao.getAll();
 
@@ -252,5 +262,6 @@ public class MainActivity extends AppCompatActivity {
             }
             users.setAdapter(adapter);
         }
+
     }
 }
