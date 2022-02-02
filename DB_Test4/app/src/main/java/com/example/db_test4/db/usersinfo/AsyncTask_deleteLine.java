@@ -2,11 +2,9 @@ package com.example.db_test4.db.usersinfo;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.WallpaperColors;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.db_test4.db.AppDatabase;
 
@@ -34,9 +32,9 @@ public class AsyncTask_deleteLine extends AsyncTask<Void, Void, Integer> {
     @Override
     protected Integer doInBackground(Void... params) {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
-        str = "Hello";
-        usersInfoDao.deleteUserInfo(str);
-        adapter.remove(str);
+
+        usersInfoDao.delete(new UsersInfo("Hello", 1, 1, 1));
+        adapter.remove("Hello");
         ary = usersInfoDao.getAll();
 
         return 0;

@@ -12,6 +12,9 @@ import java.util.List;
 public interface UsersInfoDao {
     @Insert
     void insert(UsersInfo usersInfo);
+    
+    @Delete
+    void delete(UsersInfo usersInfo);
 
     @Query("DELETE FROM UsersInfo WHERE Name = :name")
     void deleteUserInfo(String name);
