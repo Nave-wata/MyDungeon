@@ -13,7 +13,7 @@ import com.example.db_test4.db.AppDatabase;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class AsyncTask_Main extends AsyncTask<Void, Void, Integer> {
+public class AsyncTask_Save extends AsyncTask<Void, Void, Integer> {
     private final WeakReference<Activity> weakActivity;
     private final AppDatabase db;
     @SuppressLint("StaticFieldLeak")
@@ -36,7 +36,7 @@ public class AsyncTask_Main extends AsyncTask<Void, Void, Integer> {
     private List<UsersInfo> ary;
 
     @SuppressWarnings("deprecation")
-    public AsyncTask_Main(AppDatabase db, Activity activity, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
+    public AsyncTask_Save(AppDatabase db, Activity activity, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
         this.db = db;
         this.users = users;
         this.adapter = adapter;
