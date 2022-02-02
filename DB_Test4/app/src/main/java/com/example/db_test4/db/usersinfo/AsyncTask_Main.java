@@ -60,7 +60,6 @@ public class AsyncTask_Main extends AsyncTask<Void, Void, Integer> {
         int day = Integer.parseInt(editDay.getText().toString());
 
         usersInfoDao.insert(new UsersInfo(name, year, month, day));
-        ary = usersInfoDao.getAll();
 
         return 0;
     }
@@ -68,22 +67,12 @@ public class AsyncTask_Main extends AsyncTask<Void, Void, Integer> {
     @Override
     protected void onPostExecute(Integer code) {
         Activity activity = weakActivity.get();
-        adapter.clear();
 
         if(activity == null) {
             return;
         }
 
-        for (UsersInfo ui : ary) {
-            String name = ui.getName();
-            String year = Integer.valueOf(ui.getYear()).toString();
-            String month = Integer.valueOf(ui.getMonth()).toString();
-            String day = Integer.valueOf(ui.getDay()).toString();
-            adapter.add(name);
-            textOutYear.setText(year);
-            textOutMonth.setText(month);
-            textOutDay.setText(day);
-        }
+        adapter.add(editName.getText().toString());
         users.setAdapter(adapter);
     }
 }
