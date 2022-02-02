@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner users = findViewById(R.id.textOutName);
 
-        //new DataStoreAsyncTask_getNames(db, this, adapter, users);
+        new DataStoreAsyncTask_getNames(db, this, adapter, users);
 
         bt.setOnClickListener(new Test(this, db, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
     }
@@ -178,7 +178,6 @@ public class MainActivity extends AppCompatActivity {
             int day = Integer.parseInt(editDay.getText().toString());
 
             usersInfoDao.insert(new UsersInfo(name, year, month, day));
-
             ary = usersInfoDao.getAll();
 
             return 0;
@@ -192,9 +191,12 @@ public class MainActivity extends AppCompatActivity {
             }
             for (UsersInfo ui : ary) {
                 String year = Integer.valueOf(ui.getYear()).toString();
+                String month = Integer.valueOf(ui.getMonth()).toString();
+                String day = Integer.valueOf(ui.getDay()).toString();
+
                 textOutYear.setText(year);
-                //textOutMonth.setText(ui.getMonth());
-                //textOutDay.setText(ui.getDay());
+                textOutMonth.setText(month);
+                textOutDay.setText(day);
             }
         }
     }
@@ -207,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
         private Spinner users;
         private StringBuilder sb;
         private TextView textOutYear;
+        private List<UsersInfo> ary;
 
         public DataStoreAsyncTask_getNames(AppDatabase db, Activity activity, ArrayAdapter<String> adapter, Spinner users) {
             this.db = db;
@@ -221,11 +224,7 @@ public class MainActivity extends AppCompatActivity {
             sb = new StringBuilder();
 
             usersInfoDao.insert(new UsersInfo("Name", 2000, 1, 1));
-            List<UsersInfo> ary = usersInfoDao.getAll();
-
-            for (UsersInfo ui : ary) {
-                sb.append(ui.getName()).append("\n");
-            }
+            ary = usersInfoDao.getAll();
 
             return 0;
         }
@@ -236,6 +235,11 @@ public class MainActivity extends AppCompatActivity {
             if(activity == null) {
                 return;
             }
+
+            for (UsersInfo ui : ary) {
+                adapter.add(ui.getName());
+            }
+            users.setAdapter(adapter);
         }
     }
 }
