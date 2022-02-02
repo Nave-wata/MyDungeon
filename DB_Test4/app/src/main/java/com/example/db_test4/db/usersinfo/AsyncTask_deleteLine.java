@@ -46,5 +46,7 @@ public class AsyncTask_deleteLine extends AsyncTask<Void, Void, Integer> {
         if (activity == null) {
             return;
         }
+
+        users.setAdapter(adapter);
     }
 }

@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            new AsyncTask_deleteLine(db, activity, adapter, users);
+            new AsyncTask_deleteLine(db, activity, adapter, users).execute();
         }
     }
 }
