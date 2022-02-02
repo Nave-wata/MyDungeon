@@ -48,34 +48,34 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner users = findViewById(R.id.textOutName);
 
-        adapter.add("A");
-        adapter.add("B");
-        users.setAdapter(adapter);
+        //new DataStoreAsyncTask_getNames(db, this, adapter, users);
 
-        new DataStoreAsyncTask_getNames(db, this, adapter, users);
-
-        bt.setOnClickListener(new Test(this, db, textOutYear, editName, editYear, editMonth, editDay));
+        bt.setOnClickListener(new Test(this, db, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
     }
 
     private class Test implements View.OnClickListener {
         private Activity activity;
         private AppDatabase db;
-        private TextView textOutName;
+        private TextView textOutYear;
+        private TextView textOutMonth;
+        private TextView textOutDay;
         private EditText editName;
         private EditText editYear;
         private EditText editMonth;
         private EditText editDay;
 
-        private Test(Activity activity, AppDatabase db, TextView textOutName, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
+        private Test(Activity activity, AppDatabase db, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
             this.activity = activity;
             this.db = db;
-            this.textOutName = textOutName;
+            this.textOutYear = textOutYear;
+            this.textOutMonth = textOutMonth;
+            this.textOutDay = textOutDay;
             this.editName = editName;
             this.editYear = editYear;
             this.editMonth = editMonth;
             this.editDay = editDay;
 
-            new DataStoreAsyncTask(db, activity, textOutName, editName, editYear, editMonth, editDay);
+            new DataStoreAsyncTask(db, activity, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay);
         }
 
         @Override
@@ -90,12 +90,10 @@ public class MainActivity extends AppCompatActivity {
             for (boolean flag : flags) {
                 if (flag) {
                 } else {
-                    textOutName.setText("NO");
                     return;
                 }
             }
-            new DataStoreAsyncTask(db, activity, textOutName, editName, editYear, editMonth, editDay).execute();
-            textOutName.setText("Yes!");
+            new DataStoreAsyncTask(db, activity, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay).execute();
         }
 
         public boolean editTextError(EditText editText, int error) {
@@ -149,17 +147,21 @@ public class MainActivity extends AppCompatActivity {
     private static class DataStoreAsyncTask extends AsyncTask<Void, Void, Integer> {
         private WeakReference<Activity> weakActivity;
         private AppDatabase db;
-        private TextView textOutName;
+        private TextView textOutYear;
+        private TextView textOutMonth;
+        private TextView textOutDay;
         private StringBuilder sb;
         private EditText editName;
         private EditText editYear;
         private EditText editMonth;
         private EditText editDay;
 
-        public DataStoreAsyncTask(AppDatabase db, Activity activity, TextView textOutName, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
+        public DataStoreAsyncTask(AppDatabase db, Activity activity, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
             this.db = db;
             weakActivity = new WeakReference<>(activity);
-            this.textOutName = textOutName;
+            this.textOutYear = textOutYear;
+            this.textOutMonth = textOutMonth;
+            this.textOutDay = textOutDay;
             this.editName = editName;
             this.editYear = editYear;
             this.editMonth = editMonth;
@@ -187,9 +189,10 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            textOutName.setText(sb.toString());
+            textOutYear.setText(sb.toString());
         }
     }
+
 
     private static class DataStoreAsyncTask_getNames extends AsyncTask<Void, Void, Integer> {
         private WeakReference<Activity> weakActivity;
@@ -204,9 +207,7 @@ public class MainActivity extends AppCompatActivity {
             weakActivity = new WeakReference<>(activity);
             this.adapter = adapter;
             this.users = users;
-            this.textOutYear = textOutYear;
         }
-
 
         @Override
         protected Integer doInBackground(Void... params) {
@@ -226,7 +227,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Integer code) {
             Activity activity = weakActivity.get();
-
             if(activity == null) {
                 return;
             }
