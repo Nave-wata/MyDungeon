@@ -1,13 +1,8 @@
 package com.example.db_test4;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,13 +10,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.db_test4.db.AppDatabase;
 import com.example.db_test4.db.AppDatabaseSingleton;
 import com.example.db_test4.db.usersinfo.UsersInfo;
 import com.example.db_test4.db.usersinfo.UsersInfoDao;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -171,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
             sb = new StringBuilder();
 
             String text = editName.getText().toString();
-
+            usersInfoDao.insert(new UsersInfo("Name", 2000, 1, 1));
 
             return 0;
         }
