@@ -16,6 +16,9 @@ public interface UsersInfoDao {
     @Query("DELETE FROM UsersInfo WHERE Name = :name")
     void deleteUserInfo(String name);
 
+    @Query("DELETE FROM UsersInfo")
+    void deleteAll();
+
     @Query("SELECT * FROM UsersInfo")
     List<UsersInfo> getAll();
 }
