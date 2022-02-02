@@ -13,7 +13,7 @@ import com.example.db_test4.db.AppDatabase;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class AsyncTask_Main extends AsyncTask<Void, Void, Integer> {
+public class AsyncTask_getLine extends AsyncTask<Void, Void, Integer> {
     private final WeakReference<Activity> weakActivity;
     private final AppDatabase db;
     @SuppressLint("StaticFieldLeak")
@@ -25,18 +25,11 @@ public class AsyncTask_Main extends AsyncTask<Void, Void, Integer> {
     private final TextView textOutMonth;
     @SuppressLint("StaticFieldLeak")
     private final TextView textOutDay;
-    @SuppressLint("StaticFieldLeak")
-    private final EditText editName;
-    @SuppressLint("StaticFieldLeak")
-    private final EditText editYear;
-    @SuppressLint("StaticFieldLeak")
-    private final EditText editMonth;
-    @SuppressLint("StaticFieldLeak")
-    private final EditText editDay;
     private List<UsersInfo> ary;
+    private String item;
 
     @SuppressWarnings("deprecation")
-    public AsyncTask_Main(AppDatabase db, Activity activity, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
+    public AsyncTask_getLine(AppDatabase db, Activity activity, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, String item) {
         this.db = db;
         this.users = users;
         this.adapter = adapter;
@@ -44,22 +37,14 @@ public class AsyncTask_Main extends AsyncTask<Void, Void, Integer> {
         this.textOutYear = textOutYear;
         this.textOutMonth = textOutMonth;
         this.textOutDay = textOutDay;
-        this.editName = editName;
-        this.editYear = editYear;
-        this.editMonth = editMonth;
-        this.editDay = editDay;
+        this.item = item;
     }
 
     @Override
     protected Integer doInBackground(Void... params) {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
 
-        String name = editName.getText().toString();
-        int year = Integer.parseInt(editYear.getText().toString());
-        int month = Integer.parseInt(editMonth.getText().toString());
-        int day = Integer.parseInt(editDay.getText().toString());
-
-        usersInfoDao.insert(new UsersInfo(name, year, month, day));
+        ary = usersInfoDao.getLine(item);
 
         return 0;
     }
@@ -72,7 +57,10 @@ public class AsyncTask_Main extends AsyncTask<Void, Void, Integer> {
             return;
         }
 
-        adapter.add(editName.getText().toString());
-        users.setAdapter(adapter);
+        for (UsersInfo ui : ary) {
+            textOutYear.setText(String.valueOf(ui.getYear()));
+            textOutMonth.setText(String.valueOf(ui.getMonth()));
+            textOutDay.setText(String.valueOf(ui.getDay()));
+        }
     }
 }

@@ -2,7 +2,9 @@ package com.example.db_test4;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.db_test4.db.AppDatabase;
 import com.example.db_test4.db.AppDatabaseSingleton;
 import com.example.db_test4.db.usersinfo.AsyncTask_deleteLine;
+import com.example.db_test4.db.usersinfo.AsyncTask_getLine;
 import com.example.db_test4.db.usersinfo.AsyncTask_setName;
-import com.example.db_test4.db.usersinfo.AsyncTask_Main;
+import com.example.db_test4.db.usersinfo.AsyncTask_Save;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         saveButton.setOnClickListener(new SaveButton(this, db, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
         deleteButton.setOnClickListener(new DeleteButton(this, db, users, adapter));
+        users.setOnItemSelectedListener(new UsersSpinner(this, db, users, adapter, textOutYear, textOutMonth, textOutDay));
     }
 
     private class SaveButton implements View.OnClickListener {
@@ -91,12 +95,12 @@ public class MainActivity extends AppCompatActivity {
 
             for (boolean flag : flags) {
                 if (flag) {
-
+                    //
                 } else {
                     return;
                 }
             }
-            new AsyncTask_Main(db, activity, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay).execute();
+            new AsyncTask_Save(db, activity, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay).execute();
         }
 
         public boolean editTextError(EditText editText, int error) {
@@ -147,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private static class DeleteButton implements View.OnClickListener {
+    private class DeleteButton implements View.OnClickListener {
         private final Activity activity;
         private final AppDatabase db;
         private final Spinner users;
@@ -163,6 +167,37 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             new AsyncTask_deleteLine(db, activity, adapter, users).execute();
+        }
+    }
+
+    private class UsersSpinner implements AdapterView.OnItemSelectedListener {
+        private Activity activity;
+        private AppDatabase db;
+        private Spinner users;
+        private ArrayAdapter<String> adapter;
+        private TextView textOutYear;
+        private TextView textOutMonth;
+        private TextView textOutDay;
+
+        private UsersSpinner(Activity activity, AppDatabase db, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay) {
+            this.activity = activity;
+            this.db = db;
+            this.users = users;
+            this.adapter = adapter;
+            this.textOutYear = textOutYear;
+            this.textOutMonth = textOutMonth;
+            this.textOutDay = textOutDay;
+        }
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            Spinner spinner = (Spinner)parent;
+            String item = (String)spinner.getSelectedItem();
+            new AsyncTask_getLine(db, activity, users, adapter, textOutYear, textOutMonth, textOutDay, item).execute();
+        }
+
+        public void onNothingSelected(AdapterView<?> parent) {
+            //
         }
     }
 }
