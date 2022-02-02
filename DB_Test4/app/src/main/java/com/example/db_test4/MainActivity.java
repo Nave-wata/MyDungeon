@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner users = findViewById(R.id.textOutName);
 
-        new DataStoreAsyncTask_getNames(db, this, adapter, users, textOutYear);
+        new DataStoreAsyncTask_getNames(db, this, adapter, users, textOutYear).execute();
 
         bt.setOnClickListener(new Test(this, db, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
     }
@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
             for (boolean flag : flags) {
                 if (flag) {
+
                 } else {
                     return;
                 }
