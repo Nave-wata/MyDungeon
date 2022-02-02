@@ -34,8 +34,6 @@ public class AsyncTask_deleteLine extends AsyncTask<Void, Void, Integer> {
 
         String str = "Hello";
         usersInfoDao.delete(new UsersInfo(str, 1, 1, 1));
-        adapter.clear();
-        ary = usersInfoDao.getAll();
 
         return 0;
     }
@@ -46,9 +44,8 @@ public class AsyncTask_deleteLine extends AsyncTask<Void, Void, Integer> {
         if (activity == null) {
             return;
         }
-        for (UsersInfo ui : ary) {
-            adapter.add(ui.getName());
-        }
+
+        adapter.remove("Hello");
         users.setAdapter(adapter);
     }
 }
