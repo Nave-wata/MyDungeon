@@ -24,4 +24,7 @@ public interface UsersInfoDao {
 
     @Query("SELECT * FROM UsersInfo")
     List<UsersInfo> getAll();
+
+    @Query("SELECT * FROM UsersInfo WHERE Name = :name")
+    List<UsersInfo> getLine(String name);
 }

@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.db_test4.db.AppDatabase;
 import com.example.db_test4.db.AppDatabaseSingleton;
 import com.example.db_test4.db.usersinfo.AsyncTask_deleteLine;
+import com.example.db_test4.db.usersinfo.AsyncTask_getLine;
 import com.example.db_test4.db.usersinfo.AsyncTask_setName;
 import com.example.db_test4.db.usersinfo.AsyncTask_Save;
 
@@ -192,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             Spinner spinner = (Spinner)parent;
             String item = (String)spinner.getSelectedItem();
-            textOutYear.setText(item);
+            new AsyncTask_getLine(db, activity, users, adapter, textOutYear, textOutMonth, textOutDay, item).execute();
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
