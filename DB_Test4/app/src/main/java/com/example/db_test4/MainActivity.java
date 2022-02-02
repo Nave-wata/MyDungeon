@@ -245,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
         protected Integer doInBackground(Void... params) {
             UsersInfoDao usersInfoDao = db.usersInfoDao();
 
+            usersInfoDao.deleteAll();
             ary = usersInfoDao.getAll();
 
             return 0;
