@@ -13,7 +13,7 @@ import com.example.db_test4.db.AppDatabase;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class DataStoreAsyncTask_Main extends AsyncTask<Void, Void, Integer> {
+public class AsyncTask_Main extends AsyncTask<Void, Void, Integer> {
     private final WeakReference<Activity> weakActivity;
     private final AppDatabase db;
     @SuppressLint("StaticFieldLeak")
@@ -36,7 +36,7 @@ public class DataStoreAsyncTask_Main extends AsyncTask<Void, Void, Integer> {
     private List<UsersInfo> ary;
 
     @SuppressWarnings("deprecation")
-    public DataStoreAsyncTask_Main(AppDatabase db, Activity activity, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
+    public AsyncTask_Main(AppDatabase db, Activity activity, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
         this.db = db;
         this.users = users;
         this.adapter = adapter;
@@ -59,9 +59,7 @@ public class DataStoreAsyncTask_Main extends AsyncTask<Void, Void, Integer> {
         int month = Integer.parseInt(editMonth.getText().toString());
         int day = Integer.parseInt(editDay.getText().toString());
 
-        usersInfoDao.deleteAll();
         usersInfoDao.insert(new UsersInfo(name, year, month, day));
-        ary = usersInfoDao.getAll();
 
         return 0;
     }
@@ -69,19 +67,12 @@ public class DataStoreAsyncTask_Main extends AsyncTask<Void, Void, Integer> {
     @Override
     protected void onPostExecute(Integer code) {
         Activity activity = weakActivity.get();
+
         if(activity == null) {
             return;
         }
-        for (UsersInfo ui : ary) {
-            String name = ui.getName();
-            String year = Integer.valueOf(ui.getYear()).toString();
-            String month = Integer.valueOf(ui.getMonth()).toString();
-            String day = Integer.valueOf(ui.getDay()).toString();
-            adapter.add(name);
-            textOutYear.setText(year);
-            textOutMonth.setText(month);
-            textOutDay.setText(day);
-        }
+
+        adapter.add(editName.getText().toString());
         users.setAdapter(adapter);
     }
 }

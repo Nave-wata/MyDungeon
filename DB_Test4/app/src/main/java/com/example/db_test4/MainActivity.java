@@ -1,8 +1,6 @@
 package com.example.db_test4;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,13 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.db_test4.db.AppDatabase;
 import com.example.db_test4.db.AppDatabaseSingleton;
+import com.example.db_test4.db.usersinfo.AsyncTask_deleteLine;
 import com.example.db_test4.db.usersinfo.AsyncTask_setName;
-import com.example.db_test4.db.usersinfo.DataStoreAsyncTask_Main;
-import com.example.db_test4.db.usersinfo.UsersInfo;
-import com.example.db_test4.db.usersinfo.UsersInfoDao;
-
-import java.lang.ref.WeakReference;
-import java.util.List;
+import com.example.db_test4.db.usersinfo.AsyncTask_Main;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,19 +37,22 @@ public class MainActivity extends AppCompatActivity {
         editYear.setNextFocusDownId(R.id.editMonth);
         editMonth.setNextFocusDownId(R.id.editDay);
 
-        Button bt = findViewById(R.id.saveButton);
+        Button saveButton = findViewById(R.id.saveButton);
+        Button deleteButton = findViewById(R.id.deleteButton);
+
         AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner users = findViewById(R.id.textOutName);
 
-        new AsyncTask_setName(db, this, adapter, users, textOutYear).execute();
+        new AsyncTask_setName(db, this, adapter, users).execute();
 
-        bt.setOnClickListener(new Test(this, db, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
+        saveButton.setOnClickListener(new SaveButton(this, db, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
+        deleteButton.setOnClickListener(new DeleteButton(this, db, users, adapter));
     }
 
-    private class Test implements View.OnClickListener {
+    private class SaveButton implements View.OnClickListener {
         private final Activity activity;
         private final AppDatabase db;
         private final Spinner users;
@@ -68,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         private final EditText editMonth;
         private final EditText editDay;
 
-        private Test(Activity activity, AppDatabase db, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
+        private SaveButton(Activity activity, AppDatabase db, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
             this.activity = activity;
             this.db = db;
             this.users = users;
@@ -99,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
             }
-            new DataStoreAsyncTask_Main(db, activity, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay).execute();
+            new AsyncTask_Main(db, activity, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay).execute();
         }
 
         public boolean editTextError(EditText editText, int error) {
@@ -147,6 +144,25 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             return true;
+        }
+    }
+
+    private static class DeleteButton implements View.OnClickListener {
+        private final Activity activity;
+        private final AppDatabase db;
+        private final Spinner users;
+        private final ArrayAdapter<String> adapter;
+
+        private DeleteButton(Activity activity, AppDatabase db, Spinner users, ArrayAdapter<String> adapter) {
+            this.activity = activity;
+            this.db = db;
+            this.users = users;
+            this.adapter = adapter;
+        }
+
+        @Override
+        public void onClick(View view) {
+            new AsyncTask_deleteLine(db, activity, adapter, users).execute();
         }
     }
 }

@@ -5,24 +5,23 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.db_test4.db.AppDatabase;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class AsyncTask_setName extends AsyncTask<Void, Void, Integer> {
+public class AsyncTask_deleteLine extends AsyncTask<Void, Void, Integer> {
     @SuppressLint("StaticFieldLeak")
-    private Spinner users;
+    private final Spinner users;
     @SuppressLint("StaticFieldLeak")
-    private WeakReference<Activity> weakActivity;
-    private AppDatabase db;
-    private ArrayAdapter<String> adapter;
+    private final WeakReference<Activity> weakActivity;
+    private final AppDatabase db;
+    private final ArrayAdapter<String> adapter;
     private List<UsersInfo> ary;
 
     @SuppressWarnings("deprecation")
-    public AsyncTask_setName(AppDatabase db, Activity activity, ArrayAdapter<String> adapter, Spinner users) {
+    public AsyncTask_deleteLine(AppDatabase db, Activity activity, ArrayAdapter<String> adapter, Spinner users) {
         this.db = db;
         weakActivity = new WeakReference<>(activity);
         this.adapter = adapter;
@@ -33,8 +32,8 @@ public class AsyncTask_setName extends AsyncTask<Void, Void, Integer> {
     protected Integer doInBackground(Void... params) {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
 
-        usersInfoDao.deleteAll();
-        ary = usersInfoDao.getAll();
+        String str = "Hello";
+        usersInfoDao.delete(new UsersInfo(str, 1, 1, 1));
 
         return 0;
     }
@@ -42,12 +41,11 @@ public class AsyncTask_setName extends AsyncTask<Void, Void, Integer> {
     @Override
     protected void onPostExecute(Integer code) {
         Activity activity = weakActivity.get();
-        if(activity == null) {
+        if (activity == null) {
             return;
         }
-        for (UsersInfo ui : ary) {
-            adapter.add(ui.getName());
-        }
+
+        adapter.remove("Hello");
         users.setAdapter(adapter);
     }
 }
