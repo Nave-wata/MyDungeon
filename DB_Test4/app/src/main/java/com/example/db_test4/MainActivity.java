@@ -3,6 +3,7 @@ package com.example.db_test4;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -48,14 +49,16 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner users = findViewById(R.id.textOutName);
 
-        new DataStoreAsyncTask_getNames(db, this, adapter, users);
+        //new DataStoreAsyncTask_getNames(db, this, adapter, users);
 
-        bt.setOnClickListener(new Test(this, db, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
+        bt.setOnClickListener(new Test(this, db, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
     }
 
     private class Test implements View.OnClickListener {
         private Activity activity;
         private AppDatabase db;
+        private Spinner users;
+        private ArrayAdapter<String> adapter;
         private TextView textOutYear;
         private TextView textOutMonth;
         private TextView textOutDay;
@@ -64,9 +67,11 @@ public class MainActivity extends AppCompatActivity {
         private EditText editMonth;
         private EditText editDay;
 
-        private Test(Activity activity, AppDatabase db, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
+        private Test(Activity activity, AppDatabase db, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
             this.activity = activity;
             this.db = db;
+            this.users = users;
+            this.adapter = adapter;
             this.textOutYear = textOutYear;
             this.textOutMonth = textOutMonth;
             this.textOutDay = textOutDay;
@@ -91,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
             }
-            new DataStoreAsyncTask(db, activity, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay).execute();
+            new DataStoreAsyncTask(db, activity, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay).execute();
         }
 
         public boolean editTextError(EditText editText, int error) {
@@ -145,6 +150,8 @@ public class MainActivity extends AppCompatActivity {
     private static class DataStoreAsyncTask extends AsyncTask<Void, Void, Integer> {
         private WeakReference<Activity> weakActivity;
         private AppDatabase db;
+        private Spinner users;
+        private ArrayAdapter<String> adapter;
         private TextView textOutYear;
         private TextView textOutMonth;
         private TextView textOutDay;
@@ -155,8 +162,10 @@ public class MainActivity extends AppCompatActivity {
         private EditText editDay;
         private List<UsersInfo> ary;
 
-        public DataStoreAsyncTask(AppDatabase db, Activity activity, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
+        public DataStoreAsyncTask(AppDatabase db, Activity activity, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
             this.db = db;
+            this.users = users;
+            this.adapter = adapter;
             weakActivity = new WeakReference<>(activity);
             this.textOutYear = textOutYear;
             this.textOutMonth = textOutMonth;
@@ -190,14 +199,16 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             for (UsersInfo ui : ary) {
+                String name = editName.getText().toString();
                 String year = Integer.valueOf(ui.getYear()).toString();
                 String month = Integer.valueOf(ui.getMonth()).toString();
                 String day = Integer.valueOf(ui.getDay()).toString();
-
+                adapter.add(name);
                 textOutYear.setText(year);
                 textOutMonth.setText(month);
                 textOutDay.setText(day);
             }
+            users.setAdapter(adapter);
         }
     }
 
@@ -237,7 +248,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
             for (UsersInfo ui : ary) {
-                adapter.add(ui.getName());
+                String str = ui.getName();
+                adapter.add(str);
+                Log.v("Spinner", " = " + str);
             }
             users.setAdapter(adapter);
         }
