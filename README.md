@@ -19,6 +19,10 @@
 - [みんな実はこまっていた？半角・全角空白をJavaではどうtirmすべきか](https://www.bold.ne.jp/engineer-club/java-trim#-stripCharacterisWhitespace)
 - [[Android]プルダウンで項目選択できるSpinnerをアプリに設定する](https://akira-watson.com/android/spinner.html)
 
+## DB_Test4 [Repository](https://github.com/Nave-wata/MyDungeon/tree/main/DB_Test4)
+
+- DB_Test3の続き見たいなもの
+
 ## My_App_Test1 [Repository](https://github.com/Nave-wata/MyDungeon/tree/main/My_App_Test1)
 
 - [[Android]アプリの画面を遷移させる](https://akira-watson.com/android/activity-1.html)
