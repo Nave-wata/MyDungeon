@@ -171,9 +171,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            String item = users.getSelectedItem().toString();
-            if (adapter.getCount() > 0) {
+            if (users.getAdapter().getCount() > 0) {
+                String item = users.getSelectedItem().toString();
                 new AsyncTask_deleteLine(db, activity, adapter, users, textOutYear, textOutMonth, textOutDay, item).execute();
+            } else {
+                //
             }
         }
     }
