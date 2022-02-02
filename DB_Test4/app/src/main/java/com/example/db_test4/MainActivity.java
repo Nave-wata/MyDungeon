@@ -18,6 +18,7 @@ import com.example.db_test4.db.usersinfo.UsersInfo;
 import com.example.db_test4.db.usersinfo.UsersInfoDao;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -151,10 +152,10 @@ public class MainActivity extends AppCompatActivity {
         private EditText editMonth;
         private EditText editDay;
 
-        public DataStoreAsyncTask(AppDatabase db, Activity activity, TextView textOutNamem, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
+        public DataStoreAsyncTask(AppDatabase db, Activity activity, TextView textOutName, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {
             this.db = db;
             weakActivity = new WeakReference<>(activity);
-            this.textOutName = textOutNamem;
+            this.textOutName = textOutName;
             this.editName = editName;
             this.editYear = editYear;
             this.editMonth = editMonth;
@@ -166,8 +167,10 @@ public class MainActivity extends AppCompatActivity {
             UsersInfoDao usersInfoDao = db.usersInfoDao();
             sb = new StringBuilder();
 
-            String text = editName.getText().toString();
-            usersInfoDao.insert(new UsersInfo("Name", 2000, 1, 1));
+            List<UsersInfo> ary = usersInfoDao.getAll();
+            for (UsersInfo ui : ary) {
+                sb.append(ui.getName());
+            }
 
             return 0;
         }
@@ -178,6 +181,8 @@ public class MainActivity extends AppCompatActivity {
             if(activity == null) {
                 return;
             }
+
+            textOutName.setText(sb.toString());
         }
     }
 }

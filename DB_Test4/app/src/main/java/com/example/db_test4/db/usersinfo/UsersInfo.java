@@ -27,4 +27,8 @@ public class UsersInfo {
         this.month = month;
         this.day = day;
     }
+
+    public String getName() {
+        return name;
+    }
 }
