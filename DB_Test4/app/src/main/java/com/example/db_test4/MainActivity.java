@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner users = findViewById(R.id.textOutName);
 
-        //new DataStoreAsyncTask_getNames(db, this, adapter, users);
+        new DataStoreAsyncTask_getNames(db, this, adapter, users);
 
         bt.setOnClickListener(new Test(this, db, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
     }
@@ -186,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
             int month = Integer.parseInt(editMonth.getText().toString());
             int day = Integer.parseInt(editDay.getText().toString());
 
+            usersInfoDao.deleteAll();
             usersInfoDao.insert(new UsersInfo(name, year, month, day));
             ary = usersInfoDao.getAll();
 
@@ -199,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             for (UsersInfo ui : ary) {
-                String name = editName.getText().toString();
+                String name = ui.getName();;
                 String year = Integer.valueOf(ui.getYear()).toString();
                 String month = Integer.valueOf(ui.getMonth()).toString();
                 String day = Integer.valueOf(ui.getDay()).toString();
@@ -234,7 +235,6 @@ public class MainActivity extends AppCompatActivity {
             UsersInfoDao usersInfoDao = db.usersInfoDao();
             sb = new StringBuilder();
 
-            usersInfoDao.insert(new UsersInfo("Name", 2000, 1, 1));
             ary = usersInfoDao.getAll();
 
             return 0;
@@ -246,11 +246,9 @@ public class MainActivity extends AppCompatActivity {
             if(activity == null) {
                 return;
             }
-
             for (UsersInfo ui : ary) {
-                String str = ui.getName();
-                adapter.add(str);
-                Log.v("Spinner", " = " + str);
+                String name = ui.getName();
+                adapter.add(name);
             }
             users.setAdapter(adapter);
         }
