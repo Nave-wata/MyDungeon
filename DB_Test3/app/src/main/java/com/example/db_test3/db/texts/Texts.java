@@ -1,4 +1,4 @@
-package com.example.db_test3.db.tests;
+package com.example.db_test3.db.texts;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
