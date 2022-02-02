@@ -3,6 +3,7 @@ package com.example.db_test4;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         saveButton.setOnClickListener(new SaveButton(this, db, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
         deleteButton.setOnClickListener(new DeleteButton(this, db, users, adapter));
+        users.setOnItemSelectedListener(null);
     }
 
     private class SaveButton implements View.OnClickListener {
@@ -147,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private static class DeleteButton implements View.OnClickListener {
+    private class DeleteButton implements View.OnClickListener {
         private final Activity activity;
         private final AppDatabase db;
         private final Spinner users;
@@ -163,6 +165,22 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             new AsyncTask_deleteLine(db, activity, adapter, users).execute();
+        }
+    }
+
+    private class UsersSpinner implements AdapterView.OnItemSelectedListener {
+        //　アイテムが選択された時
+        @Override
+        public void onItemSelected(AdapterView<?> parent,
+                                   View view, int position, long id) {
+            Spinner spinner = (Spinner)parent;
+            String item = (String)spinner.getSelectedItem();
+            //textView.setText(item);
+        }
+
+        //　アイテムが選択されなかった
+        public void onNothingSelected(AdapterView<?> parent) {
+            //
         }
     }
 }
