@@ -58,9 +58,9 @@ public class AsyncTask_getLine extends AsyncTask<Void, Void, Integer> {
         }
 
         for (UsersInfo ui : ary) {
-            textOutYear.setText(ui.getYear());
-            textOutMonth.setText(ui.getMonth());
-            textOutDay.setText(ui.getDay());
+            textOutYear.setText(String.valueOf(ui.getYear()));
+            textOutMonth.setText(String.valueOf(ui.getMonth()));
+            textOutDay.setText(String.valueOf(ui.getDay()));
         }
     }
 }
