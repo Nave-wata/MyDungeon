@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         saveButton.setOnClickListener(new SaveButton(this, db, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay));
         deleteButton.setOnClickListener(new DeleteButton(this, db, users, adapter, textOutYear, textOutMonth, textOutDay));
-        users.setOnItemSelectedListener(new UsersSpinner(this, db, users, adapter, textOutYear, textOutMonth, textOutDay));
+        users.setOnItemSelectedListener(new UsersSpinner(this, db, users, textOutYear, textOutMonth, textOutDay));
     }
 
     private class SaveButton implements View.OnClickListener {
@@ -174,9 +174,8 @@ public class MainActivity extends AppCompatActivity {
             if (users.getAdapter().getCount() > 0) {
                 String item = users.getSelectedItem().toString();
                 new AsyncTask_deleteLine(db, activity, adapter, users, textOutYear, textOutMonth, textOutDay, item).execute();
-            } else {
-                //
             }
+
         }
     }
 
@@ -184,16 +183,14 @@ public class MainActivity extends AppCompatActivity {
         private final Activity activity;
         private final AppDatabase db;
         private final Spinner users;
-        private final ArrayAdapter<String> adapter;
         private final TextView textOutYear;
         private final TextView textOutMonth;
         private final TextView textOutDay;
 
-        private UsersSpinner(Activity activity, AppDatabase db, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay) {
+        private UsersSpinner(Activity activity, AppDatabase db, Spinner users, TextView textOutYear, TextView textOutMonth, TextView textOutDay) {
             this.activity = activity;
             this.db = db;
             this.users = users;
-            this.adapter = adapter;
             this.textOutYear = textOutYear;
             this.textOutMonth = textOutMonth;
             this.textOutDay = textOutDay;
