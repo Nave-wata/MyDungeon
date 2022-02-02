@@ -12,6 +12,10 @@ public class Texts {
     @ColumnInfo(name = "Text")
     public String text;
 
+    public Texts(String text) {
+        this.text = text;
+    }
+
     public Texts setId(int id) {
         this.id = id;
         return this;
