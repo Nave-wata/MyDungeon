@@ -48,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner users = findViewById(R.id.textOutName);
 
+        adapter.add("A");
+        adapter.add("B");
+        users.setAdapter(adapter);
+
         new DataStoreAsyncTask_getNames(db, this, adapter, users);
 
         bt.setOnClickListener(new Test(this, db, textOutYear, editName, editYear, editMonth, editDay));
@@ -193,12 +197,14 @@ public class MainActivity extends AppCompatActivity {
         private ArrayAdapter<String> adapter;
         private Spinner users;
         private StringBuilder sb;
+        private TextView textOutYear;
 
         public DataStoreAsyncTask_getNames(AppDatabase db, Activity activity, ArrayAdapter<String> adapter, Spinner users) {
             this.db = db;
             weakActivity = new WeakReference<>(activity);
             this.adapter = adapter;
             this.users = users;
+            this.textOutYear = textOutYear;
         }
 
 
@@ -211,8 +217,7 @@ public class MainActivity extends AppCompatActivity {
             List<UsersInfo> ary = usersInfoDao.getAll();
 
             for (UsersInfo ui : ary) {
-                adapter.add(ui.getName());
-                Log.v("Name", " = " + ui.getName());
+                sb.append(ui.getName()).append("\n");
             }
 
             return 0;
@@ -225,7 +230,6 @@ public class MainActivity extends AppCompatActivity {
             if(activity == null) {
                 return;
             }
-            users.setAdapter(adapter);
         }
     }
 }
