@@ -3,8 +3,6 @@ package com.example.db_test4.db.usersinfo;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -18,7 +16,6 @@ public class AsyncTask_getLine extends AsyncTask<Void, Void, Integer> {
     private final AppDatabase db;
     @SuppressLint("StaticFieldLeak")
     private final Spinner users;
-    private final ArrayAdapter<String> adapter;
     @SuppressLint("StaticFieldLeak")
     private final TextView textOutYear;
     @SuppressLint("StaticFieldLeak")
@@ -26,13 +23,12 @@ public class AsyncTask_getLine extends AsyncTask<Void, Void, Integer> {
     @SuppressLint("StaticFieldLeak")
     private final TextView textOutDay;
     private List<UsersInfo> ary;
-    private String item;
+    private final String item;
 
     @SuppressWarnings("deprecation")
-    public AsyncTask_getLine(AppDatabase db, Activity activity, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, String item) {
+    public AsyncTask_getLine(AppDatabase db, Activity activity, Spinner users, TextView textOutYear, TextView textOutMonth, TextView textOutDay, String item) {
         this.db = db;
         this.users = users;
-        this.adapter = adapter;
         weakActivity = new WeakReference<>(activity);
         this.textOutYear = textOutYear;
         this.textOutMonth = textOutMonth;

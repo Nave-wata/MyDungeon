@@ -2,7 +2,6 @@ package com.example.db_test4;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,10 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.db_test4.db.AppDatabase;
 import com.example.db_test4.db.AppDatabaseSingleton;
+import com.example.db_test4.db.usersinfo.AsyncTask_Save;
 import com.example.db_test4.db.usersinfo.AsyncTask_deleteLine;
 import com.example.db_test4.db.usersinfo.AsyncTask_getLine;
 import com.example.db_test4.db.usersinfo.AsyncTask_setName;
-import com.example.db_test4.db.usersinfo.AsyncTask_Save;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -151,14 +150,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class DeleteButton implements View.OnClickListener {
+    private static class DeleteButton implements View.OnClickListener {
         private final Activity activity;
         private final AppDatabase db;
         private final Spinner users;
         private final ArrayAdapter<String> adapter;
-        private TextView textOutYear;
-        private TextView textOutMonth;
-        private TextView textOutDay;
+        private final TextView textOutYear;
+        private final TextView textOutMonth;
+        private final TextView textOutDay;
 
         private DeleteButton(Activity activity, AppDatabase db, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay) {
             this.activity = activity;
@@ -177,14 +176,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class UsersSpinner implements AdapterView.OnItemSelectedListener {
-        private Activity activity;
-        private AppDatabase db;
-        private Spinner users;
-        private ArrayAdapter<String> adapter;
-        private TextView textOutYear;
-        private TextView textOutMonth;
-        private TextView textOutDay;
+    private static class UsersSpinner implements AdapterView.OnItemSelectedListener {
+        private final Activity activity;
+        private final AppDatabase db;
+        private final Spinner users;
+        private final ArrayAdapter<String> adapter;
+        private final TextView textOutYear;
+        private final TextView textOutMonth;
+        private final TextView textOutDay;
 
         private UsersSpinner(Activity activity, AppDatabase db, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay) {
             this.activity = activity;
@@ -200,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             Spinner spinner = (Spinner)parent;
             String item = (String)spinner.getSelectedItem();
-            new AsyncTask_getLine(db, activity, users, adapter, textOutYear, textOutMonth, textOutDay, item).execute();
+            new AsyncTask_getLine(db, activity, users, textOutYear, textOutMonth, textOutDay, item).execute();
         }
 
         public void onNothingSelected(AdapterView<?> parent) {

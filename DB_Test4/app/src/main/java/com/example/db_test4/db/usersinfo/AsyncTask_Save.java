@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.example.db_test4.db.AppDatabase;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 
 public class AsyncTask_Save extends AsyncTask<Void, Void, Integer> {
     private final WeakReference<Activity> weakActivity;
@@ -33,7 +32,6 @@ public class AsyncTask_Save extends AsyncTask<Void, Void, Integer> {
     private final EditText editMonth;
     @SuppressLint("StaticFieldLeak")
     private final EditText editDay;
-    private List<UsersInfo> ary;
 
     @SuppressWarnings("deprecation")
     public AsyncTask_Save(AppDatabase db, Activity activity, Spinner users, ArrayAdapter<String> adapter, TextView textOutYear, TextView textOutMonth, TextView textOutDay, EditText editName, EditText editYear, EditText editMonth, EditText editDay) {

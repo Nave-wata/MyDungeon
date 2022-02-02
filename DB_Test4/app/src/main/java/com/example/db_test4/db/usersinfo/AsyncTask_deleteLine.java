@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.example.db_test4.db.AppDatabase;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 
 public class AsyncTask_deleteLine extends AsyncTask<Void, Void, Integer> {
     @SuppressLint("StaticFieldLeak")
@@ -19,11 +18,13 @@ public class AsyncTask_deleteLine extends AsyncTask<Void, Void, Integer> {
     private final WeakReference<Activity> weakActivity;
     private final AppDatabase db;
     private final ArrayAdapter<String> adapter;
-    private List<UsersInfo> ary;
-    private TextView textOutYear;
-    private TextView textOutMonth;
-    private TextView textOutDay;
-    private String item;
+    @SuppressLint("StaticFieldLeak")
+    private final TextView textOutYear;
+    @SuppressLint("StaticFieldLeak")
+    private final TextView textOutMonth;
+    @SuppressLint("StaticFieldLeak")
+    private final TextView textOutDay;
+    private final String item;
 
     @SuppressWarnings("deprecation")
     public AsyncTask_deleteLine(AppDatabase db, Activity activity, ArrayAdapter<String> adapter, Spinner users, TextView textOutYear, TextView textOutMonth, TextView textOutDay, String item) {

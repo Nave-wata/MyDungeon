@@ -1,9 +1,8 @@
 package com.example.db_test4.db;
 
 import android.content.Context;
-import androidx.room.Room;
 
-import com.example.db_test4.db.AppDatabase;
+import androidx.room.Room;
 
 public class AppDatabaseSingleton {
     private static AppDatabase instance = null;
