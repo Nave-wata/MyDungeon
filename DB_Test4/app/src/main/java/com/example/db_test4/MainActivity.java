@@ -1,10 +1,7 @@
 package com.example.db_test4;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,12 +15,7 @@ import com.example.db_test4.db.AppDatabase;
 import com.example.db_test4.db.AppDatabaseSingleton;
 import com.example.db_test4.db.usersinfo.AsyncTask_deleteLine;
 import com.example.db_test4.db.usersinfo.AsyncTask_setName;
-import com.example.db_test4.db.usersinfo.DataStoreAsyncTask_Main;
-import com.example.db_test4.db.usersinfo.UsersInfo;
-import com.example.db_test4.db.usersinfo.UsersInfoDao;
-
-import java.lang.ref.WeakReference;
-import java.util.List;
+import com.example.db_test4.db.usersinfo.AsyncTask_Main;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -104,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
             }
-            new DataStoreAsyncTask_Main(db, activity, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay).execute();
+            new AsyncTask_Main(db, activity, users, adapter, textOutYear, textOutMonth, textOutDay, editName, editYear, editMonth, editDay).execute();
         }
 
         public boolean editTextError(EditText editText, int error) {
@@ -155,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class DeleteButton implements View.OnClickListener {
+    private static class DeleteButton implements View.OnClickListener {
         private final Activity activity;
         private final AppDatabase db;
         private final Spinner users;

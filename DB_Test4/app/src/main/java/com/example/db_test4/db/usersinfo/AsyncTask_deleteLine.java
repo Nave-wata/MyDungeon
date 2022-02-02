@@ -13,13 +13,12 @@ import java.util.List;
 
 public class AsyncTask_deleteLine extends AsyncTask<Void, Void, Integer> {
     @SuppressLint("StaticFieldLeak")
-    private Spinner users;
+    private final Spinner users;
     @SuppressLint("StaticFieldLeak")
-    private WeakReference<Activity> weakActivity;
-    private AppDatabase db;
-    private ArrayAdapter<String> adapter;
+    private final WeakReference<Activity> weakActivity;
+    private final AppDatabase db;
+    private final ArrayAdapter<String> adapter;
     private List<UsersInfo> ary;
-    private String str;
 
     @SuppressWarnings("deprecation")
     public AsyncTask_deleteLine(AppDatabase db, Activity activity, ArrayAdapter<String> adapter, Spinner users) {
@@ -33,8 +32,9 @@ public class AsyncTask_deleteLine extends AsyncTask<Void, Void, Integer> {
     protected Integer doInBackground(Void... params) {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
 
-        usersInfoDao.delete(new UsersInfo("Hello", 1, 1, 1));
-        adapter.remove("Hello");
+        String str = "Hello";
+        usersInfoDao.delete(new UsersInfo(str, 1, 1, 1));
+        adapter.clear();
         ary = usersInfoDao.getAll();
 
         return 0;
@@ -46,7 +46,9 @@ public class AsyncTask_deleteLine extends AsyncTask<Void, Void, Integer> {
         if (activity == null) {
             return;
         }
-
+        for (UsersInfo ui : ary) {
+            adapter.add(ui.getName());
+        }
         users.setAdapter(adapter);
     }
 }
