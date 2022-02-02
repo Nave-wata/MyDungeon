@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">DB_Test4</string>
+    <string name="users">ユーザー名</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="saveButton">保存</string>
+    <string name="deleteButton">削除</string>
+    <string name="errorNotString">数字のみは認識できません</string>
+    <string name="errorNotNum">数字のみ入力して下さい</string>
+    <string name="errorNotInput">入力必須項目です</string>
+    <string name="errorSpaceOnly">空白のみの入力はできません</string>
+    <string name="errorSpaceHeadLast">先頭・末尾に空白は入力できません</string>
+</resources>

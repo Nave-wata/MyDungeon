@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/editYear"
+        android:layout_width="67dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/frame_style"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/users"
+        app:layout_constraintVertical_bias="0.865"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editDay"
+        android:layout_width="67dp"
+        android:layout_height="34dp"
+        android:background="@drawable/frame_style"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.403"
+        app:layout_constraintStart_toEndOf="@+id/editMonth"
+        app:layout_constraintTop_toBottomOf="@+id/users"
+        app:layout_constraintVertical_bias="0.875"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textYear1"
+        android:layout_width="18dp"
+        android:layout_height="20dp"
+        android:text="@string/year"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editMonth"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toEndOf="@+id/editYear"
+        app:layout_constraintTop_toBottomOf="@+id/users"
+        app:layout_constraintVertical_bias="0.723" />
+
+    <TextView
+        android:id="@+id/textDa1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/day"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/editDay"
+        app:layout_constraintTop_toBottomOf="@+id/users"
+        app:layout_constraintVertical_bias="0.724"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textMonth1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/month"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editDay"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/editMonth"
+        app:layout_constraintTop_toBottomOf="@+id/users"
+        app:layout_constraintVertical_bias="0.724"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editMonth"
+        android:layout_width="67dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="48dp"
+        android:background="@drawable/frame_style"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintStart_toEndOf="@+id/editYear"
+        app:layout_constraintTop_toBottomOf="@+id/users"
+        app:layout_constraintVertical_bias="0.875"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/users"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/users"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:text="@string/users"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.581"
+        tools:ignore="InvalidId" />
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="189dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="48dp"
+        android:background="@drawable/frame_style"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.779"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saveButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.272"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.913" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/deleteButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toEndOf="@+id/saveButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.913" />
+
+    <Spinner
+        android:id="@+id/textOutName"
+        android:layout_width="127dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="48dp"
+        android:background="@drawable/frame_style"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.093"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textOutYear"
+        android:layout_width="67dp"
+        android:layout_height="34dp"
+        android:background="@drawable/frame_style"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.139"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/users"
+        app:layout_constraintVertical_bias="0.116"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textMonth2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/month"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textOutDay"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textOutMonth"
+        app:layout_constraintTop_toBottomOf="@+id/users"
+        app:layout_constraintVertical_bias="0.137"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textDa2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/day"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.016"
+        app:layout_constraintStart_toEndOf="@+id/textOutDay"
+        app:layout_constraintTop_toBottomOf="@+id/users"
+        app:layout_constraintVertical_bias="0.137"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textYear2"
+        android:layout_width="18dp"
+        android:layout_height="20dp"
+        android:text="@string/year"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textOutMonth"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textOutYear"
+        app:layout_constraintTop_toBottomOf="@+id/users"
+        app:layout_constraintVertical_bias="0.137" />
+
+    <TextView
+        android:id="@+id/textOutMonth"
+        android:layout_width="67dp"
+        android:layout_height="34dp"
+        android:background="@drawable/frame_style"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.209"
+        app:layout_constraintStart_toEndOf="@+id/textOutYear"
+        app:layout_constraintTop_toBottomOf="@+id/users"
+        app:layout_constraintVertical_bias="0.116"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textOutDay"
+        android:layout_width="67dp"
+        android:layout_height="34dp"
+        android:background="@drawable/frame_style"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintStart_toEndOf="@+id/textOutMonth"
+        app:layout_constraintTop_toBottomOf="@+id/users"
+        app:layout_constraintVertical_bias="0.116"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
