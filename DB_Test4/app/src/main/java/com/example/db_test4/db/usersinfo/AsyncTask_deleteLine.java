@@ -19,21 +19,22 @@ public class AsyncTask_deleteLine extends AsyncTask<Void, Void, Integer> {
     private final AppDatabase db;
     private final ArrayAdapter<String> adapter;
     private List<UsersInfo> ary;
+    private String item;
 
     @SuppressWarnings("deprecation")
-    public AsyncTask_deleteLine(AppDatabase db, Activity activity, ArrayAdapter<String> adapter, Spinner users) {
+    public AsyncTask_deleteLine(AppDatabase db, Activity activity, ArrayAdapter<String> adapter, Spinner users, String item) {
         this.db = db;
         weakActivity = new WeakReference<>(activity);
         this.adapter = adapter;
         this.users = users;
+        this.item = item;
     }
 
     @Override
     protected Integer doInBackground(Void... params) {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
 
-        String str = "Hello";
-        usersInfoDao.delete(new UsersInfo(str, 1, 1, 1));
+        usersInfoDao.deleteUserInfo(item);
 
         return 0;
     }
@@ -45,7 +46,7 @@ public class AsyncTask_deleteLine extends AsyncTask<Void, Void, Integer> {
             return;
         }
 
-        adapter.remove("Hello");
+        adapter.remove(item);
         users.setAdapter(adapter);
     }
 }

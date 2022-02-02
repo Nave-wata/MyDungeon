@@ -166,7 +166,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            new AsyncTask_deleteLine(db, activity, adapter, users).execute();
+            String item = users.getSelectedItem().toString();
+            new AsyncTask_deleteLine(db, activity, adapter, users, item).execute();
         }
     }
 
