@@ -7,18 +7,16 @@
     android:orientation="vertical"
     android:gravity="center" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <SeekBar
+        android:id="@+id/seekBar1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_fragment"
-        android:textColor="#063"
-        android:textSize="40sp" />
+        android:layout_weight="0.5"/>
 
-    <TextView
-        android:id="@+id/HelloNative"
-        android:layout_width="wrap_content"
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#063"
-        android:textSize="20sp" />
+        android:layout_weight="0.5"/>
 
 </LinearLayout>
