@@ -7,9 +7,6 @@ import android.widget.TextView;
 import com.example.fragmenttest1.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    static { System.loadLibrary("fragmenttest1"); }
-    public native String stringFromJNI();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
