@@ -7,10 +7,11 @@
     android:orientation="vertical"
     android:gravity="center" >
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.example.fragmenttest1.Fragment_Main"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"/>
+    <TextView
+        android:text="@string/hello_fragment"
+        android:layout_width="wrap_content"
+        android:textSize="40sp"
+        android:textColor="#063"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
