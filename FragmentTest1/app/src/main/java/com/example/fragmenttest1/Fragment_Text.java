@@ -6,14 +6,10 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-public class Fragment_Main extends Fragment {
-    static { System.loadLibrary("fragmenttest1"); }
-    public native String stringFromJNI();
-
+public class Fragment_Text extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        return inflater.inflate(R.layout.fragment_text, container, false);
     }
 }
