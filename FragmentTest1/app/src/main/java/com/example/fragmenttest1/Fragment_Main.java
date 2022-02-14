@@ -8,6 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class Fragment_Main extends Fragment {
+    static {
+        System.loadLibrary("fragmenttest1");
+    }
+    public native String stringFromJNI();
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
