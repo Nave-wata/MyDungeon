@@ -32,10 +32,8 @@ public class TitleFragment extends Fragment {
 
     public static TitleFragment newInstance(String str){
 
-        // Fragemnt01 インスタンス生成
         TitleFragment fragment = new TitleFragment ();
 
-        // Bundle にパラメータを設定
         Bundle barg = new Bundle();
         barg.putString("Message", str);
         fragment.setArguments(barg);
