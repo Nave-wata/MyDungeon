@@ -15,14 +15,20 @@ public class MainActivity extends AppCompatActivity {
     }
     public native String stringFromJNI();
 
+    FragmentTransaction fragmentTransaction;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, TitleFragment.newInstance("Title"));
         fragmentTransaction.commit();
+    }
+
+    public void ReFragment() {
+        fragmentTransaction;
     }
 }

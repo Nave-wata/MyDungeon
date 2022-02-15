@@ -4,6 +4,8 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,8 @@ public class TitleFragment extends Fragment {
 
         setImage.setImageViewBitmapFromAsset(imageView, "title/title.png");
         setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
+
+        imageButton.setOnClickListener(new onClickListener());
     }
 
     public static TitleFragment newInstance(String str){
@@ -39,5 +43,18 @@ public class TitleFragment extends Fragment {
         fragment.setArguments(barg);
 
         return fragment;
+    }
+
+    public class onClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            int id = view.getId();
+            MainActivity activity = (MainActivity) getActivity();
+
+            switch (id) {
+                case R.id.image_button1:
+                activity.ReFragment();
+            }
+        }
     }
 }
