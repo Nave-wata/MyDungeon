@@ -1,31 +1,61 @@
 package com.example.fragmenttest1;
 
-import android.app.Fragment;
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.SeekBar;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 public class Fragment_Main extends Fragment {
     static { System.loadLibrary("fragmenttest1"); }
     public native String stringFromJNI();
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container,
-                             Bundle savedInstanceState) {
+    Button bt;
+    SeekBar sb1;
+    SeekBar sb2;
 
-        return inflater.inflate(R.layout.fragment_main,
-                container, false);
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView textView = view.findViewById(R.id.HelloNative);
-        textView.setText(stringFromJNI());
+        bt = view.findViewById(R.id.button);
+        sb1 = view.findViewById(R.id.seekBar1);
+        sb2 = view.findViewById(R.id.seekBar2);
+
+        onSeekBarChangeListener seekBars = new onSeekBarChangeListener();
+
+        sb1.setOnSeekBarChangeListener(seekBars);
+        sb2.setOnSeekBarChangeListener(seekBars);
+    }
+
+    private class onSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+            int id = seekBar.getId();
+            String str = String.valueOf(i);
+            switch (id) {
+                case R.id.seekBar1:
+                    bt.setText("1, " + str);
+                    break;
+                case R.id.seekBar2:
+                    bt.setText("2, " + str);
+            }
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {}
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {}
     }
 }
