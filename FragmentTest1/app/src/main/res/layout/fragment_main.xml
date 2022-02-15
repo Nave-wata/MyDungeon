@@ -31,8 +31,12 @@
         android:layout_weight="0.5"
         android:max="10"
         android:progress="5"
-        tools:layout_editor_absoluteX="73dp"
-        tools:layout_editor_absoluteY="83dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintHorizontal_bias="0.575"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.099"
         tools:ignore="MissingConstraints" />
 
     <SeekBar
@@ -43,8 +47,12 @@
         android:layout_weight="0.5"
         android:max="10"
         android:progress="5"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="73dp"
-        tools:layout_editor_absoluteY="134dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintHorizontal_bias="0.575"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar1"
+        app:layout_constraintVertical_bias="0.041"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
