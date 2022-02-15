@@ -12,13 +12,5 @@ public class TitleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title);
-
-        AssetManager assetManager = getAssets();
-        SetImage setImage = new SetImage(assetManager);
-        ImageView imageView = findViewById(R.id.image_view1);
-        ImageButton imageButton = findViewById(R.id.image_button1);
-
-        setImage.setImageViewBitmapFromAsset(imageView, "title/title.png");
-        setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
     }
 }

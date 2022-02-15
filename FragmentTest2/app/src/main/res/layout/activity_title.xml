@@ -6,23 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".TitleActivity">
 
-    <ImageView
-        android:id="@+id/image_view1"
+    <fragment
+        android:id="@+id/fragment_title"
+        android:name="com.example.fragmenttest2.TitleFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/test1" />
-
-    <ImageButton
-        android:id="@+id/image_button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/test2"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
+        android:layout_height="match_parent"/>
 
 </android.support.constraint.ConstraintLayout>
