@@ -5,8 +5,10 @@
       <map>
         <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/My_App_Test1/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/My_App_Test1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21666666666666667" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/My_App_Test1/app/src/main/res/layout/activity_home.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/My_App_Test1/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/My_App_Test1/app/src/main/res/layout/activity_title.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/My_App_Test1/app/src/main/res/layout/fragment_base.xml" value="0.1884498480243161" />
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/My_App_Test1/app/src/main/res/layout/fragment_botton.xml" value="0.286231884057971" />
         <entry key="..\:/Users/pr0gr/StudioProjects/My_App_Test1/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/pr0gr/StudioProjects/My_App_Test1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/pr0gr/StudioProjects/My_App_Test1/app/src/main/res/layout/activity_home.xml" value="0.1693840579710145" />
