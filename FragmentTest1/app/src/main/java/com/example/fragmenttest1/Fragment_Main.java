@@ -41,18 +41,21 @@ public class Fragment_Main extends Fragment {
     private class onSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+            int id = seekBar.getId();
             String str = String.valueOf(i);
-            bt.setText(str);
+            switch (id) {
+                case R.id.seekBar1:
+                    bt.setText("1, " + str);
+                    break;
+                case R.id.seekBar2:
+                    bt.setText("2, " + str);
+            }
         }
 
         @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
-
-        }
+        public void onStartTrackingTouch(SeekBar seekBar) {}
 
         @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-
-        }
+        public void onStopTrackingTouch(SeekBar seekBar) {}
     }
 }
