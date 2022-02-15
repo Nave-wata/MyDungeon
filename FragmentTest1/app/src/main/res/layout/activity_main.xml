@@ -11,13 +11,6 @@
     tools:context=".MainActivity">
 
     <fragment
-        android:id="@+id/fragment_text"
-        android:name="com.example.fragmenttest1.Fragment_Text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.9"/>
-
-    <fragment
         android:id="@+id/container"
         android:name="com.example.fragmenttest1.Fragment_Main"
         android:layout_width="match_parent"
