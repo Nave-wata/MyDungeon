@@ -10,7 +10,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class SetImage {
-    public void setImageViewBitmapFromAsset(ImageView imageView, AssetManager assetManager, String strName) {
+    AssetManager assetManager;
+
+    SetImage(AssetManager assetManager) {
+        this.assetManager = assetManager;
+    }
+
+    public void setImageViewBitmapFromAsset(ImageView imageView, String strName) {
         InputStream istr = null;
 
         try {
@@ -23,7 +29,7 @@ public class SetImage {
         imageView.setImageBitmap(bitmap);
     }
 
-    public void setImageButtonBitmapFromAsset(ImageButton imageButton, AssetManager assetManager, String strName) {
+    public void setImageButtonBitmapFromAsset(ImageButton imageButton, String strName) {
         InputStream istr = null;
 
         try {
