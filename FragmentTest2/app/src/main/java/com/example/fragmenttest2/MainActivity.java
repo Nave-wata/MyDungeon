@@ -5,10 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.fragmenttest2.databinding.ActivityMainBinding;
 
@@ -21,46 +19,48 @@ public class MainActivity extends AppCompatActivity {
     }
     public native String stringFromJNI();
 
-    private ActivityMainBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setImageViewBitmapFromAsset("title/title.png", "image_view1");
-        setImageButtonBitmapFromAsset("title/tabi_start.png", "image_button1");
+        SetImage setImage = new SetImage();
+
+        setImage.setImageViewBitmapFromAsset("title/title.png", "image_view1");
+        setImage.setImageButtonBitmapFromAsset("title/tabi_start.png", "image_button1");
     }
 
-    private void setImageViewBitmapFromAsset(String strName, String strID) {
-        int ID = getResources().getIdentifier(strID, "id", getPackageName());
-        ImageView imageView = (ImageView)findViewById(ID);
-        AssetManager assetManager = getAssets();
-        InputStream istr = null;
+    private class SetImage {
+        private void setImageViewBitmapFromAsset(String strName, String strID) {
+            int ID = getResources().getIdentifier(strID, "id", getPackageName());
+            ImageView imageView = (ImageView)findViewById(ID);
+            AssetManager assetManager = getAssets();
+            InputStream istr = null;
 
-        try {
-            istr = assetManager.open(strName);
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                istr = assetManager.open(strName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Bitmap bitmap = BitmapFactory.decodeStream(istr);
+            imageView.setImageBitmap(bitmap);
         }
 
-        Bitmap bitmap = BitmapFactory.decodeStream(istr);
-        imageView.setImageBitmap(bitmap);
-    }
+        private void setImageButtonBitmapFromAsset(String strName, String strID) {
+            int ID = getResources().getIdentifier(strID, "id", getPackageName());
+            ImageButton imageButton = (ImageButton) findViewById(ID);
+            AssetManager assetManager = getAssets();
+            InputStream istr = null;
 
-    private void setImageButtonBitmapFromAsset(String strName, String strID) {
-        int ID = getResources().getIdentifier(strID, "id", getPackageName());
-        ImageButton imageButton = (ImageButton) findViewById(ID);
-        AssetManager assetManager = getAssets();
-        InputStream istr = null;
+            try {
+                istr = assetManager.open(strName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        try {
-            istr = assetManager.open(strName);
-        } catch (IOException e) {
-            e.printStackTrace();
+            Bitmap bitmap = BitmapFactory.decodeStream(istr);
+            imageButton.setImageBitmap(bitmap);
         }
-
-        Bitmap bitmap = BitmapFactory.decodeStream(istr);
-        imageButton.setImageBitmap(bitmap);
     }
 }
