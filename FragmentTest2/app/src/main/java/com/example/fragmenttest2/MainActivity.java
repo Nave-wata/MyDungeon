@@ -23,6 +23,6 @@ public class MainActivity extends AppCompatActivity {
         ImageButton imageButton = findViewById(R.id.image_button1);
 
         setImage.setImageViewBitmapFromAsset(imageView, "title/title.png");
-        setImage.setImageButtonBitmapFromAsset(imageButton, "title/tabi_start.png");
+        setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
     }
 }
