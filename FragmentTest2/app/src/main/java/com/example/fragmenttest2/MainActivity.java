@@ -24,43 +24,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        AssetManager assetManager = getAssets();
         SetImage setImage = new SetImage();
+        ImageView imageView = findViewById(R.id.image_view1);
+        ImageButton imageButton = findViewById(R.id.image_button1);
 
-        setImage.setImageViewBitmapFromAsset("title/title.png", "image_view1");
-        setImage.setImageButtonBitmapFromAsset("title/tabi_start.png", "image_button1");
-    }
-
-    private class SetImage {
-        private void setImageViewBitmapFromAsset(String strName, String strID) {
-            int ID = getResources().getIdentifier(strID, "id", getPackageName());
-            ImageView imageView = (ImageView)findViewById(ID);
-            AssetManager assetManager = getAssets();
-            InputStream istr = null;
-
-            try {
-                istr = assetManager.open(strName);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            Bitmap bitmap = BitmapFactory.decodeStream(istr);
-            imageView.setImageBitmap(bitmap);
-        }
-
-        private void setImageButtonBitmapFromAsset(String strName, String strID) {
-            int ID = getResources().getIdentifier(strID, "id", getPackageName());
-            ImageButton imageButton = (ImageButton) findViewById(ID);
-            AssetManager assetManager = getAssets();
-            InputStream istr = null;
-
-            try {
-                istr = assetManager.open(strName);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            Bitmap bitmap = BitmapFactory.decodeStream(istr);
-            imageButton.setImageBitmap(bitmap);
-        }
+        setImage.setImageViewBitmapFromAsset(imageView, assetManager,"title/title.png");
+        setImage.setImageButtonBitmapFromAsset(imageButton, assetManager, "title/tabi_start.png");
     }
 }
