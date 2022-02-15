@@ -1,11 +1,10 @@
 package com.example.my_app_test1;
 
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
+    ImageView iv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,12 +27,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void getImageViewBitmapFromAsset(String strName, String strID) {
-        int ID = getResources().getIdentifier(strID, "id", getPackageName());
-        ImageView imageView = (ImageView)findViewById(ID);
+    private void getImageViewBitmapFromAsset(View iv, String strName) {
         AssetManager assetManager = getAssets();
         InputStream istr = null;
-
+        Image
         try {
             istr = assetManager.open(strName);
         } catch (IOException e) {
@@ -39,14 +38,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Bitmap bitmap = BitmapFactory.decodeStream(istr);
-        imageView.setImageBitmap(bitmap);
+        iv.setImageBitmap(bitmap);
     }
 
     private void setScreenTitle() {
         setContentView(R.layout.activity_title);
-
+        iv = findViewById(R.id.image_view);
         // 画像
-        getImageViewBitmapFromAsset("title/title.png", "image_view");
+        getImageViewBitmapFromAsset(iv, "title/title.png");
 
         // スタートボタン
         Button title_Button = findViewById(R.id.start_button);

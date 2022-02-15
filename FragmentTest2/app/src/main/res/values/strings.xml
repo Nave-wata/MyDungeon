@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FragmentTest2</string>
+    <string name="test1">test1</string>
 </resources>
