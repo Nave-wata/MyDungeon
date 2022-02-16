@@ -44,6 +44,8 @@ public class BaseFragment extends Fragment {
                 case R.id.dungeon_button:
                     activity.ChangeDungeonActivity();
                     break;
+                case R.id.monster_button:
+                    activity.ChangeMonsterActivity();
                 default:
                     break;
             }

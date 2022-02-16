@@ -22,4 +22,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    protected void ChangeMonsterActivity() {
+        Intent intent = new Intent(getApplication(), MonsterActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }
