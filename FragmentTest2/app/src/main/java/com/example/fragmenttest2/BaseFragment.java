@@ -34,6 +34,7 @@ public class BaseFragment extends Fragment {
         setImage.setImageButtonBitmapFromAsset(dungeonButton, "base_menu/base_menu_dungeon.png");
         setImage.setImageButtonBitmapFromAsset(monsterButton, "base_menu/base_menu_monster.png");
 
+        homeButton.setOnClickListener(iBt);
         dungeonButton.setOnClickListener(iBt);
         monsterButton.setOnClickListener(iBt);
     }
