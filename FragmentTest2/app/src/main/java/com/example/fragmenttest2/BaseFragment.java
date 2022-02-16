@@ -1,5 +1,7 @@
 package com.example.fragmenttest2;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -40,14 +42,26 @@ public class BaseFragment extends Fragment {
         @Override
         public void onClick(View v) {
             int id = v.getId();
-            MainActivity activity = (MainActivity) getActivity();
 
             switch (id) {
+                case R.id.home_button:
+                    Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(mainIntent);
+                    MainActivity mainActivity1 = (MainActivity) getActivity();
+                    getActivity().finish();
+                    break;
                 case R.id.dungeon_button:
-                    activity.ChangeDungeonActivity();
+                    Intent dungeonIntent = new Intent(getActivity(), DungeonActivity.class);
+                    startActivity(dungeonIntent);
+                    MainActivity mainActivity2 = (MainActivity) getActivity();
+                    getActivity().finish();
                     break;
                 case R.id.monster_button:
-                    activity.ChangeMonsterActivity();
+                    Intent monsterIntent = new Intent(getActivity(), MonsterActivity.class);
+                    startActivity(monsterIntent);
+                    MainActivity mainActivity3 = (MainActivity) getActivity();
+                    getActivity().finish();
+                    break;
                 default:
                     break;
             }
