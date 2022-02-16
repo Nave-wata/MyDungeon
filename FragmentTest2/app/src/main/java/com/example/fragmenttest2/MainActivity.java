@@ -5,10 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TableLayout;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,8 +29,5 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment2.newInstance("base"));
         fragmentTransaction.commit();
-    }
-
-    public void ReFragment() {
     }
 }

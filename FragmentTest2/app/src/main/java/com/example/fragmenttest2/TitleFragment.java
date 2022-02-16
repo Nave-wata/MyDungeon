@@ -50,11 +50,6 @@ public class TitleFragment extends Fragment {
         public void onClick(View view) {
             int id = view.getId();
             MainActivity activity = (MainActivity) getActivity();
-
-            switch (id) {
-                case R.id.image_button1:
-                activity.ReFragment();
-            }
         }
     }
 }
