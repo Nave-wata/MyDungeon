@@ -1,7 +1,4 @@
 <resources>
     <string name="app_name">FragmentTest2</string>
-    <string name="test1">test1</string>
-    <string name="test2">test2</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

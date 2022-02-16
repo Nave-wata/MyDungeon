@@ -36,7 +36,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ReFragment() {
-        fragmentTransaction.replace(R.id.container, fragment2.newInstance("Base"));
-        fragmentTransaction.commit();
     }
 }
