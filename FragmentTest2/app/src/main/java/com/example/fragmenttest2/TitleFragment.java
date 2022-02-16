@@ -1,5 +1,6 @@
 package com.example.fragmenttest2;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,7 +39,15 @@ public class TitleFragment extends Fragment {
         @Override
         public void onClick(View view) {
             int id = view.getId();
-            MainActivity activity = (MainActivity) getActivity();
+            TitleActivity activity = (TitleActivity) getActivity();
+
+            switch (id) {
+                case R.id.image_button1:
+                    activity.ChangeActivity();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
