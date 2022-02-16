@@ -12,9 +12,7 @@ import android.widget.ImageView;
 public class BaseFragment extends Fragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_base, container, false);
     }
 
@@ -22,13 +20,16 @@ public class BaseFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         AssetManager assetManager = getActivity().getAssets();
         SetImage setImage = new SetImage(assetManager);
-        ImageButton homeButton = view.findViewById(R.id.home_button);
-        ImageButton dungeonButton;
 
-        //setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
+        ImageButton homeButton = view.findViewById(R.id.home_button);
+        ImageButton dungeonButton = view.findViewById(R.id.dungeon_button);
+        ImageButton monsterButton = view.findViewById(R.id.monster_button);
+
+        setImage.setImageButtonBitmapFromAsset(homeButton, "base_menu/base_menu_home.png");
+        setImage.setImageButtonBitmapFromAsset(dungeonButton, "base_menu/base_menu_dungeon.png");
+        setImage.setImageButtonBitmapFromAsset(monsterButton, "base_menu_monsters.png");
     }
 
     public static TitleFragment newInstance(String str){

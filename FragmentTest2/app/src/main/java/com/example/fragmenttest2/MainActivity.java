@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, fragment1.newInstance("Title"));
+        fragmentTransaction.replace(R.id.container, fragment2.newInstance("base"));
         fragmentTransaction.commit();
     }
 
