@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     public native String stringFromJNI();
 
     FragmentTransaction fragmentTransaction;
-    TitleFragment fragment1;
+    //TitleFragment fragment1;
     BaseFragment fragment2;
 
     @Override
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fragment1 = new TitleFragment();
+        //fragment1 = new TitleFragment();
         fragment2 = new BaseFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();

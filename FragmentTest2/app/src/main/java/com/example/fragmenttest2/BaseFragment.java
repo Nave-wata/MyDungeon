@@ -32,9 +32,9 @@ public class BaseFragment extends Fragment {
         setImage.setImageButtonBitmapFromAsset(monsterButton, "base_menu_monsters.png");
     }
 
-    public static TitleFragment newInstance(String str){
+    public static BaseFragment newInstance(String str){
 
-        TitleFragment fragment = new TitleFragment ();
+        BaseFragment fragment = new BaseFragment ();
 
         Bundle barg = new Bundle();
         barg.putString("Message", str);
