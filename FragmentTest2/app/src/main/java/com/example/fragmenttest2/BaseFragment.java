@@ -30,5 +30,23 @@ public class BaseFragment extends Fragment {
         setImage.setImageButtonBitmapFromAsset(homeButton, "base_menu/base_menu_home.png");
         setImage.setImageButtonBitmapFromAsset(dungeonButton, "base_menu/base_menu_dungeon.png");
         setImage.setImageButtonBitmapFromAsset(monsterButton, "base_menu/base_menu_monster.png");
+
+        dungeonButton.setOnClickListener(new onClickListener());
+    }
+
+    private class onClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            int id = v.getId();
+            MainActivity activity = (MainActivity) getActivity();
+
+            switch (id) {
+                case R.id.dungeon_button:
+                    activity.ChangeDungeonActivity();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
