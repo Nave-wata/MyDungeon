@@ -47,19 +47,16 @@ public class BaseFragment extends Fragment {
                 case R.id.home_button:
                     Intent mainIntent = new Intent(getActivity(), MainActivity.class);
                     startActivity(mainIntent);
-                    MainActivity mainActivity1 = (MainActivity) getActivity();
                     getActivity().finish();
                     break;
                 case R.id.dungeon_button:
                     Intent dungeonIntent = new Intent(getActivity(), DungeonActivity.class);
                     startActivity(dungeonIntent);
-                    MainActivity mainActivity2 = (MainActivity) getActivity();
                     getActivity().finish();
                     break;
                 case R.id.monster_button:
                     Intent monsterIntent = new Intent(getActivity(), MonsterActivity.class);
                     startActivity(monsterIntent);
-                    MainActivity mainActivity3 = (MainActivity) getActivity();
                     getActivity().finish();
                     break;
                 default:
