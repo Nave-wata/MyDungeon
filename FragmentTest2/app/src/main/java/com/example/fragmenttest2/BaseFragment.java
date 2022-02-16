@@ -22,6 +22,7 @@ public class BaseFragment extends Fragment {
 
         AssetManager assetManager = getActivity().getAssets();
         SetImage setImage = new SetImage(assetManager);
+        onClickListener iBt = new onClickListener();
 
         ImageButton homeButton = view.findViewById(R.id.home_button);
         ImageButton dungeonButton = view.findViewById(R.id.dungeon_button);
@@ -31,7 +32,8 @@ public class BaseFragment extends Fragment {
         setImage.setImageButtonBitmapFromAsset(dungeonButton, "base_menu/base_menu_dungeon.png");
         setImage.setImageButtonBitmapFromAsset(monsterButton, "base_menu/base_menu_monster.png");
 
-        dungeonButton.setOnClickListener(new onClickListener());
+        dungeonButton.setOnClickListener(iBt);
+        monsterButton.setOnClickListener(iBt);
     }
 
     private class onClickListener implements View.OnClickListener {
