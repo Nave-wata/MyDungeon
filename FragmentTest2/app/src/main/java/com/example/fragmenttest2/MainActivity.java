@@ -16,16 +16,4 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
-    protected void ChangeDungeonActivity() {
-        Intent intent = new Intent(getApplication(), DungeonActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    protected void ChangeMonsterActivity() {
-        Intent intent = new Intent(getApplication(), MonsterActivity.class);
-        startActivity(intent);
-        finish();
-    }
 }
