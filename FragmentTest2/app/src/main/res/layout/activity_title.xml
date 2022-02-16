@@ -7,10 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".TitleActivity">
 
-    <FrameLayout
-        android:id="@+id/titleContainer"
+    <fragment
+        android:id="@+id/title_fragment"
+        android:name="com.example.fragmenttest2.TitleFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="InvalidId" />
+        android:layout_height="match_parent"/>
 
   </android.support.constraint.ConstraintLayout>

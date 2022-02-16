@@ -34,18 +34,7 @@ public class TitleFragment extends Fragment {
         imageButton.setOnClickListener(new onClickListener());
     }
 
-    public static TitleFragment newInstance(String str){
-
-        TitleFragment fragment = new TitleFragment ();
-
-        Bundle barg = new Bundle();
-        barg.putString("Message", str);
-        fragment.setArguments(barg);
-
-        return fragment;
-    }
-
-    public class onClickListener implements View.OnClickListener {
+    public class onClickListener implements ImageButton.OnClickListener {
         @Override
         public void onClick(View view) {
             int id = view.getId();
