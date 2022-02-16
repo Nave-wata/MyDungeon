@@ -31,15 +31,4 @@ public class BaseFragment extends Fragment {
         setImage.setImageButtonBitmapFromAsset(dungeonButton, "base_menu/base_menu_dungeon.png");
         setImage.setImageButtonBitmapFromAsset(monsterButton, "base_menu/base_menu_monster.png");
     }
-
-    public static BaseFragment newInstance(String str){
-
-        BaseFragment fragment = new BaseFragment ();
-
-        Bundle barg = new Bundle();
-        barg.putString("Message", str);
-        fragment.setArguments(barg);
-
-        return fragment;
-    }
 }
