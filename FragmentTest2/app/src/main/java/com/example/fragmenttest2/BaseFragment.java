@@ -29,7 +29,7 @@ public class BaseFragment extends Fragment {
 
         setImage.setImageButtonBitmapFromAsset(homeButton, "base_menu/base_menu_home.png");
         setImage.setImageButtonBitmapFromAsset(dungeonButton, "base_menu/base_menu_dungeon.png");
-        setImage.setImageButtonBitmapFromAsset(monsterButton, "base_menu_monsters.png");
+        setImage.setImageButtonBitmapFromAsset(monsterButton, "base_menu/base_menu_monster.png");
     }
 
     public static BaseFragment newInstance(String str){
