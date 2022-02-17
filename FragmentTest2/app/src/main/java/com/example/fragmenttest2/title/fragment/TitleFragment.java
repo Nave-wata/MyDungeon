@@ -2,13 +2,14 @@ package com.example.fragmenttest2.title.fragment;
 
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.example.fragmenttest2.R;
 import com.example.fragmenttest2.SetImage;

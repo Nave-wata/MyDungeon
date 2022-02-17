@@ -1,8 +1,9 @@
 package com.example.fragmenttest2.title.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fragmenttest2.MainActivity;
 import com.example.fragmenttest2.R;
