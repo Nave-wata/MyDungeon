@@ -1,6 +1,5 @@
 package com.example.fragmenttest2;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -9,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+
+import com.example.fragmenttest2.dungeon.activity.DungeonActivity;
+import com.example.fragmenttest2.home.activity.MainActivity;
+import com.example.fragmenttest2.monster.activity.MonsterActivity;
 
 public class BaseFragment extends Fragment {
 

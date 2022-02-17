@@ -12,7 +12,7 @@ import java.io.InputStream;
 public class SetImage {
     AssetManager assetManager;
 
-    SetImage(AssetManager assetManager) {
+    public SetImage(AssetManager assetManager) {
         this.assetManager = assetManager;
     }
 

@@ -10,16 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FragmentTest2">
         <activity
-            android:name=".MonsterActivity"
+            android:name=".monster.activity.MonsterActivity"
             android:exported="false" />
         <activity
-            android:name=".DungeonActivity"
+            android:name=".dungeon.activity.DungeonActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".home.activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".TitleActivity"
+            android:name=".title.activity.TitleActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
