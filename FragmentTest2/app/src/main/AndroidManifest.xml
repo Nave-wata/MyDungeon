@@ -10,13 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FragmentTest2">
         <activity
-            android:name=".monster.activity.MonsterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".dungeon.activity.DungeonActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SetImage$MainActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".title.activity.TitleActivity"
