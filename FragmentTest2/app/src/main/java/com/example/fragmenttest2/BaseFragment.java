@@ -14,6 +14,9 @@ import com.example.fragmenttest2.home.activity.MainActivity;
 import com.example.fragmenttest2.monster.activity.MonsterActivity;
 
 public class BaseFragment extends Fragment {
+    static boolean homeFlag = false;
+    static boolean dungeonFlag = true;
+    static boolean monsterFlag = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,19 +51,34 @@ public class BaseFragment extends Fragment {
 
             switch (id) {
                 case R.id.home_button:
-                    Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(mainIntent);
-                    getActivity().finish();
+                    if (homeFlag) {
+                        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(mainIntent);
+                        getActivity().finish();
+                        homeFlag = false;
+                    }
+                    dungeonFlag = true;
+                    monsterFlag = true;
                     break;
                 case R.id.dungeon_button:
-                    Intent dungeonIntent = new Intent(getActivity(), DungeonActivity.class);
-                    startActivity(dungeonIntent);
-                    getActivity().finish();
+                    if (dungeonFlag) {
+                        Intent dungeonIntent = new Intent(getActivity(), DungeonActivity.class);
+                        startActivity(dungeonIntent);
+                        getActivity().finish();
+                        dungeonFlag = false;
+                    }
+                    homeFlag = true;
+                    monsterFlag = true;
                     break;
                 case R.id.monster_button:
-                    Intent monsterIntent = new Intent(getActivity(), MonsterActivity.class);
-                    startActivity(monsterIntent);
-                    getActivity().finish();
+                    if (monsterFlag) {
+                        Intent monsterIntent = new Intent(getActivity(), MonsterActivity.class);
+                        startActivity(monsterIntent);
+                        getActivity().finish();
+                        monsterFlag = false;
+                    }
+                    homeFlag = true;
+                    dungeonFlag = true;
                     break;
                 default:
                     break;
