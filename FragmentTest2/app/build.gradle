@@ -22,8 +22,14 @@ android {
                     res.srcDirs(
                             'src/main/res',
                             'src/main/res/layouts',
-                            'src/main/res/layouts/activity',
-                            'src/main/res/layouts/fragment'
+                            'src/main/res/layouts/title/activity',
+                            'src/main/res/layouts/title/fragment',
+                            'src/main/res/layouts/home/activity',
+                            'src/main/res/layouts/home/fragment',
+                            'src/main/res/layouts/dungeon/activity',
+                            'src/main/res/layouts/dungeon/fragment',
+                            'src/main/res/layouts/monster/activity',
+                            'src/main/res/layouts/monster/fragment'
                     )
                 }
             }
