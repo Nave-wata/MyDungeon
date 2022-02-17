@@ -14,4 +14,12 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
+
+    public static MainFragment newInstance(String str){
+        MainFragment fragment = new MainFragment();
+        Bundle barg = new Bundle();
+        barg.putString("Message", str);
+        fragment.setArguments(barg);
+        return fragment;
+    }
 }

@@ -1,17 +1,21 @@
 package com.example.fragmenttest2;
 
-import android.content.Intent;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.fragmenttest2.dungeon.activity.DungeonActivity;
+import com.example.fragmenttest2.dungeon.fragment.DungeonFragment;
 import com.example.fragmenttest2.home.activity.MainActivity;
+import com.example.fragmenttest2.home.fragment.MainFragment;
 import com.example.fragmenttest2.monster.activity.MonsterActivity;
+import com.example.fragmenttest2.monster.fragment.MonsterFragment;
 
 public class BaseFragment extends Fragment {
     static boolean homeFlag = false;
@@ -52,9 +56,10 @@ public class BaseFragment extends Fragment {
             switch (id) {
                 case R.id.home_button:
                     if (homeFlag) {
-                        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-                        startActivity(mainIntent);
-                        getActivity().finish();
+                        android.app.FragmentManager fragmentManager = getFragmentManager();
+                        android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
+                        fragmentTransaction.commit();
                         homeFlag = false;
                     }
                     dungeonFlag = true;
@@ -62,9 +67,10 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.dungeon_button:
                     if (dungeonFlag) {
-                        Intent dungeonIntent = new Intent(getActivity(), DungeonActivity.class);
-                        startActivity(dungeonIntent);
-                        getActivity().finish();
+                        android.app.FragmentManager fragmentManager = getFragmentManager();
+                        android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.container, DungeonFragment.newInstance("dungeon"));
+                        fragmentTransaction.commit();
                         dungeonFlag = false;
                     }
                     homeFlag = true;
@@ -72,9 +78,10 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.monster_button:
                     if (monsterFlag) {
-                        Intent monsterIntent = new Intent(getActivity(), MonsterActivity.class);
-                        startActivity(monsterIntent);
-                        getActivity().finish();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.container, MonsterFragment.newInstance("monster"));
+                        fragmentTransaction.commit();
                         monsterFlag = false;
                     }
                     homeFlag = true;
