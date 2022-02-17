@@ -14,12 +14,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="bottom"
+        android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/monster_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="ContentDescription,MissingConstraints"/>
 
     <ImageButton
         android:id="@+id/dungeon_button"
@@ -27,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="bottom"
+        android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -40,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="bottom"
+        android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

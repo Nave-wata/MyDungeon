@@ -15,6 +15,8 @@ import com.example.fragmenttest2.R;
 import com.example.fragmenttest2.SetImage;
 import com.example.fragmenttest2.title.activity.TitleActivity;
 
+import java.util.Objects;
+
 public class TitleFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -22,11 +24,11 @@ public class TitleFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
 
-        AssetManager assetManager = getActivity().getAssets();
+        AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
         ImageView imageView = view.findViewById(R.id.image_view1);
         ImageButton imageButton = view.findViewById(R.id.image_button1);
@@ -43,12 +45,9 @@ public class TitleFragment extends Fragment {
             int id = view.getId();
             TitleActivity activity = (TitleActivity) getActivity();
 
-            switch (id) {
-                case R.id.image_button1:
-                    activity.ChangeActivity();
-                    break;
-                default:
-                    break;
+            if (id == R.id.image_button1) {
+                assert activity != null;
+                activity.ChangeActivity();
             }
         }
     }
