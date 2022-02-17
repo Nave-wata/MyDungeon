@@ -16,7 +16,7 @@
             android:name=".dungeon.activity.DungeonActivity"
             android:exported="false" />
         <activity
-            android:name=".home.activity.MainActivity"
+            android:name=".SetImage$MainActivity"
             android:exported="false" />
         <activity
             android:name=".title.activity.TitleActivity"

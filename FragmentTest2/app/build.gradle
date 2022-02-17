@@ -24,12 +24,9 @@ android {
                             'src/main/res/layouts',
                             'src/main/res/layouts/title/activity',
                             'src/main/res/layouts/title/fragment',
-                            'src/main/res/layouts/home/activity',
-                            'src/main/res/layouts/home/fragment',
-                            'src/main/res/layouts/dungeon/activity',
-                            'src/main/res/layouts/dungeon/fragment',
-                            'src/main/res/layouts/monster/activity',
-                            'src/main/res/layouts/monster/fragment'
+                            'src/main/res/layouts/home',
+                            'src/main/res/layouts/dungeon',
+                            'src/main/res/layouts/monster'
                     )
                 }
             }

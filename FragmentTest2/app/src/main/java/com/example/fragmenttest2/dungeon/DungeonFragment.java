@@ -1,4 +1,4 @@
-package com.example.fragmenttest2.dungeon.fragment;
+package com.example.fragmenttest2.dungeon;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fragmenttest2.R;
-import com.example.fragmenttest2.home.fragment.MainFragment;
 
 public class DungeonFragment extends Fragment {
     @Override

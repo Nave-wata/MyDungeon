@@ -10,17 +10,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import com.example.fragmenttest2.dungeon.activity.DungeonActivity;
-import com.example.fragmenttest2.dungeon.fragment.DungeonFragment;
-import com.example.fragmenttest2.home.activity.MainActivity;
-import com.example.fragmenttest2.home.fragment.MainFragment;
-import com.example.fragmenttest2.monster.activity.MonsterActivity;
-import com.example.fragmenttest2.monster.fragment.MonsterFragment;
+import com.example.fragmenttest2.dungeon.DungeonFragment;
+import com.example.fragmenttest2.home.MainFragment;
+import com.example.fragmenttest2.monster.MonsterFragment;
+
 
 public class BaseFragment extends Fragment {
     static boolean homeFlag = false;
     static boolean dungeonFlag = true;
     static boolean monsterFlag = true;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        android.app.FragmentManager fragmentManager = getFragmentManager();
+        android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
+        fragmentTransaction.commit();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
