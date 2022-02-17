@@ -8,12 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.fragmenttest2.dungeon.DungeonFragment;
 import com.example.fragmenttest2.home.MainFragment;
 import com.example.fragmenttest2.monster.MonsterFragment;
+
+import java.util.Objects;
 
 
 public class BaseFragment extends Fragment {
@@ -25,6 +28,7 @@ public class BaseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        assert getFragmentManager() != null;
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
         fragmentTransaction.commit();
@@ -36,10 +40,10 @@ public class BaseFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        AssetManager assetManager = getActivity().getAssets();
+        AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
         onClickListener iBt = new onClickListener();
 
@@ -60,6 +64,7 @@ public class BaseFragment extends Fragment {
         @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(View v) {
+            assert getFragmentManager() != null;
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
             switch (v.getId()) {

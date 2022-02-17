@@ -19,6 +19,7 @@ public class TitleActivity extends AppCompatActivity {
     public void ChangeActivity() {
         Intent intent = new Intent(getApplication(), MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
     }
 }
