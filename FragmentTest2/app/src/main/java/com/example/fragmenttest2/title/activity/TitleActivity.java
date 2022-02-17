@@ -1,8 +1,12 @@
-package com.example.fragmenttest2;
+package com.example.fragmenttest2.title.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.fragmenttest2.MainActivity;
+import com.example.fragmenttest2.R;
 
 public class TitleActivity extends AppCompatActivity {
 
@@ -12,9 +16,10 @@ public class TitleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_title);
     }
 
-    protected void ChangeActivity() {
+    public void ChangeActivity() {
         Intent intent = new Intent(getApplication(), MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
     }
 }
