@@ -1,17 +1,34 @@
 package com.example.fragmenttest2;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.fragmenttest2.dungeon.DungeonFragment;
+import com.example.fragmenttest2.home.MainFragment;
+import com.example.fragmenttest2.monster.MonsterFragment;
+
 
 public class BaseFragment extends Fragment {
+    static boolean homeFlag = false;
+    static boolean dungeonFlag = true;
+    static boolean monsterFlag = true;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
+        fragmentTransaction.commit();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,25 +57,38 @@ public class BaseFragment extends Fragment {
     }
 
     private class onClickListener implements View.OnClickListener {
+        @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(View v) {
-            int id = v.getId();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
-            switch (id) {
+            switch (v.getId()) {
                 case R.id.home_button:
-                    Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(mainIntent);
-                    getActivity().finish();
+                    if (homeFlag) {
+                        fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
+                        fragmentTransaction.commit();
+                        homeFlag = false;
+                    }
+                    dungeonFlag = true;
+                    monsterFlag = true;
                     break;
                 case R.id.dungeon_button:
-                    Intent dungeonIntent = new Intent(getActivity(), DungeonActivity.class);
-                    startActivity(dungeonIntent);
-                    getActivity().finish();
+                    if (dungeonFlag) {
+                        fragmentTransaction.replace(R.id.container, DungeonFragment.newInstance("dungeon"));
+                        fragmentTransaction.commit();
+                        dungeonFlag = false;
+                    }
+                    homeFlag = true;
+                    monsterFlag = true;
                     break;
                 case R.id.monster_button:
-                    Intent monsterIntent = new Intent(getActivity(), MonsterActivity.class);
-                    startActivity(monsterIntent);
-                    getActivity().finish();
+                    if (monsterFlag) {
+                        fragmentTransaction.replace(R.id.container, MonsterFragment.newInstance("monster"));
+                        fragmentTransaction.commit();
+                        monsterFlag = false;
+                    }
+                    homeFlag = true;
+                    dungeonFlag = true;
                     break;
                 default:
                     break;
