@@ -24,8 +24,8 @@ public class BaseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        android.app.FragmentManager fragmentManager = getFragmentManager();
-        android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
         fragmentTransaction.commit();
     }
@@ -64,8 +64,8 @@ public class BaseFragment extends Fragment {
             switch (id) {
                 case R.id.home_button:
                     if (homeFlag) {
-                        android.app.FragmentManager fragmentManager = getFragmentManager();
-                        android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
                         fragmentTransaction.commit();
                         homeFlag = false;
@@ -75,8 +75,8 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.dungeon_button:
                     if (dungeonFlag) {
-                        android.app.FragmentManager fragmentManager = getFragmentManager();
-                        android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.container, DungeonFragment.newInstance("dungeon"));
                         fragmentTransaction.commit();
                         dungeonFlag = false;
