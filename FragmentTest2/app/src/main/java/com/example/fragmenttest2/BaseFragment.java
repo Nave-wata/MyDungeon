@@ -1,5 +1,6 @@
 package com.example.fragmenttest2;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -57,15 +58,14 @@ public class BaseFragment extends Fragment {
     }
 
     private class onClickListener implements View.OnClickListener {
+        @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(View v) {
-            int id = v.getId();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
-            switch (id) {
+            switch (v.getId()) {
                 case R.id.home_button:
                     if (homeFlag) {
-                        FragmentManager fragmentManager = getFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
                         fragmentTransaction.commit();
                         homeFlag = false;
@@ -75,8 +75,6 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.dungeon_button:
                     if (dungeonFlag) {
-                        FragmentManager fragmentManager = getFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.container, DungeonFragment.newInstance("dungeon"));
                         fragmentTransaction.commit();
                         dungeonFlag = false;
@@ -86,8 +84,6 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.monster_button:
                     if (monsterFlag) {
-                        FragmentManager fragmentManager = getFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.container, MonsterFragment.newInstance("monster"));
                         fragmentTransaction.commit();
                         monsterFlag = false;
