@@ -37,11 +37,19 @@ public class AsyncExportProgress {
     }
 
     void onPreExecute() {
+    }
+
+    public void execute() {
+        onPreExecute();
+
+        ExecutorService executorService  = Executors.newSingleThreadExecutor();
+        executorService.submit(new AsyncRunnable());
+
         Uri.Builder uriBuilder = new Uri.Builder();
         uriBuilder.scheme("https");
-        uriBuilder.authority("http://192.168.3.21:8000");
-        uriBuilder.path("/now/");
-        uriBuilder.appendQueryParameter("q", "夏目漱石");
+        uriBuilder.authority("www.google.com");
+        uriBuilder.path("/");
+        uriBuilder.appendQueryParameter("Now", "time");
         final String uriStr = uriBuilder.build().toString();
 
         try {
@@ -51,6 +59,7 @@ public class AsyncExportProgress {
             con.setRequestMethod("GET");
             con.setDoInput(true);
             con.connect(); //HTTP接続
+            Log.v("Afterrrrr", "");
 
             final InputStream in = con.getInputStream();
             final InputStreamReader inReader = new InputStreamReader(in);
@@ -69,13 +78,6 @@ public class AsyncExportProgress {
         catch(Exception e) {
             Log.v("Result", "NOOOOOOOO");
         }
-    }
-
-    public void execute() {
-        onPreExecute();
-
-        ExecutorService executorService  = Executors.newSingleThreadExecutor();
-        executorService.submit(new AsyncRunnable());
     }
 
     void onPostExecute(String resulto) {
