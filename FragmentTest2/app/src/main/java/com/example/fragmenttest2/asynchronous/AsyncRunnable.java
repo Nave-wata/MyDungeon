@@ -19,9 +19,7 @@ import java.util.function.Consumer;
 
 
 public class AsyncRunnable implements Runnable {
-    private Context context = null;
     private String url = null;
-    private String message = null;
     private Consumer<byte[]> callback = null;
     private Consumer<Exception> errorCallback = null;
     private Exception exception = null;
@@ -37,14 +35,11 @@ public class AsyncRunnable implements Runnable {
      　 * @param callback 正常時のコールバック関数(Consumer<byte[]>)
      　 * @param errorCallback エラー時のコールバック関数(Consumer<Exception>)
      　 */
-    public AsyncRunnable(Context context,
-                         String url,
-                         String message,
+    public AsyncRunnable(String url,
                          Consumer<byte[]> callback,
-                         Consumer<Exception> errorCallback) {
-        this.context = context;
+                         Consumer<Exception> errorCallback)
+    {
         this.url = url;
-        this.message = message;
         this.callback = callback;
         this.errorCallback = errorCallback;
     }
@@ -62,21 +57,12 @@ public class AsyncRunnable implements Runnable {
     }
 
     public void execute() {
-        onPreExecute();
+        //onPreExecute();
         ExecutorService executorService  = Executors.newSingleThreadExecutor();
-        executorService.submit(new AsyncRunnable(context, url, message, callback, errorCallback));
+        executorService.submit(new AsyncRunnable(url, callback, errorCallback));
     }
 
-    void onPreExecute() {
-        // 砂時計表示
-        this.progressDialog = new ProgressDialog(context);
-        this.progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        this.progressDialog.setMessage(this.message);
-        progressDialog.setCancelable(false);
-        this.progressDialog.show();
-        this.progressDialog.dismiss();
-        Log.v("DISMISS!", "OK");
-    }
+    //void onPreExecute() {}
 
     byte[] doInBackground() {
         HttpURLConnection con = null;
@@ -123,7 +109,5 @@ public class AsyncRunnable implements Runnable {
         } else {
             errorCallback.accept(this.exception);
         }
-        // 砂時計解除
-
     }
 }

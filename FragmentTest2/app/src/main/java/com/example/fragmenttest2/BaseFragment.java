@@ -85,9 +85,7 @@ public class BaseFragment extends Fragment {
                 case R.id.home_button:
                     if (homeFlag) {
                         new AsyncRunnable(
-                                getContext(),
                                 "https://google.com",
-                                "読み込み中",
                                 b->{
                                     Log.v("Connect", "OK!!");
                                 },
