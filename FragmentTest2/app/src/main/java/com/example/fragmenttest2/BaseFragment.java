@@ -125,6 +125,7 @@ public class BaseFragment extends Fragment {
         }
     }
 
+
     public class AsyncRunnable implements Runnable {
         private Context context = null;
         private String url = null;
@@ -159,7 +160,6 @@ public class BaseFragment extends Fragment {
 
         @Override
         public void run() {
-            onPreExecute();
             response = doInBackground();
             handler.post(new Runnable() {
                 @Override
@@ -170,8 +170,9 @@ public class BaseFragment extends Fragment {
         }
 
         public void execute() {
+            onPreExecute();
             ExecutorService executorService  = Executors.newSingleThreadExecutor();
-            executorService.submit(new com.example.fragmenttest2.asynchronous.AsyncRunnable(context, url, message, callback, errorCallback));
+            executorService.submit(new AsyncRunnable(context, url, message, callback, errorCallback));
         }
 
         void onPreExecute() {
