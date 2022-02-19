@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.fragmenttest2.asynchronous.AsyncExportProgress;
+import com.example.fragmenttest2.asynchronous.TryAsyncTask;
 import com.example.fragmenttest2.dungeon.DungeonFragment;
 import com.example.fragmenttest2.home.MainFragment;
 import com.example.fragmenttest2.monster.MonsterFragment;
@@ -71,8 +72,8 @@ public class BaseFragment extends Fragment {
             switch (v.getId()) {
                 case R.id.home_button:
                     if (homeFlag) {
-                        AsyncExportProgress asyncExportProgress = new AsyncExportProgress();
-                        asyncExportProgress.execute();
+                        TryAsyncTask TryAsyncTask = new TryAsyncTask();
+                        TryAsyncTask.execute();
                         fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
                         fragmentTransaction.commit();
                         homeFlag = false;
