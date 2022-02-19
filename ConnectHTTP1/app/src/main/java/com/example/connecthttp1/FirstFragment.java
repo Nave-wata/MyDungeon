@@ -34,7 +34,7 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 new HttpRequestor(
                         getContext(), // コンテキスト
-                        "https://google.com", // 接続先URL
+                        "http://192.168.3.21:8000", // 接続先URL
                         "読み込み中...",
                         b->{},
                         e->{}
