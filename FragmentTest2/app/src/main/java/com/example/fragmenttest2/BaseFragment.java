@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.fragmenttest2.asynchronous.AsyncRunnable;
 import com.example.fragmenttest2.dungeon.DungeonFragment;
 import com.example.fragmenttest2.home.MainFragment;
 import com.example.fragmenttest2.monster.MonsterFragment;
@@ -70,6 +71,11 @@ public class BaseFragment extends Fragment {
             switch (v.getId()) {
                 case R.id.home_button:
                     if (homeFlag) {
+                        new AsyncRunnable(
+                                "https://google.com",
+                                b->{/* 成功時 */},
+                                e->{/* 失敗時 */}
+                        ).execute();
                         fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
                         fragmentTransaction.commit();
                         homeFlag = false;
