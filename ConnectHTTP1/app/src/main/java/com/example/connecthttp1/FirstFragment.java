@@ -32,6 +32,13 @@ public class FirstFragment extends Fragment {
         binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                new HttpRequestor(
+                        getContext(), // コンテキスト
+                        "https://google.com", // 接続先URL
+                        "読み込み中...",
+                        b->{},
+                        e->{}
+                ).execute();
             }
         });
     }
