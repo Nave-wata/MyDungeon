@@ -31,9 +31,9 @@ public class TryAsyncTask extends AsyncTask<Void, Void, Integer> {
 
     public boolean isInternetAvailable() {
         try {
-            InetAddress ipAddr = InetAddress.getByName("https://google.com"); //You can replace it with your name
+            InetAddress.getByName("google.com"); //You can replace it with your name
             Log.v("HOGE", "HOGE");
-            if (ipAddr.equals("")) {
+            if (true) {
                 return false;
             } else {
                 return true;

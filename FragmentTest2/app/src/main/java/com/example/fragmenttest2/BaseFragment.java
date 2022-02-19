@@ -72,8 +72,8 @@ public class BaseFragment extends Fragment {
             switch (v.getId()) {
                 case R.id.home_button:
                     if (homeFlag) {
-                        TryAsyncTask TryAsyncTask = new TryAsyncTask();
-                        TryAsyncTask.execute();
+                        TryAsyncTask tryAsyncTask = new TryAsyncTask();
+                        tryAsyncTask.execute();
                         fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
                         fragmentTransaction.commit();
                         homeFlag = false;
