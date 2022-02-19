@@ -63,11 +63,11 @@ public class HttpRequestor extends AsyncTask<Void, Void, byte[]> {
     @Override
     protected void onPreExecute() {
         // 砂時計表示
-        //this.progressDialog = new ProgressDialog(context);
-        //this.progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        //this.progressDialog.setMessage(this.message);
-        //progressDialog.setCancelable(false);
-        //this.progressDialog.show();
+        this.progressDialog = new ProgressDialog(context);
+        this.progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        this.progressDialog.setMessage(this.message);
+        progressDialog.setCancelable(false);
+        this.progressDialog.show();
         super.onPreExecute();
     }
 
@@ -120,6 +120,6 @@ public class HttpRequestor extends AsyncTask<Void, Void, byte[]> {
             errorCallback.accept(this.exception);
         }
         // 砂時計解除
-        //this.progressDialog.dismiss();
+        this.progressDialog.dismiss();
     }
 }

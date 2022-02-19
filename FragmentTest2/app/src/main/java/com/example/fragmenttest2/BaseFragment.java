@@ -3,6 +3,7 @@ package com.example.fragmenttest2;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.loader.content.AsyncTaskLoader;
 
 import com.example.fragmenttest2.asynchronous.AsyncExportProgress;
+import com.example.fragmenttest2.asynchronous.HttpRequestor;
 import com.example.fragmenttest2.asynchronous.TryAsyncTask;
 import com.example.fragmenttest2.dungeon.DungeonFragment;
 import com.example.fragmenttest2.home.MainFragment;
@@ -73,8 +75,17 @@ public class BaseFragment extends Fragment {
             switch (v.getId()) {
                 case R.id.home_button:
                     if (homeFlag) {
-                        TryAsyncTask tryAsyncTask = new TryAsyncTask();
-                        tryAsyncTask.execute();
+                        new HttpRequestor(
+                                getContext(),
+                                "https://google.com",
+                                "読み込み中",
+                                b->{
+                                    Log.v("Connect", "OK!!");
+                                },
+                                e->{
+                                    Log.v("Connect", "NO!!");
+                                }
+                        ).execute();
                         fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
                         fragmentTransaction.commit();
                         homeFlag = false;
