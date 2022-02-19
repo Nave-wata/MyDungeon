@@ -53,8 +53,12 @@ public class AsyncRunnable implements Runnable {
     @Override
     public void run() {
         response = doInBackground();
-        onPostExecute(response);
-
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                onPostExecute(response);
+            }
+        });
     }
 
     public void execute() {
@@ -70,6 +74,8 @@ public class AsyncRunnable implements Runnable {
         this.progressDialog.setMessage(this.message);
         progressDialog.setCancelable(false);
         this.progressDialog.show();
+        this.progressDialog.dismiss();
+        Log.v("DISMISS!", "OK");
     }
 
     byte[] doInBackground() {
@@ -118,7 +124,6 @@ public class AsyncRunnable implements Runnable {
             errorCallback.accept(this.exception);
         }
         // 砂時計解除
-        this.progressDialog.dismiss();
-        Log.v("DISMISS!", "OK");
+
     }
 }
