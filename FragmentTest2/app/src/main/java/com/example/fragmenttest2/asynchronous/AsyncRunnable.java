@@ -1,8 +1,6 @@
 package com.example.fragmenttest2.asynchronous;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -17,13 +15,11 @@ import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 
-
 public class AsyncRunnable implements Runnable {
-    private String url = null;
-    private Consumer<byte[]> callback = null;
-    private Consumer<Exception> errorCallback = null;
-    private Exception exception = null;
-    private ProgressDialog progressDialog = null;
+    private final String url;
+    private final Consumer<byte[]> callback;
+    private final Consumer<Exception> errorCallback;
+    private Exception exception;
     private byte[] response;
     Handler handler = new Handler(Looper.getMainLooper());
 
@@ -48,12 +44,7 @@ public class AsyncRunnable implements Runnable {
     @Override
     public void run() {
         response = doInBackground();
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                onPostExecute(response);
-            }
-        });
+        handler.post(() -> onPostExecute(response));
     }
 
     public void execute() {

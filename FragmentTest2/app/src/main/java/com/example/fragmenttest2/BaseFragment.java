@@ -1,13 +1,8 @@
 package com.example.fragmenttest2;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,15 +17,7 @@ import com.example.fragmenttest2.dungeon.DungeonFragment;
 import com.example.fragmenttest2.home.MainFragment;
 import com.example.fragmenttest2.monster.MonsterFragment;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.function.Consumer;
 
 
 public class BaseFragment extends Fragment {
@@ -86,12 +73,8 @@ public class BaseFragment extends Fragment {
                     if (homeFlag) {
                         new AsyncRunnable(
                                 "https://google.com",
-                                b->{
-                                    Log.v("Connect", "OK!!");
-                                },
-                                e->{
-                                    Log.v("Connect", "NO!!");
-                                }
+                                b->{/* 成功時 */},
+                                e->{/* 失敗時 */}
                         ).execute();
                         fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
                         fragmentTransaction.commit();
