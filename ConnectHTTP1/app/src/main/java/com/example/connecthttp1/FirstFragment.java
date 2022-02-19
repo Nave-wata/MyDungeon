@@ -1,6 +1,7 @@
 package com.example.connecthttp1;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +37,12 @@ public class FirstFragment extends Fragment {
                         getContext(), // コンテキスト
                         "http://192.168.3.21:8000", // 接続先URL
                         "読み込み中...",
-                        b->{},
-                        e->{}
+                        b->{
+                            Log.v("OK!!", "");
+                        },
+                        e->{
+                            Log.v("NO!!", "");
+                        }
                 ).execute();
             }
         });

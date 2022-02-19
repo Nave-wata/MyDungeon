@@ -115,10 +115,8 @@ public class HttpRequestor extends AsyncTask<Void, Void, byte[]> {
         super.onPostExecute(response);
         // コールバック処理実行
         if (this.exception == null) {
-            Log.v("OK!!", "");
             callback.accept(response);
         } else {
-            Log.v("NO!!", "");
             errorCallback.accept(this.exception);
         }
         // 砂時計解除
