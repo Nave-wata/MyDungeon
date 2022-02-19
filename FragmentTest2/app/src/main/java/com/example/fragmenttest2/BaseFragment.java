@@ -12,11 +12,9 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.loader.content.AsyncTaskLoader;
 
-import com.example.fragmenttest2.asynchronous.AsyncExportProgress;
+import com.example.fragmenttest2.asynchronous.AsyncRunnable;
 import com.example.fragmenttest2.asynchronous.HttpRequestor;
-import com.example.fragmenttest2.asynchronous.TryAsyncTask;
 import com.example.fragmenttest2.dungeon.DungeonFragment;
 import com.example.fragmenttest2.home.MainFragment;
 import com.example.fragmenttest2.monster.MonsterFragment;
