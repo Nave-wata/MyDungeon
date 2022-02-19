@@ -52,7 +52,6 @@ public class AsyncRunnable implements Runnable {
 
     @Override
     public void run() {
-        onPreExecute();
         response = doInBackground();
         handler.post(new Runnable() {
             @Override
@@ -63,6 +62,7 @@ public class AsyncRunnable implements Runnable {
     }
 
     public void execute() {
+        onPreExecute();
         ExecutorService executorService  = Executors.newSingleThreadExecutor();
         executorService.submit(new AsyncRunnable(context, url, message, callback, errorCallback));
     }
