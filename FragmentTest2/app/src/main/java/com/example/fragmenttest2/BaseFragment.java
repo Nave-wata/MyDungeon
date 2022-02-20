@@ -3,17 +3,21 @@ package com.example.fragmenttest2;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.fragmenttest2.asynchronous.AsyncRunnable;
+import com.example.fragmenttest2.asynchronous.CallBacks;
 import com.example.fragmenttest2.dungeon.DungeonFragment;
-import com.example.fragmenttest2.home.MainFragment;
+import com.example.fragmenttest2.home.HomeFragment;
 import com.example.fragmenttest2.monster.MonsterFragment;
 
 import java.util.Objects;
@@ -30,12 +34,12 @@ public class BaseFragment extends Fragment {
 
         assert getFragmentManager() != null;
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
+        fragmentTransaction.replace(R.id.container, HomeFragment.newInstance("home"));
         fragmentTransaction.commit();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_base, container, false);
     }
 
@@ -63,14 +67,25 @@ public class BaseFragment extends Fragment {
     private class onClickListener implements View.OnClickListener {
         @SuppressLint("NonConstantResourceId")
         @Override
-        public void onClick(View v) {
+        public void onClick(@NonNull View v) {
             assert getFragmentManager() != null;
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
             switch (v.getId()) {
                 case R.id.home_button:
                     if (homeFlag) {
-                        fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
+                        new AsyncRunnable(
+                                "http://192.168.3.21:8000/one",
+                                b->{
+                                    TextView tv = getActivity().findViewById(R.id.Home_text);
+                                    CallBacks cb = new CallBacks(tv, new String(b));
+                                    cb.setStr();
+                                },
+                                e->{
+                                    Log.v("States", e.toString());
+                                }
+                        ).execute();
+                        fragmentTransaction.replace(R.id.container, HomeFragment.newInstance("home"));
                         fragmentTransaction.commit();
                         homeFlag = false;
                     }
@@ -79,6 +94,17 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.dungeon_button:
                     if (dungeonFlag) {
+                        new AsyncRunnable(
+                                "http://192.168.3.21:8000/two",
+                                b->{
+                                    TextView tv = getActivity().findViewById(R.id.Dungeon_text);
+                                    CallBacks cb = new CallBacks(tv, new String(b));
+                                    cb.setStr();
+                                },
+                                e->{
+                                    Log.v("States", e.toString());
+                                }
+                        ).execute();
                         fragmentTransaction.replace(R.id.container, DungeonFragment.newInstance("dungeon"));
                         fragmentTransaction.commit();
                         dungeonFlag = false;
@@ -88,6 +114,17 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.monster_button:
                     if (monsterFlag) {
+                        new AsyncRunnable(
+                                "http://192.168.3.21:8000/three",
+                                b->{
+                                    TextView tv = getActivity().findViewById(R.id.Monster_text);
+                                    CallBacks cb = new CallBacks(tv, new String(b));
+                                    cb.setStr();
+                                },
+                                e->{
+                                    Log.v("States", e.toString());
+                                }
+                        ).execute();
                         fragmentTransaction.replace(R.id.container, MonsterFragment.newInstance("monster"));
                         fragmentTransaction.commit();
                         monsterFlag = false;
