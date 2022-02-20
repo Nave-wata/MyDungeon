@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 
 import com.example.fragmenttest2.R;
 
-public class MainFragment extends Fragment {
+public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-    public static MainFragment newInstance(String str){
-        MainFragment fragment = new MainFragment();
+    public static HomeFragment newInstance(String str){
+        HomeFragment fragment = new HomeFragment();
         Bundle barg = new Bundle();
         barg.putString("Message", str);
         fragment.setArguments(barg);

@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.fragmenttest2.asynchronous.AsyncRunnable;
 import com.example.fragmenttest2.dungeon.DungeonFragment;
-import com.example.fragmenttest2.home.MainFragment;
+import com.example.fragmenttest2.home.HomeFragment;
 import com.example.fragmenttest2.monster.MonsterFragment;
 
 import java.util.Objects;
@@ -32,7 +32,7 @@ public class BaseFragment extends Fragment {
 
         assert getFragmentManager() != null;
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
+        fragmentTransaction.replace(R.id.container, HomeFragment.newInstance("home"));
         fragmentTransaction.commit();
     }
 
@@ -81,7 +81,7 @@ public class BaseFragment extends Fragment {
                                     Log.v("States", e.toString());
                                 }
                         ).execute();
-                        fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
+                        fragmentTransaction.replace(R.id.container, HomeFragment.newInstance("home"));
                         fragmentTransaction.commit();
                         homeFlag = false;
                     }
