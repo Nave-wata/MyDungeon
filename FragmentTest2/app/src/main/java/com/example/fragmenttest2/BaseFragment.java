@@ -74,8 +74,8 @@ public class BaseFragment extends Fragment {
                     if (homeFlag) {
                         new AsyncRunnable(
                                 "http://192.168.3.21:8000/one",
-                                b-> {
-                                    Log.v("States", new String(b));
+                                b->{
+                                    new HomeFragment().setHomeText(new String(b));
                                 },
                                 e->{
                                     Log.v("States", e.toString());
@@ -90,6 +90,15 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.dungeon_button:
                     if (dungeonFlag) {
+                        new AsyncRunnable(
+                                "http://192.168.3.21:8000/two",
+                                b->{
+                                    new DungeonFragment().setDungeonText(new String(b));
+                                },
+                                e->{
+                                    Log.v("States", e.toString());
+                                }
+                        ).execute();
                         fragmentTransaction.replace(R.id.container, DungeonFragment.newInstance("dungeon"));
                         fragmentTransaction.commit();
                         dungeonFlag = false;
@@ -99,6 +108,15 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.monster_button:
                     if (monsterFlag) {
+                        new AsyncRunnable(
+                                "http://192.168.3.21:8000/three",
+                                b->{
+                                    new MonsterFragment().setMonsterText(new String(b));
+                                },
+                                e->{
+                                    Log.v("States", e.toString());
+                                }
+                        ).execute();
                         fragmentTransaction.replace(R.id.container, MonsterFragment.newInstance("monster"));
                         fragmentTransaction.commit();
                         monsterFlag = false;
