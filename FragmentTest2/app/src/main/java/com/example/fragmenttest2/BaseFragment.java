@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -75,7 +76,8 @@ public class BaseFragment extends Fragment {
                         new AsyncRunnable(
                                 "http://192.168.3.21:8000/one",
                                 b->{
-                                    new HomeFragment().setHomeText(new String(b));
+                                    TextView tv = getActivity().findViewById(R.id.Home_text);
+                                    tv.setText(new String(b));
                                 },
                                 e->{
                                     Log.v("States", e.toString());
@@ -93,7 +95,8 @@ public class BaseFragment extends Fragment {
                         new AsyncRunnable(
                                 "http://192.168.3.21:8000/two",
                                 b->{
-                                    new DungeonFragment().setDungeonText(new String(b));
+                                    TextView tv = getActivity().findViewById(R.id.Dungeon_text);
+                                    tv.setText(new String(b));
                                 },
                                 e->{
                                     Log.v("States", e.toString());
@@ -111,7 +114,8 @@ public class BaseFragment extends Fragment {
                         new AsyncRunnable(
                                 "http://192.168.3.21:8000/three",
                                 b->{
-                                    new MonsterFragment().setMonsterText(new String(b));
+                                    TextView tv = getActivity().findViewById(R.id.Monster_text);
+                                    tv.setText(new String(b));
                                 },
                                 e->{
                                     Log.v("States", e.toString());
