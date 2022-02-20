@@ -28,7 +28,7 @@ public class TitleActivity extends AppCompatActivity {
             new AsyncRunnable(
                     URLs[i],
                     b->str[i] = new String(b),
-                    e->str[i] = "Not found",
+                    e->str[i] = "Not found"
                     ).execute();
         }
     }
@@ -36,7 +36,7 @@ public class TitleActivity extends AppCompatActivity {
     public void ChangeActivity() {
         String EXTRA_DATA = "com.example.fragmenttest2.activity";
         Intent intent = new Intent(getApplication(), MainActivity.class);
-        intent.putExtra(EXTRA_DATA, );
+        intent.putExtra(EXTRA_DATA, str);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
