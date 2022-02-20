@@ -23,9 +23,9 @@ import java.util.Objects;
 public class TitleFragment extends Fragment {
 
     public String[] URLs = new String[] {
-            "https://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060",
-            "https://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060",
-            "https://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060"};
+            "https://zipcloud.ibsnet.co.jp/api/search?zipcode=0791143",
+            "https://zipcloud.ibsnet.co.jp/api/search?zipcode=1001701",
+            "https://zipcloud.ibsnet.co.jp/api/search?zipcode=9041103"};
     public String[] str = new String[URLs.length];
     public ImageButton imageButton;
     public AssetManager assetManager;

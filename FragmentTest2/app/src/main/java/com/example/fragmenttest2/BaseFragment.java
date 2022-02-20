@@ -38,13 +38,9 @@ public class BaseFragment extends Fragment {
         Intent intent = getActivity().getIntent();
         str = intent.getStringArrayExtra(TitleActivity.EXTRA_DATA);
 
-        for (int i = 0; i < str.length; i++) {
-            Log.v("str[" + i + "] = ", str[i]);
-        }
-
         assert getFragmentManager() != null;
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.container, HomeFragment.newInstance("home"));
+        fragmentTransaction.replace(R.id.container, HomeFragment.newInstance(str[0]));
         fragmentTransaction.commit();
     }
 
@@ -80,10 +76,8 @@ public class BaseFragment extends Fragment {
 
         public onClickListener(String[] str) {
             this.str = str;
-            for (int i = 0; i < str.length; i++) {
-                Log.v("this.str[" + i + "] = ", str[i]);
-            }
         }
+
         @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(@NonNull View v) {
@@ -93,7 +87,7 @@ public class BaseFragment extends Fragment {
             switch (v.getId()) {
                 case R.id.home_button:
                     if (homeFlag) {
-                        fragmentTransaction.replace(R.id.container, HomeFragment.newInstance("home"));
+                        fragmentTransaction.replace(R.id.container, HomeFragment.newInstance(str[0]));
                         fragmentTransaction.commit();
                         homeFlag = false;
                     }
@@ -102,7 +96,7 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.dungeon_button:
                     if (dungeonFlag) {
-                        fragmentTransaction.replace(R.id.container, DungeonFragment.newInstance("dungeon"));
+                        fragmentTransaction.replace(R.id.container, DungeonFragment.newInstance(str[1]));
                         fragmentTransaction.commit();
                         dungeonFlag = false;
                     }
@@ -111,7 +105,7 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.monster_button:
                     if (monsterFlag) {
-                        fragmentTransaction.replace(R.id.container, MonsterFragment.newInstance("monster"));
+                        fragmentTransaction.replace(R.id.container, MonsterFragment.newInstance(str[2]));
                         fragmentTransaction.commit();
                         monsterFlag = false;
                     }
