@@ -35,13 +35,6 @@ public class BaseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = getActivity().getIntent();
-        str = intent.getStringArrayExtra(TitleActivity.EXTRA_DATA);
-
-        for (int i = 0; i < str.length; i++) {
-            Log.v("str = ", str[i]);
-        }
-
         assert getFragmentManager() != null;
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.container, HomeFragment.newInstance("home"));
@@ -59,7 +52,7 @@ public class BaseFragment extends Fragment {
 
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
-        onClickListener iBt = new onClickListener(str);
+        onClickListener iBt = new onClickListener();
 
         ImageButton homeButton = view.findViewById(R.id.home_button);
         ImageButton dungeonButton = view.findViewById(R.id.dungeon_button);
@@ -75,26 +68,6 @@ public class BaseFragment extends Fragment {
     }
 
     private class onClickListener implements View.OnClickListener {
-        public String[] str;
-        public String str1;
-        public String str2;
-        public String str3;
-
-        public onClickListener(String[] str) {
-            this.str = str;
-            for (int i = 0; i < str.length; i++) {
-                Log.v("this.str = ", str[i]);
-            }
-
-            str1 = str[0];
-            str2 = str[1];
-            str3 = str[2];
-
-            Log.v("str1 = ", str1);
-            Log.v("str2 = ", str2);
-            Log.v("str3 = ", str3);
-        }
-
         @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(@NonNull View v) {
