@@ -76,8 +76,13 @@ public class BaseFragment extends Fragment {
 
     private class onClickListener implements View.OnClickListener {
         String[] str;
+        String str1;
+        String
         public onClickListener(String[] str) {
             this.str = str;
+            for (int i = 0; i < str.length; i++) {
+                Log.v("this.str = ", str[i]);
+            }
         }
 
         @SuppressLint("NonConstantResourceId")
