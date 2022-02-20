@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.fragmenttest2.asynchronous.AsyncRunnable;
+import com.example.fragmenttest2.asynchronous.CallBacks;
 import com.example.fragmenttest2.dungeon.DungeonFragment;
 import com.example.fragmenttest2.home.HomeFragment;
 import com.example.fragmenttest2.monster.MonsterFragment;
@@ -77,7 +78,8 @@ public class BaseFragment extends Fragment {
                                 "http://192.168.3.21:8000/one",
                                 b->{
                                     TextView tv = getActivity().findViewById(R.id.Home_text);
-                                    tv.setText(new String(b));
+                                    CallBacks cb = new CallBacks(tv, new String(b));
+                                    cb.setStr();
                                 },
                                 e->{
                                     Log.v("States", e.toString());
@@ -95,7 +97,9 @@ public class BaseFragment extends Fragment {
                         new AsyncRunnable(
                                 "http://192.168.3.21:8000/two",
                                 b->{
-                                    test(new String(b));
+                                    TextView tv = getActivity().findViewById(R.id.Dungeon_text);
+                                    CallBacks cb = new CallBacks(tv, new String(b));
+                                    cb.setStr();
                                 },
                                 e->{
                                     Log.v("States", e.toString());
@@ -114,7 +118,8 @@ public class BaseFragment extends Fragment {
                                 "http://192.168.3.21:8000/three",
                                 b->{
                                     TextView tv = getActivity().findViewById(R.id.Monster_text);
-                                    tv.setText(new String(b));
+                                    CallBacks cb = new CallBacks(tv, new String(b));
+                                    cb.setStr();
                                 },
                                 e->{
                                     Log.v("States", e.toString());
@@ -130,11 +135,6 @@ public class BaseFragment extends Fragment {
                 default:
                     break;
             }
-        }
-
-        private void test(String str) {
-            TextView tv = getActivity().findViewById(R.id.Dungeon_text);
-            tv.setText(str);
         }
     }
 }
