@@ -11,6 +11,7 @@ import com.example.fragmenttest2.asynchronous.AsyncRunnable;
 import com.example.fragmenttest2.asynchronous.CallBacks;
 
 public class TitleActivity extends AppCompatActivity {
+    public static String EXTRA_DATA = "com.example.fragmenttest2.activity";
     public String[] URLs = new String[] {"http://192.168.3.21:8000/one",
                                          "http://192.168.3.21:8000/two",
                                          "http://192.168.3.21:8000/three"};
@@ -24,17 +25,26 @@ public class TitleActivity extends AppCompatActivity {
         setTheme(R.style.Theme_FragmentTest2);
         setContentView(R.layout.activity_title);
 
-        for (i = 0; i < URLs.length; i++) {
-            new AsyncRunnable(
-                    URLs[i],
-                    b->str[i] = new String(b),
-                    e->str[i] = "Not found"
-                    ).execute();
-        }
+        new AsyncRunnable(
+                URLs[0],
+                b->str[0] = new String(b),
+                e->str[0] = "Not found"
+                ).execute();
+
+        new AsyncRunnable(
+                URLs[1],
+                b->str[1] = new String(b),
+                e->str[1] = "Not found"
+        ).execute();
+
+        new AsyncRunnable(
+                URLs[2],
+                b->str[2] = new String(b),
+                e->str[2] = "Not found"
+        ).execute();
     }
 
     public void ChangeActivity() {
-        String EXTRA_DATA = "com.example.fragmenttest2.activity";
         Intent intent = new Intent(getApplication(), MainActivity.class);
         intent.putExtra(EXTRA_DATA, str);
         startActivity(intent);

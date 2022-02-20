@@ -1,6 +1,7 @@
 package com.example.fragmenttest2;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.example.fragmenttest2.asynchronous.CallBacks;
 import com.example.fragmenttest2.dungeon.DungeonFragment;
 import com.example.fragmenttest2.home.HomeFragment;
 import com.example.fragmenttest2.monster.MonsterFragment;
+import com.example.fragmenttest2.title.activity.TitleActivity;
 
 import java.util.Objects;
 
@@ -27,10 +29,14 @@ public class BaseFragment extends Fragment {
     static boolean homeFlag = false;
     static boolean dungeonFlag = true;
     static boolean monsterFlag = true;
+    String[] str;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getActivity().getIntent();
+        str = intent.getStringArrayExtra(TitleActivity.EXTRA_DATA);
 
         assert getFragmentManager() != null;
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -49,7 +55,7 @@ public class BaseFragment extends Fragment {
 
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
-        onClickListener iBt = new onClickListener();
+        onClickListener iBt = new onClickListener(str);
 
         ImageButton homeButton = view.findViewById(R.id.home_button);
         ImageButton dungeonButton = view.findViewById(R.id.dungeon_button);
@@ -65,6 +71,11 @@ public class BaseFragment extends Fragment {
     }
 
     private class onClickListener implements View.OnClickListener {
+        String[] str;
+        public onClickListener(String[] str) {
+            this.str = str;
+        }
+
         @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(@NonNull View v) {
@@ -74,17 +85,8 @@ public class BaseFragment extends Fragment {
             switch (v.getId()) {
                 case R.id.home_button:
                     if (homeFlag) {
-                        new AsyncRunnable(
-                                "http://192.168.3.21:8000/one",
-                                b->{
-                                    TextView tv = getActivity().findViewById(R.id.Home_text);
-                                    CallBacks cb = new CallBacks(tv, new String(b));
-                                    cb.setStr();
-                                },
-                                e->{
-                                    Log.v("States", e.toString());
-                                }
-                        ).execute();
+                        TextView tv = getActivity().findViewById(R.id.Home_text);
+                        tv.setText(str[0]);
                         fragmentTransaction.replace(R.id.container, HomeFragment.newInstance("home"));
                         fragmentTransaction.commit();
                         homeFlag = false;
@@ -94,17 +96,8 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.dungeon_button:
                     if (dungeonFlag) {
-                        new AsyncRunnable(
-                                "http://192.168.3.21:8000/two",
-                                b->{
-                                    TextView tv = getActivity().findViewById(R.id.Dungeon_text);
-                                    CallBacks cb = new CallBacks(tv, new String(b));
-                                    cb.setStr();
-                                },
-                                e->{
-                                    Log.v("States", e.toString());
-                                }
-                        ).execute();
+                        TextView tv = getActivity().findViewById(R.id.Dungeon_text);
+                        tv.setText(str[1]);
                         fragmentTransaction.replace(R.id.container, DungeonFragment.newInstance("dungeon"));
                         fragmentTransaction.commit();
                         dungeonFlag = false;
@@ -114,17 +107,8 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.monster_button:
                     if (monsterFlag) {
-                        new AsyncRunnable(
-                                "http://192.168.3.21:8000/three",
-                                b->{
-                                    TextView tv = getActivity().findViewById(R.id.Monster_text);
-                                    CallBacks cb = new CallBacks(tv, new String(b));
-                                    cb.setStr();
-                                },
-                                e->{
-                                    Log.v("States", e.toString());
-                                }
-                        ).execute();
+                        TextView tv = getActivity().findViewById(R.id.Monster_text);
+                        tv.setText(str[2]);
                         fragmentTransaction.replace(R.id.container, MonsterFragment.newInstance("monster"));
                         fragmentTransaction.commit();
                         monsterFlag = false;
