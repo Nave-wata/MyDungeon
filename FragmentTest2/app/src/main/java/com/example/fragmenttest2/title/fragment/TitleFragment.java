@@ -1,9 +1,7 @@
 package com.example.fragmenttest2.title.fragment;
 
 import android.content.res.AssetManager;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

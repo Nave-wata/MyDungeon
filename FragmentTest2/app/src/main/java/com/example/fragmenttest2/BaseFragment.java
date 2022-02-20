@@ -4,19 +4,15 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.fragmenttest2.asynchronous.AsyncRunnable;
-import com.example.fragmenttest2.asynchronous.CallBacks;
 import com.example.fragmenttest2.dungeon.DungeonFragment;
 import com.example.fragmenttest2.home.HomeFragment;
 import com.example.fragmenttest2.monster.MonsterFragment;
@@ -35,11 +31,10 @@ public class BaseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = getActivity().getIntent();
+        Intent intent = Objects.requireNonNull(getActivity()).getIntent();
         str = intent.getStringArrayExtra(TitleActivity.EXTRA_DATA);
 
-        assert getFragmentManager() != null;
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         fragmentTransaction.replace(R.id.container, HomeFragment.newInstance(str[0]));
         fragmentTransaction.commit();
     }

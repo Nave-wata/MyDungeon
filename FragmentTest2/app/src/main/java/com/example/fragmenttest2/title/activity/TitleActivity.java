@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fragmenttest2.MainActivity;
 import com.example.fragmenttest2.R;
-import com.example.fragmenttest2.asynchronous.AsyncRunnable;
-import com.example.fragmenttest2.asynchronous.CallBacks;
 
 public class TitleActivity extends AppCompatActivity {
     public static String EXTRA_DATA = "com.example.fragmenttest2.activity";
