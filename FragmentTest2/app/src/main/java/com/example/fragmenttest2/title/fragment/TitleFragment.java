@@ -73,7 +73,7 @@ public class TitleFragment extends Fragment {
     }
 
     private void Success(String b, int i) {
-        str[i] = new String(b);
+        str[i] = b;
         setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
         imageButton.setOnClickListener(new onClickListener());
     }
@@ -93,7 +93,7 @@ public class TitleFragment extends Fragment {
 
             if (id == R.id.image_button1) {
                 assert activity != null;
-                activity.ChangeActivity();
+                activity.ChangeActivity(str);
             }
         }
     }
