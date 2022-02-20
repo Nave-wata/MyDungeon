@@ -75,14 +75,24 @@ public class BaseFragment extends Fragment {
     }
 
     private class onClickListener implements View.OnClickListener {
-        String[] str;
-        String str1;
-        String
+        public String[] str;
+        public String str1;
+        public String str2;
+        public String str3;
+
         public onClickListener(String[] str) {
             this.str = str;
             for (int i = 0; i < str.length; i++) {
                 Log.v("this.str = ", str[i]);
             }
+
+            str1 = str[0];
+            str2 = str[1];
+            str3 = str[2];
+
+            Log.v("str1 = ", str1);
+            Log.v("str2 = ", str2);
+            Log.v("str3 = ", str3);
         }
 
         @SuppressLint("NonConstantResourceId")
@@ -94,8 +104,6 @@ public class BaseFragment extends Fragment {
             switch (v.getId()) {
                 case R.id.home_button:
                     if (homeFlag) {
-                        TextView tv = getActivity().findViewById(R.id.Home_text);
-                        tv.setText(str[0]);
                         fragmentTransaction.replace(R.id.container, HomeFragment.newInstance("home"));
                         fragmentTransaction.commit();
                         homeFlag = false;
@@ -105,8 +113,6 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.dungeon_button:
                     if (dungeonFlag) {
-                        TextView tv = getActivity().findViewById(R.id.Dungeon_text);
-                        tv.setText(str[1]);
                         fragmentTransaction.replace(R.id.container, DungeonFragment.newInstance("dungeon"));
                         fragmentTransaction.commit();
                         dungeonFlag = false;
@@ -116,8 +122,6 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.monster_button:
                     if (monsterFlag) {
-                        TextView tv = getActivity().findViewById(R.id.Monster_text);
-                        tv.setText(str[2]);
                         fragmentTransaction.replace(R.id.container, MonsterFragment.newInstance("monster"));
                         fragmentTransaction.commit();
                         monsterFlag = false;
