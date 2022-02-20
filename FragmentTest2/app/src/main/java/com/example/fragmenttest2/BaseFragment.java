@@ -95,8 +95,7 @@ public class BaseFragment extends Fragment {
                         new AsyncRunnable(
                                 "http://192.168.3.21:8000/two",
                                 b->{
-                                    TextView tv = getActivity().findViewById(R.id.Dungeon_text);
-                                    tv.setText(new String(b));
+                                    test(new String(b));
                                 },
                                 e->{
                                     Log.v("States", e.toString());
@@ -131,6 +130,11 @@ public class BaseFragment extends Fragment {
                 default:
                     break;
             }
+        }
+
+        private void test(String str) {
+            TextView tv = getActivity().findViewById(R.id.Dungeon_text);
+            tv.setText(str);
         }
     }
 }
