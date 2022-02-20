@@ -22,7 +22,8 @@ import java.util.Objects;
 
 public class TitleFragment extends Fragment {
 
-    public String[] URLs = new String[] {"https://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060",
+    public String[] URLs = new String[] {
+            "https://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060",
             "https://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060",
             "https://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060"};
     public String[] str = new String[URLs.length];
@@ -41,18 +42,52 @@ public class TitleFragment extends Fragment {
 
         assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
+
         ImageView imageView = view.findViewById(R.id.image_view1);
         imageButton = view.findViewById(R.id.image_button1);
 
         setImage.setImageViewBitmapFromAsset(imageView, "title/title.png");
         setImage.setImageButtonBitmapFromAsset(imageButton, "title/non_start.png");
 
-        tmp();
+        Connection();
     }
+
+    private void Connection() {
+        new AsyncRunnable(
+                URLs[0],
+                b->Success(new String(b), 0),
+                e->Failure(0)
+        ).execute();
+
+        new AsyncRunnable(
+                URLs[1],
+                b->Success(new String(b), 1),
+                e->Failure(1)
+        ).execute();
+
+        new AsyncRunnable(
+                URLs[2],
+                b->Success(new String(b), 2),
+                e->Failure(2)
+        ).execute();
+    }
+
+    private void Success(String b, int i) {
+        str[i] = new String(b);
+        setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
+        imageButton.setOnClickListener(new onClickListener());
+    }
+
+    private void Failure(int i) {
+        str[i] = "Not found";
+        setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
+        imageButton.setOnClickListener(new onClickListener());
+    }
+
 
     public class onClickListener implements ImageButton.OnClickListener {
         @Override
-        public void onClick(View view) {
+        public void onClick(@NonNull View view) {
             int id = view.getId();
             TitleActivity activity = (TitleActivity) getActivity();
 
@@ -61,49 +96,5 @@ public class TitleFragment extends Fragment {
                 activity.ChangeActivity();
             }
         }
-    }
-
-    private void tmp() {
-        new AsyncRunnable(
-                URLs[0],
-                b->{
-                    str[0] = new String(b);
-                    setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
-                    imageButton.setOnClickListener(new onClickListener());
-                },
-                e->{
-                    str[0] = "Not found";
-                    setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
-                    imageButton.setOnClickListener(new onClickListener());
-                }
-        ).execute();
-
-        new AsyncRunnable(
-                URLs[1],
-                b->{
-                    str[1] = new String(b);
-                    setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
-                    imageButton.setOnClickListener(new onClickListener());
-                },
-                e->{
-                    str[1] = "Not found";
-                    setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
-                    imageButton.setOnClickListener(new onClickListener());
-                }
-        ).execute();
-
-        new AsyncRunnable(
-                URLs[2],
-                b->{
-                    str[2] = new String(b);
-                    setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
-                    imageButton.setOnClickListener(new onClickListener());
-                },
-                e->{
-                    str[2] = "Not found";
-                    setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
-                    imageButton.setOnClickListener(new onClickListener());
-                }
-        ).execute();
     }
 }
