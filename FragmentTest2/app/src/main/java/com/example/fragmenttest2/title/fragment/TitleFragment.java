@@ -40,11 +40,6 @@ public class TitleFragment extends Fragment {
     }
 
     public class onClickListener implements ImageButton.OnClickListener {
-        public String[] URLs = new String[] {"http://192.168.3.21:8000/one",
-                "http://192.168.3.21:8000/two",
-                "http://192.168.3.21:8000/three"};
-        public String[] str = new String[URLs.length];
-
         @Override
         public void onClick(View view) {
             int id = view.getId();
@@ -54,26 +49,6 @@ public class TitleFragment extends Fragment {
                 assert activity != null;
                 activity.ChangeActivity();
             }
-        }
-
-        private void tmp() {
-            new AsyncRunnable(
-                    URLs[0],
-                    b->str[0] = new String(b),
-                    e->str[0] = "Not found"
-            ).execute();
-
-            new AsyncRunnable(
-                    URLs[1],
-                    b->str[1] = new String(b),
-                    e->str[1] = "Not found"
-            ).execute();
-
-            new AsyncRunnable(
-                    URLs[2],
-                    b->str[2] = new String(b),
-                    e->str[2] = "Not found"
-            ).execute();
         }
     }
 }
