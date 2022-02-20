@@ -25,23 +25,9 @@ public class TitleActivity extends AppCompatActivity {
         setTheme(R.style.Theme_FragmentTest2);
         setContentView(R.layout.activity_title);
 
-        new AsyncRunnable(
-                URLs[0],
-                b->str[0] = new String(b),
-                e->str[0] = "Not found"
-                ).execute();
-
-        new AsyncRunnable(
-                URLs[1],
-                b->str[1] = new String(b),
-                e->str[1] = "Not found"
-        ).execute();
-
-        new AsyncRunnable(
-                URLs[2],
-                b->str[2] = new String(b),
-                e->str[2] = "Not found"
-        ).execute();
+        str[0] = "1";
+        str[1] = "2";
+        str[2] = "3";
     }
 
     public void ChangeActivity() {

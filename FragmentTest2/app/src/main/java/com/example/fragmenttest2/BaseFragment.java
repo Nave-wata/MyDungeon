@@ -38,6 +38,10 @@ public class BaseFragment extends Fragment {
         Intent intent = getActivity().getIntent();
         str = intent.getStringArrayExtra(TitleActivity.EXTRA_DATA);
 
+        for (int i = 0; i < str.length; i++) {
+            Log.v("str = ", str[i]);
+        }
+
         assert getFragmentManager() != null;
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.container, HomeFragment.newInstance("home"));
