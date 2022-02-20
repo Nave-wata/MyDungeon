@@ -27,6 +27,8 @@ public class TitleFragment extends Fragment {
             "https://zipcloud.ibsnet.co.jp/api/search?zipcode=7830060"};
     public String[] str = new String[URLs.length];
     public ImageButton imageButton;
+    public AssetManager assetManager;
+    public SetImage setImage;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,13 +39,13 @@ public class TitleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
-        SetImage setImage = new SetImage(assetManager);
+        assetManager = Objects.requireNonNull(getActivity()).getAssets();
+        setImage = new SetImage(assetManager);
         ImageView imageView = view.findViewById(R.id.image_view1);
         imageButton = view.findViewById(R.id.image_button1);
 
         setImage.setImageViewBitmapFromAsset(imageView, "title/title.png");
-        setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
+        setImage.setImageButtonBitmapFromAsset(imageButton, "title/non_start.png");
 
         tmp();
     }
@@ -66,11 +68,12 @@ public class TitleFragment extends Fragment {
                 URLs[0],
                 b->{
                     str[0] = new String(b);
-                    Log.v("str1 = ", str[0]);
+                    setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
                     imageButton.setOnClickListener(new onClickListener());
                 },
                 e->{
                     str[0] = "Not found";
+                    setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
                     imageButton.setOnClickListener(new onClickListener());
                 }
         ).execute();
@@ -79,11 +82,12 @@ public class TitleFragment extends Fragment {
                 URLs[1],
                 b->{
                     str[1] = new String(b);
-                    Log.v("str2 = ", str[1]);
+                    setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
                     imageButton.setOnClickListener(new onClickListener());
                 },
                 e->{
                     str[1] = "Not found";
+                    setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
                     imageButton.setOnClickListener(new onClickListener());
                 }
         ).execute();
@@ -92,11 +96,12 @@ public class TitleFragment extends Fragment {
                 URLs[2],
                 b->{
                     str[2] = new String(b);
-                    Log.v("str3 = ", str[2]);
+                    setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
                     imageButton.setOnClickListener(new onClickListener());
                 },
                 e->{
                     str[2] = "Not found";
+                    setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
                     imageButton.setOnClickListener(new onClickListener());
                 }
         ).execute();

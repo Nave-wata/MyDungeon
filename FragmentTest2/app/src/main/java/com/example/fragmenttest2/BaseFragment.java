@@ -29,7 +29,6 @@ public class BaseFragment extends Fragment {
     static boolean homeFlag = false;
     static boolean dungeonFlag = true;
     static boolean monsterFlag = true;
-    String[] str;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
