@@ -3,6 +3,7 @@ package com.example.fragmenttest2;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ public class BaseFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_base, container, false);
     }
 
@@ -64,7 +65,7 @@ public class BaseFragment extends Fragment {
     private class onClickListener implements View.OnClickListener {
         @SuppressLint("NonConstantResourceId")
         @Override
-        public void onClick(View v) {
+        public void onClick(@NonNull View v) {
             assert getFragmentManager() != null;
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
@@ -73,7 +74,9 @@ public class BaseFragment extends Fragment {
                     if (homeFlag) {
                         new AsyncRunnable(
                                 "https://google.com",
-                                b->{/* 成功時 */},
+                                (a)->{
+                                    Log.v("States", a[0] + "");
+                                },
                                 e->{/* 失敗時 */}
                         ).execute();
                         fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));

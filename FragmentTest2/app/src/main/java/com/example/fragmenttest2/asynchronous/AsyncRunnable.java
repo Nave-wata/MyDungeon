@@ -25,9 +25,7 @@ public class AsyncRunnable implements Runnable {
 
     /**
      　 * コンストラクタ
-     　 * @param context コンテキスト
      　 * @param url 通信先URL
-     　 * @param message 処理中メッセージ
      　 * @param callback 正常時のコールバック関数(Consumer<byte[]>)
      　 * @param errorCallback エラー時のコールバック関数(Consumer<Exception>)
      　 */
