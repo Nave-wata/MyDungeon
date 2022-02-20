@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.fragmenttest2.R;
 
 public class HomeFragment extends Fragment {
+    public final String ARGS_NAME = "com.example.fragmenttest2.home";
     TextView mainText;
     String str;
 
@@ -18,7 +19,7 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
-        str = args.getString("Message");
+        str = args.getString(ARGS_NAME);
     }
 
     @Override
@@ -30,18 +31,14 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mainText = view.findViewById(R.id.Home_text);
-        setHomeText(str);
-    }
 
-    public void setHomeText(String strtest) {
-        mainText.setText(strtest);
+        mainText.setText(str);
     }
-
 
     public static HomeFragment newInstance(String str){
         HomeFragment fragment = new HomeFragment();
         Bundle barg = new Bundle();
-        barg.putString("Message", str);
+        barg.putString(fragment.ARGS_NAME, str);
         fragment.setArguments(barg);
         return fragment;
     }
