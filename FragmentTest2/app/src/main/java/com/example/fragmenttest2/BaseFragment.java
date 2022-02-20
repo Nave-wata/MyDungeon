@@ -73,11 +73,13 @@ public class BaseFragment extends Fragment {
                 case R.id.home_button:
                     if (homeFlag) {
                         new AsyncRunnable(
-                                "https://google.com",
-                                (a)->{
-                                    Log.v("States", a[0] + "");
+                                "http://192.168.3.21:8000/one",
+                                b-> {
+                                    Log.v("States", new String(b));
                                 },
-                                e->{/* 失敗時 */}
+                                e->{
+                                    Log.v("States", e.toString());
+                                }
                         ).execute();
                         fragmentTransaction.replace(R.id.container, MainFragment.newInstance("home"));
                         fragmentTransaction.commit();
