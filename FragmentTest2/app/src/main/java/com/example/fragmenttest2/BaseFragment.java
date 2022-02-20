@@ -29,10 +29,18 @@ public class BaseFragment extends Fragment {
     static boolean homeFlag = false;
     static boolean dungeonFlag = true;
     static boolean monsterFlag = true;
+    String[] str;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getActivity().getIntent();
+        str = intent.getStringArrayExtra(TitleActivity.EXTRA_DATA);
+
+        for (int i = 0; i < str.length; i++) {
+            Log.v("str[" + i + "] = ", str[i]);
+        }
 
         assert getFragmentManager() != null;
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -51,7 +59,7 @@ public class BaseFragment extends Fragment {
 
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
-        onClickListener iBt = new onClickListener();
+        onClickListener iBt = new onClickListener(str);
 
         ImageButton homeButton = view.findViewById(R.id.home_button);
         ImageButton dungeonButton = view.findViewById(R.id.dungeon_button);
@@ -67,6 +75,15 @@ public class BaseFragment extends Fragment {
     }
 
     private class onClickListener implements View.OnClickListener {
+
+        String[] str;
+
+        public onClickListener(String[] str) {
+            this.str = str;
+            for (int i = 0; i < str.length; i++) {
+                Log.v("this.str[" + i + "] = ", str[i]);
+            }
+        }
         @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(@NonNull View v) {
