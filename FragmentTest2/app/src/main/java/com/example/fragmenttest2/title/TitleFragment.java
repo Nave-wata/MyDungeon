@@ -1,4 +1,4 @@
-package com.example.fragmenttest2.title.fragment;
+package com.example.fragmenttest2.title;
 
 import android.content.res.AssetManager;
 import android.os.Bundle;

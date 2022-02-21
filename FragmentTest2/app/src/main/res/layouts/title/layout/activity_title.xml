@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/title_fragment"
-        android:name="com.example.fragmenttest2.title.fragment.TitleFragment"
+        android:name="com.example.fragmenttest2.title.TitleFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
