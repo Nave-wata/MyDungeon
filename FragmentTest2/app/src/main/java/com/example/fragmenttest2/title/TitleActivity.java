@@ -1,4 +1,4 @@
-package com.example.fragmenttest2.title.activity;
+package com.example.fragmenttest2.title;
 
 import android.content.Intent;
 import android.os.Bundle;

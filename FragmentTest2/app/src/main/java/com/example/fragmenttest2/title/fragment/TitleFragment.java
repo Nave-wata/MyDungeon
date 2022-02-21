@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.example.fragmenttest2.R;
 import com.example.fragmenttest2.SetImage;
 import com.example.fragmenttest2.asynchronous.AsyncRunnable;
-import com.example.fragmenttest2.title.activity.TitleActivity;
+import com.example.fragmenttest2.title.TitleActivity;
 
 import java.util.Objects;
 

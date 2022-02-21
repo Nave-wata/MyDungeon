@@ -16,7 +16,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".title.activity.TitleActivity"
+            android:name=".title.TitleActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
