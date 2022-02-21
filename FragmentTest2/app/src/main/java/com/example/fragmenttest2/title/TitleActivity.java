@@ -9,7 +9,7 @@ import com.example.fragmenttest2.MainActivity;
 import com.example.fragmenttest2.R;
 
 public class TitleActivity extends AppCompatActivity {
-    public static String EXTRA_DATA = "com.example.fragmenttest2.activity";
+    public static String EXTRA_DATA = "com.example.fragmenttest2.title";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
