@@ -23,7 +23,8 @@ public class TitleFragment extends Fragment {
     public String[] URLs = new String[] {
             "https://zipcloud.ibsnet.co.jp/api/search?zipcode=0791143",
             "https://zipcloud.ibsnet.co.jp/api/search?zipcode=1001701",
-            "https://zipcloud.ibsnet.co.jp/api/search?zipcode=9041103"};
+            "https://zipcloud.ibsnet.co.jp/api/search?zipcode=9041103"
+    };
     public String[] str = new String[URLs.length];
     public ImageButton imageButton;
     public AssetManager assetManager;
@@ -34,7 +35,7 @@ public class TitleFragment extends Fragment {
         super.onCreate(saveInstanceState);
 
         FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
-        fragmentTransaction.replace(R.id.TitleContainer, UserRegistrationFragment.newInstance("hoge"));
+        fragmentTransaction.add(R.id.TitleContainer, UserRegistrationFragment.newInstance("hoge"));
         fragmentTransaction.commit();
     }
 
