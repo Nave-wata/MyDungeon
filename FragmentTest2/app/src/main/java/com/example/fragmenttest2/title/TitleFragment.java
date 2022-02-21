@@ -10,11 +10,11 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.fragmenttest2.R;
 import com.example.fragmenttest2.SetImage;
 import com.example.fragmenttest2.asynchronous.AsyncRunnable;
-import com.example.fragmenttest2.title.TitleActivity;
 
 import java.util.Objects;
 
@@ -28,6 +28,15 @@ public class TitleFragment extends Fragment {
     public ImageButton imageButton;
     public AssetManager assetManager;
     public SetImage setImage;
+
+    @Override
+    public void onCreate(Bundle saveInstanceState) {
+        super.onCreate(saveInstanceState);
+
+        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
+        fragmentTransaction.replace(R.id.TitleContainer, UserRegistrationFragment.newInstance("hoge"));
+        fragmentTransaction.commit();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
