@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".title.TitleActivity">
 
+    <FrameLayout
+        android:id="@+id/TitleContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <fragment
         android:id="@+id/title_fragment"
         android:name="com.example.fragmenttest2.title.TitleFragment"

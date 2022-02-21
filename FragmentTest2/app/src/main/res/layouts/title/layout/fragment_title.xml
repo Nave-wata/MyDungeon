@@ -6,12 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <fragment
-        android:id="@+id/fragment_userRegistration"
-        android:name="com.example.fragmenttest2.title."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
     <ImageView
         android:id="@+id/image_view1"
         android:layout_width="match_parent"
