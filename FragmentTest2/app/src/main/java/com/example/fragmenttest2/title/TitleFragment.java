@@ -103,7 +103,7 @@ public class TitleFragment extends Fragment {
                     activity.ChangeActivity(str);
                     break;
                 case R.id.userSelection_Button:
-                    UserSelectionDialogFragment dialogFragment = new UserSelectionDialogFragment();
+                    UserSelectionDialog dialogFragment = new UserSelectionDialog();
                     dialogFragment.show(getFragmentManager(), "userSelection");
                     break;
                 default:

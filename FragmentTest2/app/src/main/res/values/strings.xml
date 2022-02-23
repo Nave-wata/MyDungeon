@@ -6,4 +6,5 @@
     <string name="home_text">H</string>
     <string name="dungeon_text">D</string>
     <string name="monster_text">M</string>
+    <string name="userSelectionTitle">Name</string>
 </resources>
