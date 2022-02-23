@@ -33,10 +33,6 @@ public class TitleFragment extends Fragment {
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
-
-        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
-        fragmentTransaction.add(R.id.TitleContainer, UserRegistrationFragment.newInstance("hoge"));
-        fragmentTransaction.commit();
     }
 
     @Override
