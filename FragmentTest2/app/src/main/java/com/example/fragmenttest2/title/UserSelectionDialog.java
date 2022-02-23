@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -30,10 +31,16 @@ public class UserSelectionDialog extends DialogFragment {
         moveSelectUserPage_btn = view.findViewById(R.id.moveSelectUserPage_button);
         moveUserAddPage_btn =  view.findViewById(R.id.moveUserAddPage_button);
 
-        onClickListener bt = new onClickListener();
-
-        moveSelectUserPage_btn.setOnClickListener(bt);
-        moveUserAddPage_btn.setOnClickListener(bt);
+        moveSelectUserPage_btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                moveSelectUserPage_btn.setText("push");
+            }
+        });
+        moveUserAddPage_btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                moveUserAddPage_btn.setText("push");
+            }
+        });
     }
 
     @Override
@@ -44,21 +51,5 @@ public class UserSelectionDialog extends DialogFragment {
         builder.setView(inflater.inflate(R.layout.dialog_userselection, null));
 
         return builder.create();
-    }
-
-    public class onClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.moveSelectUserPage_button:
-                    moveSelectUserPage_btn.setText("Push");
-                    break;
-                case R.id.moveUserAddPage_button:
-                    moveUserAddPage_btn.setText("Push");
-                    break;
-                default:
-                    break;
-            }
-        }
     }
 }
