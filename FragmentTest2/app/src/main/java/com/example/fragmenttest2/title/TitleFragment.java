@@ -1,6 +1,7 @@
 package com.example.fragmenttest2.title;
 
 import android.content.res.AssetManager;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,12 +49,14 @@ public class TitleFragment extends Fragment {
         setImage = new SetImage(assetManager);
 
         ImageView imageView = view.findViewById(R.id.image_view1);
+        ImageButton userSelectionButton = view.findViewById(R.id.userSelection_Button);
         imageButton = view.findViewById(R.id.Start_Button);
-        imageButton = view.findViewById(R.id.userSelection_Button);
 
         setImage.setImageViewBitmapFromAsset(imageView, "title/title.png");
+        setImage.setImageButtonBitmapFromAsset(userSelectionButton, "title/ic_user.png");
         setImage.setImageButtonBitmapFromAsset(imageButton, "title/non_start.png");
-        setImage.setImageButtonBitmapFromAsset(imageButton, "title/ic_user.jpeg");
+
+        userSelectionButton.setOnClickListener(new onClickListener());
 
         Connection();
     }
@@ -97,9 +100,16 @@ public class TitleFragment extends Fragment {
             int id = view.getId();
             TitleActivity activity = (TitleActivity) getActivity();
 
-            if (id == R.id.Start_Button) {
-                assert activity != null;
-                activity.ChangeActivity(str);
+            switch (id){
+                case R.id.Start_Button:
+                    activity.ChangeActivity(str);
+                    break;
+                case R.id.userSelection_Button:
+                    UsrInfoDialogFragment dialogFragment = new UsrInfoDialogFragment();
+                    dialogFragment.show(getFragmentManager(), "userInfo");
+                    break;
+                default:
+                    break;
             }
         }
     }
