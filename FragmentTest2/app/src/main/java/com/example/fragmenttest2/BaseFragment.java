@@ -17,7 +17,6 @@ import com.example.fragmenttest2.dungeon.DungeonFragment;
 import com.example.fragmenttest2.home.HomeFragment;
 import com.example.fragmenttest2.monster.MonsterFragment;
 import com.example.fragmenttest2.title.TitleActivity;
-import com.example.fragmenttest2.title.UserRegistrationFragment;
 
 import java.util.Objects;
 
