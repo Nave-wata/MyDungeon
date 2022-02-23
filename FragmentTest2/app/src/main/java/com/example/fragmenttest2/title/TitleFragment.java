@@ -48,10 +48,12 @@ public class TitleFragment extends Fragment {
         setImage = new SetImage(assetManager);
 
         ImageView imageView = view.findViewById(R.id.image_view1);
-        imageButton = view.findViewById(R.id.image_button1);
+        imageButton = view.findViewById(R.id.Start_Button);
+        imageButton = view.findViewById(R.id.userSelection_Button);
 
         setImage.setImageViewBitmapFromAsset(imageView, "title/title.png");
         setImage.setImageButtonBitmapFromAsset(imageButton, "title/non_start.png");
+        setImage.setImageButtonBitmapFromAsset(imageButton, "title/ic_user.jpeg");
 
         Connection();
     }
@@ -95,7 +97,7 @@ public class TitleFragment extends Fragment {
             int id = view.getId();
             TitleActivity activity = (TitleActivity) getActivity();
 
-            if (id == R.id.image_button1) {
+            if (id == R.id.Start_Button) {
                 assert activity != null;
                 activity.ChangeActivity(str);
             }
