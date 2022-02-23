@@ -6,5 +6,7 @@
     <string name="home_text">H</string>
     <string name="dungeon_text">D</string>
     <string name="monster_text">M</string>
-    <string name="userSelectionTitle">Name</string>
+    <string name="userSelectionTitle">ユーザー名を選択するか，新しくユーザーを作成できます．</string>
+    <string name="moveUserSelectionPage_buttonText">登録済みのユーザーを選択</string>
+    <string name="moveAddUserPage_buttonText">新しいユーザーを作る</string>
 </resources>
