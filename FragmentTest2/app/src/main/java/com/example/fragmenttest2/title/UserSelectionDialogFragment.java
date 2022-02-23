@@ -11,7 +11,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.fragmenttest2.BuildConfig;
 
-public class UsrInfoDialogFragment extends DialogFragment {
+public class UserSelectionDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {

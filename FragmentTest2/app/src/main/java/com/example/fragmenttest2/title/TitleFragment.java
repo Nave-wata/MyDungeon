@@ -1,7 +1,6 @@
 package com.example.fragmenttest2.title;
 
 import android.content.res.AssetManager;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.fragmenttest2.R;
 import com.example.fragmenttest2.SetImage;
@@ -105,8 +103,8 @@ public class TitleFragment extends Fragment {
                     activity.ChangeActivity(str);
                     break;
                 case R.id.userSelection_Button:
-                    UsrInfoDialogFragment dialogFragment = new UsrInfoDialogFragment();
-                    dialogFragment.show(getFragmentManager(), "userInfo");
+                    UserSelectionDialogFragment dialogFragment = new UserSelectionDialogFragment();
+                    dialogFragment.show(getFragmentManager(), "userSelection");
                     break;
                 default:
                     break;
