@@ -37,12 +37,12 @@ public class UserDialog extends DialogFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.selectPage_button:
-                    UserSelectDialog UserSelectDialogFragment = new UserSelectDialog();
-                    UserSelectDialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userSelect");
+                    SignInDialog signInDialogFragment = new SignInDialog();
+                    signInDialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userSelect");
                     break;
                 case R.id.addPage_button:
-                    UserAddDialog UserAddDialogFragment = new UserAddDialog();
-                    UserAddDialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userAdd");
+                    SignUpDialog signUpDialogFragment = new SignUpDialog();
+                    signUpDialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userAdd");
                     break;
                 default:
                     break;
