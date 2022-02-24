@@ -1,5 +1,6 @@
 package com.example.fragmenttest2.title;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,14 +12,27 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.fragmenttest2.BaseFragment;
 import com.example.fragmenttest2.R;
 import com.example.fragmenttest2.SetImage;
+import com.example.fragmenttest2.home.HomeFragment;
+import com.example.fragmenttest2.monster.MonsterFragment;
 
 import java.util.Objects;
 
 public class CancelFragment extends Fragment {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
+        fragmentTransaction.replace(R.id.UserSelectionDialog_Container, UserSelectionDialog.newInstance("null"));
+        fragmentTransaction.commit();
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_cancel, container, false);

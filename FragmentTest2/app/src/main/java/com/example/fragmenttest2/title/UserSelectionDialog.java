@@ -39,7 +39,18 @@ public class UserSelectionDialog extends DialogFragment {
         btn.setOnClickListener(new onClickListener(btn));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
+
+        builder.setNegativeButton("Cancel", null);
+
         return builder.create();
+    }
+
+    public static UserSelectionDialog newInstance(String str){
+        UserSelectionDialog fragment = new UserSelectionDialog();
+        Bundle barg = new Bundle();
+        barg.putString("Message", str);
+        fragment.setArguments(barg);
+        return fragment;
     }
 
 
