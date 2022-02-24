@@ -39,6 +39,7 @@ public class UserDialog extends DialogFragment {
                 case R.id.SignInPage_button:
                     SignInDialog signInDialogFragment = new SignInDialog();
                     signInDialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userSelect");
+                    dismiss();
                     break;
                 case R.id.SignUpPage_button:
                     SignUpDialog signUpDialogFragment = new SignUpDialog();
