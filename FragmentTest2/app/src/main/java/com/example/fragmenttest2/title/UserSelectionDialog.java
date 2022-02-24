@@ -38,6 +38,9 @@ public class UserSelectionDialog extends DialogFragment {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_userselection, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
+        builder.setPositiveButton(R.string.DialogPositiveText, null);
+        builder.setNeutralButton(R.string.DialogNegativeText, null);
+
         return builder.create();
     }
 
