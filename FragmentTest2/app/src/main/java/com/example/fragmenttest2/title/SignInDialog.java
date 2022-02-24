@@ -19,15 +19,11 @@ public class SignInDialog extends DialogFragment {
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signin, null);
 
-        EditText ETName = view.findViewById(R.id.TitleETUserName);
-        EditText ETPass = view.findViewById(R.id.TitleETPassword);
-        String name = ETName.getText().toString();
-        String pass = ETPass.getText().toString();
-        Log.v("Name", name);
-        Log.v("Password", pass);
+        EditText etName = view.findViewById(R.id.TitleETUserName);
+        EditText etPass = view.findViewById(R.id.TitleETPassword);
 
         Button btn = view.findViewById(R.id.SignIn_button);
-        btn.setOnClickListener(new onClickListener(name, pass));
+        btn.setOnClickListener(new onClickListener(etName, etPass));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
         return builder.create();
@@ -35,18 +31,18 @@ public class SignInDialog extends DialogFragment {
 
 
     private class onClickListener implements View.OnClickListener {
-        String name;
-        String pass;
+        EditText etName;
+        EditText etPass;
 
-        public onClickListener(String name, String pass) {
-            this.name = name;
-            this.pass = pass;
+        public onClickListener(EditText etName, EditText etPass) {
+            this.etName = etName;
+            this.etPass = etPass;
         }
 
         @Override
         public void onClick(View v) {
-            Log.v("Name", name);
-            Log.v("Password", pass);
+            Log.v("Name", etName.getText().toString());
+            Log.v("Password", etPass.getText().toString());
             dismiss();
         }
     }
