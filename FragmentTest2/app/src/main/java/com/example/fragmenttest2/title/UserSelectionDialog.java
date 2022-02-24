@@ -30,14 +30,18 @@ public class UserSelectionDialog extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
-        fragmentTransaction.replace(R.id.UserSelectionDialog_Container, CancelFragment.newInstance("null"));
-        fragmentTransaction.commit();
+
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_userselection, null);
+
+        AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
+        SetImage setImage = new SetImage(assetManager);
+
+        ImageButton imbtn = view.findViewById(R.id.cancel_button);
+        setImage.setImageButtonBitmapFromAsset(imbtn, "title/cancel.png");
 
         TextView tvTitle = view.findViewById(R.id.TextView_dialog_title);
         tvTitle.setText("Title");
