@@ -7,6 +7,6 @@
     <string name="dungeon_text">D</string>
     <string name="monster_text">M</string>
     <string name="userSelectionTitle">ユーザー名を選択するか，新しくユーザーを作成できます．</string>
-    <string name="moveUserSelectionPage_buttonText">登録済みのユーザーを選択</string>
-    <string name="moveAddUserPage_buttonText">新しいユーザーを作る</string>
+    <string name="selectionPage_buttonText">登録済みのユーザーを選択</string>
+    <string name="addUserPage_buttonText">新しいユーザーを作る</string>
 </resources>

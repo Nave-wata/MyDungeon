@@ -36,21 +36,6 @@ public class UserSelectionDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_userselection, null);
-        SetImage setImage = new SetImage(Objects.requireNonNull(getActivity()).getAssets());
-        onClickListener clickListener = new onClickListener();
-
-        ImageButton cancelButton = view.findViewById(R.id.cancel_button);
-        setImage.setImageButtonBitmapFromAsset(cancelButton, "title/cancel.png");
-        cancelButton.setOnClickListener(clickListener);
-
-        TextView tvTitle = view.findViewById(R.id.TextView_dialog_title);
-        tvTitle.setText("Title");
-
-        TextView tvMessage = view.findViewById(R.id.TextView_dialog_message);
-        tvMessage.setText("Message");
-
-        Button btn = view.findViewById(R.id.Button_dialog_positive);
-        btn.setOnClickListener(clickListener);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
         return builder.create();
