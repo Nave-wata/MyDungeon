@@ -1,5 +1,6 @@
 package com.example.fragmenttest2.title;
 
+import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -93,6 +94,7 @@ public class TitleFragment extends Fragment {
 
 
     public class onClickListener implements ImageButton.OnClickListener {
+        @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(@NonNull View view) {
             int id = view.getId();
@@ -100,11 +102,11 @@ public class TitleFragment extends Fragment {
 
             switch (id){
                 case R.id.Start_Button:
-                    activity.ChangeActivity(str);
+                    Objects.requireNonNull(activity).ChangeActivity(str);
                     break;
                 case R.id.userSelection_Button:
-                    UserSelectionDialog dialogFragment = new UserSelectionDialog();
-                    dialogFragment.show(getFragmentManager(), "userSelection");
+                    UserDialog dialogFragment = new UserDialog();
+                    dialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userSelection");
                     break;
                 default:
                     break;
