@@ -12,4 +12,6 @@
     <string name="DialogPositiveText">OK</string>
     <string name="DialogNegativeText">キャンセル</string>
     <string name="DialogNeutralText">あとで</string>
+    <string name="Name">ユーザー名</string>
+    <string name="Password">パスワード</string>
 </resources>
