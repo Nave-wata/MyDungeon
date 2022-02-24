@@ -10,10 +10,10 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.fragmenttest2.R;
 
-public class UserSelectDialog extends DialogFragment {
+public class UserAddDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
-        View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_userselect, null);
+        View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_useradd, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
         return builder.create();

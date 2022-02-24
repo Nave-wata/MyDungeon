@@ -15,10 +15,8 @@ import java.util.Objects;
 
 
 public class UserDialog extends DialogFragment {
-
-    @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_user, null);
         onClickListener clickListener = new onClickListener();
 
@@ -39,10 +37,12 @@ public class UserDialog extends DialogFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.selectPage_button:
-                    UserSelectDialog dialogFragment = new UserSelectDialog();
-                    dialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userSelect");
+                    UserSelectDialog UserSelectDialogFragment = new UserSelectDialog();
+                    UserSelectDialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userSelect");
                     break;
                 case R.id.addPage_button:
+                    UserAddDialog UserAddDialogFragment = new UserAddDialog();
+                    UserAddDialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userAdd");
                     break;
                 default:
                     break;
