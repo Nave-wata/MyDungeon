@@ -14,6 +14,10 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.fragmenttest2.R;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class SignInDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
@@ -41,8 +45,16 @@ public class SignInDialog extends DialogFragment {
 
         @Override
         public void onClick(View v) {
+            MessageDigest sha256 = null;
+            try {
+                sha256 = MessageDigest.getInstance("SHA-512");
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            byte[] sha256_result = sha256.digest(etPass.getText().toString().getBytes());
+
             Log.v("Name", etName.getText().toString());
-            Log.v("Password", etPass.getText().toString());
+            Log.v("Password", String.format("%04x", new BigInteger(1, sha256_result)));
             dismiss();
         }
     }
