@@ -37,6 +37,8 @@ public class UserDialog extends DialogFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.selectPage_button:
+                    UserSelectDialog dialogFragment = new UserSelectDialog();
+                    dialogFragment.show(dialogFragment.getFragmentManager(), "userselect");
                     break;
                 case R.id.addPage_button:
                     break;

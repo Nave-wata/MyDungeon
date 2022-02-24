@@ -106,7 +106,7 @@ public class TitleFragment extends Fragment {
                     break;
                 case R.id.userSelection_Button:
                     UserDialog dialogFragment = new UserDialog();
-                    dialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userSelection");
+                    dialogFragment.show(Objects.requireNonNull(getFragmentManager()), "user");
                     break;
                 default:
                     break;
