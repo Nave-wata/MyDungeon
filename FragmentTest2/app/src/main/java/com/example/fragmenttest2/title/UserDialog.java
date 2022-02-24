@@ -20,8 +20,8 @@ public class UserDialog extends DialogFragment {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_user, null);
         onClickListener clickListener = new onClickListener();
 
-        view.findViewById(R.id.selectPage_button).setOnClickListener(clickListener);
-        view.findViewById(R.id.addPage_button).setOnClickListener(clickListener);
+        view.findViewById(R.id.SignIn_button).setOnClickListener(clickListener);
+        view.findViewById(R.id.SignUp_button).setOnClickListener(clickListener);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
         builder.setPositiveButton(R.string.DialogPositiveText, null);
@@ -36,11 +36,11 @@ public class UserDialog extends DialogFragment {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.selectPage_button:
+                case R.id.SignIn_button:
                     SignInDialog signInDialogFragment = new SignInDialog();
                     signInDialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userSelect");
                     break;
-                case R.id.addPage_button:
+                case R.id.SignUp_button:
                     SignUpDialog signUpDialogFragment = new SignUpDialog();
                     signUpDialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userAdd");
                     break;

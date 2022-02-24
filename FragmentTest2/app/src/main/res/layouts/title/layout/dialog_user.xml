@@ -8,7 +8,7 @@
 
 
     <Button
-        android:id="@+id/selectPage_button"
+        android:id="@+id/SignIn_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -19,7 +19,7 @@
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/addPage_button"
+        android:id="@+id/SignUp_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -28,4 +28,5 @@
         android:gravity="center"
         android:text="@string/SignUp_buttonText"
         android:textSize="20sp" />
+
 </LinearLayout>
