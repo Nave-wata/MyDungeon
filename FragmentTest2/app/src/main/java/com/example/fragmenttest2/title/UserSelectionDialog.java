@@ -27,11 +27,15 @@ public class UserSelectionDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_userselection, null);
-        builder.setView(view);
 
+        TextView tvTitle = view.findViewById(R.id.TextView_dialog_title);
+        tvTitle.setText("Title");
+
+        TextView tvMessage = view.findViewById(R.id.TextView_dialog_message);
+        tvMessage.setText("Message");
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
         return builder.create();
     }
 }
