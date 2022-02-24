@@ -17,7 +17,6 @@ public class UserSelectDialog extends DialogFragment {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_userselect, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
-
         return builder.create();
     }
 }

@@ -11,6 +11,8 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.fragmenttest2.R;
 
+import java.util.Objects;
+
 
 public class UserDialog extends DialogFragment {
 
@@ -31,14 +33,14 @@ public class UserDialog extends DialogFragment {
     }
 
 
-    private static class onClickListener implements View.OnClickListener {
+    private class onClickListener implements View.OnClickListener {
         @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.selectPage_button:
                     UserSelectDialog dialogFragment = new UserSelectDialog();
-                    dialogFragment.show(dialogFragment.getFragmentManager(), "userselect");
+                    dialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userSelect");
                     break;
                 case R.id.addPage_button:
                     break;
