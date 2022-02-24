@@ -5,6 +5,14 @@
     android:layout_height="match_parent" >
 
     <!-- タイトル -->
+
+    <fragment
+        android:id="@+id/test_fragment"
+        android:name="com.example.fragmenttest2.title.CancelFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"/>
+
     <TextView
         android:id="@+id/TextView_dialog_title"
         android:layout_width="wrap_content"
