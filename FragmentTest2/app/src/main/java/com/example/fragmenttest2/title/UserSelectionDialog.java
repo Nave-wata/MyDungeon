@@ -36,12 +36,12 @@ public class UserSelectionDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_userselection, null);
+        SetImage setImage = new SetImage(Objects.requireNonNull(getActivity()).getAssets());
+        onClickListener clickListener = new onClickListener();
 
-        AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
-        SetImage setImage = new SetImage(assetManager);
-
-        ImageButton imbtn = view.findViewById(R.id.cancel_button);
-        setImage.setImageButtonBitmapFromAsset(imbtn, "title/cancel.png");
+        ImageButton cancelButton = view.findViewById(R.id.cancel_button);
+        setImage.setImageButtonBitmapFromAsset(cancelButton, "title/cancel.png");
+        cancelButton.setOnClickListener(clickListener);
 
         TextView tvTitle = view.findViewById(R.id.TextView_dialog_title);
         tvTitle.setText("Title");
@@ -50,26 +50,17 @@ public class UserSelectionDialog extends DialogFragment {
         tvMessage.setText("Message");
 
         Button btn = view.findViewById(R.id.Button_dialog_positive);
-        btn.setOnClickListener(new onClickListener(btn));
+        btn.setOnClickListener(clickListener);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
-
-        builder.setNegativeButton("Cancel", null);
-
         return builder.create();
     }
 
 
     private class onClickListener implements View.OnClickListener {
-        Button btn;
-
-        private onClickListener(Button btn) {
-            this.btn = btn;
-        }
-
         @Override
         public void onClick(View v) {
-            btn.setText("PUSH!");
+            Log.v("Button", "Pushed!");
         }
     }
 }
