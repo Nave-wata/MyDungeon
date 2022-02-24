@@ -35,6 +35,14 @@ public class UserSelectionDialog extends DialogFragment {
         TextView tvMessage = view.findViewById(R.id.TextView_dialog_message);
         tvMessage.setText("Message");
 
+        Button btn = view.findViewById(R.id.Button_dialog_positive);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn.setText("Push");
+            }
+        });
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
         return builder.create();
     }
