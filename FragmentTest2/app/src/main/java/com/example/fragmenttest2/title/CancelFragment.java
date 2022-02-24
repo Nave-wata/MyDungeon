@@ -25,15 +25,6 @@ import java.util.Objects;
 public class CancelFragment extends Fragment {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
-        fragmentTransaction.replace(R.id.UserSelectionDialog_Container, UserSelectionDialog.newInstance("null"));
-        fragmentTransaction.commit();
-    }
-
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_cancel, container, false);
     }
@@ -49,6 +40,14 @@ public class CancelFragment extends Fragment {
         setImage.setImageButtonBitmapFromAsset(btn, "title/cancel.png");
 
         btn.setOnClickListener(new onClickListener());
+    }
+
+    public static CancelFragment newInstance(String str){
+        CancelFragment fragment = new CancelFragment();
+        Bundle barg = new Bundle();
+        barg.putString("Message", str);
+        fragment.setArguments(barg);
+        return fragment;
     }
 
     class onClickListener implements View.OnClickListener {

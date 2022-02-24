@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.fragmenttest2.BaseFragment;
 import com.example.fragmenttest2.R;
@@ -24,6 +25,15 @@ import java.util.Objects;
 
 
 public class UserSelectionDialog extends DialogFragment {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
+        fragmentTransaction.replace(R.id.UserSelectionDialog_Container, CancelFragment.newInstance("null"));
+        fragmentTransaction.commit();
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -43,14 +53,6 @@ public class UserSelectionDialog extends DialogFragment {
         builder.setNegativeButton("Cancel", null);
 
         return builder.create();
-    }
-
-    public static UserSelectionDialog newInstance(String str){
-        UserSelectionDialog fragment = new UserSelectionDialog();
-        Bundle barg = new Bundle();
-        barg.putString("Message", str);
-        fragment.setArguments(barg);
-        return fragment;
     }
 
 
