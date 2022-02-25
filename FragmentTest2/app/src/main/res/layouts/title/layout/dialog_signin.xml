@@ -14,7 +14,7 @@
         android:text="@string/Name"/>
 
     <EditText
-        android:id="@+id/TitleETUserName"
+        android:id="@+id/TitleSIUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -32,7 +32,7 @@
         android:text="@string/Password"/>
 
     <EditText
-        android:id="@+id/TitleETPassword"
+        android:id="@+id/TitleSIPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

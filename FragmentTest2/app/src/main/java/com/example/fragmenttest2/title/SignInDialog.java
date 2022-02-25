@@ -30,8 +30,8 @@ public class SignInDialog extends DialogFragment {
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signin, null);
 
-        EditText etName = view.findViewById(R.id.TitleETUserName);
-        EditText etPass = view.findViewById(R.id.TitleETPassword);
+        EditText etName = view.findViewById(R.id.TitleSIUserName);
+        EditText etPass = view.findViewById(R.id.TitleSIPassword);
 
         Button btn = view.findViewById(R.id.SignIn_button);
         btn.setOnClickListener(new onClickListener(etName, etPass));
