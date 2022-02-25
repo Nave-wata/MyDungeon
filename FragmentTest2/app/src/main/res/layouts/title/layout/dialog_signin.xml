@@ -21,7 +21,8 @@
         android:gravity="center"
         android:layout_marginHorizontal="50dp"
         android:layout_marginBottom="15dp"
-        android:hint="Enter Name" />
+        android:hint="Enter Name"
+        android:inputType="text"/>
 
     <TextView
         android:layout_width="match_parent"
