@@ -5,6 +5,7 @@
  * @author    Yoshiteru Ishida
  * @copyright Copyright 2021 Yoshiteru Ishida
  */
+#include <string>
 
 #define MESSAGE_BLOCK_SIZE 64
 #define INIT_HASH_LENGTH 8
@@ -44,6 +45,9 @@ public:
     void print_block_one(unsigned char* block);
     void print_block(unsigned char** block);
     void print_hash(unsigned int* H);
+
+    std::string hash_return(unsigned int* H);
+    std::string hex_return(unsigned int i);
 
     void free_block(unsigned char** block);
 

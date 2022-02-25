@@ -168,6 +168,34 @@ void SHA256::print_hash(unsigned int* H) {
     std::cout << std::endl;
 }
 
+std::string SHA256::hash_return(unsigned int* H) {
+    std::string result;
+    for (int intI = 0; intI < INIT_HASH_LENGTH; intI++) {
+        std::string output = hex_return(H[intI]);
+        result += output;
+    }
+    return result;
+}
+
+std::string SHA256::hex_return(unsigned int i) {
+    unsigned int h;
+    std::stringstream output;
+
+    h = (i & 0xff000000) >> 24;
+    output << std::hex << std::setw(2) << std::setfill('0') << (unsigned short int)(h);
+
+    h = (i & 0x00ff0000) >> 16;
+    output << std::hex << std::setw(2) << std::setfill('0') << (unsigned short int)(h);
+
+    h = (i & 0x0000ff00) >> 8;
+    output << std::hex << std::setw(2) << std::setfill('0') << (unsigned short int)(h);
+
+    h = (i & 0x000000ff);
+    output << std::hex << std::setw(2) << std::setfill('0') << (unsigned short int)(h);
+
+    return output.str();
+}
+
 void SHA256::print_hex(unsigned int i) {
     unsigned int h;
 
