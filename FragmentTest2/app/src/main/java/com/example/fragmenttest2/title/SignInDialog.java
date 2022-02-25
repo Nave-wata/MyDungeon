@@ -55,14 +55,50 @@ public class SignInDialog extends DialogFragment {
         public void onClick(View v) {
             final String name = etName.getText().toString();
             final String password = etPass.getText().toString();
+            final String[] nameSplit = name.split("");
+            final String[] passwordSplit = password.split("");
+            boolean flag = true;
 
-            if (name.length() != 0) {
+            if (name.length() == 0) {
                 etName.setError(getString(R.string.errorNotInput));
-            } else if (password.length() != 0) {
+                flag = false;
+            }
+            if (password.length() == 0) {
                 etPass.setError(getString(R.string.errorNotInput));
-            } else if (false) {
+                flag = false;
+            }
+            if (name.trim().isEmpty()) {
+                etName.setError(getString(R.string.errorSpaceOnly));
+                flag = false;
+            }
+            if (password.trim().isEmpty()) {
+                etPass.setError(getString(R.string.errorSpaceOnly));
+            }
+            if (nameSplit[0].trim().isEmpty() || nameSplit[nameSplit.length - 1].trim().isEmpty()) {
+                etName.setError(getString(R.string.errorSpaceHeadLast));
+                flag = false;
+            }
+            if (passwordSplit[0].trim().isEmpty() || passwordSplit[passwordSplit.length - 1].trim().isEmpty()) {
+                etPass.setError(getString(R.string.errorSpaceHeadLast));
+            }
+            if (name.replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) {
+                etName.setError(getString(R.string.errorSpaceOnly));
+                flag = false;
+            }
+            if (password.replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) {
+                etPass.setError(getString(R.string.errorSpaceOnly));
+            }
+            if (nameSplit[0].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty() ||
+                    nameSplit[nameSplit.length - 1].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) {
+                etName.setError(getString(R.string.errorSpaceHeadLast));
+                flag = false;
+            }
+            if (passwordSplit[0].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty() ||
+                    passwordSplit[passwordSplit.length - 1].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) {
+                etPass.setError(getString(R.string.errorSpaceHeadLast));
+            }
 
-            } else {
+            if (flag) {
                 LocalDateTime nowDateTime = LocalDateTime.now();
                 final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                 final String nowTime = nowDateTime.format(dateTimeFormatter);

@@ -15,5 +15,6 @@
     <string name="Name">ユーザー名</string>
     <string name="Password">パスワード</string>
     <string name="errorNotInput">入力必須項目です</string>
-
+    <string name="errorSpaceOnly">空白のみの入力はできません</string>
+    <string name="errorSpaceHeadLast">先頭・末尾に空白は入力できません</string>
 </resources>
