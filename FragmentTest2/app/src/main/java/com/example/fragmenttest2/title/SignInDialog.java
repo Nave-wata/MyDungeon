@@ -53,6 +53,7 @@ public class SignInDialog extends DialogFragment {
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void onClick(View v) {
+            final String regex = "[0123456789abcdefghijklmnopqrstyvwxyzABCDEFGHIJKLMNOPQRSTYVWXYZ]";
             final String name = etName.getText().toString();
             final String password = etPass.getText().toString();
             final String[] nameSplit = name.split("");
@@ -71,45 +72,31 @@ public class SignInDialog extends DialogFragment {
                 flag = false;
                 passwordFlag = flag;
             }
-            if (name.trim().isEmpty() && nameFlag) {
-                etName.setError(getString(R.string.errorSpaceOnly));
+            if (name.length() == name.trim().length() && nameFlag) {
+                etName.setError(getString(R.string.errorNotSpace));
                 flag = false;
                 nameFlag = false;
             }
-            if (password.trim().isEmpty() && passwordFlag) {
-                etPass.setError(getString(R.string.errorSpaceOnly));
+            if (password.length() == password.trim().length() && passwordFlag) {
+                etPass.setError(getString(R.string.errorNotSpace));
                 flag = false;
                 passwordFlag = false;
             }
-            if ((nameSplit[0].trim().isEmpty() || nameSplit[nameSplit.length - 1].trim().isEmpty()) && nameFlag) {
-                etName.setError(getString(R.string.errorSpaceHeadLast));
-                flag = false;
-                nameFlag = false;
+            if (nameFlag) {
+                for (String s : nameSplit) {
+                    if (!s.matches(regex)) {
+                        etName.setError(getString(R.string.errorNotInText));
+                        break;
+                    }
+                }
             }
-            if ((passwordSplit[0].trim().isEmpty() || passwordSplit[passwordSplit.length - 1].trim().isEmpty()) && passwordFlag) {
-                etPass.setError(getString(R.string.errorSpaceHeadLast));
-                flag = false;
-                passwordFlag = false;
-            }
-            if (name.replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty() && nameFlag) {
-                etName.setError(getString(R.string.errorSpaceOnly));
-                flag = false;
-                nameFlag = false;
-            }
-            if (password.replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty() && passwordFlag) {
-                etPass.setError(getString(R.string.errorSpaceOnly));
-                flag = false;
-                passwordFlag = false;
-            }
-            if ((nameSplit[0].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty() ||
-                    nameSplit[nameSplit.length - 1].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) && nameFlag) {
-                etName.setError(getString(R.string.errorSpaceHeadLast));
-                flag = false;
-            }
-            if ((passwordSplit[0].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty() ||
-                    passwordSplit[passwordSplit.length - 1].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) && passwordFlag) {
-                etPass.setError(getString(R.string.errorSpaceHeadLast));
-                flag = false;
+            if (passwordFlag) {
+                for (String s : passwordSplit) {
+                    if (!s.matches(regex)) {
+                        etPass.setError(getString(R.string.errorNotInText));
+                        break;
+                    }
+                }
             }
 
             if (flag) {
