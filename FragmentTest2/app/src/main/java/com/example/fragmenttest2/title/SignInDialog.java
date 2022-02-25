@@ -4,11 +4,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -17,7 +15,7 @@ import androidx.fragment.app.DialogFragment;
 import com.example.fragmenttest2.R;
 import com.example.fragmenttest2.asynchronous.AppDatabase;
 import com.example.fragmenttest2.asynchronous.AppDatabaseSingleton;
-import com.example.fragmenttest2.asynchronous.usersinfo.DateSave;
+import com.example.fragmenttest2.asynchronous.usersinfo.DataSave;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -101,7 +99,7 @@ public class SignInDialog extends DialogFragment {
                 //final String nowTime = nowDateTime.format(dateTimeFormatter);
                 final String salt = getRandomString(15, 25);
                 final String hash = HASH(etPass.getText().toString(), salt);
-                new DateSave(db, name, salt, hash).execute();
+                new DataSave(db, name, salt, hash).execute();
 
                 dismiss();
             }
