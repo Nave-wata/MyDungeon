@@ -7,6 +7,7 @@
  */
 
 #include "SHA256.h"
+#include "SHA512.cpp"
 
 #include <iomanip>
 #include <iostream>

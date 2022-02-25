@@ -6,6 +6,9 @@
  * @copyright Copyright 2021 Yoshiteru Ishida
  */
 #pragma once
+#ifndef _SHA256_H_
+#define _SHA256_H_
+
 #include <string>
 
 #define MESSAGE_BLOCK_SIZE 64
@@ -57,3 +60,5 @@ public:
 
 private:
 };
+
+#endif // _SHA256_H_
