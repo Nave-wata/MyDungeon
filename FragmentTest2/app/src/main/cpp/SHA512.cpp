@@ -1,7 +1,7 @@
 
 // C++ program for the above approach
 #include <bits/stdc++.h>
-#include <SHA256.h>
+#include "SHA256.h"
 
 using namespace std;
 typedef unsigned long long int int64;
@@ -310,19 +310,18 @@ string SHA512(string myString) {
     return output.str();
 }
 
-// Driver Code
-int main() {
-    // Input
-    string S = "GeeksForGeeks";
-    int start = clock();
+string SHA256_SHA512(const string name, const string password, const int salt) {
+    unsigned int H[INIT_HASH_LENGTH];
+    SHA256 sha256;
+    usigned char** result = sha256.padding((char*)password);
 
-    for (int i = 0; i < 5000; i++) {
-        S = SHA512(S);
+    for (int i = 0; i < 10000; i++) {
+        sha256.compute(result, H);
+        result = sha256.padding((char*)H);
     }
 
-    int end = clock();
-    // Function Call
-    cout << "result: " << (double)(end - start) / CLOCKS_PER_SEC << endl;
+    string output = SHA512(result);
+    sha256.free_block(result);
 
-    return 0;
+    return output;
 }

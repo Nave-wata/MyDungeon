@@ -19,6 +19,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class SignInDialog extends DialogFragment {
+    static {
+        System.loadLibrary("fragmenttest2");
+    }
+    static native String HASH(String name, String pass, int salt);
+
     @Override
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signin, null);
@@ -46,15 +51,10 @@ public class SignInDialog extends DialogFragment {
         @Override
         public void onClick(View v) {
             MessageDigest sha256 = null;
-            try {
-                sha256 = MessageDigest.getInstance("SHA-512");
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            }
-            byte[] sha256_result = sha256.digest(etPass.getText().toString().getBytes());
 
             Log.v("Name", etName.getText().toString());
-            Log.v("Password", String.format("%04x", new BigInteger(1, sha256_result)));
+            Log.v("Password", etPass.getText().toString());
+            Log.v("Hash", HASH(etName.getText().toString(), etPass.getText().toString(), 1));
             dismiss();
         }
     }
