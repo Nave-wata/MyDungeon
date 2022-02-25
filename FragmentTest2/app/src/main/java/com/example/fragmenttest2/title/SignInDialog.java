@@ -71,7 +71,7 @@ public class SignInDialog extends DialogFragment {
 
         @NonNull
         String getRandomString(int min, int max) {
-            String str = "0123456789abcdefghijklmnopqrstyvwxyzABCDEFGHIJKLMNOPQRSTYVWXYZ-^\\@[;:],./!\"#$%&'()=~|`{+*}<>?_";
+            String str = "0123456789abcdefghijklmnopqrstyvwxyzABCDEFGHIJKLMNOPQRSTYVWXYZ";
             StringBuilder builder = new StringBuilder();
             int randInt = (int) (Math.random() * (max - min)) + min;
 
