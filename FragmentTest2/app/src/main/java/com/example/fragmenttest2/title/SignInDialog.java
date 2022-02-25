@@ -70,22 +70,13 @@ public class SignInDialog extends DialogFragment {
             if (password.length() == 0 && passwordFlag) {
                 etPass.setError(getString(R.string.errorNotInput));
                 flag = false;
-                passwordFlag = flag;
-            }
-            if (name.length() == name.trim().length() && nameFlag) {
-                etName.setError(getString(R.string.errorNotSpace));
-                flag = false;
-                nameFlag = false;
-            }
-            if (password.length() == password.trim().length() && passwordFlag) {
-                etPass.setError(getString(R.string.errorNotSpace));
-                flag = false;
                 passwordFlag = false;
             }
             if (nameFlag) {
                 for (String s : nameSplit) {
                     if (!s.matches(regex)) {
                         etName.setError(getString(R.string.errorNotInText));
+                        flag = false;
                         break;
                     }
                 }
@@ -94,6 +85,7 @@ public class SignInDialog extends DialogFragment {
                 for (String s : passwordSplit) {
                     if (!s.matches(regex)) {
                         etPass.setError(getString(R.string.errorNotInText));
+                        flag = false;
                         break;
                     }
                 }
