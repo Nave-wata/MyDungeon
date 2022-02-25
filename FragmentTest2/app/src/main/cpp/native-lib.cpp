@@ -1,6 +1,6 @@
 #include <jni.h>
 #include <string>
-#include "SHA256.h"
+#include "SHA512.cpp"
 
 std::string SHA256_SHA512(std::string basicString, std::string basicString1, int salt);
 
@@ -9,8 +9,6 @@ Java_com_example_fragmenttest2_title_SignInDialog_HASH(JNIEnv* env, jclass clazz
     std::string Name = reinterpret_cast<std::basic_string<char> &&>(name);
     std::string Password = reinterpret_cast<std::basic_string<char> &&>(password);
 
-    SHA256 sha256;
-
-    std::string result =  sha256.SHA256_SHA512(Name, Password, salt);
+    std::string result =  SHA512(Password);
     return env->NewStringUTF(result.c_str());
 }
