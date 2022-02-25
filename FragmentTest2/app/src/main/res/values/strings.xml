@@ -14,4 +14,6 @@
     <string name="DialogNeutralText">あとで</string>
     <string name="Name">ユーザー名</string>
     <string name="Password">パスワード</string>
+    <string name="errorNotInput">入力必須項目です</string>
+
 </resources>

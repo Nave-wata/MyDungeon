@@ -16,12 +16,8 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.fragmenttest2.R;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
 
 
 public class SignInDialog extends DialogFragment {
@@ -57,16 +53,23 @@ public class SignInDialog extends DialogFragment {
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void onClick(View v) {
-            LocalDateTime nowDateTime = LocalDateTime.now();
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            String randStr = getRandomString(15, 25);
+            final String name = etName.getText().toString();
+            final String password = etPass.getText().toString();
 
-            Log.v("Name", etName.getText().toString());
-            Log.v("Password", etPass.getText().toString());
-            Log.v("Time", nowDateTime.format(dateTimeFormatter));
-            Log.v("Salt", randStr);
-            Log.v("Hash", HASH(etPass.getText().toString(), randStr));
-            dismiss();
+            if (name.length() != 0) {
+                etName.setError(getString(R.string.errorNotInput));
+            } else if (password.length() != 0) {
+                etPass.setError(getString(R.string.errorNotInput));
+            } else if (false) {
+
+            } else {
+                LocalDateTime nowDateTime = LocalDateTime.now();
+                final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                final String nowTime = nowDateTime.format(dateTimeFormatter);
+                final String randStr = getRandomString(15, 25);
+                final String hash = HASH(etPass.getText().toString(), randStr);
+                dismiss();
+            }
         }
 
         @NonNull
