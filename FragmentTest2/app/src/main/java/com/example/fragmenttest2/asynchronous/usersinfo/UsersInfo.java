@@ -18,16 +18,16 @@ public class UsersInfo {
     @ColumnInfo(name = "Name")
     public String name;
 
-    @ColumnInfo(name = "Time")
-    public String time;
+    @ColumnInfo(name = "Salt")
+    public String salt;
 
-    public UsersInfo(String name) {
-        Date dateObj = new Date();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm ss");
-        String time = format.format(dateObj);
+    @ColumnInfo(name = "hash")
+    public String hash;
 
+    public UsersInfo(String name, String salt, String hash) {
         this.name = name;
-        this.time = time;
+        this.salt = salt;
+        this.hash = hash;
     }
 
     public String getName() {

@@ -29,14 +29,17 @@ public class DateSave implements Runnable {
     }
 
     public void execute() {
-        onPreExecute();
+        //onPreExecute();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.submit(new DateSave(db, name, salt, hash));
     }
 
-    void onPreExecute() {}
+    //void onPreExecute() {}
 
-    void doInBackground() {}
+    void doInBackground() {
+        UsersInfoDao usersInfoDao = db.usersInfoDao();
+        usersInfoDao.insert(new UsersInfo(name, salt, hash));
+    }
 
     void onPostExecute() {}
 }
