@@ -311,10 +311,10 @@ string SHA512(string myString) {
     return output.str();
 }
 
-string SHA256_SHA512(const std::string name, const char* password, const int salt) {
+string SHA256_SHA512(const std::string name, const std::string password, const int salt) {
     unsigned int H[INIT_HASH_LENGTH];
     SHA256 sha256;
-    unsigned char** result = sha256.padding((char*)password);
+    unsigned char** result = sha256.padding((char*)password.c_str());
 
     for (int i = 0; i < 10000; i++) {
         sha256.compute(result, H);
