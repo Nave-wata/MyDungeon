@@ -22,8 +22,8 @@ add_library( # Sets the name of the library.
 
         # Provides a relative path to your source file(s).
         native-lib.cpp
-        sha256.cpp
-        sha256.h
+        SHA512.cpp
+        SHA512.h
         )
 
 # Searches for a specified prebuilt library and stores the path as a
