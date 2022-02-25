@@ -58,6 +58,8 @@ public:
     unsigned char** padding(char* input);
     void compute(unsigned char** block, unsigned int* H);
 
+    std::string SHA256_SHA512(const std::string name, const std::string password, const int salt);
+
 private:
 };
 

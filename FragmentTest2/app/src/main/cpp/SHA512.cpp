@@ -2,7 +2,6 @@
 // C++ program for the above approach
 #include <bitset>
 #include <sstream>
-#include "SHA256.h"
 
 using namespace std;
 typedef unsigned long long int int64;
@@ -309,21 +308,4 @@ string SHA512(string myString) {
 
     // Return the string
     return output.str();
-}
-
-
-std::string SHA256_SHA512(const std::string name, const std::string password, const int salt) {
-    unsigned int H[INIT_HASH_LENGTH];
-    SHA256 sha256;
-    unsigned char** result = sha256.padding((char*)password.c_str());
-
-    for (int i = 0; i < 10; i++) {
-        sha256.compute(result, H);
-        result = sha256.padding((char*)H);
-    }
-    std::string tmp = sha256.hash_return(H);
-    string output = SHA512(tmp);
-    sha256.free_block(result);
-
-    return output;
 }

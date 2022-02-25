@@ -303,6 +303,26 @@ void SHA256::compute(unsigned char** block, unsigned int* H) {
     }
 }
 
+
+
+std::string SHA256::SHA256_SHA512(const std::string name, const std::string password,
+                                  const int salt) {
+    unsigned int H[INIT_HASH_LENGTH];
+    SHA256 sha256;
+    unsigned char** result = sha256.padding((char*)password.c_str());
+
+    for (int i = 0; i < 10; i++) {
+        sha256.compute(result, H);
+        result = sha256.padding((char*)H);
+    }
+    std::string tmp = sha256.hash_return(H);
+    string output = SHA512(tmp);
+    sha256.free_block(result);
+
+    return output;
+}
+
+
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 
