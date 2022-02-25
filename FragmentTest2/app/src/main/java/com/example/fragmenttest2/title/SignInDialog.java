@@ -28,7 +28,7 @@ public class SignInDialog extends DialogFragment {
     static {
         System.loadLibrary("fragmenttest2");
     }
-    static native String HASH(String name, String pass, int salt);
+    static native String HASH(String password, String salt);
 
     @Override
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class SignInDialog extends DialogFragment {
             Log.v("Password", etPass.getText().toString());
             Log.v("Time", nowDateTime.format(dateTimeFormatter));
             Log.v("Salt", randStr);
-            Log.v("Hash", HASH(etName.getText().toString(), etPass.getText().toString(), 1));
+            Log.v("Hash", HASH(etPass.getText().toString(), randStr));
             dismiss();
         }
 
