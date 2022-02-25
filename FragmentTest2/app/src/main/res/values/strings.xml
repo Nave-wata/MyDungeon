@@ -16,5 +16,5 @@
     <string name="Password">パスワード</string>
     <string name="errorNotInput">入力必須項目です</string>
     <string name="errorNotSpace">空白が含まれています</string>
-    <string name="errorNotInText">記号が含まれています</string>
+    <string name="errorNotInText">英数字以外が含まれています</string>
 </resources>
