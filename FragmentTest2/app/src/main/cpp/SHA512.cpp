@@ -2,7 +2,6 @@
 // C++ program for the above approach
 #include <bitset>
 #include <sstream>
-#include "SHA256.h"
 #include "SHA256.cpp"
 
 using namespace std;

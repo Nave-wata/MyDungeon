@@ -5,6 +5,7 @@
  * @author    Yoshiteru Ishida
  * @copyright Copyright 2021 Yoshiteru Ishida
  */
+#pragma once
 #include <string>
 
 #define MESSAGE_BLOCK_SIZE 64
