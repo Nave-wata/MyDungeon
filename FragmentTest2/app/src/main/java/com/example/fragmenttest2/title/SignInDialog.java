@@ -99,8 +99,6 @@ public class SignInDialog extends DialogFragment {
                 //final String nowTime = nowDateTime.format(dateTimeFormatter);
                 final String salt = getRandomString(15, 25);
                 final String hash = HASH(etPass.getText().toString(), salt);
-                new DataSave(db, name, salt, hash).execute();
-
                 dismiss();
             }
         }
