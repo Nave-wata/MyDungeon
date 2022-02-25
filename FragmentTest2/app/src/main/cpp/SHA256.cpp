@@ -277,7 +277,7 @@ void SHA256::compute(unsigned char** block, unsigned int* H) {
 
         //	3. For t=0 to 63:
         for (int t = 0; t < MESSAGE_BLOCK_SIZE; t++) {
-            T1 = h + SIGMA1(e) + Ch(e, f, g) + K[t] + W[t];
+            T1 = h + SIGMA1(e) + Ch(e, f, g) + K1[t] + W[t];
             T2 = SIGMA0(a) + Maj(a, b, c);
 
             h = g;

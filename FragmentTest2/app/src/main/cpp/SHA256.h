@@ -19,7 +19,7 @@
 #define sigma0(x) ((ROTR(x, 7) ^ ROTR(x, 18) ^ SHR(x, 3)))
 #define sigma1(x) ((ROTR(x, 17) ^ ROTR(x, 19) ^ SHR(x, 10)))
 
-const unsigned int K[64] = {
+const unsigned int K1[64] = {
         0x428a2f98UL, 0x71374491UL, 0xb5c0fbcfUL, 0xe9b5dba5UL, 0x3956c25bUL,
         0x59f111f1UL, 0x923f82a4UL, 0xab1c5ed5UL, 0xd807aa98UL, 0x12835b01UL,
         0x243185beUL, 0x550c7dc3UL, 0x72be5d74UL, 0x80deb1feUL, 0x9bdc06a7UL,

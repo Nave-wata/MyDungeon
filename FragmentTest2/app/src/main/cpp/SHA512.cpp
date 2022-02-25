@@ -3,6 +3,7 @@
 #include <bitset>
 #include <sstream>
 #include "SHA256.h"
+#include "SHA256.cpp"
 
 using namespace std;
 typedef unsigned long long int int64;
@@ -155,9 +156,9 @@ int64 sigmaA(int64 a) {
 
 // Function to generate the hash code
 void Func(int64 a, int64 b, int64 c, int64& d, int64 e, int64 f, int64 g,
-          int64& h, int K) {
+          int64& h, int K2) {
     // Find the Hash Code
-    int64 T1 = h + Ch2(e, f, g) + sigmaE(e) + Message[K] + Constants[K];
+    int64 T1 = h + Ch2(e, f, g) + sigmaE(e) + Message[K2] + Constants[K2];
     int64 T2 = sigmaA(a) + maj(a, b, c);
 
     d = d + T1;
@@ -316,7 +317,7 @@ string SHA256_SHA512(const std::string name, const std::string password, const i
     SHA256 sha256;
     unsigned char** result = sha256.padding((char*)password.c_str());
 
-    for (int i = 0; i < 10000; i++) {
+    for (int i = 0; i < 10; i++) {
         sha256.compute(result, H);
         result = sha256.padding((char*)H);
     }
