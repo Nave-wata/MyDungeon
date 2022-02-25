@@ -138,9 +138,7 @@ int64 maj(int64 a, int64 b, int64 c) { return (a & b) ^ (b & c) ^ (c & a); }
 
 // Function to find the ch value of a,
 // b, and c
-int64 Ch(int64 e, int64 f, int64 g) {
-    return (e & f) ^ (~e & g);
-}
+int64 Ch2(int64 e, int64 f, int64 g) { return (e & f) ^ (~e & g); }
 
 // Function to find the Bitwise XOR with
 // the right rotate over 14, 18, and 41
@@ -160,7 +158,7 @@ int64 sigmaA(int64 a) {
 void Func(int64 a, int64 b, int64 c, int64& d, int64 e, int64 f, int64 g,
           int64& h, int K) {
     // Find the Hash Code
-    int64 T1 = h + Ch(e, f, g) + sigmaE(e) + Message[K] + Constants[K];
+    int64 T1 = h + Ch2(e, f, g) + sigmaE(e) + Message[K] + Constants[K];
     int64 T2 = sigmaA(a) + maj(a, b, c);
 
     d = d + T1;
