@@ -28,8 +28,8 @@ public class SignUpDialog extends DialogFragment {
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signup, null);
 
-        EditText etName = view.findViewById(R.id.TitleSIUserName);
-        EditText etPass = view.findViewById(R.id.TitleSIPassword);
+        EditText etName = view.findViewById(R.id.TitleSUUserName);
+        EditText etPass = view.findViewById(R.id.TitleSUPassword);
 
         Button btn = view.findViewById(R.id.SignUp_button);
         btn.setOnClickListener(new SignUpDialog.onClickListener(etName, etPass));
