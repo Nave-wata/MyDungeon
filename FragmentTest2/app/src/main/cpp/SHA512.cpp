@@ -321,8 +321,8 @@ string SHA256_SHA512(_jstring *const name, _jstring *const password, const int s
         sha256.compute(result, H);
         result = sha256.padding((char*)H);
     }
-
-    string output = SHA512((sha256.hash_return(H));
+    std::string tmp = sha256.hash_return(H);
+    string output = SHA512(tmp);
     sha256.free_block(result);
 
     return output;
