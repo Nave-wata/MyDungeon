@@ -16,7 +16,6 @@ Java_com_example_fragmenttest2_title_SignInDialog_HASH(JNIEnv* env, jclass clazz
     sha256.compute(result, H);
     result = sha256.padding((char*)H);
     std::string output = sha256.hash_return(H);
-    sha256.print_hash(H);
 
     sha256.free_block(result);
 
