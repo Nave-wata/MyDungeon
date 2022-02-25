@@ -7,11 +7,11 @@
  */
 
 #include "SHA256.h"
-#include "SHA512.cpp"
 
 #include <iomanip>
 #include <iostream>
 #include <string.h>
+#include <bitset>
 #include <sstream>
 
 #define MESSAGE_BLOCK_SIZE 64
@@ -278,7 +278,7 @@ void SHA256::compute(unsigned char** block, unsigned int* H) {
 
         //	3. For t=0 to 63:
         for (int t = 0; t < MESSAGE_BLOCK_SIZE; t++) {
-            T1 = h + SIGMA1(e) + Ch(e, f, g) + K1[t] + W[t];
+            T1 = h + SIGMA1(e) + Ch(e, f, g) + K[t] + W[t];
             T2 = SIGMA0(a) + Maj(a, b, c);
 
             h = g;
@@ -302,24 +302,6 @@ void SHA256::compute(unsigned char** block, unsigned int* H) {
         H[7] = (h + H[7]) & 0xffffffff;
     }
 }
-
-
-string SHA256_SHA512(const std::string name, const std::string password, const int salt) {
-    unsigned int H[INIT_HASH_LENGTH];
-    SHA256 sha256;
-    unsigned char** result = sha256.padding((char*)password.c_str());
-
-    for (int i = 0; i < 10; i++) {
-        sha256.compute(result, H);
-        result = sha256.padding((char*)H);
-    }
-    std::string tmp = sha256.hash_return(H);
-    string output = SHA512(tmp);
-    sha256.free_block(result);
-
-    return output;
-}
-
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
