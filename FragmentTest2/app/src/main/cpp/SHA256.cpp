@@ -11,6 +11,7 @@
 #include <iomanip>
 #include <iostream>
 #include <string.h>
+#include <sstream>
 
 #define MESSAGE_BLOCK_SIZE 64
 

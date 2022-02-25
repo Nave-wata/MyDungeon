@@ -1,6 +1,8 @@
 
 // C++ program for the above approach
-#include <bits/stdc++.h>
+#include <jni.h>
+#include <bitset>
+#include <sstream>
 #include "SHA256.h"
 
 using namespace std;
@@ -136,7 +138,9 @@ int64 maj(int64 a, int64 b, int64 c) { return (a & b) ^ (b & c) ^ (c & a); }
 
 // Function to find the ch value of a,
 // b, and c
-int64 Ch(int64 e, int64 f, int64 g) { return (e & f) ^ (~e & g); }
+int64 Ch(int64 e, int64 f, int64 g) {
+    return (e & f) ^ (~e & g);
+}
 
 // Function to find the Bitwise XOR with
 // the right rotate over 14, 18, and 41
@@ -310,17 +314,17 @@ string SHA512(string myString) {
     return output.str();
 }
 
-string SHA256_SHA512(const string name, const string password, const int salt) {
+string SHA256_SHA512(_jstring *const name, _jstring *const password, const int salt) {
     unsigned int H[INIT_HASH_LENGTH];
     SHA256 sha256;
-    usigned char** result = sha256.padding((char*)password);
+    unsigned char** result = sha256.padding((char*)password);
 
     for (int i = 0; i < 10000; i++) {
         sha256.compute(result, H);
         result = sha256.padding((char*)H);
     }
 
-    string output = SHA512(result);
+    string output = SHA512((sha256.hash_return(H));
     sha256.free_block(result);
 
     return output;
