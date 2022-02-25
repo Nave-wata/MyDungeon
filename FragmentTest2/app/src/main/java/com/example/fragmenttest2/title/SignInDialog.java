@@ -58,44 +58,58 @@ public class SignInDialog extends DialogFragment {
             final String[] nameSplit = name.split("");
             final String[] passwordSplit = password.split("");
             boolean flag = true;
+            boolean nameFlag = true;
+            boolean passwordFlag = true;
 
-            if (name.length() == 0) {
+            if (name.length() == 0 && nameFlag) {
                 etName.setError(getString(R.string.errorNotInput));
                 flag = false;
+                nameFlag = false;
             }
-            if (password.length() == 0) {
+            if (password.length() == 0 && passwordFlag) {
                 etPass.setError(getString(R.string.errorNotInput));
                 flag = false;
+                passwordFlag = flag;
             }
-            if (name.trim().isEmpty()) {
+            if (name.trim().isEmpty() && nameFlag) {
                 etName.setError(getString(R.string.errorSpaceOnly));
                 flag = false;
+                nameFlag = false;
             }
-            if (password.trim().isEmpty()) {
+            if (password.trim().isEmpty() && passwordFlag) {
                 etPass.setError(getString(R.string.errorSpaceOnly));
+                flag = false;
+                passwordFlag = false;
             }
-            if (nameSplit[0].trim().isEmpty() || nameSplit[nameSplit.length - 1].trim().isEmpty()) {
+            if ((nameSplit[0].trim().isEmpty() || nameSplit[nameSplit.length - 1].trim().isEmpty()) && nameFlag) {
+                etName.setError(getString(R.string.errorSpaceHeadLast));
+                flag = false;
+                nameFlag = false;
+            }
+            if ((passwordSplit[0].trim().isEmpty() || passwordSplit[passwordSplit.length - 1].trim().isEmpty()) && passwordFlag) {
+                etPass.setError(getString(R.string.errorSpaceHeadLast));
+                flag = false;
+                passwordFlag = false;
+            }
+            if (name.replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty() && nameFlag) {
+                etName.setError(getString(R.string.errorSpaceOnly));
+                flag = false;
+                nameFlag = false;
+            }
+            if (password.replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty() && passwordFlag) {
+                etPass.setError(getString(R.string.errorSpaceOnly));
+                flag = false;
+                passwordFlag = false;
+            }
+            if ((nameSplit[0].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty() ||
+                    nameSplit[nameSplit.length - 1].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) && nameFlag) {
                 etName.setError(getString(R.string.errorSpaceHeadLast));
                 flag = false;
             }
-            if (passwordSplit[0].trim().isEmpty() || passwordSplit[passwordSplit.length - 1].trim().isEmpty()) {
+            if ((passwordSplit[0].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty() ||
+                    passwordSplit[passwordSplit.length - 1].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) && passwordFlag) {
                 etPass.setError(getString(R.string.errorSpaceHeadLast));
-            }
-            if (name.replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) {
-                etName.setError(getString(R.string.errorSpaceOnly));
                 flag = false;
-            }
-            if (password.replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) {
-                etPass.setError(getString(R.string.errorSpaceOnly));
-            }
-            if (nameSplit[0].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty() ||
-                    nameSplit[nameSplit.length - 1].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) {
-                etName.setError(getString(R.string.errorSpaceHeadLast));
-                flag = false;
-            }
-            if (passwordSplit[0].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty() ||
-                    passwordSplit[passwordSplit.length - 1].replaceFirst("^[\\h]+", "").replaceFirst("[\\h]+$", "").isEmpty()) {
-                etPass.setError(getString(R.string.errorSpaceHeadLast));
             }
 
             if (flag) {
