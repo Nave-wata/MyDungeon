@@ -1,5 +1,7 @@
 package com.example.fragmenttest2.title;
 
+import static com.example.fragmenttest2.title.SignInDialog.getHash;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Build;
@@ -92,11 +94,9 @@ public class SignUpDialog extends DialogFragment {
             }
 
             if (flag) {
-                LocalDateTime nowDateTime = LocalDateTime.now();
                 final AppDatabase db = AppDatabaseSingleton.getInstance(getActivity().getApplicationContext());
                 final String salt = getRandomString(15, 25);
-                //final String hash = new SignInDialog().getHash(password, salt);
-                String hash = "A";
+                final String hash = getHash(password, salt);
                 new DataSave(
                         db,
                         name,
