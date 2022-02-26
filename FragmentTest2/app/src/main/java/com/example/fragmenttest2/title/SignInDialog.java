@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.example.fragmenttest2.R;
 import com.example.fragmenttest2.asynchronous.AppDatabase;
 import com.example.fragmenttest2.asynchronous.AppDatabaseSingleton;
 import com.example.fragmenttest2.asynchronous.usersinfo.DataSave;
+import com.example.fragmenttest2.asynchronous.usersinfo.GetLine;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -88,11 +90,14 @@ public class SignInDialog extends DialogFragment {
             }
 
             if (flag) {
-                LocalDateTime nowDateTime = LocalDateTime.now();
                 final AppDatabase db = AppDatabaseSingleton.getInstance(getActivity().getApplicationContext());
-                final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-                //final String nowTime = nowDateTime.format(dateTimeFormatter);
-                final String salt = getRandomString(15, 25);
+                new GetLine(
+                        db,
+                        name,
+                        password,
+                        b->Log.v("Response", "OK"),
+                        e->Log.v("Response", "NO")
+                ).execute();
                 dismiss();
             }
         }

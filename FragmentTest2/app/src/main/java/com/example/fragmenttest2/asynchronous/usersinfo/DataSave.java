@@ -16,11 +16,11 @@ public class DataSave implements Runnable {
     private final Consumer<Boolean> callback;
     private final Consumer<Exception> errorCallback;
     private Exception exception;
+    private boolean response;
     private AppDatabase db;
     private String name;
     private String salt;
     private String hash;
-    private boolean response;
 
     public DataSave(AppDatabase db,
                     String name,
@@ -40,7 +40,7 @@ public class DataSave implements Runnable {
     @Override
     public void run() {
         response = doInBackground();
-        handler.post(() -> onPostExecute(response));
+        handler.post(() -> onPostExecute());
     }
 
     public void execute() {
@@ -53,6 +53,7 @@ public class DataSave implements Runnable {
 
     boolean doInBackground() {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
+
         try {
             usersInfoDao.insert(new UsersInfo(name, salt, hash));
             return true;
@@ -65,7 +66,7 @@ public class DataSave implements Runnable {
     }
 
     @SuppressLint("NewApi")
-    void onPostExecute(boolean response) {
+    void onPostExecute() {
         if(this.exception == null) {
             callback.accept(response);
         } else {
