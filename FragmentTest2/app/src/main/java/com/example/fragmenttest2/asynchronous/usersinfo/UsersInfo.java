@@ -30,7 +30,9 @@ public class UsersInfo {
         this.hash = hash;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
+
+    public String getSalt() { return salt; }
+
+    public String getHash() { return hash; }
 }
