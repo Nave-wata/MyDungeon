@@ -20,6 +20,7 @@ public class DataSave implements Runnable {
     private String name;
     private String salt;
     private String hash;
+    private boolean response;
 
     public DataSave(AppDatabase db,
                     String name,
@@ -38,8 +39,8 @@ public class DataSave implements Runnable {
 
     @Override
     public void run() {
-        boolean result = doInBackground();
-        handler.post(() -> onPostExecute(result));
+        response = doInBackground();
+        handler.post(() -> onPostExecute(response));
     }
 
     public void execute() {
@@ -52,13 +53,23 @@ public class DataSave implements Runnable {
 
     boolean doInBackground() {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
-        usersInfoDao.insert(new UsersInfo(name, salt, hash));
-        usersInfoDao.deleteAll(); // 今は消すやつ実装してないから
-        return true;
+        try {
+            usersInfoDao.insert(new UsersInfo(name, salt, hash));
+            return true;
+        } catch (Exception e) {
+            this.exception = e;
+            return false;
+        } finally {
+            usersInfoDao.deleteAll(); // 今は消すやつ実装してないから
+        }
     }
 
     @SuppressLint("NewApi")
-    void onPostExecute(boolean result) {
-
+    void onPostExecute(boolean response) {
+        if(this.exception == null) {
+            callback.accept(response);
+        } else {
+            errorCallback.accept(this.exception);
+        }
     }
 }
