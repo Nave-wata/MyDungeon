@@ -1,10 +1,4 @@
 #include <jni.h>
-#include <string>
 
-extern "C" JNIEXPORT jstring JNICALL
-Java_com_example_fragmenttest2_MainActivity_stringFromJNI(
-        JNIEnv* env,
-        jobject /* this */) {
-    std::string hello = "Hello from C++";
-    return env->NewStringUTF(hello.c_str());
-}
+extern "C" JNIEXPORT jstring
+Java_com_example_fragmenttest2_title_SignUpDialog_HASH(JNIEnv* env, jclass clazz, jstring password1, jstring salt1) {}

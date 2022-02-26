@@ -1,9 +1,8 @@
-package com.example.fragmenttest2.title.fragment;
+package com.example.fragmenttest2.title;
 
+import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import androidx.fragment.app.Fragment;
 import com.example.fragmenttest2.R;
 import com.example.fragmenttest2.SetImage;
 import com.example.fragmenttest2.asynchronous.AsyncRunnable;
-import com.example.fragmenttest2.title.activity.TitleActivity;
 
 import java.util.Objects;
 
@@ -25,11 +23,17 @@ public class TitleFragment extends Fragment {
     public String[] URLs = new String[] {
             "https://zipcloud.ibsnet.co.jp/api/search?zipcode=0791143",
             "https://zipcloud.ibsnet.co.jp/api/search?zipcode=1001701",
-            "https://zipcloud.ibsnet.co.jp/api/search?zipcode=9041103"};
+            "https://zipcloud.ibsnet.co.jp/api/search?zipcode=9041103"
+    };
     public String[] str = new String[URLs.length];
     public ImageButton imageButton;
     public AssetManager assetManager;
     public SetImage setImage;
+
+    @Override
+    public void onCreate(Bundle saveInstanceState) {
+        super.onCreate(saveInstanceState);
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,10 +48,14 @@ public class TitleFragment extends Fragment {
         setImage = new SetImage(assetManager);
 
         ImageView imageView = view.findViewById(R.id.image_view1);
-        imageButton = view.findViewById(R.id.image_button1);
+        ImageButton userSelectionButton = view.findViewById(R.id.userSelection_Button);
+        imageButton = view.findViewById(R.id.Start_Button);
 
         setImage.setImageViewBitmapFromAsset(imageView, "title/title.png");
+        setImage.setImageButtonBitmapFromAsset(userSelectionButton, "title/ic_user.png");
         setImage.setImageButtonBitmapFromAsset(imageButton, "title/non_start.png");
+
+        userSelectionButton.setOnClickListener(new onClickListener());
 
         Connection();
     }
@@ -86,14 +94,22 @@ public class TitleFragment extends Fragment {
 
 
     public class onClickListener implements ImageButton.OnClickListener {
+        @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(@NonNull View view) {
             int id = view.getId();
             TitleActivity activity = (TitleActivity) getActivity();
 
-            if (id == R.id.image_button1) {
-                assert activity != null;
-                activity.ChangeActivity(str);
+            switch (id){
+                case R.id.Start_Button:
+                    Objects.requireNonNull(activity).ChangeActivity(str);
+                    break;
+                case R.id.userSelection_Button:
+                    UserDialog dialogFragment = new UserDialog();
+                    dialogFragment.show(Objects.requireNonNull(getFragmentManager()), "user");
+                    break;
+                default:
+                    break;
             }
         }
     }

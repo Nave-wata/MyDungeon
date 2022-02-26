@@ -4,23 +4,19 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.fragmenttest2.asynchronous.AsyncRunnable;
-import com.example.fragmenttest2.asynchronous.CallBacks;
 import com.example.fragmenttest2.dungeon.DungeonFragment;
 import com.example.fragmenttest2.home.HomeFragment;
 import com.example.fragmenttest2.monster.MonsterFragment;
-import com.example.fragmenttest2.title.activity.TitleActivity;
+import com.example.fragmenttest2.title.TitleActivity;
 
 import java.util.Objects;
 
@@ -35,12 +31,11 @@ public class BaseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = getActivity().getIntent();
+        Intent intent = Objects.requireNonNull(getActivity()).getIntent();
         str = intent.getStringArrayExtra(TitleActivity.EXTRA_DATA);
 
-        assert getFragmentManager() != null;
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.container, HomeFragment.newInstance(str[0]));
+        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
+        fragmentTransaction.replace(R.id.MainContainer, HomeFragment.newInstance(str[0]));
         fragmentTransaction.commit();
     }
 
@@ -87,7 +82,7 @@ public class BaseFragment extends Fragment {
             switch (v.getId()) {
                 case R.id.home_button:
                     if (homeFlag) {
-                        fragmentTransaction.replace(R.id.container, HomeFragment.newInstance(str[0]));
+                        fragmentTransaction.replace(R.id.MainContainer, HomeFragment.newInstance(str[0]));
                         fragmentTransaction.commit();
                         homeFlag = false;
                     }
@@ -96,7 +91,7 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.dungeon_button:
                     if (dungeonFlag) {
-                        fragmentTransaction.replace(R.id.container, DungeonFragment.newInstance(str[1]));
+                        fragmentTransaction.replace(R.id.MainContainer, DungeonFragment.newInstance(str[1]));
                         fragmentTransaction.commit();
                         dungeonFlag = false;
                     }
@@ -105,7 +100,7 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.monster_button:
                     if (monsterFlag) {
-                        fragmentTransaction.replace(R.id.container, MonsterFragment.newInstance(str[2]));
+                        fragmentTransaction.replace(R.id.MainContainer, MonsterFragment.newInstance(str[2]));
                         fragmentTransaction.commit();
                         monsterFlag = false;
                     }

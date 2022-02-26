@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.example.fragmenttest2.R;
 
+import java.util.Objects;
+
 public class HomeFragment extends Fragment {
     public final String ARGS_NAME = "com.example.fragmenttest2.home";
     TextView mainText;
@@ -19,7 +21,7 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
-        str = args.getString(ARGS_NAME);
+        str = Objects.requireNonNull(args).getString(ARGS_NAME);
     }
 
     @Override
