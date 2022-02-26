@@ -100,7 +100,6 @@ public class SignUpDialog extends DialogFragment {
                 LocalDateTime nowDateTime = LocalDateTime.now();
                 final AppDatabase db = AppDatabaseSingleton.getInstance(getActivity().getApplicationContext());
                 final String salt = getRandomString(15, 25);
-                //final String hash = HASH(etPass.getText().toString(), salt);
                 MessageDigest sha256 = null;
                 try {
                     sha256 = MessageDigest.getInstance("SHA-512");
@@ -108,8 +107,7 @@ public class SignUpDialog extends DialogFragment {
                     e.printStackTrace();
                 }
                 byte[] sha256_result = sha256.digest(etPass.getText().toString().getBytes());
-                Log.v("Password", String.format("%04x", new BigInteger(1, sha256_result)));
-                String hash = "A";
+                String hash = String.format("%04x", new BigInteger(1, sha256_result));
                 new DataSave(
                         db,
                         name,

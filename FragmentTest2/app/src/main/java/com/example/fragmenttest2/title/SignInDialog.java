@@ -115,14 +115,14 @@ public class SignInDialog extends DialogFragment {
                                 //hash = hash.substring(0, hash.length()-1);
                             }
                             //String result = HASH(password, salt);
-                            MessageDigest sha3_512 = null;
+                            MessageDigest sha256 = null;
                             try {
-                                sha3_512 = MessageDigest.getInstance("SHA3-512");
+                                sha256 = MessageDigest.getInstance("SHA-512");
                             } catch (NoSuchAlgorithmException e) {
                                 e.printStackTrace();
                             }
-                            byte[] sha3_512_result = sha3_512.digest(password.getBytes());
-                            String result = String.format("%040x", new BigInteger(1, sha3_512_result));
+                            byte[] sha256_result = sha256.digest(etPass.getText().toString().getBytes());
+                            String result = String.format("%04x", new BigInteger(1, sha256_result));
 
                             Log.v("Name", name);
                             Log.v("Password", password);
