@@ -32,6 +32,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 
@@ -44,6 +45,8 @@ public class SignInDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signin, null);
+        assetManager = Objects.requireNonNull(getActivity()).getAssets();
+        setImage = new SetImage(assetManager);
 
         EditText etName = view.findViewById(R.id.TitleSIUserName);
         EditText etPass = view.findViewById(R.id.TitleSIPassword);
@@ -139,6 +142,7 @@ public class SignInDialog extends DialogFragment {
                         ).execute();
                         dismiss();
                     }
+                    break;
                 case R.id.SILook_unLook_button:
                     if (flagLook) {
                         etPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
