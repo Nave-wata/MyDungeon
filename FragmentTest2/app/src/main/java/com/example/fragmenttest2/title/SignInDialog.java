@@ -115,7 +115,7 @@ public class SignInDialog extends DialogFragment {
                             Log.v("Password", password);
                             Log.v("Salt", salt);
                             Log.v("Hash", hash);
-                            if (hash == result) {
+                            if (hash.length() == result.length()) {
                                 Log.v("HASH", "OK");
                             } else {
                                 Log.v("HASH", "NO");
