@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,7 @@ import java.time.format.DateTimeFormatter;
 import java.security.MessageDigest;
 
 public class SignUpDialog extends DialogFragment {
+    boolean flagLook = true;
 
     @Override
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
@@ -54,66 +56,80 @@ public class SignUpDialog extends DialogFragment {
             this.etPass = etPass;
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void onClick(View v) {
-            final String regex = "[0123456789abcdefghijklmnopqrstyvwxyzABCDEFGHIJKLMNOPQRSTYVWXYZ]";
-            final String name = etName.getText().toString();
-            final String password = etPass.getText().toString();
-            final String[] nameSplit = name.split("");
-            final String[] passwordSplit = password.split("");
-            boolean flag = true;
-            boolean nameFlag = true;
-            boolean passwordFlag = true;
+            switch (v.getId()) {
+                case R.id.SignIn_button:
+                    final String regex = "[0123456789abcdefghijklmnopqrstyvwxyzABCDEFGHIJKLMNOPQRSTYVWXYZ]";
+                    final String name = etName.getText().toString();
+                    final String password = etPass.getText().toString();
+                    final String[] nameSplit = name.split("");
+                    final String[] passwordSplit = password.split("");
+                    boolean flag = true;
+                    boolean nameFlag = true;
+                    boolean passwordFlag = true;
 
-            if (name.length() == 0 && nameFlag) {
-                etName.setError(getString(R.string.errorNotInput));
-                flag = false;
-                nameFlag = false;
-            }
-            if (password.length() == 0 && passwordFlag) {
-                etPass.setError(getString(R.string.errorNotInput));
-                flag = false;
-                passwordFlag = false;
-            }
-            if (nameFlag) {
-                for (String s : nameSplit) {
-                    if (!s.matches(regex)) {
-                        etName.setError(getString(R.string.errorNotInText));
+                    if (name.length() == 0 && nameFlag) {
+                        etName.setError(getString(R.string.errorNotInput));
                         flag = false;
-                        break;
+                        nameFlag = false;
                     }
-                }
-            }
-            if (passwordFlag) {
-                for (String s : passwordSplit) {
-                    if (!s.matches(regex)) {
-                        etPass.setError(getString(R.string.errorNotInText));
+                    if (password.length() == 0 && passwordFlag) {
+                        etPass.setError(getString(R.string.errorNotInput));
                         flag = false;
-                        break;
+                        passwordFlag = false;
                     }
-                }
-            }
-
-            if (flag) {
-                final AppDatabase db = AppDatabaseSingleton.getInstance(getActivity().getApplicationContext());
-                final String salt = getRandomString(15, 25);
-                final String hash = getHash(password, salt);
-                new DataSave(
-                        db,
-                        name,
-                        salt,
-                        hash,
-                        b->{
-                            Context context = getActivity().getApplicationContext();
-                            Toast.makeText(context, "登録完了しました", Toast.LENGTH_SHORT).show();
-                        },
-                        e->{
-                            Context context = getActivity().getApplicationContext();
-                            Toast.makeText(context, "登録できませんでした", Toast.LENGTH_SHORT).show();
+                    if (nameFlag) {
+                        for (String s : nameSplit) {
+                            if (!s.matches(regex)) {
+                                etName.setError(getString(R.string.errorNotInText));
+                                flag = false;
+                                break;
+                            }
                         }
-                ).execute();
-                dismiss();
+                    }
+                    if (passwordFlag) {
+                        for (String s : passwordSplit) {
+                            if (!s.matches(regex)) {
+                                etPass.setError(getString(R.string.errorNotInText));
+                                flag = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (flag) {
+                        final AppDatabase db = AppDatabaseSingleton.getInstance(getActivity().getApplicationContext());
+                        final String salt = getRandomString(15, 25);
+                        final String hash = getHash(password, salt);
+                        new DataSave(
+                                db,
+                                name,
+                                salt,
+                                hash,
+                                b -> {
+                                    Context context = getActivity().getApplicationContext();
+                                    Toast.makeText(context, "登録完了しました", Toast.LENGTH_SHORT).show();
+                                },
+                                e -> {
+                                    Context context = getActivity().getApplicationContext();
+                                    Toast.makeText(context, "登録できませんでした", Toast.LENGTH_SHORT).show();
+                                }
+                        ).execute();
+                        dismiss();
+                    }
+                    break;
+                case R.id.Look_unLook_button:
+                    if (flagLook) {
+                        etPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                        flagLook = false;
+                    } else {
+                        etPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        flagLook = true;
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 
