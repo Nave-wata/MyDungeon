@@ -10,7 +10,7 @@ Java_com_example_fragmenttest2_title_SignUpDialog_HASH(JNIEnv* env, jclass clazz
     SHA512 sha512;
 
     for (int i = 0; i < 1; i++) {
-        str = sha512.hash(str);
+        str = sha512.hash("A");
     }
 
     return env->NewStringUTF(str.c_str());
@@ -24,7 +24,7 @@ Java_com_example_fragmenttest2_title_SignInDialog_HASH(JNIEnv* env, jclass clazz
     SHA512 sha512;
 
     for (int i = 0; i < 1; i++) {
-        str = sha512.hash(str);
+        str = sha512.hash("A");
     }
 
     return env->NewStringUTF(str.c_str());
