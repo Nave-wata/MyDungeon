@@ -20,6 +20,9 @@ import com.example.fragmenttest2.asynchronous.usersinfo.DataSave;
 import com.example.fragmenttest2.asynchronous.usersinfo.GetLine;
 import com.example.fragmenttest2.asynchronous.usersinfo.UsersInfo;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -111,7 +114,16 @@ public class SignInDialog extends DialogFragment {
                                 Log.v("Hash", hash);
                                 //hash = hash.substring(0, hash.length()-1);
                             }
-                            String result = HASH(password, salt);
+                            //String result = HASH(password, salt);
+                            MessageDigest sha3_512 = null;
+                            try {
+                                sha3_512 = MessageDigest.getInstance("SHA3-512");
+                            } catch (NoSuchAlgorithmException e) {
+                                e.printStackTrace();
+                            }
+                            byte[] sha3_512_result = sha3_512.digest(password.getBytes());
+                            String result = String.format("%040x", new BigInteger(1, sha3_512_result));
+
                             Log.v("Name", name);
                             Log.v("Password", password);
                             Log.v("Salt", salt);

@@ -18,8 +18,11 @@ import com.example.fragmenttest2.asynchronous.AppDatabase;
 import com.example.fragmenttest2.asynchronous.AppDatabaseSingleton;
 import com.example.fragmenttest2.asynchronous.usersinfo.DataSave;
 
+import java.math.BigInteger;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.security.MessageDigest;
 
 public class SignUpDialog extends DialogFragment {
     static {
@@ -96,10 +99,17 @@ public class SignUpDialog extends DialogFragment {
             if (flag) {
                 LocalDateTime nowDateTime = LocalDateTime.now();
                 final AppDatabase db = AppDatabaseSingleton.getInstance(getActivity().getApplicationContext());
-                final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-                //final String nowTime = nowDateTime.format(dateTimeFormatter);
                 final String salt = getRandomString(15, 25);
-                final String hash = HASH(etPass.getText().toString(), salt);
+                //final String hash = HASH(etPass.getText().toString(), salt);
+                MessageDigest sha256 = null;
+                try {
+                    sha256 = MessageDigest.getInstance("SHA-512");
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
+                byte[] sha256_result = sha256.digest(etPass.getText().toString().getBytes());
+                Log.v("Password", String.format("%04x", new BigInteger(1, sha256_result)));
+                String hash = "A";
                 new DataSave(
                         db,
                         name,
