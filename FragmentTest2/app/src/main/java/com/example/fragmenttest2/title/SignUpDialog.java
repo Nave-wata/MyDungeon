@@ -4,12 +4,14 @@ import static com.example.fragmenttest2.title.SignInDialog.getHash;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -103,13 +105,13 @@ public class SignUpDialog extends DialogFragment {
                         salt,
                         hash,
                         b->{
-                            Log.v("Sign Up", "OK");
-                            Log.v("Name", name);
-                            Log.v("Password", password);
-                            Log.v("Salt", salt);
-                            Log.v("Hash", hash);
+                            Context context = getActivity().getApplicationContext();
+                            Toast.makeText(context, "登録完了しました", Toast.LENGTH_SHORT).show();
                         },
-                        e->Log.v("Sign Up", "NO")
+                        e->{
+                            Context context = getActivity().getApplicationContext();
+                            Toast.makeText(context, "登録できませんでした", Toast.LENGTH_SHORT).show();
+                        }
                 ).execute();
                 dismiss();
             }

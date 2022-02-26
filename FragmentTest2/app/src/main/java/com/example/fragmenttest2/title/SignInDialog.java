@@ -2,12 +2,14 @@ package com.example.fragmenttest2.title;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -103,25 +105,19 @@ public class SignInDialog extends DialogFragment {
                         name,
                         password,
                         b-> {
-                            Log.v("Sign In", "OK");
                             String salt = null;
                             String hash = null;
                             for (UsersInfo ui : b) {
                                 salt = ui.getSalt();
                                 hash = ui.getHash();
-                                Log.v("Hash", hash);
                             }
-
                             String result = getHash(password, salt);
-                            Log.v("Name", name);
-                            Log.v("Password", password);
-                            Log.v("Salt", salt);
-                            Log.v("Hash", hash);
-                            Log.v("result", result);
                             if (hash.equals(result)) {
-                                Log.v("HASH", "OK");
+                                Context context = getActivity().getApplicationContext();
+                                Toast.makeText(context, "ログイン成功", Toast.LENGTH_LONG).show();
                             } else {
-                                Log.v("HASH", "NO");
+                                Context context = getActivity().getApplicationContext();
+                                Toast.makeText(context, "ログイン失敗", Toast.LENGTH_LONG).show();
                             }
                         },
                         e->Log.v("Sign In", "NO")

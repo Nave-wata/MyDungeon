@@ -9,17 +9,7 @@ import java.util.List;
 
 @Dao
 public interface UsersInfoDao {
-    @Query("INSERT INTO UsersInfo " +
-            "SELECT " +
-                "Name " +
-            "FROM " +
-                "UsersInfo " +
-            "WHERE NOT EXISTS (SELECT" +
-                                    " * " +
-            "                   FROM " +
-            "                       UsersInfo " +
-            "                   WHERE " +
-            "                       Name = usersInfo.name)")
+    @Insert
     void insert(UsersInfo usersInfo);
 
     @Query("DELETE FROM UsersInfo WHERE Name = :name")
