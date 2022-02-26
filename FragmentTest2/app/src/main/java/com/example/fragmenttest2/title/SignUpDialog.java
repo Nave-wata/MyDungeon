@@ -100,6 +100,10 @@ public class SignUpDialog extends DialogFragment {
                 //final String nowTime = nowDateTime.format(dateTimeFormatter);
                 final String salt = getRandomString(15, 25);
                 final String hash = HASH(etPass.getText().toString(), salt);
+                Log.v("Name", name);
+                Log.v("Password", password);
+                Log.v("Salt", salt);
+                Log.v("Hash", hash);
                 new DataSave(
                         db,
                         name,

@@ -101,14 +101,20 @@ public class SignInDialog extends DialogFragment {
                         password,
                         b-> {
                             Log.v("Sign In", "OK");
+                            String Name = null;
                             String salt = null;
                             String hash = null;
                             for (UsersInfo ui : b) {
+                                Name = ui.getName();
                                 salt = ui.getSalt();
                                 hash = ui.getHash();
                                 //hash = hash.substring(0, hash.length()-1);
                             }
                             String result = HASH(password, salt);
+                            Log.v("Name", name);
+                            Log.v("Password", password);
+                            Log.v("Salt", salt);
+                            Log.v("Hash", hash);
                             if (hash == result) {
                                 Log.v("HASH", "OK");
                             } else {
