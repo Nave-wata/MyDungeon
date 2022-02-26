@@ -95,7 +95,8 @@ public class SignUpDialog extends DialogFragment {
                 LocalDateTime nowDateTime = LocalDateTime.now();
                 final AppDatabase db = AppDatabaseSingleton.getInstance(getActivity().getApplicationContext());
                 final String salt = getRandomString(15, 25);
-                final String hash = new SignInDialog().getHash(password, salt);
+                //final String hash = new SignInDialog().getHash(password, salt);
+                String hash = "A";
                 new DataSave(
                         db,
                         name,
