@@ -105,8 +105,8 @@ public class SignUpDialog extends DialogFragment {
                         name,
                         salt,
                         hash,
-                        b->Log.v("Response", "OK"),
-                        e->Log.v("Response", "NO")
+                        b->Log.v("Sign Up", "OK"),
+                        e->Log.v("Sign Up", "NO")
                 ).execute();
                 dismiss();
             }

@@ -7,7 +7,7 @@ Java_com_example_fragmenttest2_title_SignUpDialog_HASH(JNIEnv* env, jclass clazz
     std::string Password = reinterpret_cast<std::basic_string<char> &&>(password);
     std::string Salt = reinterpret_cast<std::basic_string<char> &&>(salt);
     std::string str = Password + Salt;
-    SHA512 sha512;;
+    SHA512 sha512;
 
     for (int i = 0; i < 10120; i++) {
         if (i % Password.length() == 0) {

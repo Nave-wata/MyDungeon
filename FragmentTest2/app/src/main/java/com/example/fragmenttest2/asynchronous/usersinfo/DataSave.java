@@ -32,14 +32,14 @@ public class DataSave implements Runnable {
         this.db = db;
         this.name = name;
         this.salt = salt;
-        this.hash = hash + "A";
+        this.hash = hash;
         this.callback = callback;
         this.errorCallback = errorCallback;
     }
 
     @Override
     public void run() {
-        response = doInBackground();
+        doInBackground();
         handler.post(() -> onPostExecute());
     }
 
@@ -51,15 +51,13 @@ public class DataSave implements Runnable {
 
     //void onPreExecute() {}
 
-    boolean doInBackground() {
+    void doInBackground() {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
 
         try {
             usersInfoDao.insert(new UsersInfo(name, salt, hash));
-            return true;
         } catch (Exception e) {
             this.exception = e;
-            return false;
         }
     }
 
