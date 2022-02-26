@@ -10,11 +10,20 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class GetLine implements Runnable {
+    static {
+        System.loadLibrary("fragmenttest2");
+    }
+    static native String HASH(String password, String salt);
+
     Handler handler = new Handler(Looper.getMainLooper());
     private AppDatabase db;
+    private String name;
+    private String password;
 
-    public GetLine(AppDatabase db, String name) {
+    public GetLine(AppDatabase db, String name, String password) {
         this.db = db;
+        this.name = name;
+        this.password = password;
     }
 
     @Override
@@ -26,7 +35,7 @@ public class GetLine implements Runnable {
     public void execute() {
         //onPreExecute();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(new GetLine(db);
+        executorService.submit(new GetLine(db, name, password);
     }
 
     //void onPreExecute() {}

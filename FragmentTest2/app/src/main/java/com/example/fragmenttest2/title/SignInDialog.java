@@ -22,11 +22,6 @@ import java.time.format.DateTimeFormatter;
 
 
 public class SignInDialog extends DialogFragment {
-    static {
-        System.loadLibrary("fragmenttest2");
-    }
-    static native String HASH(String password, String salt);
-
     @Override
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signin, null);
