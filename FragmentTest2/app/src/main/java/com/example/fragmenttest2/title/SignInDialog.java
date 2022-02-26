@@ -132,7 +132,7 @@ public class SignInDialog extends DialogFragment {
     }
 
     public static String getHash(String password, String salt) {
-        MessageDigest sha512 = null;
+        MessageDigest sha512;
         try {
             sha512 = MessageDigest.getInstance("SHA-512");
         } catch (NoSuchAlgorithmException e) {

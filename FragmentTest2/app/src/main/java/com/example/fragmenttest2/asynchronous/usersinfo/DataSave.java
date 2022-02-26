@@ -3,6 +3,7 @@ package com.example.fragmenttest2.asynchronous.usersinfo;
 import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.example.fragmenttest2.asynchronous.AppDatabase;
 
@@ -55,7 +56,9 @@ public class DataSave implements Runnable {
 
         try {
             usersInfoDao.insert(new UsersInfo(name, salt, hash));
+            Log.v("Status", "OK");
         } catch (Exception e) {
+            Log.v("Status", "NO");
             this.exception = e;
         }
     }
