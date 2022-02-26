@@ -18,12 +18,16 @@ import com.example.fragmenttest2.asynchronous.AppDatabase;
 import com.example.fragmenttest2.asynchronous.AppDatabaseSingleton;
 import com.example.fragmenttest2.asynchronous.usersinfo.DataSave;
 import com.example.fragmenttest2.asynchronous.usersinfo.GetLine;
+import com.example.fragmenttest2.asynchronous.usersinfo.UsersInfo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
 public class SignInDialog extends DialogFragment {
+    static { System.loadLibrary("fragmenttest2"); }
+    static native String HASH(String password, String salt);
+
     @Override
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signin, null);
@@ -95,7 +99,21 @@ public class SignInDialog extends DialogFragment {
                         db,
                         name,
                         password,
-                        b->Log.v("Response", "OK"),
+                        b-> {
+                            Log.v("Response", "OK");
+                            String salt = null;
+                            String hash = null;
+                            for (UsersInfo ui : b) {
+                                salt = ui.getSalt();
+                                hash = ui.getHash();
+                            }
+                            String result = HASH(password, salt);
+                            if (hash == result) {
+                                Log.v("HASH", "OK");
+                            } else {
+                                Log.v("HASH", "NO");
+                            }
+                        },
                         e->Log.v("Response", "NO")
                 ).execute();
                 dismiss();

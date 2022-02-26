@@ -60,8 +60,6 @@ public class DataSave implements Runnable {
         } catch (Exception e) {
             this.exception = e;
             return false;
-        } finally {
-            usersInfoDao.deleteAll(); // 今は消すやつ実装してないから
         }
     }
 
