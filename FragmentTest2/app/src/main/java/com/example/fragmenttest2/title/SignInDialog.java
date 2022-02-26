@@ -115,7 +115,8 @@ public class SignInDialog extends DialogFragment {
                             Log.v("Password", password);
                             Log.v("Salt", salt);
                             Log.v("Hash", hash);
-                            if (hash.length() == result.length()) {
+                            Log.v("result", result);
+                            if (hash.equals(result)) {
                                 Log.v("HASH", "OK");
                             } else {
                                 Log.v("HASH", "NO");
@@ -125,20 +126,6 @@ public class SignInDialog extends DialogFragment {
                 ).execute();
                 dismiss();
             }
-        }
-
-        @NonNull
-        String getRandomString(int min, int max) {
-            String str = "0123456789abcdefghijklmnopqrstyvwxyzABCDEFGHIJKLMNOPQRSTYVWXYZ";
-            StringBuilder builder = new StringBuilder();
-            int randInt = (int) (Math.random() * (max - min)) + min;
-
-            for (int j = 0; j < randInt; j++) {
-                int tmp = (int) (str.length() * Math.random());
-                builder.append(str.charAt(tmp));
-            }
-
-            return builder.toString();
         }
     }
 }
