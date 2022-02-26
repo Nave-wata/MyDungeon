@@ -51,7 +51,7 @@ public class SignUpDialog extends DialogFragment {
         onClickListener clickListener = new onClickListener(etName, etPass);
 
         Button btn = view.findViewById(R.id.SignUp_button);
-        LookUnLook = view.findViewById(R.id.Look_unLook_button);
+        LookUnLook = view.findViewById(R.id.SULook_unLook_button);
         setImage.setImageViewBitmapFromAsset(LookUnLook, "title/unlook.png");
 
         btn.setOnClickListener(clickListener);
@@ -135,7 +135,7 @@ public class SignUpDialog extends DialogFragment {
                         dismiss();
                     }
                     break;
-                case R.id.Look_unLook_button:
+                case R.id.SULook_unLook_button:
                     if (flagLook) {
                         etPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                         setImage.setImageViewBitmapFromAsset(LookUnLook, "title/look.png");

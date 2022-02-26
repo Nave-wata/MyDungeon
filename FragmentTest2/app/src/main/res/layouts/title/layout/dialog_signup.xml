@@ -43,7 +43,6 @@
             android:id="@+id/TitleSUPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_weight="0.9"
             android:gravity="center"
             android:hint="Password"
@@ -51,7 +50,7 @@
             android:maxLength="128" />
 
         <ImageButton
-            android:id="@+id/Look_unLook_button"
+            android:id="@+id/SULook_unLook_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
