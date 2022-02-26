@@ -132,15 +132,27 @@ public class SignInDialog extends DialogFragment {
     }
 
     public static String getHash(String password, String salt) {
-        MessageDigest sha256 = null;
+        MessageDigest sha512 = null;
         try {
-            sha256 = MessageDigest.getInstance("SHA-512");
+            sha512 = MessageDigest.getInstance("SHA-512");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
+            return null;
         }
-        byte[] sha256_result = sha256.digest(password.getBytes());
-        String hash = String.format("%04x", new BigInteger(1, sha256_result));
 
+        byte[] sha512_result = sha512.digest(password.getBytes());
+        byte[] Salt = salt.getBytes();
+        for (int i = 0; i < 10000; i++) {
+            if (i % password.length() == 0) {
+                byte[] tmp = new byte[sha512_result.length + Salt.length];
+                System.arraycopy(sha512_result, 0, tmp, 0, sha512_result.length);
+                System.arraycopy(Salt, 0, tmp, sha512_result.length, Salt.length);
+                sha512_result = sha512.digest(tmp);
+            } else {
+                sha512_result = sha512.digest(sha512_result);
+            }
+        }
+        String hash = String.format("%04x", new BigInteger(1, sha512_result));
         return hash;
     }
 }
