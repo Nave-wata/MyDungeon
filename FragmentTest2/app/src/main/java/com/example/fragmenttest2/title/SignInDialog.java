@@ -108,6 +108,7 @@ public class SignInDialog extends DialogFragment {
                                 Name = ui.getName();
                                 salt = ui.getSalt();
                                 hash = ui.getHash();
+                                Log.v("Hash", hash);
                                 //hash = hash.substring(0, hash.length()-1);
                             }
                             String result = HASH(password, salt);
