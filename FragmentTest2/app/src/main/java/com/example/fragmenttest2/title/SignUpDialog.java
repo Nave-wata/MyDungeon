@@ -25,11 +25,6 @@ import java.time.format.DateTimeFormatter;
 import java.security.MessageDigest;
 
 public class SignUpDialog extends DialogFragment {
-    static {
-        System.loadLibrary("fragmenttest2");
-    }
-    static native String HASH(String password, String salt);
-
 
     @Override
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
@@ -100,14 +95,7 @@ public class SignUpDialog extends DialogFragment {
                 LocalDateTime nowDateTime = LocalDateTime.now();
                 final AppDatabase db = AppDatabaseSingleton.getInstance(getActivity().getApplicationContext());
                 final String salt = getRandomString(15, 25);
-                MessageDigest sha256 = null;
-                try {
-                    sha256 = MessageDigest.getInstance("SHA-512");
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                }
-                byte[] sha256_result = sha256.digest(etPass.getText().toString().getBytes());
-                String hash = String.format("%04x", new BigInteger(1, sha256_result));
+                final String hash = new SignInDialog().getHash(password, salt);
                 new DataSave(
                         db,
                         name,

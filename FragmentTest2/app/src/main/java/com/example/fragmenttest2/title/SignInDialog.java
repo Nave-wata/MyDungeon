@@ -21,15 +21,15 @@ import com.example.fragmenttest2.asynchronous.usersinfo.GetLine;
 import com.example.fragmenttest2.asynchronous.usersinfo.UsersInfo;
 
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Stream;
 
 
 public class SignInDialog extends DialogFragment {
-    static { System.loadLibrary("fragmenttest2"); }
-    static native String HASH(String password, String salt);
 
     @Override
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
@@ -104,26 +104,15 @@ public class SignInDialog extends DialogFragment {
                         password,
                         b-> {
                             Log.v("Sign In", "OK");
-                            String Name = null;
                             String salt = null;
                             String hash = null;
                             for (UsersInfo ui : b) {
-                                Name = ui.getName();
                                 salt = ui.getSalt();
                                 hash = ui.getHash();
                                 Log.v("Hash", hash);
-                                //hash = hash.substring(0, hash.length()-1);
                             }
-                            //String result = HASH(password, salt);
-                            MessageDigest sha256 = null;
-                            try {
-                                sha256 = MessageDigest.getInstance("SHA-512");
-                            } catch (NoSuchAlgorithmException e) {
-                                e.printStackTrace();
-                            }
-                            byte[] sha256_result = sha256.digest(etPass.getText().toString().getBytes());
-                            String result = String.format("%04x", new BigInteger(1, sha256_result));
 
+                            String result = getHash(password, salt);
                             Log.v("Name", name);
                             Log.v("Password", password);
                             Log.v("Salt", salt);
@@ -140,5 +129,31 @@ public class SignInDialog extends DialogFragment {
                 dismiss();
             }
         }
+    }
+
+    public static String getHash(String password, String salt) {
+        MessageDigest sha512 = null;
+        byte[] sha512_result = sha512.digest(password.getBytes(StandardCharsets.UTF_8));
+        byte[] Salt = salt.getBytes(StandardCharsets.UTF_8);
+
+        try {
+            sha512 = MessageDigest.getInstance("SHA-512");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < 10000; i++) {
+            if (i % password.length() == 0) {
+                byte[] tmp = new byte[sha512_result.length + Salt.length];
+                System.arraycopy(sha512_result, 0, tmp, 0, sha512_result.length);
+                System.arraycopy(Salt, 0, tmp, sha512_result.length, sha512_result.length);
+                sha512_result = sha512.digest(tmp);
+            } else {
+                sha512_result = sha512.digest(sha512_result);
+            }
+        }
+
+        String hash = String.format("%04x", new BigInteger(1, sha512_result));
+        return hash;
     }
 }
