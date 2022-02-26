@@ -93,7 +93,6 @@ public class SignInDialog extends DialogFragment {
                 final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
                 //final String nowTime = nowDateTime.format(dateTimeFormatter);
                 final String salt = getRandomString(15, 25);
-                final String hash = HASH(etPass.getText().toString(), salt);
                 dismiss();
             }
         }

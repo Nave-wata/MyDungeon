@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.fragmenttest2.asynchronous.AppDatabase;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -19,6 +20,7 @@ public class GetLine implements Runnable {
     private AppDatabase db;
     private String name;
     private String password;
+    private List<UsersInfo> data;
 
     public GetLine(AppDatabase db, String name, String password) {
         this.db = db;
@@ -35,18 +37,18 @@ public class GetLine implements Runnable {
     public void execute() {
         //onPreExecute();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(new GetLine(db, name, password);
+        executorService.submit(new GetLine(db, name, password));
     }
 
     //void onPreExecute() {}
 
     void doInBackground() {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
-        usersInfoDao.getLine();
+        data = usersInfoDao.getLine(name);
         usersInfoDao.deleteAll(); // 今は消すやつ実装してないから
     }
 
     void onPostExecute() {
-        Log.v("DataSave", "OK?");
+
     }
 }

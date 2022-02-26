@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -99,7 +100,14 @@ public class SignUpDialog extends DialogFragment {
                 //final String nowTime = nowDateTime.format(dateTimeFormatter);
                 final String salt = getRandomString(15, 25);
                 final String hash = HASH(etPass.getText().toString(), salt);
-                new DataSave(db, name, salt, hash).execute();
+                new DataSave(
+                        db,
+                        name,
+                        salt,
+                        hash,
+                        b->Log.v("Result", "OK"),
+                        e->Log.v("Result", "NO")
+                ).execute();
                 dismiss();
             }
         }
