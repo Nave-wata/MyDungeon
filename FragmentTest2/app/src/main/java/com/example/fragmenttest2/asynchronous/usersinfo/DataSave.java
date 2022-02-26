@@ -52,23 +52,13 @@ public class DataSave implements Runnable {
 
     boolean doInBackground() {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
-        try {
-            usersInfoDao.insert(new UsersInfo(name, salt, hash));
-            return true;
-        } catch (Exception e) {
-            this.exception = e;
-            return false;
-        } finally {
-            usersInfoDao.deleteAll(); // 今は消すやつ実装してないから
-        }
+        usersInfoDao.insert(new UsersInfo(name, salt, hash));
+        usersInfoDao.deleteAll(); // 今は消すやつ実装してないから
+        return true;
     }
 
     @SuppressLint("NewApi")
     void onPostExecute(boolean result) {
-        if(this.exception == null) {
-            callback.accept((result));
-        } else {
-            errorCallback.accept(this.exception);
-        }
+
     }
 }
