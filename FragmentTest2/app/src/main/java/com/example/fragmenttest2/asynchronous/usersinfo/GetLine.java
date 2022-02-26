@@ -55,8 +55,6 @@ public class GetLine implements Runnable {
             data = usersInfoDao.getLine(name);
         } catch (Exception e) {
             this.exception = e;
-        } finally {
-            usersInfoDao.deleteAll(); // 井濱消すやつ実装してないから
         }
     }
 
