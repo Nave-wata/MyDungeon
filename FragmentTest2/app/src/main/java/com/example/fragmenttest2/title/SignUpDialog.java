@@ -32,6 +32,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.security.MessageDigest;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public class SignUpDialog extends DialogFragment {
     boolean flagLook = true;
@@ -126,6 +127,10 @@ public class SignUpDialog extends DialogFragment {
                                 b -> {
                                     Context context = getActivity().getApplicationContext();
                                     Toast.makeText(context, "登録完了しました", Toast.LENGTH_SHORT).show();
+                                },
+                                sqlE -> {
+                                    Context context = getActivity().getApplicationContext();
+                                    Toast.makeText(context, "ユーザー名が重複しています", Toast.LENGTH_SHORT).show();
                                 },
                                 e -> {
                                     Context context = getActivity().getApplicationContext();
