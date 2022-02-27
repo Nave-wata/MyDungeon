@@ -1,16 +1,13 @@
 package com.example.fragmenttest2.asynchronous.usersinfo;
 
-import android.annotation.SuppressLint;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
-@Entity(tableName = "UsersInfo")
+@Entity(tableName = "UsersInfo", indices = {@Index(value = "Name", unique = true)})
 public class UsersInfo {
     @PrimaryKey(autoGenerate = true)
     public int id;
