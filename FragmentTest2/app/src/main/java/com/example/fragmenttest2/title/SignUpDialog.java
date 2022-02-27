@@ -2,6 +2,7 @@ package com.example.fragmenttest2.title;
 
 import static com.example.fragmenttest2.title.SignInDialog.getHash;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -9,7 +10,6 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,13 +26,7 @@ import com.example.fragmenttest2.asynchronous.AppDatabase;
 import com.example.fragmenttest2.asynchronous.AppDatabaseSingleton;
 import com.example.fragmenttest2.asynchronous.usersinfo.DataSave;
 
-import java.math.BigInteger;
-import java.security.NoSuchAlgorithmException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.security.MessageDigest;
 import java.util.Objects;
-import java.util.function.Consumer;
 
 public class SignUpDialog extends DialogFragment {
     boolean flagLook = true;
@@ -40,8 +34,9 @@ public class SignUpDialog extends DialogFragment {
     public SetImage setImage;
     ImageButton LookUnLook;
 
+    @NonNull
     @Override
-    public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signup, null);
         assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
@@ -72,12 +67,13 @@ public class SignUpDialog extends DialogFragment {
             this.etPass = etPass;
         }
 
+        @SuppressLint("NonConstantResourceId")
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.SignUp_button:
-                    final String regex = "[0123456789abcdefghijklmnopqrstyvwxyzABCDEFGHIJKLMNOPQRSTYVWXYZ]";
+                    final String regex = "[0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]";
                     final String name = etName.getText().toString();
                     final String password = etPass.getText().toString();
                     final String[] nameSplit = name.split("");
@@ -86,12 +82,12 @@ public class SignUpDialog extends DialogFragment {
                     boolean nameFlag = true;
                     boolean passwordFlag = true;
 
-                    if (name.length() == 0 && nameFlag) {
+                    if (name.length() == 0) {
                         etName.setError(getString(R.string.errorNotInput));
                         flag = false;
                         nameFlag = false;
                     }
-                    if (password.length() == 0 && passwordFlag) {
+                    if (password.length() == 0) {
                         etPass.setError(getString(R.string.errorNotInput));
                         flag = false;
                         passwordFlag = false;
@@ -116,8 +112,8 @@ public class SignUpDialog extends DialogFragment {
                     }
 
                     if (flag) {
-                        final AppDatabase db = AppDatabaseSingleton.getInstance(getActivity().getApplicationContext());
-                        final String salt = getRandomString(15, 25);
+                        final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
+                        final String salt = getRandomString();
                         final String hash = getHash(password, salt);
                         new DataSave(
                                 db,
@@ -157,10 +153,10 @@ public class SignUpDialog extends DialogFragment {
         }
 
         @NonNull
-        String getRandomString(int min, int max) {
+        String getRandomString() {
             String str = "0123456789abcdefghijklmnopqrstyvwxyzABCDEFGHIJKLMNOPQRSTYVWXYZ";
             StringBuilder builder = new StringBuilder();
-            int randInt = (int) (Math.random() * (max - min)) + min;
+            int randInt = (int) (Math.random() * 10) + 15;
 
             for (int j = 0; j < randInt; j++) {
                 int tmp = (int) (str.length() * Math.random());

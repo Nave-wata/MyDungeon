@@ -3,6 +3,7 @@ package com.example.fragmenttest2.asynchronous.usersinfo;
 import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.example.fragmenttest2.asynchronous.AppDatabase;
 
@@ -16,9 +17,9 @@ public class GetLine implements Runnable {
     private final Consumer<List<UsersInfo>> callback;
     private final Consumer<Exception> errorCallback;
     private Exception exception;
-    private AppDatabase db;
-    private String name;
-    private String password;
+    private final AppDatabase db;
+    private final String name;
+    private final String password;
     private List<UsersInfo> data;
 
     public GetLine(AppDatabase db,
@@ -28,7 +29,7 @@ public class GetLine implements Runnable {
                    Consumer<Exception> errorCallback)
     {
         this.db = db;
-        this.name = name + "A";
+        this.name = name;
         this.password = password;
         this.callback = callback;
         this.errorCallback = errorCallback;
@@ -37,7 +38,7 @@ public class GetLine implements Runnable {
     @Override
     public void run() {
         doInBackground();
-        handler.post(() -> onPostExecute());
+        handler.post(this::onPostExecute);
     }
 
     public void execute() {

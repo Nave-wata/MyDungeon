@@ -19,11 +19,10 @@ public class DataSave implements Runnable {
     private final Consumer<Exception> errorCallback;
     private Exception exception;
     private SQLiteConstraintException sqliteConstraintException;
-    private boolean response;
-    private AppDatabase db;
-    private String name;
-    private String salt;
-    private String hash;
+    private final AppDatabase db;
+    private final String name;
+    private final String salt;
+    private final String hash;
 
     public DataSave(AppDatabase db,
                     String name,
@@ -34,9 +33,9 @@ public class DataSave implements Runnable {
                     Consumer<Exception> errorCallback)
     {
         this.db = db;
-        this.name = name + "A";
-        this.salt = salt + "A";
-        this.hash = hash + "A";
+        this.name = name;
+        this.salt = salt;
+        this.hash = hash;
         this.callback = callback;
         this.sqlErrorCallback = sqlErrorCallback;
         this.errorCallback = errorCallback;
@@ -45,7 +44,7 @@ public class DataSave implements Runnable {
     @Override
     public void run() {
         doInBackground();
-        handler.post(() -> onPostExecute());
+        handler.post(this::onPostExecute);
     }
 
     public void execute() {
@@ -61,12 +60,10 @@ public class DataSave implements Runnable {
 
         try {
             usersInfoDao.insert(new UsersInfo(name, salt, hash));
-            Log.v("Status", "OK");
         } catch (SQLiteConstraintException e) {
             this.sqliteConstraintException = e;
             this.exception = e;
         } catch (Exception e) {
-            Log.v("Status", "NO");
             this.exception = e;
         }
     }
@@ -74,7 +71,7 @@ public class DataSave implements Runnable {
     @SuppressLint("NewApi")
     void onPostExecute() {
         if(this.exception == null) {
-            callback.accept(response);
+            callback.accept(true);
         } else if (this.exception == this.sqliteConstraintException) {
             sqlErrorCallback.accept((SQLiteConstraintException) this.exception);
         } else {

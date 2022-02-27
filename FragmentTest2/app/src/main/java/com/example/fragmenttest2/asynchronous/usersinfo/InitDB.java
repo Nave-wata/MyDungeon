@@ -1,17 +1,12 @@
 package com.example.fragmenttest2.asynchronous.usersinfo;
 
-import android.os.Handler;
-import android.os.Looper;
-
 import com.example.fragmenttest2.asynchronous.AppDatabase;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class InitDB implements Runnable {
-    Handler handler = new Handler(Looper.getMainLooper());
-    private Exception exception;
-    private AppDatabase db;
+    private final AppDatabase db;
 
     public InitDB(AppDatabase db) {
         this.db = db;
@@ -39,8 +34,7 @@ public class InitDB implements Runnable {
 
         try {
             usersInfoDao.insert(new UsersInfo(name, salt, hash));
-        } catch (Exception e) {
-            this.exception = e;
+        } catch (Exception ignored) {
         }
     }
 
