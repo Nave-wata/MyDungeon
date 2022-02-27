@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.database.sqlite.SQLiteConstraintException;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.example.fragmenttest2.asynchronous.AppDatabase;
 
