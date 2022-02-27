@@ -126,15 +126,16 @@ public class SignInDialog extends DialogFragment {
                                     String salt = null;
                                     String hash = null;
                                     for (UsersInfo ui : b) {
-                                        salt = ui.getSalt();
+                                        salt = ui.getSalt().substring(0, ui.getSalt().length() - 1);
                                         hash = ui.getHash();
                                     }
-                                    String result = getHash(password, salt);
+                                    String result = getHash(password, salt) + "A";
+                                    Context context = getActivity().getApplicationContext();
+                                    Log.v("HASH0", result);
+                                    Log.v("HASH1", hash);
                                     if (hash.equals(result)) {
-                                        Context context = getActivity().getApplicationContext();
                                         Toast.makeText(context, "ログイン成功", Toast.LENGTH_LONG).show();
                                     } else {
-                                        Context context = getActivity().getApplicationContext();
                                         Toast.makeText(context, "ログイン失敗", Toast.LENGTH_LONG).show();
                                     }
                                 },
