@@ -34,9 +34,9 @@ public class DataSave implements Runnable {
                     Consumer<Exception> errorCallback)
     {
         this.db = db;
-        this.name = name;
-        this.salt = salt;
-        this.hash = hash;
+        this.name = name + "A";
+        this.salt = salt + "A";
+        this.hash = hash + "A";
         this.callback = callback;
         this.sqlErrorCallback = sqlErrorCallback;
         this.errorCallback = errorCallback;

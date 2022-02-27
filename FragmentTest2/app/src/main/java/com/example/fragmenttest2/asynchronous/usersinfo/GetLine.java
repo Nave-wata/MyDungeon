@@ -28,7 +28,7 @@ public class GetLine implements Runnable {
                    Consumer<Exception> errorCallback)
     {
         this.db = db;
-        this.name = name;
+        this.name = name + "A";
         this.password = password;
         this.callback = callback;
         this.errorCallback = errorCallback;
