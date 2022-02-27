@@ -15,8 +15,9 @@ import java.util.Objects;
 
 
 public class UserDialog extends DialogFragment {
+    @NonNull
     @Override
-    public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_user, null);
         onClickListener clickListener = new onClickListener();
 

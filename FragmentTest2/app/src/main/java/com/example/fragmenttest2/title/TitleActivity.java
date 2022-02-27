@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fragmenttest2.MainActivity;
 import com.example.fragmenttest2.R;
-import com.example.fragmenttest2.asynchronous.AppDatabase;
 import com.example.fragmenttest2.asynchronous.AppDatabaseSingleton;
 import com.example.fragmenttest2.asynchronous.usersinfo.InitDB;
 
