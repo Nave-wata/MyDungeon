@@ -60,12 +60,10 @@ public class DataSave implements Runnable {
 
         try {
             usersInfoDao.insert(new UsersInfo(name, salt, hash));
-            Log.v("Status", "OK");
         } catch (SQLiteConstraintException e) {
             this.sqliteConstraintException = e;
             this.exception = e;
         } catch (Exception e) {
-            Log.v("Status", "NO");
             this.exception = e;
         }
     }

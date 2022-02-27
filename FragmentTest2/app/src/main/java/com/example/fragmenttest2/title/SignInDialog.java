@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
@@ -123,21 +124,27 @@ public class SignInDialog extends DialogFragment {
                                 b-> {
                                     String salt = null;
                                     String hash = null;
-                                    for (UsersInfo ui : b) {
-                                        salt = ui.getSalt();
-                                        hash = ui.getHash();
-                                    }
-                                    String result = getHash(password, salt);
                                     Context context = getActivity().getApplicationContext();
-                                    Log.v("HASH0", result);
-                                    Log.v("HASH1", hash);
-                                    if (Objects.requireNonNull(hash).equals(result)) {
-                                        Toast.makeText(context, "ログイン成功", Toast.LENGTH_LONG).show();
-                                    } else {
+
+                                    try {
+                                        for (UsersInfo ui : b) {
+                                            salt = ui.getSalt();
+                                            hash = ui.getHash();
+                                        }
+                                        String result = getHash(password, salt);
+                                        if (Objects.requireNonNull(hash).equals(result)) {
+                                            Toast.makeText(context, "ログイン成功", Toast.LENGTH_LONG).show();
+                                        } else {
+                                            Toast.makeText(context, "ログイン失敗", Toast.LENGTH_LONG).show();
+                                        }
+                                    } catch (Exception e) {
                                         Toast.makeText(context, "ログイン失敗", Toast.LENGTH_LONG).show();
                                     }
                                 },
-                                e->Log.v("Sign In", "NO")
+                                e-> {
+                                    Context context = getActivity().getApplicationContext();
+                                    Toast.makeText(context, "ログイン失敗", Toast.LENGTH_LONG).show();
+                                }
                         ).execute();
                         dismiss();
                     }
@@ -160,6 +167,7 @@ public class SignInDialog extends DialogFragment {
         }
     }
 
+    @Nullable
     public static String getHash(String password, String salt) {
         MessageDigest sha512;
         try {
