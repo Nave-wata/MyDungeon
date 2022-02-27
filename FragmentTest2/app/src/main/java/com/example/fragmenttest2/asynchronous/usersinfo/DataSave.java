@@ -1,7 +1,6 @@
 package com.example.fragmenttest2.asynchronous.usersinfo;
 
 import android.annotation.SuppressLint;
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -15,10 +14,8 @@ import java.util.function.Consumer;
 public class DataSave implements Runnable {
     Handler handler = new Handler(Looper.getMainLooper());
     private final Consumer<Boolean> callback;
-    private Consumer<SQLiteConstraintException> sqliteErrorCallback;
     private final Consumer<Exception> errorCallback;
     private Exception exception;
-    private Exception sqliteConstraintException;
     private boolean response;
     private AppDatabase db;
     private String name;
@@ -30,7 +27,6 @@ public class DataSave implements Runnable {
                     String salt,
                     String hash,
                     Consumer<Boolean> callback,
-                    Consumer<SQLiteConstraintException> sqliteErrorCallback,
                     Consumer<Exception> errorCallback)
     {
         this.db = db;
@@ -38,7 +34,6 @@ public class DataSave implements Runnable {
         this.salt = salt;
         this.hash = hash;
         this.callback = callback;
-        this.sqliteErrorCallback = sqliteErrorCallback;
         this.errorCallback = errorCallback;
     }
 
@@ -51,7 +46,7 @@ public class DataSave implements Runnable {
     public void execute() {
         //onPreExecute();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(new DataSave(db, name, salt, hash, callback, sqliteErrorCallback, errorCallback));
+        executorService.submit(new DataSave(db, name, salt, hash, callback, errorCallback));
     }
 
     //void onPreExecute() {}
@@ -62,10 +57,6 @@ public class DataSave implements Runnable {
         try {
             usersInfoDao.insert(new UsersInfo(name, salt, hash));
             Log.v("Status", "OK");
-        } catch (SQLiteConstraintException e){
-            Log.v("Status", "SQLNO");
-            this.sqliteConstraintException = e;
-            this.exception = e;
         } catch (Exception e) {
             Log.v("Status", "NO");
             this.exception = e;
@@ -76,8 +67,6 @@ public class DataSave implements Runnable {
     void onPostExecute() {
         if(this.exception == null) {
             callback.accept(response);
-        } else if (this.exception == this.sqliteConstraintException) {
-            sqliteErrorCallback.accept((SQLiteConstraintException) this.sqliteErrorCallback);
         } else {
             errorCallback.accept(this.exception);
         }

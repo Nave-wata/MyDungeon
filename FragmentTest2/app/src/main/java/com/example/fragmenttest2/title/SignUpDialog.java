@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
@@ -127,10 +126,6 @@ public class SignUpDialog extends DialogFragment {
                                 b -> {
                                     Context context = getActivity().getApplicationContext();
                                     Toast.makeText(context, "登録完了しました", Toast.LENGTH_SHORT).show();
-                                },
-                                sqlE -> {
-                                    Context context = getActivity().getApplicationContext();
-                                    Toast.makeText(context, "ユーザー名が重複しています", Toast.LENGTH_SHORT).show();
                                 },
                                 e -> {
                                     Context context = getActivity().getApplicationContext();
