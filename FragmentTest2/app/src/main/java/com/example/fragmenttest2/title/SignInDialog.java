@@ -135,15 +135,15 @@ public class SignInDialog extends DialogFragment {
                                         if (Objects.requireNonNull(hash).equals(result)) {
                                             Toast.makeText(context, "ログイン成功", Toast.LENGTH_LONG).show();
                                         } else {
-                                            Toast.makeText(context, "ログイン失敗", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(context, "パスワードが間違っています", Toast.LENGTH_LONG).show();
                                         }
                                     } catch (Exception e) {
-                                        Toast.makeText(context, "ログイン失敗", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, "ユーザー名が登録されていません", Toast.LENGTH_LONG).show();
                                     }
                                 },
                                 e-> {
                                     Context context = getActivity().getApplicationContext();
-                                    Toast.makeText(context, "ログイン失敗", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, "ログインできませんでした", Toast.LENGTH_LONG).show();
                                 }
                         ).execute();
                         dismiss();
