@@ -63,7 +63,7 @@ public class DataSave implements Runnable {
             usersInfoDao.insert(new UsersInfo(name, salt, hash));
             Log.v("Status", "OK");
         } catch (SQLiteConstraintException e){
-            Log.v("Status", "NO");
+            Log.v("Status", "SQLNO");
             this.sqliteConstraintException = e;
             this.exception = e;
         } catch (Exception e) {
@@ -77,7 +77,7 @@ public class DataSave implements Runnable {
         if(this.exception == null) {
             callback.accept(response);
         } else if (this.exception == this.sqliteConstraintException) {
-
+            sqliteErrorCallback.accept((SQLiteConstraintException) this.sqliteErrorCallback);
         } else {
             errorCallback.accept(this.exception);
         }
