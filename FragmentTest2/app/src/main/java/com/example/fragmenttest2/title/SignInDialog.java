@@ -1,5 +1,6 @@
 package com.example.fragmenttest2.title;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -15,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
@@ -22,18 +24,13 @@ import com.example.fragmenttest2.R;
 import com.example.fragmenttest2.SetImage;
 import com.example.fragmenttest2.asynchronous.AppDatabase;
 import com.example.fragmenttest2.asynchronous.AppDatabaseSingleton;
-import com.example.fragmenttest2.asynchronous.usersinfo.DataSave;
 import com.example.fragmenttest2.asynchronous.usersinfo.GetLine;
 import com.example.fragmenttest2.asynchronous.usersinfo.UsersInfo;
 
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 
 public class SignInDialog extends DialogFragment {
@@ -42,8 +39,9 @@ public class SignInDialog extends DialogFragment {
     public SetImage setImage;
     ImageButton LookUnLook;
 
+    @NonNull
     @Override
-    public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signin, null);
         assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
@@ -73,12 +71,13 @@ public class SignInDialog extends DialogFragment {
             this.etPass = etPass;
         }
 
+        @SuppressLint("NonConstantResourceId")
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.SignIn_button:
-                    final String regex = "[0123456789abcdefghijklmnopqrstyvwxyzABCDEFGHIJKLMNOPQRSTYVWXYZ]";
+                    final String regex = "[0123456789abcdefghijklmnopqrstuvwxzABCDEFGHIJKLMNOPQRSTUVWXYZ]";
                     final String name = etName.getText().toString();
                     final String password = etPass.getText().toString();
                     final String[] nameSplit = name.split("");
@@ -87,12 +86,12 @@ public class SignInDialog extends DialogFragment {
                     boolean nameFlag = true;
                     boolean passwordFlag = true;
 
-                    if (name.length() == 0 && nameFlag) {
+                    if (name.length() == 0) {
                         etName.setError(getString(R.string.errorNotInput));
                         flag = false;
                         nameFlag = false;
                     }
-                    if (password.length() == 0 && passwordFlag) {
+                    if (password.length() == 0) {
                         etPass.setError(getString(R.string.errorNotInput));
                         flag = false;
                         passwordFlag = false;
@@ -117,7 +116,7 @@ public class SignInDialog extends DialogFragment {
                     }
 
                     if (flag) {
-                        final AppDatabase db = AppDatabaseSingleton.getInstance(getActivity().getApplicationContext());
+                        final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
                         new GetLine(
                                 db,
                                 name,
@@ -125,21 +124,27 @@ public class SignInDialog extends DialogFragment {
                                 b-> {
                                     String salt = null;
                                     String hash = null;
-                                    for (UsersInfo ui : b) {
-                                        salt = ui.getSalt().substring(0, ui.getSalt().length() - 1);
-                                        hash = ui.getHash();
-                                    }
-                                    String result = getHash(password, salt) + "A";
                                     Context context = getActivity().getApplicationContext();
-                                    Log.v("HASH0", result);
-                                    Log.v("HASH1", hash);
-                                    if (hash.equals(result)) {
-                                        Toast.makeText(context, "ログイン成功", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(context, "ログイン失敗", Toast.LENGTH_LONG).show();
+
+                                    try {
+                                        for (UsersInfo ui : b) {
+                                            salt = ui.getSalt();
+                                            hash = ui.getHash();
+                                        }
+                                        String result = getHash(password, salt);
+                                        if (Objects.requireNonNull(hash).equals(result)) {
+                                            Toast.makeText(context, "ログイン成功", Toast.LENGTH_LONG).show();
+                                        } else {
+                                            Toast.makeText(context, "パスワードが間違っています", Toast.LENGTH_LONG).show();
+                                        }
+                                    } catch (Exception e) {
+                                        Toast.makeText(context, "ユーザー名が登録されていません", Toast.LENGTH_LONG).show();
                                     }
                                 },
-                                e->Log.v("Sign In", "NO")
+                                e-> {
+                                    Context context = getActivity().getApplicationContext();
+                                    Toast.makeText(context, "ログインできませんでした", Toast.LENGTH_LONG).show();
+                                }
                         ).execute();
                         dismiss();
                     }
@@ -162,6 +167,7 @@ public class SignInDialog extends DialogFragment {
         }
     }
 
+    @Nullable
     public static String getHash(String password, String salt) {
         MessageDigest sha512;
         try {
@@ -183,7 +189,6 @@ public class SignInDialog extends DialogFragment {
                 sha512_result = sha512.digest(sha512_result);
             }
         }
-        String hash = String.format("%04x", new BigInteger(1, sha512_result));
-        return hash;
+        return String.format("%04x", new BigInteger(1, sha512_result));
     }
 }
