@@ -38,6 +38,7 @@ public class DungeonFragment extends Fragment {
         mainText.setText(str);
     }
 
+    @NonNull
     public static DungeonFragment newInstance(String str){
         DungeonFragment fragment = new DungeonFragment();
         Bundle barg = new Bundle();

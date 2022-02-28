@@ -35,7 +35,7 @@ public class UserDialog extends DialogFragment {
     private class onClickListener implements View.OnClickListener {
         @SuppressLint("NonConstantResourceId")
         @Override
-        public void onClick(View v) {
+        public void onClick(@NonNull View v) {
             switch (v.getId()) {
                 case R.id.SignInPage_button:
                     SignInDialog signInDialogFragment = new SignInDialog();

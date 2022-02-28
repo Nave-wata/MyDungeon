@@ -37,6 +37,7 @@ public class HomeFragment extends Fragment {
         mainText.setText(str);
     }
 
+    @NonNull
     public static HomeFragment newInstance(String str){
         HomeFragment fragment = new HomeFragment();
         Bundle barg = new Bundle();
