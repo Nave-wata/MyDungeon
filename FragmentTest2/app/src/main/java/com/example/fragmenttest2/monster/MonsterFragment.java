@@ -38,6 +38,7 @@ public class MonsterFragment extends Fragment {
         mainText.setText(str);
     }
 
+    @NonNull
     public static MonsterFragment newInstance(String str){
         MonsterFragment fragment = new MonsterFragment();
         Bundle barg = new Bundle();

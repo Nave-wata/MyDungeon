@@ -70,7 +70,7 @@ public class SignUpDialog extends DialogFragment {
         @SuppressLint("NonConstantResourceId")
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
-        public void onClick(View v) {
+        public void onClick(@NonNull View v) {
             switch (v.getId()) {
                 case R.id.SignUp_button:
                     final String regex = "[0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]";

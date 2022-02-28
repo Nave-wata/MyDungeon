@@ -23,6 +23,12 @@
 
 - DB_Test3の続き見たいなもの
 
+## FragmentTest1 [Repository](https://github.com/Nave-wata/MyDungeon/tree/main/FragmentTest1)
+
+## FragmentTest2 [Repository](https://github.com/Nave-wata/MyDungeon/tree/main/FragmentTest2)
+
+現在のメイン
+
 ## My_App_Test1 [Repository](https://github.com/Nave-wata/MyDungeon/tree/main/My_App_Test1)
 
 - [[Android]アプリの画面を遷移させる](https://akira-watson.com/android/activity-1.html)
