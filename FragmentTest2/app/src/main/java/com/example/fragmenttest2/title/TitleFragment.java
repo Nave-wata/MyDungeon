@@ -56,6 +56,11 @@ public class TitleFragment extends Fragment {
         userSelectionButton.setOnClickListener(clickListener);
     }
 
+    public void setOnClickStartButton() {
+        setImage.setImageViewBitmapFromAsset(startButton, "title/start.png");
+        startButton.setOnClickListener(new onClickListener());
+    }
+
     @NonNull
     public static TitleFragment newInstance(){
         TitleFragment fragment = new TitleFragment();
@@ -78,7 +83,7 @@ public class TitleFragment extends Fragment {
                     Objects.requireNonNull(activity).ChangeActivity();
                     break;
                 case R.id.userSelection_Button:
-                    UserDialog dialogFragment = new UserDialog(b-> Log.v("hoge", "hgoe"));
+                    UserDialog dialogFragment = new UserDialog(b->setOnClickStartButton());
                     dialogFragment.show(Objects.requireNonNull(getFragmentManager()), "user");
                     break;
                 default:
