@@ -13,6 +13,7 @@
     <string name="DialogNegativeText">キャンセル</string>
     <string name="DialogNeutralText">あとで</string>
     <string name="Name">ユーザー名</string>
+    <string name="NotUserSelect">未選択</string>
     <string name="Password">パスワード</string>
     <string name="Password2">パスワードをもう一度入力</string>
     <string name="NotMatch">パスワードが異なっています</string>
