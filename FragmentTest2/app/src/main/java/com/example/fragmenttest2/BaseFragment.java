@@ -23,6 +23,7 @@ import java.util.Objects;
 
 
 public class BaseFragment extends Fragment {
+    public final String ARGS_NAME = "com.example.fragmenttest2";
     static boolean homeFlag = false;
     static boolean dungeonFlag = true;
     static boolean monsterFlag = true;
@@ -64,6 +65,15 @@ public class BaseFragment extends Fragment {
         homeButton.setOnClickListener(iBt);
         dungeonButton.setOnClickListener(iBt);
         monsterButton.setOnClickListener(iBt);
+    }
+
+    @NonNull
+    public static BaseFragment newInstance(){
+        BaseFragment fragment = new BaseFragment();
+        Bundle barg = new Bundle();
+        barg.putString(fragment.ARGS_NAME, null);
+        fragment.setArguments(barg);
+        return fragment;
     }
 
     private class onClickListener implements View.OnClickListener {
