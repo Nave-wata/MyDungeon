@@ -25,17 +25,13 @@ public class BaseFragment extends Fragment {
     static boolean homeFlag = false;
     static boolean dungeonFlag = true;
     static boolean monsterFlag = true;
-    String[] str;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = Objects.requireNonNull(getActivity()).getIntent();
-        str = intent.getStringArrayExtra(TitleActivity.EXTRA_DATA);
-
         FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
-        fragmentTransaction.replace(R.id.MainContainer, HomeFragment.newInstance(str[0]));
+        fragmentTransaction.replace(R.id.MainContainer, HomeFragment.newInstance(MainActivity.UserName));
         fragmentTransaction.commit();
     }
 
@@ -50,7 +46,7 @@ public class BaseFragment extends Fragment {
 
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
-        onClickListener iBt = new onClickListener(str);
+        onClickListener iBt = new onClickListener(MainActivity.UserName);
 
         ImageButton homeButton = view.findViewById(R.id.home_button);
         ImageButton dungeonButton = view.findViewById(R.id.dungeon_button);
@@ -67,10 +63,10 @@ public class BaseFragment extends Fragment {
 
     private class onClickListener implements View.OnClickListener {
 
-        String[] str;
+        String UserName;
 
-        public onClickListener(String[] str) {
-            this.str = str;
+        public onClickListener(String UserName) {
+            this.UserName = UserName;
         }
 
         @SuppressLint("NonConstantResourceId")
@@ -82,7 +78,7 @@ public class BaseFragment extends Fragment {
             switch (v.getId()) {
                 case R.id.home_button:
                     if (homeFlag) {
-                        fragmentTransaction.replace(R.id.MainContainer, HomeFragment.newInstance(str[0]));
+                        fragmentTransaction.replace(R.id.MainContainer, HomeFragment.newInstance(UserName));
                         fragmentTransaction.commit();
                         homeFlag = false;
                     }
@@ -91,7 +87,7 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.dungeon_button:
                     if (dungeonFlag) {
-                        fragmentTransaction.replace(R.id.MainContainer, DungeonFragment.newInstance(str[1]));
+                        fragmentTransaction.replace(R.id.MainContainer, DungeonFragment.newInstance(UserName));
                         fragmentTransaction.commit();
                         dungeonFlag = false;
                     }
@@ -100,7 +96,7 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.monster_button:
                     if (monsterFlag) {
-                        fragmentTransaction.replace(R.id.MainContainer, MonsterFragment.newInstance(str[2]));
+                        fragmentTransaction.replace(R.id.MainContainer, MonsterFragment.newInstance(UserName));
                         fragmentTransaction.commit();
                         monsterFlag = false;
                     }
