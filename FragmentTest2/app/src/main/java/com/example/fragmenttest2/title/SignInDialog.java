@@ -8,7 +8,6 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,7 +36,6 @@ import java.util.function.Consumer;
 public class SignInDialog extends DialogFragment {
     private final Consumer<Integer> callback;
     private boolean flagLook = true;
-    private AssetManager assetManager;
     private SetImage setImage;
     private ImageButton LookUnLook;
 
@@ -49,7 +47,7 @@ public class SignInDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signin, null);
-        assetManager = Objects.requireNonNull(getActivity()).getAssets();
+        AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
 
         EditText etName = view.findViewById(R.id.TitleSIUserName);

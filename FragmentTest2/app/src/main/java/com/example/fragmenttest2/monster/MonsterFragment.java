@@ -15,7 +15,6 @@ import java.util.Objects;
 
 public class MonsterFragment extends Fragment {
     final String EXTRA_DATA = "com.example.fragmenttest2.monster";
-    private TextView mainText;
     private String str;
 
     @Override
@@ -33,7 +32,7 @@ public class MonsterFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mainText = view.findViewById(R.id.Monster_text);
+        TextView mainText = view.findViewById(R.id.Monster_text);
 
         mainText.setText(str);
     }

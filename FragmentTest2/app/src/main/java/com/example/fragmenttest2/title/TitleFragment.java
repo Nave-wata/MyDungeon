@@ -2,9 +2,7 @@ package com.example.fragmenttest2.title;
 
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +12,13 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.fragmenttest2.BaseFragment;
 import com.example.fragmenttest2.R;
 import com.example.fragmenttest2.SetImage;
-import com.example.fragmenttest2.asynchronous.AsyncRunnable;
 
 import java.util.Objects;
 
 public class TitleFragment extends Fragment {
     public final String EXTRA_DATA = "com.example.fragmenttest2.title";
-    private AssetManager assetManager;
     private SetImage setImage;
     private ImageButton startButton;
 
@@ -41,7 +36,7 @@ public class TitleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        assetManager = Objects.requireNonNull(getActivity()).getAssets();
+        AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
         onClickListener clickListener = new onClickListener();
 

@@ -32,7 +32,6 @@ import java.util.function.Consumer;
 public class SignUpDialog extends DialogFragment {
     private final Consumer<Integer> callback;
     private boolean flagLook = true;
-    private AssetManager assetManager;
     private SetImage setImage;
     private ImageButton LookUnLook;
 
@@ -44,7 +43,7 @@ public class SignUpDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signup, null);
-        assetManager = Objects.requireNonNull(getActivity()).getAssets();
+        AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
 
         EditText etName = view.findViewById(R.id.TitleSUUserName);

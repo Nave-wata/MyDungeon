@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.fragmenttest2.BaseFragment;
 import com.example.fragmenttest2.MainActivity;
 import com.example.fragmenttest2.R;
 import com.example.fragmenttest2.asynchronous.AppDatabaseSingleton;

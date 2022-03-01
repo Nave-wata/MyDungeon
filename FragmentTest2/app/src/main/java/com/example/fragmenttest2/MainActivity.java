@@ -1,12 +1,11 @@
 package com.example.fragmenttest2;
 
-import androidx.fragment.app.FragmentTransaction;
-import androidx.fragment.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.fragmenttest2.title.TitleActivity;
 

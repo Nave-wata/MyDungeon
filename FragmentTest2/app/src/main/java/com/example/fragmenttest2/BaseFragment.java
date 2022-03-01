@@ -1,10 +1,8 @@
 package com.example.fragmenttest2;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +15,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.fragmenttest2.dungeon.DungeonFragment;
 import com.example.fragmenttest2.home.HomeFragment;
 import com.example.fragmenttest2.monster.MonsterFragment;
-import com.example.fragmenttest2.title.TitleActivity;
 
 import java.util.Objects;
 
@@ -27,7 +24,7 @@ public class BaseFragment extends Fragment {
     private boolean homeFlag = false;
     private boolean dungeonFlag = true;
     private boolean monsterFlag = true;
-    private String UserName;
+    private final String UserName;
 
     public BaseFragment(String UserName) {
         this.UserName = UserName;
@@ -79,7 +76,7 @@ public class BaseFragment extends Fragment {
 
     private class onClickListener implements View.OnClickListener {
 
-        private String UserName;
+        private final String UserName;
 
         public onClickListener(String UserName) {
             this.UserName = UserName;
