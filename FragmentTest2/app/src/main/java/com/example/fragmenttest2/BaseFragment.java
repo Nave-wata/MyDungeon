@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,9 +31,13 @@ public class BaseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Intent intent = getActivity().getIntent();
+        MainActivity.UserName = intent.getStringExtra(TitleActivity.EXTRA_DATA);
+
         FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         fragmentTransaction.replace(R.id.MainContainer, HomeFragment.newInstance(MainActivity.UserName));
         fragmentTransaction.commit();
+        Log.v("BaseFragment", "onCreate");
     }
 
     @Override

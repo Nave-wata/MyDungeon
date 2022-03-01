@@ -2,6 +2,7 @@ package com.example.fragmenttest2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,5 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = this.getIntent();
         UserName = intent.getStringExtra(TitleActivity.EXTRA_DATA);
+        Log.v("UserName = ", UserName);
     }
 }
