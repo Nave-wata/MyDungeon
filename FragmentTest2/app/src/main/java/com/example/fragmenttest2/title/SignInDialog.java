@@ -134,7 +134,6 @@ public class SignInDialog extends DialogFragment {
                                         String result = getHash(password, salt);
                                         if (Objects.requireNonNull(hash).equals(result)) {
                                             TitleActivity.UserName = name;
-                                            new TitleFragment().setOnClickStartButton();
                                             Toast.makeText(context, "ログイン成功", Toast.LENGTH_LONG).show();
                                         } else {
                                             Toast.makeText(context, "パスワードが間違っています", Toast.LENGTH_LONG).show();

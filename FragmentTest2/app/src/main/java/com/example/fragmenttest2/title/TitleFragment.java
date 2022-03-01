@@ -55,11 +55,6 @@ public class TitleFragment extends Fragment {
         userSelectionButton.setOnClickListener(clickListener);
     }
 
-    public void setOnClickStartButton() {
-        startButton.setOnClickListener(new onClickListener()); // 押せるタイミング調整
-        setImage.setImageButtonBitmapFromAsset(startButton, "title/start.png");
-    }
-
     @NonNull
     public static TitleFragment newInstance(){
         TitleFragment fragment = new TitleFragment();
