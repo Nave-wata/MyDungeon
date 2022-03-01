@@ -24,6 +24,7 @@ public class TitleFragment extends Fragment {
     public final String EXTRA_DATA = "com.example.fragmenttest2.title";
     private AssetManager assetManager;
     private SetImage setImage;
+    private ImageButton startButton;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -45,14 +46,18 @@ public class TitleFragment extends Fragment {
 
         ImageView imageView = view.findViewById(R.id.image_view1);
         ImageButton userSelectionButton = view.findViewById(R.id.userSelection_Button);
-        ImageButton startButton = view.findViewById(R.id.Start_Button);
+        startButton = view.findViewById(R.id.Start_Button);
 
         setImage.setImageViewBitmapFromAsset(imageView, "title/title.png");
         setImage.setImageButtonBitmapFromAsset(userSelectionButton, "title/ic_user.png");
         setImage.setImageButtonBitmapFromAsset(startButton, "title/non_start.png");
 
-        startButton.setOnClickListener(clickListener); // 押せるタイミング調整
         userSelectionButton.setOnClickListener(clickListener);
+    }
+
+    public void setOnClickStartButton() {
+        startButton.setOnClickListener(new onClickListener()); // 押せるタイミング調整
+        setImage.setImageButtonBitmapFromAsset(startButton, "title/start.png");
     }
 
     @NonNull
