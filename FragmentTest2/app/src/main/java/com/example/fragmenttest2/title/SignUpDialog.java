@@ -27,12 +27,18 @@ import com.example.fragmenttest2.asynchronous.AppDatabaseSingleton;
 import com.example.fragmenttest2.asynchronous.usersinfo.DataSave;
 
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public class SignUpDialog extends DialogFragment {
+    private final Consumer<Integer> callback;
     private boolean flagLook = true;
     private AssetManager assetManager;
     private SetImage setImage;
     private ImageButton LookUnLook;
+
+    public SignUpDialog(Consumer<Integer> callback) {
+        this.callback = callback;
+    }
 
     @NonNull
     @Override
@@ -124,6 +130,7 @@ public class SignUpDialog extends DialogFragment {
                                     Context context = getActivity().getApplicationContext();
                                     Toast.makeText(context, "登録完了しました", Toast.LENGTH_SHORT).show();
                                     TitleActivity.UserName = name;
+                                    callback.accept(0);
                                 },
                                 sqlE -> {
                                     Context context = getActivity().getApplicationContext();

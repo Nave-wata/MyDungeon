@@ -31,13 +31,19 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 
 public class SignInDialog extends DialogFragment {
+    private final Consumer<Integer> callback;
     private boolean flagLook = true;
     private AssetManager assetManager;
     private SetImage setImage;
     private ImageButton LookUnLook;
+
+    public SignInDialog(Consumer<Integer> callback) {
+        this.callback = callback;
+    }
 
     @NonNull
     @Override
@@ -134,6 +140,7 @@ public class SignInDialog extends DialogFragment {
                                         String result = getHash(password, salt);
                                         if (Objects.requireNonNull(hash).equals(result)) {
                                             TitleActivity.UserName = name;
+                                            callback.accept(0);
                                             Toast.makeText(context, "ログイン成功", Toast.LENGTH_LONG).show();
                                         } else {
                                             Toast.makeText(context, "パスワードが間違っています", Toast.LENGTH_LONG).show();

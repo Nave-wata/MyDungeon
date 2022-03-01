@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +78,7 @@ public class TitleFragment extends Fragment {
                     Objects.requireNonNull(activity).ChangeActivity();
                     break;
                 case R.id.userSelection_Button:
-                    UserDialog dialogFragment = new UserDialog();
+                    UserDialog dialogFragment = new UserDialog(b-> Log.v("hoge", "hgoe"));
                     dialogFragment.show(Objects.requireNonNull(getFragmentManager()), "user");
                     break;
                 default:
