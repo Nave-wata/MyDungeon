@@ -32,9 +32,6 @@ public class BaseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = getActivity().getIntent();
-        MainActivity.UserName = intent.getStringExtra(TitleActivity.EXTRA_DATA);
-
         FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         fragmentTransaction.replace(R.id.MainContainer, HomeFragment.newInstance(MainActivity.UserName));
         fragmentTransaction.commit();
