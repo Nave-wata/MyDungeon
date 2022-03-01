@@ -12,7 +12,7 @@ import com.example.fragmenttest2.title.TitleActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-    public String UserName;
+    private String UserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

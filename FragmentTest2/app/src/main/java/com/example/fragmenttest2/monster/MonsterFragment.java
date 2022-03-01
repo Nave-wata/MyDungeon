@@ -14,7 +14,7 @@ import com.example.fragmenttest2.R;
 import java.util.Objects;
 
 public class MonsterFragment extends Fragment {
-    public final String ARGS_NAME = "com.example.fragmenttest2.monster";
+    final String ARGS_NAME = "com.example.fragmenttest2.monster";
     TextView mainText;
     String str;
 

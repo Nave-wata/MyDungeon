@@ -13,7 +13,7 @@ import com.example.fragmenttest2.R;
 import java.util.Objects;
 
 public class HomeFragment extends Fragment {
-    public final String ARGS_NAME = "com.example.fragmenttest2.home";
+    final String ARGS_NAME = "com.example.fragmenttest2.home";
     TextView mainText;
     String str;
 

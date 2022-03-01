@@ -23,7 +23,7 @@ import java.util.Objects;
 
 
 public class BaseFragment extends Fragment {
-    public final String ARGS_NAME = "com.example.fragmenttest2";
+    final String ARGS_NAME = "com.example.fragmenttest2";
     private boolean homeFlag = false;
     private boolean dungeonFlag = true;
     private boolean monsterFlag = true;
@@ -79,7 +79,7 @@ public class BaseFragment extends Fragment {
 
     private class onClickListener implements View.OnClickListener {
 
-        String UserName;
+        private String UserName;
 
         public onClickListener(String UserName) {
             this.UserName = UserName;
