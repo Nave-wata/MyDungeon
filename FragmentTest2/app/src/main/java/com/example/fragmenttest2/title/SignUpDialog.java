@@ -99,11 +99,6 @@ public class SignUpDialog extends DialogFragment {
                     boolean passwordFlag = true;
                     boolean passwordFlag2 = true;
 
-                    if (!password.equals(password2)) {
-                        etPass2.setError(getString(R.string.NotMatch));
-                        flag = false;
-                        passwordFlag2 = false;
-                    }
                     if (name.length() == 0) {
                         etName.setError(getString(R.string.errorNotInput));
                         flag = false;
@@ -114,12 +109,12 @@ public class SignUpDialog extends DialogFragment {
                         flag = false;
                         passwordFlag = false;
                     }
-                    if (password2.length() == 0 && passwordFlag2) {
+                    if (password2.length() == 0) {
                         etPass2.setError(getString(R.string.errorNotInput));
                         flag = false;
                         passwordFlag2 = false;
                     }
-                    if (nameFlag && passwordFlag2) {
+                    if (nameFlag) {
                         for (String s : nameSplit) {
                             if (!s.matches(regex)) {
                                 etName.setError(getString(R.string.errorNotInText));
@@ -128,7 +123,7 @@ public class SignUpDialog extends DialogFragment {
                             }
                         }
                     }
-                    if (passwordFlag && passwordFlag2) {
+                    if (passwordFlag) {
                         for (String s : passwordSplit) {
                             if (!s.matches(regex)) {
                                 etPass.setError(getString(R.string.errorNotInText));
@@ -137,14 +132,19 @@ public class SignUpDialog extends DialogFragment {
                             }
                         }
                     }
-                    if (passwordFlag2 && nameFlag) {
+                    if (passwordFlag2) {
                         for (String s : passwordSplit2) {
                             if (!s.matches(regex)) {
                                 etPass2.setError(getString(R.string.errorNotInText));
                                 flag = false;
+                                passwordFlag2 = false;
                                 break;
                             }
                         }
+                    }
+                    if (!password.equals(password2) && passwordFlag2) {
+                        etPass2.setError(getString(R.string.NotMatch));
+                        flag = false;
                     }
 
                     if (flag) {
