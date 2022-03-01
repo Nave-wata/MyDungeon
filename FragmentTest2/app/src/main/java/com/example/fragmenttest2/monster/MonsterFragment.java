@@ -15,8 +15,8 @@ import java.util.Objects;
 
 public class MonsterFragment extends Fragment {
     final String EXTRA_DATA = "com.example.fragmenttest2.monster";
-    TextView mainText;
-    String str;
+    private TextView mainText;
+    private String str;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

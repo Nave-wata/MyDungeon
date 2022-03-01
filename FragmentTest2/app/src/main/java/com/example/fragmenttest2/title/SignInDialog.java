@@ -34,10 +34,10 @@ import java.util.Objects;
 
 
 public class SignInDialog extends DialogFragment {
-    boolean flagLook = true;
-    public AssetManager assetManager;
-    public SetImage setImage;
-    ImageButton LookUnLook;
+    private boolean flagLook = true;
+    private AssetManager assetManager;
+    private SetImage setImage;
+    private ImageButton LookUnLook;
 
     @NonNull
     @Override

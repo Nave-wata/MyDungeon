@@ -22,8 +22,8 @@ import java.util.Objects;
 
 public class TitleFragment extends Fragment {
     public final String EXTRA_DATA = "com.example.fragmenttest2.title";
-    public AssetManager assetManager;
-    public SetImage setImage;
+    private AssetManager assetManager;
+    private SetImage setImage;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
