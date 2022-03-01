@@ -24,7 +24,7 @@ public class TitleActivity extends AppCompatActivity {
 
     public void ChangeActivity() {
         Intent intent = new Intent(getApplication(), MainActivity.class);
-        intent.putExtra(EXTRA_DATA, );
+        intent.putExtra(EXTRA_DATA, SignInDialog.UserName);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();

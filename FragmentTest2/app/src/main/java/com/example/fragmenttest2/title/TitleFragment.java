@@ -50,7 +50,7 @@ public class TitleFragment extends Fragment {
         setImage.setImageButtonBitmapFromAsset(userSelectionButton, "title/ic_user.png");
         setImage.setImageButtonBitmapFromAsset(startButton, "title/non_start.png");
 
-        startButton.setOnClickListener(clickListener);
+        startButton.setOnClickListener(clickListener); // 押せるタイミング調整
         userSelectionButton.setOnClickListener(clickListener);
     }
 
