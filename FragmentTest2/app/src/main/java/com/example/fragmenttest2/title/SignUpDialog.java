@@ -99,6 +99,11 @@ public class SignUpDialog extends DialogFragment {
                     boolean passwordFlag = true;
                     boolean passwordFlag2 = true;
 
+                    if (!password.equals(password2)) {
+                        etPass2.setError(getString(R.string.NotMatch));
+                        flag = false;
+                        passwordFlag2 = false;
+                    }
                     if (name.length() == 0) {
                         etName.setError(getString(R.string.errorNotInput));
                         flag = false;
@@ -109,7 +114,7 @@ public class SignUpDialog extends DialogFragment {
                         flag = false;
                         passwordFlag = false;
                     }
-                    if (password2.length() == 0) {
+                    if (password2.length() == 0 && passwordFlag2) {
                         etPass2.setError(getString(R.string.errorNotInput));
                         flag = false;
                         passwordFlag2 = false;

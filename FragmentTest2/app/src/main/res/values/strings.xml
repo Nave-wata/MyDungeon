@@ -15,6 +15,7 @@
     <string name="Name">ユーザー名</string>
     <string name="Password">パスワード</string>
     <string name="Password2">パスワードをもう一度入力</string>
+    <string name="NotMatch">パスワードが異なっています</string>
     <string name="errorNotInput">入力必須項目です</string>
     <string name="errorNotSpace">空白が含まれています</string>
     <string name="errorNotInText">英数字以外が含まれています</string>
