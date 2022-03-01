@@ -12,6 +12,7 @@ import com.example.fragmenttest2.asynchronous.usersinfo.InitDB;
 
 public class TitleActivity extends AppCompatActivity {
     public static String EXTRA_DATA = "com.example.fragmenttest2.title";
+    public static String UserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,7 @@ public class TitleActivity extends AppCompatActivity {
 
     public void ChangeActivity() {
         Intent intent = new Intent(getApplication(), MainActivity.class);
-        intent.putExtra(EXTRA_DATA, SignInDialog.UserName);
+        intent.putExtra(EXTRA_DATA, UserName);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();

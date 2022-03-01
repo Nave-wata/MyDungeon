@@ -38,7 +38,6 @@ public class SignInDialog extends DialogFragment {
     public AssetManager assetManager;
     public SetImage setImage;
     ImageButton LookUnLook;
-    public static String UserName;
 
     @NonNull
     @Override
@@ -134,7 +133,7 @@ public class SignInDialog extends DialogFragment {
                                         }
                                         String result = getHash(password, salt);
                                         if (Objects.requireNonNull(hash).equals(result)) {
-                                            UserName = name;
+                                            TitleActivity.UserName = name;
                                             Toast.makeText(context, "ログイン成功", Toast.LENGTH_LONG).show();
                                         } else {
                                             Toast.makeText(context, "パスワードが間違っています", Toast.LENGTH_LONG).show();

@@ -123,7 +123,7 @@ public class SignUpDialog extends DialogFragment {
                                 b -> {
                                     Context context = getActivity().getApplicationContext();
                                     Toast.makeText(context, "登録完了しました", Toast.LENGTH_SHORT).show();
-                                    SignInDialog.UserName = name;
+                                    TitleActivity.UserName = name;
                                 },
                                 sqlE -> {
                                     Context context = getActivity().getApplicationContext();
