@@ -2,6 +2,7 @@ package com.example.fragmenttest2.title;
 
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +21,6 @@ import java.util.Objects;
 
 public class TitleFragment extends Fragment {
 
-    public String[] URLs = new String[] {
-            "https://zipcloud.ibsnet.co.jp/api/search?zipcode=0791143",
-            "https://zipcloud.ibsnet.co.jp/api/search?zipcode=1001701",
-            "https://zipcloud.ibsnet.co.jp/api/search?zipcode=9041103"
-    };
-    public String[] str = new String[URLs.length];
-    public ImageButton imageButton;
     public AssetManager assetManager;
     public SetImage setImage;
 
@@ -46,50 +40,18 @@ public class TitleFragment extends Fragment {
 
         assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
+        onClickListener clickListener = new onClickListener();
 
         ImageView imageView = view.findViewById(R.id.image_view1);
         ImageButton userSelectionButton = view.findViewById(R.id.userSelection_Button);
-        imageButton = view.findViewById(R.id.Start_Button);
+        ImageButton startButton = view.findViewById(R.id.Start_Button);
 
         setImage.setImageViewBitmapFromAsset(imageView, "title/title.png");
         setImage.setImageButtonBitmapFromAsset(userSelectionButton, "title/ic_user.png");
-        setImage.setImageButtonBitmapFromAsset(imageButton, "title/non_start.png");
+        setImage.setImageButtonBitmapFromAsset(startButton, "title/non_start.png");
 
-        userSelectionButton.setOnClickListener(new onClickListener());
-
-        Connection();
-    }
-
-    private void Connection() {
-        new AsyncRunnable(
-                URLs[0],
-                b->Success(new String(b), 0),
-                e->Failure(0)
-        ).execute();
-
-        new AsyncRunnable(
-                URLs[1],
-                b->Success(new String(b), 1),
-                e->Failure(1)
-        ).execute();
-
-        new AsyncRunnable(
-                URLs[2],
-                b->Success(new String(b), 2),
-                e->Failure(2)
-        ).execute();
-    }
-
-    private void Success(String b, int i) {
-        str[i] = b;
-        setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
-        imageButton.setOnClickListener(new onClickListener());
-    }
-
-    private void Failure(int i) {
-        str[i] = "Not found";
-        setImage.setImageButtonBitmapFromAsset(imageButton, "title/start.png");
-        imageButton.setOnClickListener(new onClickListener());
+        startButton.setOnClickListener(clickListener);
+        userSelectionButton.setOnClickListener(clickListener);
     }
 
 
@@ -102,7 +64,7 @@ public class TitleFragment extends Fragment {
 
             switch (id){
                 case R.id.Start_Button:
-                    Objects.requireNonNull(activity).ChangeActivity(str);
+                    Objects.requireNonNull(activity).ChangeActivity();
                     break;
                 case R.id.userSelection_Button:
                     UserDialog dialogFragment = new UserDialog();
