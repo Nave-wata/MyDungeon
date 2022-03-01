@@ -14,7 +14,7 @@ import com.example.fragmenttest2.R;
 import java.util.Objects;
 
 public class DungeonFragment extends Fragment {
-    final String ARGS_NAME = "com.example.fragmenttest2.dungeon";
+    final String EXTRA_DATA = "com.example.fragmenttest2.dungeon";
     TextView mainText;
     String str;
 
@@ -22,7 +22,7 @@ public class DungeonFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
-        str = Objects.requireNonNull(args).getString(ARGS_NAME);
+        str = Objects.requireNonNull(args).getString(EXTRA_DATA);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class DungeonFragment extends Fragment {
     public static DungeonFragment newInstance(String str){
         DungeonFragment fragment = new DungeonFragment();
         Bundle barg = new Bundle();
-        barg.putString(fragment.ARGS_NAME, str);
+        barg.putString(fragment.EXTRA_DATA, str);
         fragment.setArguments(barg);
         return fragment;
     }

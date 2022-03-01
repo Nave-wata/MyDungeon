@@ -14,7 +14,7 @@ import com.example.fragmenttest2.R;
 import java.util.Objects;
 
 public class MonsterFragment extends Fragment {
-    final String ARGS_NAME = "com.example.fragmenttest2.monster";
+    final String EXTRA_DATA = "com.example.fragmenttest2.monster";
     TextView mainText;
     String str;
 
@@ -22,7 +22,7 @@ public class MonsterFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
-        str = Objects.requireNonNull(args).getString(ARGS_NAME);
+        str = Objects.requireNonNull(args).getString(EXTRA_DATA);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class MonsterFragment extends Fragment {
     public static MonsterFragment newInstance(String str){
         MonsterFragment fragment = new MonsterFragment();
         Bundle barg = new Bundle();
-        barg.putString(fragment.ARGS_NAME, str);
+        barg.putString(fragment.EXTRA_DATA, str);
         fragment.setArguments(barg);
         return fragment;
     }

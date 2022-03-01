@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.fragmenttest2.BaseFragment;
 import com.example.fragmenttest2.MainActivity;
 import com.example.fragmenttest2.R;
 import com.example.fragmenttest2.asynchronous.AppDatabaseSingleton;
@@ -19,6 +22,11 @@ public class TitleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_FragmentTest2);
         setContentView(R.layout.activity_title);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.TitleContainer, TitleFragment.newInstance());
+        fragmentTransaction.commit();
 
         new InitDB(AppDatabaseSingleton.getInstance(getApplicationContext())).execute();
     }

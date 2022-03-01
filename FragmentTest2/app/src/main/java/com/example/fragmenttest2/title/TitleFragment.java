@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.fragmenttest2.BaseFragment;
 import com.example.fragmenttest2.R;
 import com.example.fragmenttest2.SetImage;
 import com.example.fragmenttest2.asynchronous.AsyncRunnable;
@@ -20,7 +21,7 @@ import com.example.fragmenttest2.asynchronous.AsyncRunnable;
 import java.util.Objects;
 
 public class TitleFragment extends Fragment {
-
+    public final String EXTRA_DATA = "com.example.fragmenttest2.title";
     public AssetManager assetManager;
     public SetImage setImage;
 
@@ -52,6 +53,15 @@ public class TitleFragment extends Fragment {
 
         startButton.setOnClickListener(clickListener); // 押せるタイミング調整
         userSelectionButton.setOnClickListener(clickListener);
+    }
+
+    @NonNull
+    public static TitleFragment newInstance(){
+        TitleFragment fragment = new TitleFragment();
+        Bundle barg = new Bundle();
+        barg.putString(fragment.EXTRA_DATA, null);
+        fragment.setArguments(barg);
+        return fragment;
     }
 
 

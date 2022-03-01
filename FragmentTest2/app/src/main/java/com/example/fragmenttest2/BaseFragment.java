@@ -23,7 +23,7 @@ import java.util.Objects;
 
 
 public class BaseFragment extends Fragment {
-    final String ARGS_NAME = "com.example.fragmenttest2";
+    final String EXTRA_DATA = "com.example.fragmenttest2";
     private boolean homeFlag = false;
     private boolean dungeonFlag = true;
     private boolean monsterFlag = true;
@@ -72,7 +72,7 @@ public class BaseFragment extends Fragment {
     public static BaseFragment newInstance(String UserName){
         BaseFragment fragment = new BaseFragment(UserName);
         Bundle barg = new Bundle();
-        barg.putString(fragment.ARGS_NAME, UserName);
+        barg.putString(fragment.EXTRA_DATA, UserName);
         fragment.setArguments(barg);
         return fragment;
     }
