@@ -24,18 +24,22 @@ import java.util.Objects;
 
 public class BaseFragment extends Fragment {
     public final String ARGS_NAME = "com.example.fragmenttest2";
-    static boolean homeFlag = false;
-    static boolean dungeonFlag = true;
-    static boolean monsterFlag = true;
+    private boolean homeFlag = false;
+    private boolean dungeonFlag = true;
+    private boolean monsterFlag = true;
+    private String UserName;
+
+    public BaseFragment(String UserName) {
+        this.UserName = UserName;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
-        fragmentTransaction.replace(R.id.MainContainer, HomeFragment.newInstance(MainActivity.UserName));
+        fragmentTransaction.replace(R.id.MainContainer, HomeFragment.newInstance(UserName));
         fragmentTransaction.commit();
-        Log.v("BaseFragment", "onCreate");
     }
 
     @Override
@@ -49,7 +53,7 @@ public class BaseFragment extends Fragment {
 
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
-        onClickListener iBt = new onClickListener(MainActivity.UserName);
+        onClickListener iBt = new onClickListener(UserName);
 
         ImageButton homeButton = view.findViewById(R.id.home_button);
         ImageButton dungeonButton = view.findViewById(R.id.dungeon_button);
@@ -65,10 +69,10 @@ public class BaseFragment extends Fragment {
     }
 
     @NonNull
-    public static BaseFragment newInstance(){
-        BaseFragment fragment = new BaseFragment();
+    public static BaseFragment newInstance(String UserName){
+        BaseFragment fragment = new BaseFragment(UserName);
         Bundle barg = new Bundle();
-        barg.putString(fragment.ARGS_NAME, null);
+        barg.putString(fragment.ARGS_NAME, UserName);
         fragment.setArguments(barg);
         return fragment;
     }

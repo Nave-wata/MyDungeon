@@ -12,7 +12,7 @@ import com.example.fragmenttest2.title.TitleActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-    public static String UserName;
+    public String UserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +21,10 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = this.getIntent();
         UserName = intent.getStringExtra(TitleActivity.EXTRA_DATA);
-        Log.v("UserName = ", UserName);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.BaseContainer, BaseFragment.newInstance());
+        fragmentTransaction.replace(R.id.BaseContainer, BaseFragment.newInstance(UserName));
         fragmentTransaction.commit();
     }
 }
