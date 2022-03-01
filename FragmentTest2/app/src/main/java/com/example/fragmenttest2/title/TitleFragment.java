@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,6 +22,7 @@ public class TitleFragment extends Fragment {
     public final String EXTRA_DATA = "com.example.fragmenttest2.title";
     private SetImage setImage;
     private ImageButton startButton;
+    private TextView UserNameText;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -43,6 +45,7 @@ public class TitleFragment extends Fragment {
         ImageView imageView = view.findViewById(R.id.image_view1);
         ImageButton userSelectionButton = view.findViewById(R.id.userSelection_Button);
         startButton = view.findViewById(R.id.Start_Button);
+        UserNameText = view.findViewById(R.id.UserNameText);
 
         setImage.setImageViewBitmapFromAsset(imageView, "title/title.png");
         setImage.setImageButtonBitmapFromAsset(userSelectionButton, "title/ic_user.png");
@@ -54,6 +57,7 @@ public class TitleFragment extends Fragment {
     public void setOnClickStartButton() {
         setImage.setImageViewBitmapFromAsset(startButton, "title/start.png");
         startButton.setOnClickListener(new onClickListener());
+        UserNameText.setText(TitleActivity.UserName);
     }
 
     @NonNull

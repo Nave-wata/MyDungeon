@@ -41,7 +41,7 @@
         <TextView
             android:id="@+id/UserNameText"
             android:layout_width="wrap_content"
-            android:layout_height="90px"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@string/NotUserSelect"
             android:background="#aaa"
