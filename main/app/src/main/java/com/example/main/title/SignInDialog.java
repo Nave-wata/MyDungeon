@@ -80,8 +80,13 @@ public class SignInDialog extends DialogFragment {
 
         setImage.setImageViewBitmapFromAsset(LookUnLook, "title/unlook.png");
 
-        nextAutoIn.setChecked(false);
-
+        if (dataStore.getBoolean(DS_Flag, false)) {
+            nextAutoIn.setChecked(true);
+            etName.setText(dataStore.getString(DS_Name, null));
+            etPass.setText(dataStore.getString(DS_Passwd, null));
+        } else {
+            nextAutoIn.setChecked(false);
+        }
 
         onClickListener clickListener = new onClickListener(etName, etPass, nextAutoIn);
         btn.setOnClickListener(clickListener);
@@ -196,12 +201,13 @@ public class SignInDialog extends DialogFragment {
                                             Toast.makeText(context, "ログイン成功", Toast.LENGTH_LONG).show();
 
                                             if (nextAutoIn.isChecked()) {
-                                                //editor.putBoolean(DS_Flag, true);
-                                                //editor.putString(DS_Name, name);
-                                                //editor.putString(DS_Passwd, password);
+                                                editor.putBoolean(DS_Flag, true);
+                                                editor.putString(DS_Name, name);
+                                                editor.putString(DS_Passwd, password);
                                             } else {
-                                                //editor.putBoolean("Flag", false);
+                                                editor.putBoolean("Flag", false);
                                             }
+                                            editor.apply();
                                         } else {
                                             Toast.makeText(context, "パスワードが間違っています", Toast.LENGTH_LONG).show();
                                         }
