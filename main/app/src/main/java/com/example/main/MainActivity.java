@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.main.title.TitleActivity;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -56,10 +57,8 @@ public class MainActivity extends AppCompatActivity {
         //LocalDateTime afterTime = LocalDateTime.parse(afterTimeStr);
 
         //long Day = ChronoUnit.SECONDS.between(beforeTime, afterTime);
-        LocalDateTime dt1;
-        LocalDateTime dt2;
-
-        dt1 = parse("2017-12-10 09:10:30.432");
-        dt2 = parse("2022-03-16 12:45:12.102");
+        LocalDateTime beginSummerVacation = LocalDateTime.of(2021, 7, 20, 11, 00);// 夏休みは終業式が終わったタイミングから
+        LocalDateTime endSummerVacation = LocalDateTime.of(2021, 9, 1, 8, 00);// 始業式が始まるタイミングまで
+        Duration summerVacationDuration = Duration.between(beginSummerVacation, endSummerVacation);// 期間分の時間を取得する
     }
 }
