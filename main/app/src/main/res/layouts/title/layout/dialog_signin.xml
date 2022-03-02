@@ -59,7 +59,7 @@
     </LinearLayout>
 
     <CheckBox
-        android:id="@+id/nextAutoIn"
+        android:id="@+id/SInextAutoIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

@@ -76,7 +76,7 @@ public class SignInDialog extends DialogFragment {
         EditText etPass = view.findViewById(R.id.TitleSIPassword);
         Button btn = view.findViewById(R.id.SignIn_button);
         LookUnLook = view.findViewById(R.id.SILook_unLook_button);
-        CheckBox nextAutoIn = view.findViewById(R.id.nextAutoIn);
+        CheckBox nextAutoIn = view.findViewById(R.id.SInextAutoIn);
 
         setImage.setImageViewBitmapFromAsset(LookUnLook, "title/unlook.png");
 
