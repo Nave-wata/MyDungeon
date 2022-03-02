@@ -2,6 +2,7 @@ package com.example.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -25,5 +26,11 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.BaseContainer, BaseFragment.newInstance(UserName));
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.v("MyApp", "onPose");
     }
 }
