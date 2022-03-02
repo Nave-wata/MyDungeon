@@ -12,9 +12,16 @@ import androidx.fragment.app.DialogFragment;
 import com.example.fragmenttest2.R;
 
 import java.util.Objects;
+import java.util.function.Consumer;
 
 
 public class UserDialog extends DialogFragment {
+    private final Consumer<Integer> callback;
+
+    public UserDialog(Consumer<Integer> callback) {
+        this.callback = callback;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -38,12 +45,12 @@ public class UserDialog extends DialogFragment {
         public void onClick(@NonNull View v) {
             switch (v.getId()) {
                 case R.id.SignInPage_button:
-                    SignInDialog signInDialogFragment = new SignInDialog();
+                    SignInDialog signInDialogFragment = new SignInDialog(callback);
                     signInDialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userSelect");
                     dismiss();
                     break;
                 case R.id.SignUpPage_button:
-                    SignUpDialog signUpDialogFragment = new SignUpDialog();
+                    SignUpDialog signUpDialogFragment = new SignUpDialog(callback);
                     signUpDialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userAdd");
                     dismiss();
                     break;

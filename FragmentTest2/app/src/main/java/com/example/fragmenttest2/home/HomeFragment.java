@@ -13,15 +13,14 @@ import com.example.fragmenttest2.R;
 import java.util.Objects;
 
 public class HomeFragment extends Fragment {
-    public final String ARGS_NAME = "com.example.fragmenttest2.home";
-    TextView mainText;
-    String str;
+    final String EXTRA_DATA = "com.example.fragmenttest2.home";
+    private String str;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
-        str = Objects.requireNonNull(args).getString(ARGS_NAME);
+        str = Objects.requireNonNull(args).getString(EXTRA_DATA);
     }
 
     @Override
@@ -32,7 +31,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mainText = view.findViewById(R.id.Home_text);
+        TextView mainText = view.findViewById(R.id.Home_text);
 
         mainText.setText(str);
     }
@@ -41,7 +40,7 @@ public class HomeFragment extends Fragment {
     public static HomeFragment newInstance(String str){
         HomeFragment fragment = new HomeFragment();
         Bundle barg = new Bundle();
-        barg.putString(fragment.ARGS_NAME, str);
+        barg.putString(fragment.EXTRA_DATA, str);
         fragment.setArguments(barg);
         return fragment;
     }

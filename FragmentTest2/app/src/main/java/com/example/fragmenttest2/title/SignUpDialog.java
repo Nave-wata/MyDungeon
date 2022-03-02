@@ -27,31 +27,43 @@ import com.example.fragmenttest2.asynchronous.AppDatabaseSingleton;
 import com.example.fragmenttest2.asynchronous.usersinfo.DataSave;
 
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public class SignUpDialog extends DialogFragment {
-    boolean flagLook = true;
-    public AssetManager assetManager;
-    public SetImage setImage;
-    ImageButton LookUnLook;
+    private final Consumer<Integer> callback;
+    private boolean flagLook = true;
+    private boolean flagLook2 = true;
+    private SetImage setImage;
+    private ImageButton LookUnLook;
+    private ImageButton LookUnLook2;
+
+    public SignUpDialog(Consumer<Integer> callback) {
+        this.callback = callback;
+    }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signup, null);
-        assetManager = Objects.requireNonNull(getActivity()).getAssets();
+        AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
 
         EditText etName = view.findViewById(R.id.TitleSUUserName);
         EditText etPass = view.findViewById(R.id.TitleSUPassword);
+        EditText etPass2 = view.findViewById(R.id.TitleSUPassword2);
 
-        onClickListener clickListener = new onClickListener(etName, etPass);
+        onClickListener clickListener = new onClickListener(etName, etPass, etPass2);
 
         Button btn = view.findViewById(R.id.SignUp_button);
         LookUnLook = view.findViewById(R.id.SULook_unLook_button);
+        LookUnLook2 = view.findViewById(R.id.SULook_unLook_button2);
         setImage.setImageViewBitmapFromAsset(LookUnLook, "title/unlook.png");
+        setImage.setImageViewBitmapFromAsset(LookUnLook2, "title/unlook.png");
+
 
         btn.setOnClickListener(clickListener);
         LookUnLook.setOnClickListener(clickListener);
+        LookUnLook2.setOnClickListener(clickListener);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
         return builder.create();
@@ -61,10 +73,12 @@ public class SignUpDialog extends DialogFragment {
     private class onClickListener implements View.OnClickListener {
         EditText etName;
         EditText etPass;
+        EditText etPass2;
 
-        public onClickListener(EditText etName, EditText etPass) {
+        public onClickListener(EditText etName, EditText etPass, EditText etPass2) {
             this.etName = etName;
             this.etPass = etPass;
+            this.etPass2 = etPass2;
         }
 
         @SuppressLint("NonConstantResourceId")
@@ -76,11 +90,14 @@ public class SignUpDialog extends DialogFragment {
                     final String regex = "[0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]";
                     final String name = etName.getText().toString();
                     final String password = etPass.getText().toString();
+                    final String password2 = etPass2.getText().toString();
                     final String[] nameSplit = name.split("");
                     final String[] passwordSplit = password.split("");
+                    final String[] passwordSplit2 = password2.split("");
                     boolean flag = true;
                     boolean nameFlag = true;
                     boolean passwordFlag = true;
+                    boolean passwordFlag2 = true;
 
                     if (name.length() == 0) {
                         etName.setError(getString(R.string.errorNotInput));
@@ -91,6 +108,11 @@ public class SignUpDialog extends DialogFragment {
                         etPass.setError(getString(R.string.errorNotInput));
                         flag = false;
                         passwordFlag = false;
+                    }
+                    if (password2.length() == 0) {
+                        etPass2.setError(getString(R.string.errorNotInput));
+                        flag = false;
+                        passwordFlag2 = false;
                     }
                     if (nameFlag) {
                         for (String s : nameSplit) {
@@ -110,6 +132,20 @@ public class SignUpDialog extends DialogFragment {
                             }
                         }
                     }
+                    if (passwordFlag2) {
+                        for (String s : passwordSplit2) {
+                            if (!s.matches(regex)) {
+                                etPass2.setError(getString(R.string.errorNotInText));
+                                flag = false;
+                                passwordFlag2 = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (!password.equals(password2) && passwordFlag2) {
+                        etPass2.setError(getString(R.string.NotMatch));
+                        flag = false;
+                    }
 
                     if (flag) {
                         final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
@@ -123,6 +159,8 @@ public class SignUpDialog extends DialogFragment {
                                 b -> {
                                     Context context = getActivity().getApplicationContext();
                                     Toast.makeText(context, "登録完了しました", Toast.LENGTH_SHORT).show();
+                                    TitleActivity.UserName = name;
+                                    callback.accept(0);
                                 },
                                 sqlE -> {
                                     Context context = getActivity().getApplicationContext();
@@ -147,6 +185,16 @@ public class SignUpDialog extends DialogFragment {
                         flagLook = true;
                     }
                     break;
+                case R.id.SULook_unLook_button2:
+                    if (flagLook2) {
+                        etPass2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                        setImage.setImageViewBitmapFromAsset(LookUnLook2, "title/look.png");
+                        flagLook = false;
+                    } else {
+                        etPass2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        setImage.setImageViewBitmapFromAsset(LookUnLook2, "title/unlook.png");
+                        flagLook = true;
+                    }
                 default:
                     break;
             }

@@ -14,15 +14,14 @@ import com.example.fragmenttest2.R;
 import java.util.Objects;
 
 public class MonsterFragment extends Fragment {
-    public final String ARGS_NAME = "com.example.fragmenttest2.monster";
-    TextView mainText;
-    String str;
+    final String EXTRA_DATA = "com.example.fragmenttest2.monster";
+    private String str;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
-        str = Objects.requireNonNull(args).getString(ARGS_NAME);
+        str = Objects.requireNonNull(args).getString(EXTRA_DATA);
     }
 
     @Override
@@ -33,7 +32,7 @@ public class MonsterFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mainText = view.findViewById(R.id.Monster_text);
+        TextView mainText = view.findViewById(R.id.Monster_text);
 
         mainText.setText(str);
     }
@@ -42,7 +41,7 @@ public class MonsterFragment extends Fragment {
     public static MonsterFragment newInstance(String str){
         MonsterFragment fragment = new MonsterFragment();
         Bundle barg = new Bundle();
-        barg.putString(fragment.ARGS_NAME, str);
+        barg.putString(fragment.EXTRA_DATA, str);
         fragment.setArguments(barg);
         return fragment;
     }
