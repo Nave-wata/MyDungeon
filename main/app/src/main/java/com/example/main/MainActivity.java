@@ -69,10 +69,11 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("Second", nowSecond);
         editor.apply();
 
-        LocalDateTime beforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
-        LocalDateTime nowTimes = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
+        LocalDateTime beforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute);
+        LocalDateTime nowTimes = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute);
         Duration duration = Duration.between(beforeTime, nowTimes);// 期間分の時間を取得する
-        long deff = duration.toSeconds();
-        Log.v("deff_Minute", " = " + deff);
+        long diff_min = duration.toMinutes();
+        long diff_sec = diff_min * 60 + (nowSecond - beforeSecond);
+        Log.v("diff_Minute", " = " + diff_sec);
     }
 }
