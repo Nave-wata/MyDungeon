@@ -1,5 +1,6 @@
 package com.example.main.title;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.example.main.title.SignInDialog.getHash;
 
 import android.annotation.SuppressLint;
@@ -55,11 +56,13 @@ public class SignUpDialog extends DialogFragment {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signup, null);
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
+        dataStore = getActivity().getSharedPreferences(NEXT_INFO, MODE_PRIVATE);
+        editor = dataStore.edit();
 
         EditText etName = view.findViewById(R.id.TitleSUUserName);
         EditText etPass = view.findViewById(R.id.TitleSUPassword);
         EditText etPass2 = view.findViewById(R.id.TitleSUPassword2);
-        CheckBox nextAutoIn = view.findViewById(R.id.SInextAutoIn);
+        CheckBox nextAutoIn = view.findViewById(R.id.SUnextAutoIn);
         Button btn = view.findViewById(R.id.SignUp_button);
         LookUnLook = view.findViewById(R.id.SULook_unLook_button);
         LookUnLook2 = view.findViewById(R.id.SULook_unLook_button2);
