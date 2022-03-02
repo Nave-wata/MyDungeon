@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -175,24 +176,9 @@ public class SignInDialog extends DialogFragment {
                         flagLook = true;
                     }
                     break;
-                case /* any */:
-                    DataStore<Preferences> dataStore = new RxPreferenceDataStoreBuilder(getContext(), "settings").build();
-                    Single<Preferences> updateResult =  RxDataStore.updateDataAsync(dataStore,
-                            prefsIn -> {
-                                MutablePreferences mutablePreferences = prefsIn.toMutablePreferences();
-                                Integer currentInt = prefsIn.get(INTEGER_KEY);
-                                mutablePreferences.set(INTEGER_KEY, currentInt != null ? currentInt + 1 : 1);
-                                return Single.just(mutablePreferences);
-                            });
-                    Preferences.Key<Integer> EXAMPLE_COUNTER = PreferencesKeys.int("example_counter");
-
-                    Flowable<Integer> exampleCounterFlow =
-                            RxDataStore.data(dataStore).map(prefs -> prefs.get(EXAMPLE_COUNTER));
-                    break;
                 default:
                     break;
             }
-
         }
     }
 
