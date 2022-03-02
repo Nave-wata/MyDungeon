@@ -49,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         afterTimeStr = LocalDateTime.now().toString();
-        LocalDateTime beforeTime = LocalDateTime.parse(beforeTimeStr);
-        LocalDateTime afterTime = LocalDateTime.parse(afterTimeStr);
+        //LocalDateTime beforeTime = LocalDateTime.parse(beforeTimeStr);
+        //LocalDateTime afterTime = LocalDateTime.parse(afterTimeStr);
 
-        long Day = ChronoUnit.SECONDS.between(beforeTime, afterTime);
+        //long Day = ChronoUnit.SECONDS.between(beforeTime, afterTime);
     }
 }
