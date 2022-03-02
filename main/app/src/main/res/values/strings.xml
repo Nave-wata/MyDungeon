@@ -9,6 +9,7 @@
     <string name="userSelectionTitle">ユーザー名を選択するか，新しくユーザーを作成できます．</string>
     <string name="SignIn_buttonText">ログイン</string>
     <string name="SignUp_buttonText">新規登録</string>
+    <string name="NextSignInOP">次回の自動入力を有効にする</string>
     <string name="DialogPositiveText">OK</string>
     <string name="DialogNegativeText">キャンセル</string>
     <string name="DialogNeutralText">あとで</string>
