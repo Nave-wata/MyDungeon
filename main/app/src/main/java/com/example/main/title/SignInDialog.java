@@ -1,5 +1,7 @@
 package com.example.main.title;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -46,7 +48,13 @@ import io.reactivex.rxjava3.core.Single;
 
 
 public class SignInDialog extends DialogFragment {
-    private final Consumer<Integer> callback;
+    final Consumer<Integer> callback;
+    final String NEXT_INFO = "NextInfo";
+    final String DS_Flag = "Flag";
+    final String DS_Name = "Name";
+    final String DS_Passwd = "Password";
+    private SharedPreferences dataStore;
+    private SharedPreferences.Editor editor;
     private boolean flagLook = true;
     private SetImage setImage;
     private ImageButton LookUnLook;
@@ -61,6 +69,8 @@ public class SignInDialog extends DialogFragment {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signin, null);
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
+        dataStore = getActivity().getSharedPreferences(NEXT_INFO, MODE_PRIVATE);
+        editor = dataStore.edit();
 
         EditText etName = view.findViewById(R.id.TitleSIUserName);
         EditText etPass = view.findViewById(R.id.TitleSIPassword);
@@ -71,6 +81,7 @@ public class SignInDialog extends DialogFragment {
         setImage.setImageViewBitmapFromAsset(LookUnLook, "title/unlook.png");
 
         nextAutoIn.setChecked(false);
+
 
         onClickListener clickListener = new onClickListener(etName, etPass, nextAutoIn);
         btn.setOnClickListener(clickListener);
@@ -183,6 +194,14 @@ public class SignInDialog extends DialogFragment {
                                             TitleActivity.UserName = name;
                                             callback.accept(0);
                                             Toast.makeText(context, "ログイン成功", Toast.LENGTH_LONG).show();
+
+                                            if (nextAutoIn.isChecked()) {
+                                                //editor.putBoolean(DS_Flag, true);
+                                                //editor.putString(DS_Name, name);
+                                                //editor.putString(DS_Passwd, password);
+                                            } else {
+                                                //editor.putBoolean("Flag", false);
+                                            }
                                         } else {
                                             Toast.makeText(context, "パスワードが間違っています", Toast.LENGTH_LONG).show();
                                         }
@@ -207,13 +226,6 @@ public class SignInDialog extends DialogFragment {
                         etPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                         setImage.setImageViewBitmapFromAsset(LookUnLook, "title/unlook.png");
                         flagLook = true;
-                    }
-                    break;
-                case R.id.nextAutoIn:
-                    if (nextAutoIn.isChecked()) {
-                        Log.v("nextAutoIn", "true");
-                    } else {
-                        Log.v("nextAutoIn", "false");
                     }
                     break;
                 default:
