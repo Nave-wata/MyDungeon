@@ -1,5 +1,7 @@
 package com.example.main;
 
+import static java.time.LocalDateTime.parse;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -49,9 +51,15 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         afterTimeStr = LocalDateTime.now().toString();
+        Log.v("My_Time", afterTimeStr);
         //LocalDateTime beforeTime = LocalDateTime.parse(beforeTimeStr);
         //LocalDateTime afterTime = LocalDateTime.parse(afterTimeStr);
 
         //long Day = ChronoUnit.SECONDS.between(beforeTime, afterTime);
+        LocalDateTime dt1;
+        LocalDateTime dt2;
+
+        dt1 = parse("2017-12-10 09:10:30.432");
+        dt2 = parse("2022-03-16 12:45:12.102");
     }
 }
