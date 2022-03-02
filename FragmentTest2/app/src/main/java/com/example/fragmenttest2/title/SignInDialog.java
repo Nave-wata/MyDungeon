@@ -8,7 +8,6 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,19 +30,24 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 
 public class SignInDialog extends DialogFragment {
-    boolean flagLook = true;
-    public AssetManager assetManager;
-    public SetImage setImage;
-    ImageButton LookUnLook;
+    private final Consumer<Integer> callback;
+    private boolean flagLook = true;
+    private SetImage setImage;
+    private ImageButton LookUnLook;
+
+    public SignInDialog(Consumer<Integer> callback) {
+        this.callback = callback;
+    }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signin, null);
-        assetManager = Objects.requireNonNull(getActivity()).getAssets();
+        AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
 
         EditText etName = view.findViewById(R.id.TitleSIUserName);
@@ -133,6 +137,8 @@ public class SignInDialog extends DialogFragment {
                                         }
                                         String result = getHash(password, salt);
                                         if (Objects.requireNonNull(hash).equals(result)) {
+                                            TitleActivity.UserName = name;
+                                            callback.accept(0);
                                             Toast.makeText(context, "ログイン成功", Toast.LENGTH_LONG).show();
                                         } else {
                                             Toast.makeText(context, "パスワードが間違っています", Toast.LENGTH_LONG).show();

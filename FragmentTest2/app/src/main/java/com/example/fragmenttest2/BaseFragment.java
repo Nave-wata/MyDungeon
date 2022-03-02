@@ -1,7 +1,6 @@
 package com.example.fragmenttest2;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,26 +15,27 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.fragmenttest2.dungeon.DungeonFragment;
 import com.example.fragmenttest2.home.HomeFragment;
 import com.example.fragmenttest2.monster.MonsterFragment;
-import com.example.fragmenttest2.title.TitleActivity;
 
 import java.util.Objects;
 
 
 public class BaseFragment extends Fragment {
-    static boolean homeFlag = false;
-    static boolean dungeonFlag = true;
-    static boolean monsterFlag = true;
-    String[] str;
+    final String EXTRA_DATA = "com.example.fragmenttest2";
+    private boolean homeFlag = false;
+    private boolean dungeonFlag = true;
+    private boolean monsterFlag = true;
+    private final String UserName;
+
+    public BaseFragment(String UserName) {
+        this.UserName = UserName;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = Objects.requireNonNull(getActivity()).getIntent();
-        str = intent.getStringArrayExtra(TitleActivity.EXTRA_DATA);
-
         FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
-        fragmentTransaction.replace(R.id.MainContainer, HomeFragment.newInstance(str[0]));
+        fragmentTransaction.replace(R.id.MainContainer, HomeFragment.newInstance(UserName));
         fragmentTransaction.commit();
     }
 
@@ -50,7 +50,7 @@ public class BaseFragment extends Fragment {
 
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
-        onClickListener iBt = new onClickListener(str);
+        onClickListener iBt = new onClickListener(UserName);
 
         ImageButton homeButton = view.findViewById(R.id.home_button);
         ImageButton dungeonButton = view.findViewById(R.id.dungeon_button);
@@ -65,12 +65,21 @@ public class BaseFragment extends Fragment {
         monsterButton.setOnClickListener(iBt);
     }
 
+    @NonNull
+    public static BaseFragment newInstance(String UserName){
+        BaseFragment fragment = new BaseFragment(UserName);
+        Bundle barg = new Bundle();
+        barg.putString(fragment.EXTRA_DATA, UserName);
+        fragment.setArguments(barg);
+        return fragment;
+    }
+
     private class onClickListener implements View.OnClickListener {
 
-        String[] str;
+        private final String UserName;
 
-        public onClickListener(String[] str) {
-            this.str = str;
+        public onClickListener(String UserName) {
+            this.UserName = UserName;
         }
 
         @SuppressLint("NonConstantResourceId")
@@ -82,7 +91,7 @@ public class BaseFragment extends Fragment {
             switch (v.getId()) {
                 case R.id.home_button:
                     if (homeFlag) {
-                        fragmentTransaction.replace(R.id.MainContainer, HomeFragment.newInstance(str[0]));
+                        fragmentTransaction.replace(R.id.MainContainer, HomeFragment.newInstance(UserName));
                         fragmentTransaction.commit();
                         homeFlag = false;
                     }
@@ -91,7 +100,7 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.dungeon_button:
                     if (dungeonFlag) {
-                        fragmentTransaction.replace(R.id.MainContainer, DungeonFragment.newInstance(str[1]));
+                        fragmentTransaction.replace(R.id.MainContainer, DungeonFragment.newInstance(UserName));
                         fragmentTransaction.commit();
                         dungeonFlag = false;
                     }
@@ -100,7 +109,7 @@ public class BaseFragment extends Fragment {
                     break;
                 case R.id.monster_button:
                     if (monsterFlag) {
-                        fragmentTransaction.replace(R.id.MainContainer, MonsterFragment.newInstance(str[2]));
+                        fragmentTransaction.replace(R.id.MainContainer, MonsterFragment.newInstance(UserName));
                         fragmentTransaction.commit();
                         monsterFlag = false;
                     }
