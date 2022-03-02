@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         LocalDateTime beforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
         LocalDateTime nowTimes = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
-        Duration duration = Duration.between(beforeTime, nowTime);// 期間分の時間を取得する
+        Duration duration = Duration.between(beforeTime, nowTimes);// 期間分の時間を取得する
         long deff = duration.toSeconds();
         Log.v("deff_Minute", " = " + deff);
     }
