@@ -6,12 +6,14 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -31,6 +33,12 @@ import java.util.function.Consumer;
 
 public class SignUpDialog extends DialogFragment {
     private final Consumer<Integer> callback;
+    final String NEXT_INFO = "NextInfo";
+    final String DS_Flag = "Flag";
+    final String DS_Name = "Name";
+    final String DS_Passwd = "Password";
+    private SharedPreferences dataStore;
+    private SharedPreferences.Editor editor;
     private boolean flagLook = true;
     private boolean flagLook2 = true;
     private SetImage setImage;
@@ -51,19 +59,21 @@ public class SignUpDialog extends DialogFragment {
         EditText etName = view.findViewById(R.id.TitleSUUserName);
         EditText etPass = view.findViewById(R.id.TitleSUPassword);
         EditText etPass2 = view.findViewById(R.id.TitleSUPassword2);
-
-        onClickListener clickListener = new onClickListener(etName, etPass, etPass2);
-
+        CheckBox nextAutoIn = view.findViewById(R.id.SInextAutoIn);
         Button btn = view.findViewById(R.id.SignUp_button);
         LookUnLook = view.findViewById(R.id.SULook_unLook_button);
         LookUnLook2 = view.findViewById(R.id.SULook_unLook_button2);
+
         setImage.setImageViewBitmapFromAsset(LookUnLook, "title/unlook.png");
         setImage.setImageViewBitmapFromAsset(LookUnLook2, "title/unlook.png");
 
+        nextAutoIn.setChecked(false);
 
+        onClickListener clickListener = new onClickListener(etName, etPass, etPass2, nextAutoIn);
         btn.setOnClickListener(clickListener);
         LookUnLook.setOnClickListener(clickListener);
         LookUnLook2.setOnClickListener(clickListener);
+        nextAutoIn.setOnClickListener(clickListener);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
         return builder.create();
@@ -74,11 +84,13 @@ public class SignUpDialog extends DialogFragment {
         EditText etName;
         EditText etPass;
         EditText etPass2;
+        CheckBox nextAutoIn;
 
-        public onClickListener(EditText etName, EditText etPass, EditText etPass2) {
+        public onClickListener(EditText etName, EditText etPass, EditText etPass2, CheckBox nextAutoIn) {
             this.etName = etName;
             this.etPass = etPass;
             this.etPass2 = etPass2;
+            this.nextAutoIn = nextAutoIn;
         }
 
         @SuppressLint("NonConstantResourceId")
@@ -160,6 +172,14 @@ public class SignUpDialog extends DialogFragment {
                                     Context context = getActivity().getApplicationContext();
                                     Toast.makeText(context, "登録完了しました", Toast.LENGTH_SHORT).show();
                                     TitleActivity.UserName = name;
+                                    if (nextAutoIn.isChecked()) {
+                                        editor.putBoolean(DS_Flag, true);
+                                        editor.putString(DS_Name, name);
+                                        editor.putString(DS_Passwd, password);
+                                    } else {
+                                        editor.putBoolean("Flag", false);
+                                    }
+                                    editor.apply();
                                     callback.accept(0);
                                 },
                                 sqlE -> {

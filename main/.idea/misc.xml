@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/main/app/src/main/res/layouts/title/layout/dialog_signin.xml" value="0.33967391304347827" />
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/main/app/src/main/res/layouts/title/layout/dialog_signup.xml" value="0.3875" />
         <entry key="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3845" />
         <entry key="$PROJECT_DIR$/app/src/main/res/drawable/splash.xml" value="0.373" />
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_dungeon.xml" value="0.3875" />
