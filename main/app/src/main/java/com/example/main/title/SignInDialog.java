@@ -17,6 +17,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.datastore.core.DataStore;
+import androidx.datastore.preferences.core.MutablePreferences;
+import androidx.datastore.preferences.core.Preferences;
+import androidx.datastore.preferences.core.PreferencesKeys;
+import androidx.datastore.preferences.rxjava3.RxPreferenceDataStoreBuilder;
+import androidx.datastore.rxjava3.RxDataStore;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.main.R;
@@ -31,6 +37,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 import java.util.function.Consumer;
+
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Single;
 
 
 public class SignInDialog extends DialogFragment {
@@ -165,6 +174,20 @@ public class SignInDialog extends DialogFragment {
                         setImage.setImageViewBitmapFromAsset(LookUnLook, "title/unlook.png");
                         flagLook = true;
                     }
+                    break;
+                case /* any */:
+                    DataStore<Preferences> dataStore = new RxPreferenceDataStoreBuilder(getContext(), "settings").build();
+                    Single<Preferences> updateResult =  RxDataStore.updateDataAsync(dataStore,
+                            prefsIn -> {
+                                MutablePreferences mutablePreferences = prefsIn.toMutablePreferences();
+                                Integer currentInt = prefsIn.get(INTEGER_KEY);
+                                mutablePreferences.set(INTEGER_KEY, currentInt != null ? currentInt + 1 : 1);
+                                return Single.just(mutablePreferences);
+                            });
+                    Preferences.Key<Integer> EXAMPLE_COUNTER = PreferencesKeys.int("example_counter");
+
+                    Flowable<Integer> exampleCounterFlow =
+                            RxDataStore.data(dataStore).map(prefs -> prefs.get(EXAMPLE_COUNTER));
                     break;
                 default:
                     break;

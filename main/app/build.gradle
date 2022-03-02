@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application'
-    id "com.google.protobuf" version "0.8.12"
 }
 
 android {
@@ -76,25 +75,6 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
-    implementation "androidx.datastore:datastore:1.0.0"
-    implementation  "com.google.protobuf:protobuf-javalite:3.14.0"
-}
-
-protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:3.14.0"
-    }
-
-    // Generates the java Protobuf-lite code for the Protobufs in this project. See
-    // https://github.com/google/protobuf-gradle-plugin#customizing-protobuf-compilation
-    // for more information.
-    generateProtoTasks {
-        all().each { task ->
-            task.builtins {
-                java {
-                    option 'lite'
-                }
-            }
-        }
-    }
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha06"
+    implementation "androidx.datastore:datastore-preferences-rxjava3:1.0.0-alpha06"
 }
