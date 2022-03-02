@@ -16,7 +16,6 @@ import com.example.main.title.TitleActivity;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 
 public class MainActivity extends AppCompatActivity {
