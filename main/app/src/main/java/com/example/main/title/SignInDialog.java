@@ -9,8 +9,10 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -62,27 +64,58 @@ public class SignInDialog extends DialogFragment {
 
         EditText etName = view.findViewById(R.id.TitleSIUserName);
         EditText etPass = view.findViewById(R.id.TitleSIPassword);
-        onClickListener clickListener = new onClickListener(etName, etPass);
-
         Button btn = view.findViewById(R.id.SignIn_button);
         LookUnLook = view.findViewById(R.id.SILook_unLook_button);
+        CheckBox nextAutoIn = view.findViewById(R.id.nextAutoIn);
+
         setImage.setImageViewBitmapFromAsset(LookUnLook, "title/unlook.png");
 
+        nextAutoIn.setChecked(false);
+
+        onClickListener clickListener = new onClickListener(etName, etPass, nextAutoIn);
         btn.setOnClickListener(clickListener);
         LookUnLook.setOnClickListener(clickListener);
+        nextAutoIn.setOnClickListener(clickListener);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
         return builder.create();
+    }
+
+    @Nullable
+    public static String getHash(String password, String salt) {
+        MessageDigest sha512;
+        try {
+            sha512 = MessageDigest.getInstance("SHA-512");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        byte[] sha512_result = sha512.digest(password.getBytes());
+        byte[] Salt = salt.getBytes();
+        for (int i = 0; i < 10000; i++) {
+            if (i % password.length() == 0) {
+                byte[] tmp = new byte[sha512_result.length + Salt.length];
+                System.arraycopy(sha512_result, 0, tmp, 0, sha512_result.length);
+                System.arraycopy(Salt, 0, tmp, sha512_result.length, Salt.length);
+                sha512_result = sha512.digest(tmp);
+            } else {
+                sha512_result = sha512.digest(sha512_result);
+            }
+        }
+        return String.format("%04x", new BigInteger(1, sha512_result));
     }
 
 
     private class onClickListener implements View.OnClickListener {
         EditText etName;
         EditText etPass;
+        CheckBox nextAutoIn;
 
-        public onClickListener(EditText etName, EditText etPass) {
+        public onClickListener(EditText etName, EditText etPass, CheckBox nextAutoIn) {
             this.etName = etName;
             this.etPass = etPass;
+            this.nextAutoIn = nextAutoIn;
         }
 
         @SuppressLint("NonConstantResourceId")
@@ -176,34 +209,16 @@ public class SignInDialog extends DialogFragment {
                         flagLook = true;
                     }
                     break;
+                case R.id.nextAutoIn:
+                    if (nextAutoIn.isChecked()) {
+                        Log.v("nextAutoIn", "true");
+                    } else {
+                        Log.v("nextAutoIn", "false");
+                    }
+                    break;
                 default:
                     break;
             }
         }
-    }
-
-    @Nullable
-    public static String getHash(String password, String salt) {
-        MessageDigest sha512;
-        try {
-            sha512 = MessageDigest.getInstance("SHA-512");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        byte[] sha512_result = sha512.digest(password.getBytes());
-        byte[] Salt = salt.getBytes();
-        for (int i = 0; i < 10000; i++) {
-            if (i % password.length() == 0) {
-                byte[] tmp = new byte[sha512_result.length + Salt.length];
-                System.arraycopy(sha512_result, 0, tmp, 0, sha512_result.length);
-                System.arraycopy(Salt, 0, tmp, sha512_result.length, Salt.length);
-                sha512_result = sha512.digest(tmp);
-            } else {
-                sha512_result = sha512.digest(sha512_result);
-            }
-        }
-        return String.format("%04x", new BigInteger(1, sha512_result));
     }
 }
