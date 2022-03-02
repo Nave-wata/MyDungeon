@@ -5,9 +5,11 @@ import static java.time.LocalDateTime.parse;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -35,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    @SuppressLint("NewApi")
+    @SuppressWarnings("Since15")
+    @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     public void onPause() {
         super.onPause();
@@ -43,27 +46,33 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences dataStore = getSharedPreferences("Prev_TIme", MODE_PRIVATE);
         SharedPreferences.Editor editor = dataStore.edit();
 
-        int nowYear = LocalDateTime.now().getYear();
-        int nowMonth = LocalDateTime.now().getMonthValue();
-        int nowDay = LocalDateTime.now().getDayOfMonth();
-        int nowHour = LocalDateTime.now().getHour();
-        int nowMinute = LocalDateTime.now().getMinute();
+        LocalDateTime nowTime = LocalDateTime.now();
+        int nowYear = nowTime.getYear();
+        int nowMonth = nowTime.getMonthValue();
+        int nowDay = nowTime.getDayOfMonth();
+        int nowHour = nowTime.getHour();
+        int nowMinute = nowTime.getMinute();
+        int nowSecond = nowTime.getSecond();
+
         int beforeYear = dataStore.getInt("Year", 0);
         int beforeMonth = dataStore.getInt("Month", 0);
         int beforeDay = dataStore.getInt("Day", 0);
         int beforeHour = dataStore.getInt("Hour", 0);
         int beforeMinute = dataStore.getInt("Minute", 0);
+        int beforeSecond = dataStore.getInt("Second", 0);
 
         editor.putInt("Year", nowYear);
         editor.putInt("Month", nowMonth);
         editor.putInt("Day", nowDay);
         editor.putInt("Hour", nowHour);
         editor.putInt("Minute", nowMinute);
+        editor.putInt("Second", nowSecond);
         editor.apply();
 
-        LocalDateTime beforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute);
-        LocalDateTime nowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute);
+        LocalDateTime beforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
+        LocalDateTime nowTimes = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
         Duration duration = Duration.between(beforeTime, nowTime);// 期間分の時間を取得する
-        //duration.toMinutes();
+        long deff = duration.toSeconds();
+        Log.v("deff_Minute", " = " + deff);
     }
 }
