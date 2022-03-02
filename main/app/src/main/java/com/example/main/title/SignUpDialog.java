@@ -38,7 +38,6 @@ public class SignUpDialog extends DialogFragment {
     final String DS_Flag = "Flag";
     final String DS_Name = "Name";
     final String DS_Passwd = "Password";
-    private SharedPreferences dataStore;
     private SharedPreferences.Editor editor;
     private boolean flagLook = true;
     private boolean flagLook2 = true;
@@ -56,7 +55,7 @@ public class SignUpDialog extends DialogFragment {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signup, null);
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
-        dataStore = getActivity().getSharedPreferences(NEXT_INFO, MODE_PRIVATE);
+        SharedPreferences dataStore = getActivity().getSharedPreferences(NEXT_INFO, MODE_PRIVATE);
         editor = dataStore.edit();
 
         EditText etName = view.findViewById(R.id.TitleSUUserName);
@@ -212,11 +211,11 @@ public class SignUpDialog extends DialogFragment {
                     if (flagLook2) {
                         etPass2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                         setImage.setImageViewBitmapFromAsset(LookUnLook2, "title/look.png");
-                        flagLook = false;
+                        flagLook2 = false;
                     } else {
                         etPass2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                         setImage.setImageViewBitmapFromAsset(LookUnLook2, "title/unlook.png");
-                        flagLook = true;
+                        flagLook2 = true;
                     }
                 default:
                     break;

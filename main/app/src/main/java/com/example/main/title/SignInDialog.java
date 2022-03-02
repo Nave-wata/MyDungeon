@@ -11,7 +11,6 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -22,12 +21,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.datastore.core.DataStore;
-import androidx.datastore.preferences.core.MutablePreferences;
-import androidx.datastore.preferences.core.Preferences;
-import androidx.datastore.preferences.core.PreferencesKeys;
-import androidx.datastore.preferences.rxjava3.RxPreferenceDataStoreBuilder;
-import androidx.datastore.rxjava3.RxDataStore;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.main.R;
@@ -43,9 +36,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-import io.reactivex.rxjava3.core.Flowable;
-import io.reactivex.rxjava3.core.Single;
-
 
 public class SignInDialog extends DialogFragment {
     final Consumer<Integer> callback;
@@ -53,7 +43,6 @@ public class SignInDialog extends DialogFragment {
     final String DS_Flag = "Flag";
     final String DS_Name = "Name";
     final String DS_Passwd = "Password";
-    private SharedPreferences dataStore;
     private SharedPreferences.Editor editor;
     private boolean flagLook = true;
     private SetImage setImage;
@@ -69,7 +58,7 @@ public class SignInDialog extends DialogFragment {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_signin, null);
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
-        dataStore = getActivity().getSharedPreferences(NEXT_INFO, MODE_PRIVATE);
+        SharedPreferences dataStore = getActivity().getSharedPreferences(NEXT_INFO, MODE_PRIVATE);
         editor = dataStore.edit();
 
         EditText etName = view.findViewById(R.id.TitleSIUserName);
