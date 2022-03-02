@@ -51,12 +51,13 @@ public class MainActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
 
-        afterTimeStr = LocalDateTime.now().toString();
-        Log.v("My_Time", afterTimeStr);
-        //LocalDateTime beforeTime = LocalDateTime.parse(beforeTimeStr);
-        //LocalDateTime afterTime = LocalDateTime.parse(afterTimeStr);
+        int beforeYear = LocalDateTime.now().getYear();
+        int beforeMonth = LocalDateTime.now().getMonthValue();
+        int beforeDay = LocalDateTime.now().getDayOfMonth();
+        int beforeHour = LocalDateTime.now().getHour();
+        int beforeMinute = LocalDateTime.now().getMinute();
+        Log.v("My Time", "Year " + beforeYear + ", Month " + beforeMonth + ", Day " + beforeDay + ", Hour" + beforeHour + ", Minute" + beforeMinute);
 
-        //long Day = ChronoUnit.SECONDS.between(beforeTime, afterTime);
         LocalDateTime beginSummerVacation = LocalDateTime.of(2021, 7, 20, 11, 00);// 夏休みは終業式が終わったタイミングから
         LocalDateTime endSummerVacation = LocalDateTime.of(2021, 9, 1, 8, 00);// 始業式が始まるタイミングまで
         Duration summerVacationDuration = Duration.between(beginSummerVacation, endSummerVacation);// 期間分の時間を取得する
