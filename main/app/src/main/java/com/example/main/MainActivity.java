@@ -10,6 +10,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.main.title.TitleActivity;
 
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class MainActivity extends AppCompatActivity {
     private String UserName;
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        Log.v("MyApp", "onPose");
+
+        Date date = Calendar.getInstance().getTime();
+        Log.v("My Time", date.toString());
     }
 }
