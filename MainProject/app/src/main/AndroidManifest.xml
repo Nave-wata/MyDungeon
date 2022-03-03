@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.main">
         <activity
-            android:name="com.example.main.MainActivity"
+            android:name="com.example.mainproject.MainActivity"
             android:exported="false" />
         <activity
             android:name="com.example.mainproject.title.TitleActivity"
