@@ -22,6 +22,7 @@
         android:layout_marginHorizontal="50dp"
         android:layout_marginBottom="15dp"
         android:hint="Enter Name"
+        android:maxLength="40"
         android:inputType="text"/>
 
     <TextView
@@ -42,7 +43,6 @@
             android:id="@+id/TitleSIPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_weight="0.9"
             android:gravity="center"
             android:hint="Password"
