@@ -1,6 +1,7 @@
-package com.example.main.asynchronous.usersinfo;
+package com.example.main.asynchronous;
 
-import com.example.main.asynchronous.AppDatabase;
+import com.example.main.asynchronous.usersinfo.UsersInfo;
+import com.example.main.asynchronous.usersinfo.UsersInfoDao;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

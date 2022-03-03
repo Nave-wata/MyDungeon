@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    @SuppressWarnings("Since15")
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     public void onPause() {

@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.main.MainActivity;
 import com.example.main.R;
 import com.example.main.asynchronous.AppDatabaseSingleton;
-import com.example.main.asynchronous.usersinfo.InitDB;
+import com.example.main.asynchronous.InitDB;
 
 public class TitleActivity extends AppCompatActivity {
     public final static String EXTRA_DATA = "com.example.fragmenttest2.title";
