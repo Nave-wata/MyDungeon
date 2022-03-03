@@ -1,7 +1,6 @@
 package com.example.mainproject.title;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.mainproject.title.SignInDialog.getHash;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -29,14 +28,11 @@ import com.example.mainproject.SetImage;
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
 import com.example.mainproject.asynchronous.usersinfo.DataSave;
-import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 
 import java.util.Objects;
 import java.util.function.Consumer;
 
 public class SignUpDialog extends DialogFragment {
-    static { System.loadLibrary("mainproject"); }
-    public native String stringFromJNI();
 
     private final Consumer<Integer> callback;
     final String NEXT_INFO = "NextInfo";
@@ -169,7 +165,10 @@ public class SignUpDialog extends DialogFragment {
                     if (flag) {
                         final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
                         final String salt = getRandomString();
-                        final String hash = getHash(password, salt);
+                        final String hash = TitleActivity.HASH(password, salt);
+                        Log.v("Pasd", password);
+                        Log.v("Salt", salt);
+                        Log.v("Hash", hash);
                         new DataSave(
                                 db,
                                 name,
@@ -187,11 +186,6 @@ public class SignUpDialog extends DialogFragment {
                                         editor.putBoolean("Flag", false);
                                     }
                                     editor.apply();
-                                    Log.v("C++", stringFromJNI());
-                                    Log.v("Name", name);
-                                    Log.v("Password", password);
-                                    Log.v("Salt", salt);
-                                    Log.v("Hash", hash);
                                     callback.accept(0);
                                 },
                                 sqlE -> {

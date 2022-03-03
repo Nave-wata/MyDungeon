@@ -2,11 +2,7 @@ package com.example.mainproject.asynchronous;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
 import androidx.room.Room;
-
-import com.example.mainproject.asynchronous.possessioninfo.PossessionInfo;
-import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 
 
 public class AppDatabaseSingleton {

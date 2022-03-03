@@ -19,7 +19,6 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
@@ -30,9 +29,6 @@ import com.example.mainproject.asynchronous.AppDatabaseSingleton;
 import com.example.mainproject.asynchronous.usersinfo.GetLine;
 import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -86,31 +82,6 @@ public class SignInDialog extends DialogFragment {
         return builder.create();
     }
 
-    @Nullable
-    public static String getHash(String password, String salt) {
-        MessageDigest sha512;
-        try {
-            sha512 = MessageDigest.getInstance("SHA-512");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        byte[] sha512_result = sha512.digest(password.getBytes());
-        byte[] Salt = salt.getBytes();
-        for (int i = 0; i < 10000; i++) {
-            if (i % password.length() == 0) {
-                byte[] tmp = new byte[sha512_result.length + Salt.length];
-                System.arraycopy(sha512_result, 0, tmp, 0, sha512_result.length);
-                System.arraycopy(Salt, 0, tmp, sha512_result.length, Salt.length);
-                sha512_result = sha512.digest(tmp);
-            } else {
-                sha512_result = sha512.digest(sha512_result);
-            }
-        }
-        return String.format("%04x", new BigInteger(1, sha512_result));
-    }
-
 
     private class onClickListener implements View.OnClickListener {
         EditText etName;
@@ -129,7 +100,7 @@ public class SignInDialog extends DialogFragment {
         public void onClick(@NonNull View v) {
             switch (v.getId()) {
                 case R.id.SignIn_button:
-                    final String regex = "[0123456789abcdefghijklmnopqrstuvwxzABCDEFGHIJKLMNOPQRSTUVWXYZ]";
+                    final String regex = "[0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]";
                     final String name = etName.getText().toString();
                     final String password = etPass.getText().toString();
                     final String[] nameSplit = name.split("");
@@ -183,7 +154,7 @@ public class SignInDialog extends DialogFragment {
                                             salt = ui.getSalt();
                                             hash = ui.getHash();
                                         }
-                                        String result = getHash(password, salt);
+                                        String result = TitleActivity.HASH(password, salt);
                                         if (Objects.requireNonNull(hash).equals(result)) {
                                             TitleActivity.UserName = name;
                                             callback.accept(0);
