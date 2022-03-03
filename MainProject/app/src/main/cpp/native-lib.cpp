@@ -15,13 +15,20 @@ Java_com_example_mainproject_title_SignUpDialog_HASH(
         JNIEnv* env,
         jobject /* this */,
         jstring j_password,
-        jstring j_salt) {
+        jstring j_salt){
+
     std::string password = env->GetStringUTFChars(j_password, 0);
     std::string salt = env->GetStringUTFChars(j_salt, 0);
     std::string result = password;
     SHA512 sha512;
 
-    result = sha512.hash(result);
+    for (int i = 0; i < 10000; i++) {
+        if (i % password.length() == 0) {
+            result = sha512.hash(result);
+        } else {
+            result = sha512.hash(result);
+        }
+    }
 
-    return env->NewStringUTF(password.c_str());
+    return env->NewStringUTF(result.c_str());
 }
