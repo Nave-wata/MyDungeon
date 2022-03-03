@@ -3,6 +3,7 @@ package com.example.mainproject;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,17 +33,21 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
         fragmentTransaction.commit();
+        Log.v("MainActivity", "onCreate");
     }
 
-    @
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.v("MainActivity", "onStart");
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    public void onPause() {
-        super.onPause();
-
+    public void onStop() {
+        super.onStop();
+        Log.v("MainActivity", "onStop");
         AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
-
         LocalDateTime nowTime = LocalDateTime.now();
         int nowYear = nowTime.getYear();
         int nowMonth = nowTime.getMonthValue();
@@ -60,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 nowHour,
                 nowMinute,
                 nowSecond,
-                b->{},
+                b->finish(),
                 e->{}
         ).execute();
     }
