@@ -8,8 +8,6 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "UsersInfo", indices = {@Index(value = "Name", unique = true)})
 public class UsersInfo {
-    public static final String NAME = "UsersInfo";
-
     @PrimaryKey(autoGenerate = true)
     public long id;
 

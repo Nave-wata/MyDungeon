@@ -168,7 +168,7 @@ public class SignInDialog extends DialogFragment {
                     }
 
                     if (flag) {
-                        final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext(), UsersInfo.NAME);
+                        final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
                         new GetLine(
                                 db,
                                 name,

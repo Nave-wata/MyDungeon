@@ -163,7 +163,7 @@ public class SignUpDialog extends DialogFragment {
                     }
 
                     if (flag) {
-                        final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext(), UsersInfo.NAME);
+                        final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
                         final String salt = getRandomString();
                         final String hash = getHash(password, salt);
                         new DataSave(
