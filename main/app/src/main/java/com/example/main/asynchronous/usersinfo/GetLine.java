@@ -3,6 +3,7 @@ package com.example.main.asynchronous.usersinfo;
 import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.example.main.asynchronous.AppDatabase;
 
@@ -55,6 +56,7 @@ public class GetLine implements Runnable {
             data = usersInfoDao.getLine(name);
         } catch (Exception e) {
             this.exception = e;
+            Log.v("[Exception]", e.toString());
         }
     }
 

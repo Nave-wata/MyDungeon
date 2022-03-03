@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "PossessionInfo", indices = {@Index(value = "Name", unique = true)})
 public class PossessionInfo {
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public long id;
 
     @ColumnInfo(name = "Name")
     public String name;
