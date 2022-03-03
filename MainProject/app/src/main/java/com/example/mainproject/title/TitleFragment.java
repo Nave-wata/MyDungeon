@@ -19,7 +19,7 @@ import com.example.mainproject.SetImage;
 import java.util.Objects;
 
 public class TitleFragment extends Fragment {
-    public final String EXTRA_DATA = "com.example.fragmenttest2.title";
+    public final String EXTRA_DATA = "com.example.mainproject.title";
     private SetImage setImage;
     private ImageButton startButton;
     private TextView UserNameText;

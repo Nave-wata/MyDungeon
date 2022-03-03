@@ -13,7 +13,7 @@ import com.example.mainproject.asynchronous.AppDatabaseSingleton;
 import com.example.mainproject.asynchronous.InitializeDatabase;
 
 public class TitleActivity extends AppCompatActivity {
-    public final static String EXTRA_DATA = "com.example.fragmenttest2.title";
+    public final static String EXTRA_DATA = "com.example.mainproject.title";
     public static String UserName;
     static { System.loadLibrary("mainproject"); }
     public static native String HASH(String password, String salt);

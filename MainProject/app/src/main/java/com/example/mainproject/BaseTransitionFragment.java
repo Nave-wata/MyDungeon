@@ -20,7 +20,7 @@ import java.util.Objects;
 
 
 public class BaseTransitionFragment extends Fragment {
-    final String EXTRA_DATA = "com.example.fragmenttest2";
+    final String EXTRA_DATA = "com.example.mainproject";
     private boolean homeFlag = false;
     private boolean dungeonFlag = true;
     private boolean monsterFlag = true;

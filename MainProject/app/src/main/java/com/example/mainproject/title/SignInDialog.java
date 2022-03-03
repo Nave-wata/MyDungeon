@@ -19,7 +19,6 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
@@ -30,9 +29,6 @@ import com.example.mainproject.asynchronous.AppDatabaseSingleton;
 import com.example.mainproject.asynchronous.usersinfo.GetLine;
 import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -84,31 +80,6 @@ public class SignInDialog extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
         return builder.create();
-    }
-
-    @Nullable
-    public static String getHash(String password, String salt) {
-        MessageDigest sha512;
-        try {
-            sha512 = MessageDigest.getInstance("SHA-512");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        byte[] sha512_result = sha512.digest(password.getBytes());
-        byte[] Salt = salt.getBytes();
-        for (int i = 0; i < 10000; i++) {
-            if (i % password.length() == 0) {
-                byte[] tmp = new byte[sha512_result.length + Salt.length];
-                System.arraycopy(sha512_result, 0, tmp, 0, sha512_result.length);
-                System.arraycopy(Salt, 0, tmp, sha512_result.length, Salt.length);
-                sha512_result = sha512.digest(tmp);
-            } else {
-                sha512_result = sha512.digest(sha512_result);
-            }
-        }
-        return String.format("%04x", new BigInteger(1, sha512_result));
     }
 
 
