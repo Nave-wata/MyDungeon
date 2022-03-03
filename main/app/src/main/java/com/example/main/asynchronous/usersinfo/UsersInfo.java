@@ -6,11 +6,10 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 
-
 @Entity(tableName = "UsersInfo", indices = {@Index(value = "Name", unique = true)})
 public class UsersInfo {
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public long id;
 
     @ColumnInfo(name = "Name")
     public String name;
@@ -21,7 +20,9 @@ public class UsersInfo {
     @ColumnInfo(name = "hash")
     public String hash;
 
-    public UsersInfo(String name, String salt, String hash) {
+    public UsersInfo(String name,
+                     String salt,
+                     String hash) {
         this.name = name;
         this.salt = salt;
         this.hash = hash;

@@ -12,6 +12,7 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -28,11 +29,15 @@ import com.example.main.SetImage;
 import com.example.main.asynchronous.AppDatabase;
 import com.example.main.asynchronous.AppDatabaseSingleton;
 import com.example.main.asynchronous.usersinfo.DataSave;
+import com.example.main.asynchronous.usersinfo.UsersInfo;
 
 import java.util.Objects;
 import java.util.function.Consumer;
 
 public class SignUpDialog extends DialogFragment {
+    static { System.loadLibrary("fragmenttest2"); }
+    static native String HASH(String password, String salt);
+
     private final Consumer<Integer> callback;
     final String NEXT_INFO = "NextInfo";
     final String DS_Flag = "Flag";
@@ -164,7 +169,8 @@ public class SignUpDialog extends DialogFragment {
                     if (flag) {
                         final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
                         final String salt = getRandomString();
-                        final String hash = getHash(password, salt);
+                        final String hash = "a";
+                        HASH(password, salt);
                         new DataSave(
                                 db,
                                 name,
@@ -182,6 +188,10 @@ public class SignUpDialog extends DialogFragment {
                                         editor.putBoolean("Flag", false);
                                     }
                                     editor.apply();
+                                    Log.v("Name", name);
+                                    Log.v("Password", password);
+                                    Log.v("Salt", salt);
+                                    Log.v("Hash", hash);
                                     callback.accept(0);
                                 },
                                 sqlE -> {
