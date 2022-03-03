@@ -3,6 +3,7 @@ package com.example.mainproject.asynchronous.possessioninfo;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -80,8 +81,15 @@ public class DataSave implements Runnable {
 
         try {
             possessionInfoDao.insert(new PossessionInfo(name, year, month, day, hour, minute, second));
+            Log.v("MyAll", "Yes");
         } catch (Exception e) {
-            this.exception = e;
+            try {
+                Log.v("MyAll", "!!!!!!");
+                possessionInfoDao.upDate(name, year, month, day, hour, minute, second);
+            } catch (Exception ie) {
+                Log.v("MyAll", "NOOOO");
+                this.exception = ie;
+            }
         }
     }
 

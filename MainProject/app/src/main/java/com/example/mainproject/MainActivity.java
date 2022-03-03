@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mainproject.asynchronous.AppDatabase;
+import com.example.mainproject.asynchronous.AppDatabaseSingleton;
+import com.example.mainproject.asynchronous.possessioninfo.DataSave;
 import com.example.mainproject.title.TitleActivity;
 
 import java.time.LocalDateTime;
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
 
+        AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
+
         LocalDateTime nowTime = LocalDateTime.now();
         int nowYear = nowTime.getYear();
         int nowMonth = nowTime.getMonthValue();
@@ -43,5 +48,18 @@ public class MainActivity extends AppCompatActivity {
         int nowHour = nowTime.getHour();
         int nowMinute = nowTime.getMinute();
         int nowSecond = nowTime.getSecond();
+
+        new DataSave(
+                db,
+                UserName,
+                nowYear,
+                nowMonth,
+                nowDay,
+                nowHour,
+                nowMinute,
+                nowSecond,
+                b->{},
+                e->{}
+        ).execute();
     }
 }

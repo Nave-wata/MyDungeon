@@ -12,6 +12,17 @@ public interface PossessionInfoDao {
     @Insert
     void insert(PossessionInfo possessionInfo);
 
+    @Query("UPDATE PossessionInfo " +
+            "SET Name = :name, " +
+            "    Year = :year, " +
+            "    Month = :month, " +
+            "    Day =  :day, " +
+            "    Hour = :hour, " +
+            "    Minute = :minute, " +
+            "    Second = :second " +
+            "WHERE Name = :name")
+    void upDate(String name, int year, int month, int day, int hour, int minute, int second);
+
     @Query("DELETE FROM PossessionInfo WHERE Name = :name")
     void deletePossessionInfo(String name);
 
