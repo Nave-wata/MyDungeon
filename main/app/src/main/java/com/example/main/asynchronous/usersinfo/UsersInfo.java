@@ -21,10 +21,42 @@ public class UsersInfo {
     @ColumnInfo(name = "hash")
     public String hash;
 
-    public UsersInfo(String name, String salt, String hash) {
+    @ColumnInfo(name = "Year")
+    public int year;
+
+    @ColumnInfo(name = "Month")
+    public int month;
+
+    @ColumnInfo(name = "Day")
+    public int day;
+
+    @ColumnInfo(name = "Hour")
+    public int hour;
+
+    @ColumnInfo(name = "Minute")
+    public int minute;
+
+    @ColumnInfo(name = "Second")
+    public int second;
+
+    public UsersInfo(String name,
+                     String salt,
+                     String hash,
+                     int year,
+                     int month,
+                     int day,
+                     int hour,
+                     int minute,
+                     int second) {
         this.name = name;
         this.salt = salt;
         this.hash = hash;
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
     }
 
     public String getName() { return name; }
@@ -32,4 +64,16 @@ public class UsersInfo {
     public String getSalt() { return salt; }
 
     public String getHash() { return hash; }
+
+    public int getYear() { return year; }
+
+    public int getMonth() { return month; }
+
+    public int getDay() { return day; }
+
+    public int getHour() { return hour; }
+
+    public int getMinute() { return minute; }
+
+    public int getSecond() { return second; }
 }
