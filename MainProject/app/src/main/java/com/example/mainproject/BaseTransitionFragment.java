@@ -20,7 +20,7 @@ import java.util.Objects;
 
 
 public class BaseTransitionFragment extends Fragment {
-    final String EXTRA_DATA = "com.example.fragmenttest2";
+    final String EXTRA_DATA = "com.example.mainproject";
     private boolean homeFlag = false;
     private boolean dungeonFlag = true;
     private boolean monsterFlag = true;
@@ -41,7 +41,7 @@ public class BaseTransitionFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_base, container, false);
+        return inflater.inflate(R.layout.fragment_basetransition, container, false);
     }
 
     @Override

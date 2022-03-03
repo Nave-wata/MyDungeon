@@ -14,7 +14,7 @@ import com.example.mainproject.R;
 import java.util.Objects;
 
 public class DungeonFragment extends Fragment {
-    final String EXTRA_DATA = "com.example.fragmenttest2.dungeon";
+    final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String str;
 
     @Override

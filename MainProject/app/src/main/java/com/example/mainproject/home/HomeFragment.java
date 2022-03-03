@@ -1,12 +1,13 @@
 package com.example.mainproject.home;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.example.mainproject.R;
 
@@ -14,7 +15,7 @@ import java.util.Objects;
 
 
 public class HomeFragment extends Fragment {
-    final String EXTRA_DATA = "com.example.fragmenttest2.home";
+    final String EXTRA_DATA = "com.example.mainproject.home";
     private String str;
 
     @Override

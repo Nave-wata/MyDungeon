@@ -1,13 +1,13 @@
 package com.example.mainproject.monster;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.example.mainproject.R;
 
@@ -15,7 +15,7 @@ import java.util.Objects;
 
 
 public class MonsterFragment extends Fragment {
-    final String EXTRA_DATA = "com.example.fragmenttest2.monster";
+    final String EXTRA_DATA = "com.example.mainproject.monster";
     private String str;
 
     @Override

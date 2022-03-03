@@ -1,6 +1,5 @@
 package com.example.mainproject.asynchronous;
 
-import androidx.room.AutoMigration;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
