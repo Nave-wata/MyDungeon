@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">MainProject</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="home_text">H</string>
+    <string name="dungeon_text">D</string>
+    <string name="monster_text">M</string>
+    <string name="userSelectionTitle">ユーザー名を選択するか，新しくユーザーを作成できます．</string>
+    <string name="SignIn_buttonText">ログイン</string>
+    <string name="SignUp_buttonText">新規登録</string>
+    <string name="NextSignInOP">次回の自動入力を有効にする</string>
+    <string name="DialogPositiveText">OK</string>
+    <string name="DialogNegativeText">キャンセル</string>
+    <string name="DialogNeutralText">あとで</string>
+    <string name="Name">ユーザー名</string>
+    <string name="NotUserSelect">未選択</string>
+    <string name="Password">パスワード</string>
+    <string name="Password2">パスワードをもう一度入力</string>
+    <string name="NotMatch">パスワードが異なっています</string>
+    <string name="errorNotInput">入力必須項目です</string>
+    <string name="errorNotSpace">空白が含まれています</string>
+    <string name="errorNotInText">英数字以外が含まれています</string>
+</resources>
