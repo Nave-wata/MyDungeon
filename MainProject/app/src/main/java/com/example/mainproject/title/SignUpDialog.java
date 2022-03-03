@@ -36,7 +36,6 @@ import java.util.function.Consumer;
 
 public class SignUpDialog extends DialogFragment {
     static { System.loadLibrary("fragmenttest2"); }
-    static native String HASH(String password, String salt);
 
     private final Consumer<Integer> callback;
     final String NEXT_INFO = "NextInfo";
@@ -169,8 +168,7 @@ public class SignUpDialog extends DialogFragment {
                     if (flag) {
                         final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
                         final String salt = getRandomString();
-                        final String hash = "a";
-                        HASH(password, salt);
+                        final String hash = getHash(password, salt);
                         new DataSave(
                                 db,
                                 name,

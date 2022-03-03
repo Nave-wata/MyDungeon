@@ -22,6 +22,7 @@
         android:layout_marginHorizontal="50dp"
         android:layout_marginBottom="15dp"
         android:hint="Enter Name"
+        android:maxLength="40"
         android:inputType="text"/>
 
     <TextView
@@ -42,7 +43,6 @@
             android:id="@+id/TitleSIPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_weight="0.9"
             android:gravity="center"
             android:hint="Password"
@@ -58,13 +58,20 @@
 
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/SInextAutoIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/NextSignInOP" />
+
     <Button
         android:id="@+id/SignIn_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
+        android:layout_margin="10dp"
         android:gravity="center"
-        android:text="@string/SignIn_buttonText"/>
+        android:text="@string/SignIn_buttonText" />
 
 </LinearLayout>

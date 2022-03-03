@@ -91,12 +91,19 @@
 
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/SUnextAutoIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/NextSignInOP" />
+
     <Button
         android:id="@+id/SignUp_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
+        android:layout_margin="10dp"
         android:gravity="center"
         android:text="@string/SignUp_buttonText"/>
 
