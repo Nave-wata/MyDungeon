@@ -183,7 +183,7 @@ public class SignInDialog extends DialogFragment {
                                             salt = ui.getSalt();
                                             hash = ui.getHash();
                                         }
-                                        String result = getHash(password, salt);
+                                        String result = TitleActivity.HASH(password, salt);
                                         if (Objects.requireNonNull(hash).equals(result)) {
                                             TitleActivity.UserName = name;
                                             callback.accept(0);

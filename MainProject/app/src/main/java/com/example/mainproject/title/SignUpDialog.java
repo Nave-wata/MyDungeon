@@ -1,7 +1,6 @@
 package com.example.mainproject.title;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.mainproject.title.SignInDialog.getHash;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -12,7 +11,6 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -34,9 +32,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class SignUpDialog extends DialogFragment {
-    static { System.loadLibrary("mainproject"); }
-    public native String stringFromJNI();
-    public native String HASH(String password, String salt);
 
     private final Consumer<Integer> callback;
     final String NEXT_INFO = "NextInfo";
@@ -169,7 +164,7 @@ public class SignUpDialog extends DialogFragment {
                     if (flag) {
                         final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
                         final String salt = getRandomString();
-                        final String hash = getHash(password, salt);
+                        final String hash = TitleActivity.HASH(password, salt);
                         new DataSave(
                                 db,
                                 name,
@@ -187,8 +182,6 @@ public class SignUpDialog extends DialogFragment {
                                         editor.putBoolean("Flag", false);
                                     }
                                     editor.apply();
-                                    Log.v("Password", password);
-                                    Log.v("C++", HASH(password, salt));
                                     callback.accept(0);
                                 },
                                 sqlE -> {

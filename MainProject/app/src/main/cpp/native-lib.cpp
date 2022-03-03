@@ -3,17 +3,9 @@
 #include "SHA512.h"
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_com_example_mainproject_title_SignUpDialog_stringFromJNI(
+Java_com_example_mainproject_title_TitleActivity_HASH(
         JNIEnv* env,
-        jobject /* this */) {
-    std::string hello = "Hello from C++";
-    return env->NewStringUTF(hello.c_str());
-}
-
-extern "C" JNIEXPORT jstring JNICALL
-Java_com_example_mainproject_title_SignUpDialog_HASH(
-        JNIEnv* env,
-        jobject /* this */,
+        jclass clazz,
         jstring j_password,
         jstring j_salt){
 
@@ -24,7 +16,7 @@ Java_com_example_mainproject_title_SignUpDialog_HASH(
 
     for (int i = 0; i < 10000; i++) {
         if (i % password.length() == 0) {
-            result = sha512.hash(result);
+            result = sha512.hash(result) + salt;
         } else {
             result = sha512.hash(result);
         }
