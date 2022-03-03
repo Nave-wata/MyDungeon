@@ -1,15 +1,17 @@
 package com.example.main.asynchronous;
 
+import android.util.Log;
+
 import com.example.main.asynchronous.usersinfo.UsersInfo;
 import com.example.main.asynchronous.usersinfo.UsersInfoDao;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class InitDB implements Runnable {
+public class InitializeDatabase implements Runnable {
     private final AppDatabase db;
 
-    public InitDB(AppDatabase db) {
+    public InitializeDatabase(AppDatabase db) {
         this.db = db;
     }
 
@@ -22,7 +24,7 @@ public class InitDB implements Runnable {
     public void execute() {
         // onPreExecute();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(new InitDB(db));
+        executorService.submit(new InitializeDatabase(db));
     }
 
     // void onPreExecute() {}
@@ -35,7 +37,9 @@ public class InitDB implements Runnable {
 
         try {
             usersInfoDao.insert(new UsersInfo(name, salt, hash));
+            Log.v("MyOne", "NonTime");
         } catch (Exception ignored) {
+            Log.v("MyOne", "Time");
         }
     }
 
