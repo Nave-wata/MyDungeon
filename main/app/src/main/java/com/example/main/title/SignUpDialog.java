@@ -35,7 +35,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class SignUpDialog extends DialogFragment {
-    static { System.loadLibrary("main"); }
+    static { System.loadLibrary("fragment2"); }
     static native String HASH(String password, String salt);
 
     private final Consumer<Integer> callback;
