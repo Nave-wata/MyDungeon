@@ -1,10 +1,10 @@
-package com.example.mainproject.asynchronous.usersinfo;
+package com.example.mainproject.asynchronous.possessioninfo;
 
-
-import android.annotation.SuppressLint;
-import android.database.sqlite.SQLiteConstraintException;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.mainproject.asynchronous.AppDatabase;
 
@@ -14,33 +14,42 @@ import java.util.function.Consumer;
 
 public class DataSave implements Runnable {
     Handler handler = new Handler(Looper.getMainLooper());
-    private final Consumer<Boolean> callback;
-    private final Consumer<SQLiteConstraintException> sqlErrorCallback;
-    private final Consumer<Exception> errorCallback;
+    final Consumer<Boolean> callback;
+    final Consumer<Exception> errorCallback;
     private Exception exception;
-    private SQLiteConstraintException sqliteConstraintException;
-    private final AppDatabase db;
-    private final String name;
-    private final String salt;
-    private final String hash;
+    final AppDatabase db;
+    final String name;
+    final int year;
+    final int month;
+    final int day;
+    final int hour;
+    final int minute;
+    final int second;
 
     public DataSave(AppDatabase db,
                     String name,
-                    String salt,
-                    String hash,
+                    int year,
+                    int month,
+                    int day,
+                    int hour,
+                    int minute,
+                    int second,
                     Consumer<Boolean> callback,
-                    Consumer<SQLiteConstraintException> sqlErrorCallback,
                     Consumer<Exception> errorCallback)
     {
         this.db = db;
         this.name = name;
-        this.salt = salt;
-        this.hash = hash;
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
         this.callback = callback;
-        this.sqlErrorCallback = sqlErrorCallback;
         this.errorCallback = errorCallback;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void run() {
         doInBackground();
@@ -54,34 +63,32 @@ public class DataSave implements Runnable {
                 new DataSave(
                         db,
                         name,
-                        salt,
-                        hash,
+                        year,
+                        month,
+                        day,
+                        hour,
+                        minute,
+                        second,
                         callback,
-                        sqlErrorCallback,
                         errorCallback));
     }
 
     //void onPreExecute() {}
 
     void doInBackground() {
-        UsersInfoDao usersInfoDao = db.usersInfoDao();
+        PossessionInfoDao possessionInfoDao = db.possessionInfoDao();
 
         try {
-            usersInfoDao.insert(new UsersInfo(name, salt, hash));
-        } catch (SQLiteConstraintException e) {
-            this.sqliteConstraintException = e;
-            this.exception = e;
+            possessionInfoDao.insert(new PossessionInfo(name, year, month, day, hour, minute, second));
         } catch (Exception e) {
             this.exception = e;
         }
     }
 
-    @SuppressLint("NewApi")
+    @RequiresApi(api = Build.VERSION_CODES.N)
     void onPostExecute() {
-        if(this.exception == null) {
+        if (this.exception == null) {
             callback.accept(true);
-        } else if (this.exception == this.sqliteConstraintException) {
-            sqlErrorCallback.accept((SQLiteConstraintException) this.exception);
         } else {
             errorCallback.accept(this.exception);
         }
