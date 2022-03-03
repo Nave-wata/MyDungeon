@@ -10,6 +10,4 @@ Java_com_example_main_title_SignUpDialog_HASH(JNIEnv * env, jclass clazz, jstrin
     SHA512 sha512;
 
     //result = sha512.hash(result);
-
-    return (jstring) result.c_str();
 }
