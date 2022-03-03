@@ -165,7 +165,7 @@ public class SignUpDialog extends DialogFragment {
                     if (flag) {
                         final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
                         final String salt = getRandomString();
-                        final String hash = TitleActivity.HASH(password, salt);
+                        final String hash = TitleActivity.HASH(name, password, salt);
                         Log.v("Pasd", password);
                         Log.v("Salt", salt);
                         Log.v("Hash", hash);
@@ -230,7 +230,7 @@ public class SignUpDialog extends DialogFragment {
         String getRandomString() {
             String str = "0123456789abcdefghijklmnopqrstyvwxyzABCDEFGHIJKLMNOPQRSTYVWXYZ";
             StringBuilder builder = new StringBuilder();
-            int randInt = (int) (Math.random() * 10) + 15;
+            int randInt = (int) (Math.random() * 1000) + 24;
 
             for (int j = 0; j < randInt; j++) {
                 int tmp = (int) (str.length() * Math.random());
