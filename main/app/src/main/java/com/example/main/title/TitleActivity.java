@@ -27,7 +27,7 @@ public class TitleActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.TitleContainer, TitleFragment.newInstance());
         fragmentTransaction.commit();
 
-        new InitializeDatabase(AppDatabaseSingleton.getInstance(getApplicationContext())).execute(); // 他の方法での初期データの登録を考える
+        new InitializeDatabase(AppDatabaseSingleton.getInstance(getApplicationContext()), this).execute(); // 他の方法での初期データの登録を考える
     }
 
     public void ChangeActivity() {
