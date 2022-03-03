@@ -35,7 +35,8 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class SignUpDialog extends DialogFragment {
-    static { System.loadLibrary("fragmenttest2"); }
+    static { System.loadLibrary("mainproject"); }
+    public native String stringFromJNI();
 
     private final Consumer<Integer> callback;
     final String NEXT_INFO = "NextInfo";
@@ -186,6 +187,7 @@ public class SignUpDialog extends DialogFragment {
                                         editor.putBoolean("Flag", false);
                                     }
                                     editor.apply();
+                                    Log.v("C++", stringFromJNI());
                                     Log.v("Name", name);
                                     Log.v("Password", password);
                                     Log.v("Salt", salt);
