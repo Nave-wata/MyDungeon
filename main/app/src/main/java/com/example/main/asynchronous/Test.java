@@ -1,6 +1,5 @@
 package com.example.main.asynchronous;
 
-import androidx.room.AutoMigration;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
@@ -10,13 +9,9 @@ import com.example.main.asynchronous.usersinfo.UsersInfo;
 import com.example.main.asynchronous.usersinfo.UsersInfoDao;
 
 
-/**/
-
-@Database(version = 2,
-        entities = {
-            UsersInfo.class,
-            PossessionInfo.class})
-public abstract class AppDatabase extends RoomDatabase {
-    public abstract UsersInfoDao usersInfoDao();
+@Database(entities = {
+        PossessionInfo.class},
+        version = 2)
+public abstract class Test extends RoomDatabase {
     public abstract PossessionInfoDao possessionInfoDao();
 }

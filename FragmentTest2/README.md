@@ -3,7 +3,7 @@
 **敵は倒す！** か, **共存！** で作るのがだいぶ異なる
 将来的には両方自由にできるようにはしたいけどまず実装するのはどっちかを決めた方がいい
 インフレに気を付ける
-アプリのデータベースはアプリを変更して走らせてもそのままやから気にせず楽しんで作ればいい！とおもったけどデータベース（@Database）を変更したらなんか[色々](https://developer.android.com/training/data-storage/room/migrating-db-versions?hl=ja)あるらしい
+アプリのデータベースはアプリを変更して走らせてもそのままやから気にせず楽しんで作ればいい！とおもったけどデータベース（@Database）を変更したらなんか[色々](https://developer.android.com/training/data-storage/room/migrating-db-versions?hl=ja)あるらしい．無理．とりあえず放置で．DBサーバーの構築早めにした方が良いかも知らん
 
 ## 全体
 
