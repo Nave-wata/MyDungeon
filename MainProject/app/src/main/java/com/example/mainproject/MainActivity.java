@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    @
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onPause() {

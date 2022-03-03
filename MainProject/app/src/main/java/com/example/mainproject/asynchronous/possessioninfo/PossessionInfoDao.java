@@ -21,7 +21,7 @@ public interface PossessionInfoDao {
             "    Minute = :minute, " +
             "    Second = :second " +
             "WHERE Name = :name")
-    void upDate(String name, int year, int month, int day, int hour, int minute, int second);
+    void UpDateTime(String name, int year, int month, int day, int hour, int minute, int second);
 
     @Query("DELETE FROM PossessionInfo WHERE Name = :name")
     void deletePossessionInfo(String name);
