@@ -29,7 +29,6 @@ import com.example.mainproject.SetImage;
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
 import com.example.mainproject.asynchronous.usersinfo.DataSave;
-import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -37,6 +36,7 @@ import java.util.function.Consumer;
 public class SignUpDialog extends DialogFragment {
     static { System.loadLibrary("mainproject"); }
     public native String stringFromJNI();
+    public native String HASH(String password, String salt);
 
     private final Consumer<Integer> callback;
     final String NEXT_INFO = "NextInfo";
@@ -187,7 +187,7 @@ public class SignUpDialog extends DialogFragment {
                                         editor.putBoolean("Flag", false);
                                     }
                                     editor.apply();
-                                    Log.v("C++", stringFromJNI());
+                                    //Log.v("C++", HASH("password", "salt"));
                                     Log.v("Name", name);
                                     Log.v("Password", password);
                                     Log.v("Salt", salt);
