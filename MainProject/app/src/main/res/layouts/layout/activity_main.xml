@@ -8,12 +8,18 @@
     tools:context=".MainActivity">
 
     <FrameLayout
+        android:id="@+id/BaseStatusContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
         android:id="@+id/MainContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <FrameLayout
-        android:id="@+id/BaseContainer"
+        android:id="@+id/BaseTransitionContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"/>

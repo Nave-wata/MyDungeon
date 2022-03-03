@@ -41,7 +41,7 @@ public class BaseTransitionFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_base, container, false);
+        return inflater.inflate(R.layout.fragment_basetransition, container, false);
     }
 
     @Override
