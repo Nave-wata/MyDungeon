@@ -1,13 +1,11 @@
 package com.example.main.asynchronous.possessioninfo;
 
-
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.main.asynchronous.usersinfo.UsersInfo;
-
 import java.util.List;
+
 
 @Dao
 public interface PossessionInfoDao {
@@ -21,8 +19,8 @@ public interface PossessionInfoDao {
     void deleteAll();
 
     @Query("SELECT * FROM PossessionInfo WHERE Name = :name")
-    List<UsersInfo> getLine(String name);
+    List<PossessionInfo> getLine(String name);
 
     @Query("SELECT * FROM PossessionInfo")
-    List<UsersInfo> getAll();
+    List<PossessionInfo> getAll();
 }
