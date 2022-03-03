@@ -6,7 +6,6 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 
-
 @Entity(tableName = "UsersInfo", indices = {@Index(value = "Name", unique = true)})
 public class UsersInfo {
     @PrimaryKey(autoGenerate = true)
