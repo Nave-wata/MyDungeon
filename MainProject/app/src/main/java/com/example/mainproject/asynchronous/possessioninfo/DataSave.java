@@ -3,7 +3,6 @@ package com.example.mainproject.asynchronous.possessioninfo;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -85,7 +84,6 @@ public class DataSave implements Runnable {
             try {
                 possessionInfoDao.UpDateTime(name, year, month, day, hour, minute, second);
             } catch (Exception ie) {
-                Log.v("Status", "HOGE");
                 this.exception = ie;
             }
         }
@@ -93,7 +91,6 @@ public class DataSave implements Runnable {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     void onPostExecute() {
-        Log.v("Status", "123456789");
         if (this.exception == null) {
             callback.accept(true);
         } else {

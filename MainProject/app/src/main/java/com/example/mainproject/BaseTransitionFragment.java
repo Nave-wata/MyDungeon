@@ -65,6 +65,7 @@ public class BaseTransitionFragment extends Fragment {
         monsterButton.setOnClickListener(iBt);
     }
 
+
     @NonNull
     public static BaseTransitionFragment newInstance(String UserName){
         BaseTransitionFragment fragment = new BaseTransitionFragment(UserName);
