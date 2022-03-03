@@ -12,8 +12,7 @@ import com.example.main.asynchronous.usersinfo.UsersInfoDao;
 
 /**/
 
-@Database(version = 3
-        ,
+@Database(version = 2,
         entities = {
             UsersInfo.class,
             PossessionInfo.class})
