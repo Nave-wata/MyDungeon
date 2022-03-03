@@ -28,6 +28,7 @@ import com.example.main.SetImage;
 import com.example.main.asynchronous.AppDatabase;
 import com.example.main.asynchronous.AppDatabaseSingleton;
 import com.example.main.asynchronous.usersinfo.DataSave;
+import com.example.main.asynchronous.usersinfo.UsersInfo;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -162,7 +163,7 @@ public class SignUpDialog extends DialogFragment {
                     }
 
                     if (flag) {
-                        final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
+                        final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext(), UsersInfo.NAME);
                         final String salt = getRandomString();
                         final String hash = getHash(password, salt);
                         new DataSave(
