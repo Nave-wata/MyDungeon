@@ -66,8 +66,8 @@ public class BaseTransitionFragment extends Fragment {
     }
 
     @NonNull
-    public static BaseFragment newInstance(String UserName){
-        BaseFragment fragment = new BaseFragment(UserName);
+    public static BaseTransitionFragment newInstance(String UserName){
+        BaseTransitionFragment fragment = new BaseTransitionFragment(UserName);
         Bundle barg = new Bundle();
         barg.putString(fragment.EXTRA_DATA, UserName);
         fragment.setArguments(barg);
