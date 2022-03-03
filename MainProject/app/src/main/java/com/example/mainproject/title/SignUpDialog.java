@@ -177,6 +177,10 @@ public class SignUpDialog extends DialogFragment {
                                 b -> {
                                     Context context = getActivity().getApplicationContext();
                                     Toast.makeText(context, "登録完了しました", Toast.LENGTH_SHORT).show();
+                                    Log.v("Name", name);
+                                    Log.v("Password", password);
+                                    Log.v("Salt", salt);
+                                    Log.v("hash", hash);
                                     TitleActivity.UserName = name;
                                     if (nextAutoIn.isChecked()) {
                                         editor.putBoolean(DS_Flag, true);
