@@ -1,13 +1,23 @@
 package com.example.main;
 
-import android.content.Intent;
-import android.os.Bundle;
+import static java.time.LocalDateTime.parse;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.main.title.TitleActivity;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -25,5 +35,18 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.BaseContainer, BaseFragment.newInstance(UserName));
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        LocalDateTime nowTime = LocalDateTime.now();
+        int nowYear = nowTime.getYear();
+        int nowMonth = nowTime.getMonthValue();
+        int nowDay = nowTime.getDayOfMonth();
+        int nowHour = nowTime.getHour();
+        int nowMinute = nowTime.getMinute();
+        int nowSecond = nowTime.getSecond();
     }
 }

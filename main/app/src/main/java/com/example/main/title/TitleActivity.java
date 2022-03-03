@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.main.MainActivity;
 import com.example.main.R;
 import com.example.main.asynchronous.AppDatabaseSingleton;
-import com.example.main.asynchronous.usersinfo.InitDB;
+import com.example.main.asynchronous.InitializeDatabase;
 
 public class TitleActivity extends AppCompatActivity {
     public final static String EXTRA_DATA = "com.example.fragmenttest2.title";
@@ -27,7 +27,7 @@ public class TitleActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.TitleContainer, TitleFragment.newInstance());
         fragmentTransaction.commit();
 
-        new InitDB(AppDatabaseSingleton.getInstance(getApplicationContext())).execute();
+        new InitializeDatabase(AppDatabaseSingleton.getInstance(getApplicationContext()), this).execute(); // 他の方法での初期データの登録を考える
     }
 
     public void ChangeActivity() {
