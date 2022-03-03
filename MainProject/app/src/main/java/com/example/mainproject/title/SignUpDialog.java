@@ -11,6 +11,7 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -165,6 +166,9 @@ public class SignUpDialog extends DialogFragment {
                         final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
                         final String salt = getRandomString();
                         final String hash = TitleActivity.HASH(password, salt);
+                        Log.v("Pasd", password);
+                        Log.v("Salt", salt);
+                        Log.v("Hash", hash);
                         new DataSave(
                                 db,
                                 name,

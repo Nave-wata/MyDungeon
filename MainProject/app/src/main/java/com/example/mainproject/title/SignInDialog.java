@@ -129,7 +129,7 @@ public class SignInDialog extends DialogFragment {
         public void onClick(@NonNull View v) {
             switch (v.getId()) {
                 case R.id.SignIn_button:
-                    final String regex = "[0123456789abcdefghijklmnopqrstuvwxzABCDEFGHIJKLMNOPQRSTUVWXYZ]";
+                    final String regex = "[0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]";
                     final String name = etName.getText().toString();
                     final String password = etPass.getText().toString();
                     final String[] nameSplit = name.split("");

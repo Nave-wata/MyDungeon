@@ -4,7 +4,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 import com.example.mainproject.asynchronous.usersinfo.UsersInfoDao;
@@ -41,9 +40,9 @@ public class InitializeDatabase implements Runnable {
         String DS_Name = "Name";
         String DS_Passwd = "Password";
         String name = "hgnkHVbHZsSdyiArXL4MNiwnWYdFxaQEEuNstxG6";
-        String password = "Y8jeDbJKJJ6r2uaa4i997d7LEB5i3dXCEKignuL4XN2RLrj2KeAxpHBeTzHFjJtg4ArC5zz3fjCkusfYUt8C3FrjtDn9e8A7dCxkkJ7Fnr93L2bcsLfGCA9XWcuyJif6";
-        String salt = "WjfKR6s2DE7jh9Y";
-        String hash = "ae4a8211a251c813ff09ebdbe3645dedce53dfb3c89b182a29af674945a0c454e98fcf2ed2df95948de436592df61896cb447ba4242bc11c57c8c8827c7bae93";
+        String password = "d099c99b3d444150d6b92c2197170f7263673bbaf80b8b03f437b287694e9eca36ce29dd32f24f03ff05fd088bba7d2322bf3310a800f5210f947a7d22365024";
+        String salt = "aGY4GzyZnLaDvthtIwY";
+        String hash = "6f715ba2cc56b5c32fee6d688d40ca33bcba9a18443eab40713ed08b0ecd49f230f6448cd97e63fc120f26e656adfa5396a86a259bec185e46e44ee151a8811";
         UsersInfoDao usersInfoDao = db.usersInfoDao();
         SharedPreferences dataStore = activity.getSharedPreferences(NEXT_INFO, MODE_PRIVATE);
         SharedPreferences.Editor editor = dataStore.edit();
@@ -51,6 +50,7 @@ public class InitializeDatabase implements Runnable {
         editor.putBoolean(DS_Flag, true);
         editor.putString(DS_Name, name);
         editor.putString(DS_Passwd, password);
+        editor.apply();
 
         try {
             usersInfoDao.insert(new UsersInfo(name, salt, hash));
