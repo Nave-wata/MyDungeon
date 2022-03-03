@@ -7,7 +7,6 @@ import android.os.Looper;
 import androidx.annotation.RequiresApi;
 
 import com.example.mainproject.asynchronous.AppDatabase;
-import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -16,7 +15,7 @@ import java.util.function.Consumer;
 
 public class GetLine implements Runnable {
     android.os.Handler handler = new Handler(Looper.getMainLooper());
-    private final Consumer<List<UsersInfo>> callback;
+    private final Consumer<List<PossessionInfo>> callback;
     private final Consumer<Exception> errorCallback;
     private Exception exception;
     private final AppDatabase db;
@@ -25,7 +24,7 @@ public class GetLine implements Runnable {
 
     public GetLine(AppDatabase db,
                    String name,
-                   Consumer<List<UsersInfo>> callback,
+                   Consumer<List<PossessionInfo>> callback,
                    Consumer<Exception> errorCallback)
     {
         this.db = db;
@@ -34,6 +33,7 @@ public class GetLine implements Runnable {
         this.errorCallback = errorCallback;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void run() {
         doInBackground();
