@@ -17,6 +17,18 @@ android {
             cmake {
                 cppFlags '-std=c++17'
             }
+            sourceSets {
+                main {
+                    res.srcDirs(
+                            'src/main/res',
+                            'src/main/res/layouts',
+                            'src/main/res/layouts/title',
+                            'src/main/res/layouts/home',
+                            'src/main/res/layouts/dungeon',
+                            'src/main/res/layouts/monster'
+                    )
+                }
+            }
         }
     }
 
@@ -48,4 +60,14 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+
+    implementation 'com.squareup.okhttp3:okhttp:4.0.0-alpha02'
+
+    def room_version = "2.4.1"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha06"
+    implementation "androidx.datastore:datastore-preferences-rxjava3:1.0.0-alpha06"
 }
