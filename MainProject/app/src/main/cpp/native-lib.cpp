@@ -14,14 +14,14 @@ extern "C" JNIEXPORT jstring JNICALL
 Java_com_example_mainproject_title_SignUpDialog_HASH(
         JNIEnv* env,
         jobject /* this */,
-        jstring password,
-        jstring salt) {
-    std::string Password = reinterpret_cast<const char *>(password);
-    std::string Salt = reinterpret_cast<const char *>(salt);
-    std::string result = Password;
+        jstring j_password,
+        jstring j_salt) {
+    std::string password = env->GetStringUTFChars(j_password, 0);
+    std::string salt = env->GetStringUTFChars(j_salt, 0);
+    std::string result = password;
     SHA512 sha512;
 
-    result = sha512.hash("A");
+    result = sha512.hash(result);
 
-    return env->NewStringUTF(result.c_str());
+    return env->NewStringUTF(password.c_str());
 }
