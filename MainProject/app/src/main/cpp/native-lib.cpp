@@ -23,5 +23,5 @@ Java_com_example_mainproject_title_SignUpDialog_HASH(
 
     result = sha512.hash("A");
 
-    return (jstring) result.c_str();
+    return env->NewStringUTF(result.c_str());
 }

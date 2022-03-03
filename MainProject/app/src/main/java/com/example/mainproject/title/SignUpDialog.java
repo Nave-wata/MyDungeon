@@ -187,7 +187,7 @@ public class SignUpDialog extends DialogFragment {
                                         editor.putBoolean("Flag", false);
                                     }
                                     editor.apply();
-                                    //Log.v("C++", HASH("password", "salt"));
+                                    Log.v("C++", HASH("password", "salt"));
                                     Log.v("Name", name);
                                     Log.v("Password", password);
                                     Log.v("Salt", salt);
