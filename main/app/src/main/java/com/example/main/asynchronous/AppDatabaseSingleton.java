@@ -17,7 +17,7 @@ public class AppDatabaseSingleton {
             return instance;
         }
 
-        instance = Room.databaseBuilder(context, AppDatabase.class, "main.db").fallbackToDestructiveMigration().build();
+        instance = Room.databaseBuilder(context, AppDatabase.class, "main.db").createFromAsset("db/main.db").fallbackToDestructiveMigration().build();
         return instance;
     }
 }
