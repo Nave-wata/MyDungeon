@@ -49,7 +49,7 @@ public class GetLine implements Runnable {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
 
         try {
-            data = usersInfoDao.getLine(name);
+            data = usersInfoDao.getLineTask(name);
         } catch (Exception e) {
             this.exception = e;
         }

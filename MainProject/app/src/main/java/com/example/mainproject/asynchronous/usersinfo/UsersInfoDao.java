@@ -22,14 +22,14 @@ public interface UsersInfoDao {
     void updateTimeTask(String name, int year, int month, int day, int hour, int minute, int second);
 
     @Query("DELETE FROM UsersInfo WHERE Name = :name")
-    void deleteUserInfo(String name);
+    void deleteUserInfoTask(String name);
 
     @Query("DELETE FROM UsersInfo")
-    void deleteAll();
+    void deleteAllTask();
 
     @Query("SELECT * FROM UsersInfo WHERE Name = :name")
-    List<UsersInfo> getLine(String name);
+    List<UsersInfo> getLineTask(String name);
 
     @Query("SELECT * FROM UsersInfo")
-    List<UsersInfo> getAll();
+    List<UsersInfo> getAllTask();
 }

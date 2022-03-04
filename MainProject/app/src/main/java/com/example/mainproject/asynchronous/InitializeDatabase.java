@@ -57,9 +57,10 @@ public class InitializeDatabase implements Runnable {
         int nowMinute = nowTime.getMinute();
         int nowSecond = nowTime.getSecond();
         UsersInfoDao usersInfoDao = db.usersInfoDao();
+
+        // ここに書いてるとチェックボックス外してもアプリ再起したら入力されてます
         SharedPreferences dataStore = activity.getSharedPreferences(NEXT_INFO, MODE_PRIVATE);
         SharedPreferences.Editor editor = dataStore.edit();
-
         editor.putBoolean(DS_Flag, true);
         editor.putString(DS_Name, name);
         editor.putString(DS_Passwd, password);
