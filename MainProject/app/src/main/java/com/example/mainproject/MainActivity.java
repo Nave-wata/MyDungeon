@@ -3,7 +3,6 @@ package com.example.mainproject;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -68,11 +67,8 @@ public class MainActivity extends AppCompatActivity {
                                     for (UsersPossessionInfo up: c) {
                                         _DP = up.getDP();
                                         _MONEY = up.getMoney();
-                                        Log.v("_DP", "" + _DP);
-                                        Log.v("_MONEY", "" + _MONEY);
                                     }
-                                    Log.v("_DP", "" + _DP);
-                                    Log.v("_MONEY", "" + _MONEY);
+
                                     LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
                                     LocalDateTime NowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
                                     Duration summerVacationDuration = Duration.between(BeforeTime, NowTime);
@@ -138,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
                 nowHour,
                 nowMinute,
                 nowSecond,
-                b-> Log.v("MainActivity", "OK"),
-                e->Log.v("MainActivity", "NO")
+                b->{},
+                e->{}
         ).execute();
     }
 }

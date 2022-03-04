@@ -90,12 +90,11 @@ public class BaseStatusFragment extends Fragment {
     public static byte[] CastByte(long L1) {
         byte[] output = new byte[BaseStatusFragment.SIZE];
 
+
         for (int i = 0; i < output.length; i++) {
             output[i] = (byte) (L1 % 10);
-            Log.v("output[" + i + "]", "" + output[i]);
-            L1 %= 10;
+            L1 /= 10;
         }
-        Log.v("output", "" + output);
         return output;
     }
 
