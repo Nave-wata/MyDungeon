@@ -4,8 +4,8 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.util.Log;
 
-import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 import com.example.mainproject.asynchronous.usersinfo.UsersInfoDao;
 
 import java.util.concurrent.ExecutorService;
@@ -53,8 +53,10 @@ public class InitializeDatabase implements Runnable {
         editor.apply();
 
         try {
-            usersInfoDao.insert(new UsersInfo(name, salt, hash));
+            usersInfoDao.insertNames(name, salt, hash);
+            Log.v("Database Init", "OK");
         } catch (Exception ignored) {
+            Log.v("Database Init", "NO");
         }
     }
 

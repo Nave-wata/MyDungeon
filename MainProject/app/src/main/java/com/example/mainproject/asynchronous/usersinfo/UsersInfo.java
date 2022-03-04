@@ -17,16 +17,56 @@ public class UsersInfo {
     @ColumnInfo(name = "Salt")
     public String salt;
 
-    @ColumnInfo(name = "hash")
+    @ColumnInfo(name = "Hash")
     public String hash;
 
-    public UsersInfo(String name,
-                     String salt,
-                     String hash)
+    @ColumnInfo(name = "Year")
+    public int year;
+
+    @ColumnInfo(name = "Month")
+    public int month;
+
+    @ColumnInfo(name = "Day")
+    public int day;
+
+    @ColumnInfo(name = "Hour")
+    public int hour;
+
+    @ColumnInfo(name = "Minute")
+    public int minute;
+
+    @ColumnInfo(name = "Second")
+    public int second;
+
+    public UsersInfo setPass(
+            String name,
+            String salt,
+            String hash)
     {
+        UsersInfo usersInfo = new UsersInfo();
         this.name = name;
         this.salt = salt;
         this.hash = hash;
+
+        return usersInfo;
+    }
+
+    public void setTime(
+            String name,
+            int year,
+            int month,
+            int day,
+            int hour,
+            int minute,
+            int second)
+    {
+        this.name = name;
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
     }
 
     public String getName() { return name; }

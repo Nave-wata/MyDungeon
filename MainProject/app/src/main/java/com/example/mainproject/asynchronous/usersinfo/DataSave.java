@@ -67,7 +67,7 @@ public class DataSave implements Runnable {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
 
         try {
-            usersInfoDao.insert(new UsersInfo(name, salt, hash));
+            usersInfoDao.insertNames(name, salt, hash);
         } catch (SQLiteConstraintException e) {
             this.sqliteConstraintException = e;
             this.exception = e;
