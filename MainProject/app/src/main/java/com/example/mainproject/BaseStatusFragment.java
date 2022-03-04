@@ -103,8 +103,13 @@ public class BaseStatusFragment extends Fragment {
         long output = 0;
 
         for (int i = 0; i < 18; i++) {
+            Log.v("ary[" + i + "]", "" + ary[i]);
+        }
+
+        for (int i = 0; i < 18; i++) {
             output += ary[i] * Math.pow(10, i);
         }
+        Log.v("output", "" + output);
 
         return output;
     }
