@@ -1,4 +1,4 @@
-package com.example.mainproject.asynchronous.usersinfo;
+package com.example.mainproject.asynchronous.userspossessioninfo;
 
 import android.annotation.SuppressLint;
 import android.os.Handler;
@@ -11,19 +11,19 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-public class GetLine implements Runnable {
+public class GetUsersPossessionInfo implements Runnable {
     Handler handler = new Handler(Looper.getMainLooper());
-    private final Consumer<List<UsersInfo>> callback;
+    private final Consumer<List<UsersPossessionInfo>> callback;
     private final Consumer<Exception> errorCallback;
     private Exception exception;
     private final AppDatabase db;
     private final String name;
-    private List<UsersInfo> data;
+    private List<UsersPossessionInfo> data;
 
-    public GetLine(AppDatabase db,
-                   String name,
-                   Consumer<List<UsersInfo>> callback,
-                   Consumer<Exception> errorCallback)
+    public GetUsersPossessionInfo(AppDatabase db,
+                                  String name,
+                                  Consumer<List<UsersPossessionInfo>> callback,
+                                  Consumer<Exception> errorCallback)
     {
         this.db = db;
         this.name = name;
@@ -40,16 +40,16 @@ public class GetLine implements Runnable {
     public void execute() {
         //onPreExecute();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(new GetLine(db, name, callback, errorCallback));
+        executorService.submit(new GetUsersPossessionInfo(db, name, callback, errorCallback));
     }
 
     //void onPreExecute() {}
 
     void doInBackground() {
-        UsersInfoDao usersInfoDao = db.usersInfoDao();
+        UsersPossessionInfoDao usersPossessionInfoDao = db.possessionInfoDao();
 
         try {
-            data = usersInfoDao.getLineTask(name);
+            data = usersPossessionInfoDao.getLineTask(name);
         } catch (Exception e) {
             this.exception = e;
         }

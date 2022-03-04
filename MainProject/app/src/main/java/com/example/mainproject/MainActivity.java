@@ -12,9 +12,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
-import com.example.mainproject.asynchronous.usersinfo.GetLine;
+import com.example.mainproject.asynchronous.usersinfo.GetUsersInfo;
 import com.example.mainproject.asynchronous.usersinfo.UpdateTime;
 import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
+import com.example.mainproject.asynchronous.userspossessioninfo.GetUsersPossessionInfo;
+import com.example.mainproject.asynchronous.userspossessioninfo.UsersPossessionInfo;
 import com.example.mainproject.title.TitleActivity;
 
 import java.time.Duration;
@@ -34,44 +36,63 @@ public class MainActivity extends AppCompatActivity {
         UserName = intent.getStringExtra(TitleActivity.EXTRA_DATA);
         final AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
 
-        new GetLine(
+        new GetUsersInfo(
                 db,
                 UserName,
                 b->{
-                    long diffSecond = 0;
-                    try {
-                        LocalDateTime nowTime = LocalDateTime.now();
-                        int nowYear = nowTime.getYear();
-                        int nowMonth = nowTime.getMonthValue();
-                        int nowDay = nowTime.getDayOfMonth();
-                        int nowHour = nowTime.getHour();
-                        int nowMinute = nowTime.getMinute();
-                        int nowSecond = nowTime.getSecond();
-                        int beforeYear = 0, beforeMonth = 0 , beforeDay = 0, beforeHour = 0, beforeMinute = 0, beforeSecond = 0;
+                    new GetUsersPossessionInfo(
+                            db,
+                            UserName,
+                            c->{
+                                long diffSecond = 0;
+                                byte[] _DP = new byte[BaseStatusFragment.SIZE];
+                                byte[] _MONEY = new byte[BaseStatusFragment.SIZE];
+                                try {
+                                    LocalDateTime nowTime = LocalDateTime.now();
+                                    int nowYear = nowTime.getYear();
+                                    int nowMonth = nowTime.getMonthValue();
+                                    int nowDay = nowTime.getDayOfMonth();
+                                    int nowHour = nowTime.getHour();
+                                    int nowMinute = nowTime.getMinute();
+                                    int nowSecond = nowTime.getSecond();
+                                    int beforeYear = 0, beforeMonth = 0 , beforeDay = 0, beforeHour = 0, beforeMinute = 0, beforeSecond = 0;
 
-                        for (UsersInfo pi: b) {
-                            beforeYear = pi.getYear();
-                            beforeMonth = pi.getMonth();
-                            beforeDay = pi.getDay();
-                            beforeHour = pi.getHour();
-                            beforeMinute = pi.getMinute();
-                            beforeSecond = pi.getSecond();
-                        }
+                                    for (UsersInfo pi: b) {
+                                        beforeYear = pi.getYear();
+                                        beforeMonth = pi.getMonth();
+                                        beforeDay = pi.getDay();
+                                        beforeHour = pi.getHour();
+                                        beforeMinute = pi.getMinute();
+                                        beforeSecond = pi.getSecond();
+                                    }
+                                    for (UsersPossessionInfo up: c) {
+                                        _DP = up.getDP();
+                                        _MONEY = up.getMoney();
+                                    }
 
-                        LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
-                        LocalDateTime NowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
-                        Duration summerVacationDuration = Duration.between(BeforeTime, NowTime);
-                        diffSecond = summerVacationDuration.getSeconds();
-                    } catch (Exception e) {
-                        diffSecond = 0;
-                    } finally {
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
-                        fragmentTransaction.commit();
-                        BaseStatusFragment.initDiffTime(diffSecond);
-                        Log.v("MainActivity", "onCreate End");
-                    }
+                                    LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
+                                    LocalDateTime NowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
+                                    Duration summerVacationDuration = Duration.between(BeforeTime, NowTime);
+                                    diffSecond = summerVacationDuration.getSeconds();
+                                } catch (Exception e) {
+                                    diffSecond = 0;
+                                } finally {
+                                    FragmentManager fragmentManager = getSupportFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
+                                    fragmentTransaction.commit();
+                                    BaseStatusFragment.initDiffTime(diffSecond, _DP, _MONEY);
+                                    Log.v("MainActivity", "onCreate End");
+                                }
+                            },
+                            e->{
+                                // お問い合わせ画面でも出す？
+                                FragmentManager fragmentManager = getSupportFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
+                                fragmentTransaction.commit();
+                            }
+                    ).execute();
                 },
                 e->{
                     // お問い合わせ画面でも出す？

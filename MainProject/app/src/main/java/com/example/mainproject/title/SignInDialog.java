@@ -26,7 +26,7 @@ import com.example.mainproject.R;
 import com.example.mainproject.SetImage;
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
-import com.example.mainproject.asynchronous.usersinfo.GetLine;
+import com.example.mainproject.asynchronous.usersinfo.GetUsersInfo;
 import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 
 import java.util.Objects;
@@ -140,7 +140,7 @@ public class SignInDialog extends DialogFragment {
 
                     if (flag) {
                         final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
-                        new GetLine(
+                        new GetUsersInfo(
                                 db,
                                 name,
                                 b-> {

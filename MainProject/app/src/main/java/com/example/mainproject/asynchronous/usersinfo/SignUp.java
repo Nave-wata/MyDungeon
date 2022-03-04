@@ -7,8 +7,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.mainproject.asynchronous.AppDatabase;
-import com.example.mainproject.asynchronous.possession.PossessionInfo;
-import com.example.mainproject.asynchronous.possession.PossessionInfoDao;
+import com.example.mainproject.asynchronous.userspossessioninfo.UsersPossessionInfo;
+import com.example.mainproject.asynchronous.userspossessioninfo.UsersPossessionInfoDao;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -91,11 +91,11 @@ public class SignUp implements Runnable {
 
     void doInBackground() {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
-        PossessionInfoDao possessionInfoDao = db.possessionInfoDao();
+        UsersPossessionInfoDao usersPossessionInfoDao = db.possessionInfoDao();
 
         try {
             usersInfoDao.signUpTask(name, salt, hash, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
-            possessionInfoDao.insetTask(new PossessionInfo(name, 100, 100));
+            usersPossessionInfoDao.insetTask(new UsersPossessionInfo(name, 100, 100));
         } catch (SQLiteConstraintException e) {
             this.sqliteConstraintException = e;
             this.exception = e;
