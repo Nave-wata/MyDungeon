@@ -3,7 +3,6 @@ package com.example.mainproject;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,9 +11,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
-import com.example.mainproject.asynchronous.possessioninfo.DataSave;
-import com.example.mainproject.asynchronous.possessioninfo.GetLine;
-import com.example.mainproject.asynchronous.possessioninfo.PossessionInfo;
+import com.example.mainproject.asynchronous.timediffinfo.DataSave;
+import com.example.mainproject.asynchronous.timediffinfo.GetLine;
+import com.example.mainproject.asynchronous.timediffinfo.TimeDiffInfo;
 import com.example.mainproject.title.TitleActivity;
 
 import java.time.Duration;
@@ -38,36 +37,42 @@ public class MainActivity extends AppCompatActivity {
                 db,
                 UserName,
                 b->{
-                    LocalDateTime nowTime = LocalDateTime.now();
-                    int nowYear = nowTime.getYear();
-                    int nowMonth = nowTime.getMonthValue();
-                    int nowDay = nowTime.getDayOfMonth();
-                    int nowHour = nowTime.getHour();
-                    int nowMinute = nowTime.getMinute();
-                    int nowSecond = nowTime.getSecond();
-                    int beforeYear = 0, beforeMonth = 0 , beforeDay = 0, beforeHour = 0, beforeMinute = 0, beforeSecond = 0;
+                    long diffSecond = 0;
+                    try {
+                        LocalDateTime nowTime = LocalDateTime.now();
+                        int nowYear = nowTime.getYear();
+                        int nowMonth = nowTime.getMonthValue();
+                        int nowDay = nowTime.getDayOfMonth();
+                        int nowHour = nowTime.getHour();
+                        int nowMinute = nowTime.getMinute();
+                        int nowSecond = nowTime.getSecond();
+                        int beforeYear = 0, beforeMonth = 0 , beforeDay = 0, beforeHour = 0, beforeMinute = 0, beforeSecond = 0;
 
-                    for (PossessionInfo pi: b) {
-                        beforeYear = pi.getYear();
-                        beforeMonth = pi.getMonth();
-                        beforeDay = pi.getDay();
-                        beforeHour = pi.getHour();
-                        beforeMinute = pi.getMinute();
-                        beforeSecond = pi.getSecond();
+                        for (TimeDiffInfo pi: b) {
+                            beforeYear = pi.getYear();
+                            beforeMonth = pi.getMonth();
+                            beforeDay = pi.getDay();
+                            beforeHour = pi.getHour();
+                            beforeMinute = pi.getMinute();
+                            beforeSecond = pi.getSecond();
+                        }
+
+                        LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);// 夏休みは終業式が終わったタイミングから
+                        LocalDateTime NowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);// 始業式が始まるタイミングまで
+                        Duration summerVacationDuration = Duration.between(BeforeTime, NowTime);// 期間分の時間を取得する
+                        diffSecond = summerVacationDuration.getSeconds();
+                    } catch (Exception e) {
+                        diffSecond = 0;
+                    } finally {
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
+                        fragmentTransaction.commit();
+                        BaseStatusFragment.initDiffTime(diffSecond);
                     }
-
-                    LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);// 夏休みは終業式が終わったタイミングから
-                    LocalDateTime NowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);// 始業式が始まるタイミングまで
-                    Duration summerVacationDuration = Duration.between(BeforeTime, NowTime);// 期間分の時間を取得する
-                    long diffSecond = summerVacationDuration.getSeconds();
-                    Log.v("diffSecond", String.valueOf(diffSecond));
-
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
-                    fragmentTransaction.commit();
                 },
                 e->{
+                    // お問い合わせ画面でも出す？
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));

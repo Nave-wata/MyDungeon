@@ -1,4 +1,4 @@
-package com.example.mainproject.asynchronous.possessioninfo;
+package com.example.mainproject.asynchronous.timediffinfo;
 
 import android.os.Build;
 import android.os.Handler;
@@ -76,13 +76,13 @@ public class DataSave implements Runnable {
     //void onPreExecute() {}
 
     void doInBackground() {
-        PossessionInfoDao possessionInfoDao = db.possessionInfoDao();
+        TimeDiffInfoDao timeDiffInfoDao = db.timeDiffInfoDao();
 
         try {
-            possessionInfoDao.insert(new PossessionInfo(name, year, month, day, hour, minute, second));
+            timeDiffInfoDao.insert(new TimeDiffInfo(name, year, month, day, hour, minute, second));
         } catch (Exception e) {
             try {
-                possessionInfoDao.UpDateTime(name, year, month, day, hour, minute, second);
+                timeDiffInfoDao.UpDateTime(name, year, month, day, hour, minute, second);
             } catch (Exception ie) {
                 this.exception = ie;
             }

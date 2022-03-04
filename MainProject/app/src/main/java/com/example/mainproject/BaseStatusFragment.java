@@ -13,11 +13,15 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class BaseStatusFragment extends Fragment {
     final String UserName;
     final String EXTRA_DATA = "com.example.mainproject";
+    public static ArrayList<Byte> DP = new ArrayList<Byte>();
+    public static ArrayList<Byte> MONEY = new ArrayList<Byte>();
+
     private final Handler handler = new Handler(Looper.getMainLooper());
 
     public BaseStatusFragment(String UserName) {
@@ -51,5 +55,10 @@ public class BaseStatusFragment extends Fragment {
         barg.putString(fragment.EXTRA_DATA, UserName);
         fragment.setArguments(barg);
         return fragment;
+    }
+
+    public static void initDiffTime(long diffTime) { // アプリ起動時にする計算処理
+        Log.v("DiffTime", "" + diffTime);
+        Log.v("DP.size", "" + DP.size());
     }
 }

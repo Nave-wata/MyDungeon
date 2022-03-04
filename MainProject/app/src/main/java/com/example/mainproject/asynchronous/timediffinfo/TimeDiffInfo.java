@@ -1,12 +1,12 @@
-package com.example.mainproject.asynchronous.possessioninfo;
+package com.example.mainproject.asynchronous.timediffinfo;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "PossessionInfo", indices = {@Index(value = "Name", unique = true)})
-public class PossessionInfo {
+@Entity(tableName = "TimeDiffInfo", indices = {@Index(value = "Name", unique = true)})
+public class TimeDiffInfo {
     @PrimaryKey(autoGenerate = true)
     public long id;
 
@@ -31,13 +31,13 @@ public class PossessionInfo {
     @ColumnInfo(name = "Second")
     public int second;
 
-    public PossessionInfo(String name,
-                          int year,
-                          int month,
-                          int day,
-                          int hour,
-                          int minute,
-                          int second) {
+    public TimeDiffInfo(String name,
+                        int year,
+                        int month,
+                        int day,
+                        int hour,
+                        int minute,
+                        int second) {
         this.name = name;
         this.year = year;
         this.month = month;

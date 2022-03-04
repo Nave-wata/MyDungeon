@@ -1,4 +1,4 @@
-package com.example.mainproject.asynchronous.possessioninfo;
+package com.example.mainproject.asynchronous.timediffinfo;
 
 import android.os.Build;
 import android.os.Handler;
@@ -15,16 +15,16 @@ import java.util.function.Consumer;
 
 public class GetLine implements Runnable {
     android.os.Handler handler = new Handler(Looper.getMainLooper());
-    private final Consumer<List<PossessionInfo>> callback;
+    private final Consumer<List<TimeDiffInfo>> callback;
     private final Consumer<Exception> errorCallback;
     private Exception exception;
     private final AppDatabase db;
     private final String name;
-    private List<PossessionInfo> data;
+    private List<TimeDiffInfo> data;
 
     public GetLine(AppDatabase db,
                    String name,
-                   Consumer<List<PossessionInfo>> callback,
+                   Consumer<List<TimeDiffInfo>> callback,
                    Consumer<Exception> errorCallback)
     {
         this.db = db;
@@ -49,10 +49,10 @@ public class GetLine implements Runnable {
     //void onPreExecute() {}
 
     void doInBackground() {
-        PossessionInfoDao possessionInfoDao = db.possessionInfoDao();
+        TimeDiffInfoDao timeDiffInfoDao = db.timeDiffInfoDao();
 
         try {
-            data = possessionInfoDao.getLine(name);
+            data = timeDiffInfoDao.getLine(name);
         } catch (Exception e) {
             this.exception = e;
         }

@@ -1,4 +1,4 @@
-package com.example.mainproject.asynchronous.possessioninfo;
+package com.example.mainproject.asynchronous.timediffinfo;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -8,11 +8,11 @@ import java.util.List;
 
 
 @Dao
-public interface PossessionInfoDao {
+public interface TimeDiffInfoDao {
     @Insert
-    void insert(PossessionInfo possessionInfo);
+    void insert(TimeDiffInfo timeDiffInfo);
 
-    @Query("UPDATE PossessionInfo " +
+    @Query("UPDATE TimeDiffInfo " +
             "SET Name = :name, " +
             "    Year = :year, " +
             "    Month = :month, " +
@@ -23,15 +23,15 @@ public interface PossessionInfoDao {
             "WHERE Name = :name")
     void UpDateTime(String name, int year, int month, int day, int hour, int minute, int second);
 
-    @Query("DELETE FROM PossessionInfo WHERE Name = :name")
+    @Query("DELETE FROM TimeDiffInfo WHERE Name = :name")
     void deletePossessionInfo(String name);
 
-    @Query("DELETE FROM PossessionInfo")
+    @Query("DELETE FROM TimeDiffInfo")
     void deleteAll();
 
-    @Query("SELECT * FROM PossessionInfo WHERE Name = :name")
-    List<PossessionInfo> getLine(String name);
+    @Query("SELECT * FROM TimeDiffInfo WHERE Name = :name")
+    List<TimeDiffInfo> getLine(String name);
 
-    @Query("SELECT * FROM PossessionInfo")
-    List<PossessionInfo> getAll();
+    @Query("SELECT * FROM TimeDiffInfo")
+    List<TimeDiffInfo> getAll();
 }
