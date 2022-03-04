@@ -59,20 +59,31 @@ public class BaseStatusFragment extends Fragment {
         return fragment;
     }
 
-    public static void initDiffTime(long diffTime) { // アプリ起動時にする計算処理
+    public static void initDiffTime(long diffTime/*, byte[] _DP, byte[] _MONEY*/) { // アプリ起動時にする計算処理
         int num1 = 5; // DP test用 秒数にかける数
         int num2 = 10; // MONEY test用 秒数にかける数
+        long carry1 = 0;
+        long carry2 = 0;
+
+        byte[] _DP = {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        byte[] _MONEY = {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+        DP = _DP;
+        MONEY = _MONEY;
 
         for (int i = 0; i < SIZE - 1; i++) {
-            long tmp = DP[i] * (num1 * diffTime);
-            DP[i + 1] += tmp;
-            tmp = MONEY[i] * (num2 * diffTime);
-            MONEY[i + 1] += tmp;
+            long tmp = DP[i] * (num1 * diffTime) + carry1;
+            DP[i] = (byte) (tmp % 10);
+            carry1 = tmp / 10;
+            tmp = MONEY[i] * (num2 * diffTime) + carry2;
+            MONEY[i] = (byte) (tmp % 10);
+            carry2 = tmp / 10;
         }
 
         long DP_num = CastLong(DP);
         long MONEY_num = CastLong(MONEY);
 
+        Log.v("diffTime", "" + diffTime);
         Log.v("DP_num", "" + DP_num);
         Log.v("MONEY_num", "" + MONEY_num);
     }
