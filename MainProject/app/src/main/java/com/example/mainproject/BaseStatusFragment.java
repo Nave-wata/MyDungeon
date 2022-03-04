@@ -2,6 +2,9 @@ package com.example.mainproject;
 
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import java.util.Objects;
 public class BaseStatusFragment extends Fragment {
     final String UserName;
     final String EXTRA_DATA = "com.example.mainproject";
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
     public BaseStatusFragment(String UserName) {
         this.UserName = UserName;
@@ -28,6 +32,7 @@ public class BaseStatusFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.v("BaseStatusFragment", "onViewCreated");
 
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
