@@ -67,7 +67,12 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
                     fragmentTransaction.commit();
                 },
-                e->{}
+                e->{
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
+                    fragmentTransaction.commit();
+                }
         ).execute();
     }
 
