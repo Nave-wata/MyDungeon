@@ -12,9 +12,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
-import com.example.mainproject.asynchronous.timediffinfo.GetLine;
-import com.example.mainproject.asynchronous.timediffinfo.TimeDiffInfo;
+import com.example.mainproject.asynchronous.usersinfo.GetLine;
 import com.example.mainproject.asynchronous.usersinfo.UpdateTime;
+import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 import com.example.mainproject.title.TitleActivity;
 
 import java.time.Duration;
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                         int nowSecond = nowTime.getSecond();
                         int beforeYear = 0, beforeMonth = 0 , beforeDay = 0, beforeHour = 0, beforeMinute = 0, beforeSecond = 0;
 
-                        for (TimeDiffInfo pi: b) {
+                        for (UsersInfo pi: b) {
                             beforeYear = pi.getYear();
                             beforeMonth = pi.getMonth();
                             beforeDay = pi.getDay();
