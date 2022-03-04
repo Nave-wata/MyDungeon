@@ -65,9 +65,12 @@ public class MainActivity extends AppCompatActivity {
                                         beforeMinute = pi.getMinute();
                                         beforeSecond = pi.getSecond();
                                     }
+                                    Log.v("MainActivity", "");
+                                    Log.v("DP", "" + b);
+                                    Log.v("MONEY", "" + c);
                                     for (UsersPossessionInfo up: c) {
-                                        _DP = up.getDP();
-                                        _MONEY = up.getMoney();
+                                        Log.v("DP", "" + up.getDP());
+                                        Log.v("MONEY", "" + up.getMoney());
                                     }
 
                                     LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
@@ -82,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
                                     fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
                                     fragmentTransaction.commit();
                                     BaseStatusFragment.initDiffTime(diffSecond, _DP, _MONEY);
-                                    Log.v("MainActivity", "onCreate End");
                                 }
                             },
                             e->{
