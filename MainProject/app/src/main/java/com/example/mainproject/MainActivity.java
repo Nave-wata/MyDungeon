@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
                             UserName,
                             c->{
                                 long diffSecond = 0;
-                                byte[] _DP = new byte[BaseStatusFragment.SIZE];
-                                byte[] _MONEY = new byte[BaseStatusFragment.SIZE];
+                                byte[] _DP = null;
+                                byte[] _MONEY = null;
                                 try {
                                     LocalDateTime nowTime = LocalDateTime.now();
                                     int nowYear = nowTime.getYear();
@@ -65,14 +65,14 @@ public class MainActivity extends AppCompatActivity {
                                         beforeMinute = pi.getMinute();
                                         beforeSecond = pi.getSecond();
                                     }
-                                    Log.v("MainActivity", "");
-                                    Log.v("DP", "" + b);
-                                    Log.v("MONEY", "" + c);
                                     for (UsersPossessionInfo up: c) {
-                                        Log.v("DP", "" + up.getDP());
-                                        Log.v("MONEY", "" + up.getMoney());
+                                        _DP = up.getDP();
+                                        _MONEY = up.getMoney();
+                                        Log.v("_DP", "" + _DP);
+                                        Log.v("_MONEY", "" + _MONEY);
                                     }
-
+                                    Log.v("_DP", "" + _DP);
+                                    Log.v("_MONEY", "" + _MONEY);
                                     LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
                                     LocalDateTime NowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
                                     Duration summerVacationDuration = Duration.between(BeforeTime, NowTime);
