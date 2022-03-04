@@ -143,7 +143,6 @@ public class SignInDialog extends DialogFragment {
                         new GetLine(
                                 db,
                                 name,
-                                password,
                                 b-> {
                                     String salt = null;
                                     String hash = null;

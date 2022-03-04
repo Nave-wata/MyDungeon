@@ -11,7 +11,6 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -27,8 +26,9 @@ import com.example.mainproject.R;
 import com.example.mainproject.SetImage;
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
-import com.example.mainproject.asynchronous.usersinfo.DataSave;
+import com.example.mainproject.asynchronous.usersinfo.SignUp;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -166,14 +166,24 @@ public class SignUpDialog extends DialogFragment {
                         final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
                         final String salt = getRandomString();
                         final String hash = TitleActivity.HASH(name, password, salt);
-                        Log.v("Pasd", password);
-                        Log.v("Salt", salt);
-                        Log.v("Hash", hash);
-                        new DataSave(
+                        LocalDateTime nowTime = LocalDateTime.now();
+                        int nowYear = nowTime.getYear();
+                        int nowMonth = nowTime.getMonthValue();
+                        int nowDay = nowTime.getDayOfMonth();
+                        int nowHour = nowTime.getHour();
+                        int nowMinute = nowTime.getMinute();
+                        int nowSecond = nowTime.getSecond();
+                        new SignUp(
                                 db,
                                 name,
                                 salt,
                                 hash,
+                                nowYear,
+                                nowMonth,
+                                nowDay,
+                                nowHour,
+                                nowMinute,
+                                nowSecond,
                                 b -> {
                                     Context context = getActivity().getApplicationContext();
                                     Toast.makeText(context, "登録完了しました", Toast.LENGTH_SHORT).show();

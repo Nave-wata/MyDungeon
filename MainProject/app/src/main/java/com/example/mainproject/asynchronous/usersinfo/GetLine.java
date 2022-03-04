@@ -18,18 +18,15 @@ public class GetLine implements Runnable {
     private Exception exception;
     private final AppDatabase db;
     private final String name;
-    private final String password;
     private List<UsersInfo> data;
 
     public GetLine(AppDatabase db,
                    String name,
-                   String password,
                    Consumer<List<UsersInfo>> callback,
                    Consumer<Exception> errorCallback)
     {
         this.db = db;
         this.name = name;
-        this.password = password;
         this.callback = callback;
         this.errorCallback = errorCallback;
     }
@@ -43,7 +40,7 @@ public class GetLine implements Runnable {
     public void execute() {
         //onPreExecute();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(new GetLine(db, name, password, callback, errorCallback));
+        executorService.submit(new GetLine(db, name, callback, errorCallback));
     }
 
     //void onPreExecute() {}

@@ -3,6 +3,7 @@ package com.example.mainproject;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,9 +12,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
-import com.example.mainproject.asynchronous.timediffinfo.DataSave;
 import com.example.mainproject.asynchronous.timediffinfo.GetLine;
 import com.example.mainproject.asynchronous.timediffinfo.TimeDiffInfo;
+import com.example.mainproject.asynchronous.usersinfo.UpdateTime;
 import com.example.mainproject.title.TitleActivity;
 
 import java.time.Duration;
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         int nowMinute = nowTime.getMinute();
         int nowSecond = nowTime.getSecond();
 
-        new DataSave(
+        new UpdateTime(
                 db,
                 UserName,
                 nowYear,
@@ -113,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
                 nowHour,
                 nowMinute,
                 nowSecond,
-                b->{},
-                e->{}
+                b-> Log.v("MainActivity", "OK"),
+                e->Log.v("MainActivity", "NO")
         ).execute();
     }
 }

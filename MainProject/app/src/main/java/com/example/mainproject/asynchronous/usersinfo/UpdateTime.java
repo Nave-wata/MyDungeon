@@ -1,8 +1,6 @@
 package com.example.mainproject.asynchronous.usersinfo;
 
-
 import android.annotation.SuppressLint;
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -12,32 +10,41 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-public class DataSave implements Runnable {
+public class UpdateTime implements Runnable {
     Handler handler = new Handler(Looper.getMainLooper());
     private final Consumer<Boolean> callback;
-    private final Consumer<SQLiteConstraintException> sqlErrorCallback;
     private final Consumer<Exception> errorCallback;
     private Exception exception;
-    private SQLiteConstraintException sqliteConstraintException;
     private final AppDatabase db;
     private final String name;
-    private final String salt;
-    private final String hash;
+    private final int nowYear;
+    private final int nowMonth;
+    private final int nowDay;
+    private final int nowHour;
+    private final int nowMinute;
+    private final int nowSecond;
 
-    public DataSave(AppDatabase db,
-                    String name,
-                    String salt,
-                    String hash,
-                    Consumer<Boolean> callback,
-                    Consumer<SQLiteConstraintException> sqlErrorCallback,
-                    Consumer<Exception> errorCallback)
+    public UpdateTime(
+            AppDatabase db,
+              String name,
+              int nowYear,
+              int nowMonth,
+              int nowDay,
+              int nowHour,
+              int nowMinute,
+              int nowSecond,
+              Consumer<Boolean> callback,
+              Consumer<Exception> errorCallback)
     {
         this.db = db;
         this.name = name;
-        this.salt = salt;
-        this.hash = hash;
+        this.nowYear = nowYear;
+        this.nowMonth = nowMonth;
+        this.nowDay = nowDay;
+        this.nowHour = nowHour;
+        this.nowMinute = nowMinute;
+        this.nowSecond  = nowSecond;
         this.callback = callback;
-        this.sqlErrorCallback = sqlErrorCallback;
         this.errorCallback = errorCallback;
     }
 
@@ -51,13 +58,16 @@ public class DataSave implements Runnable {
         //onPreExecute();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.submit(
-                new DataSave(
+                new UpdateTime(
                         db,
                         name,
-                        salt,
-                        hash,
+                        nowYear,
+                        nowMonth,
+                        nowDay,
+                        nowHour,
+                        nowMinute,
+                        nowSecond,
                         callback,
-                        sqlErrorCallback,
                         errorCallback));
     }
 
@@ -67,10 +77,7 @@ public class DataSave implements Runnable {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
 
         try {
-            usersInfoDao.insertNames(name, salt, hash);
-        } catch (SQLiteConstraintException e) {
-            this.sqliteConstraintException = e;
-            this.exception = e;
+            usersInfoDao.updateTimeTask(name, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
         } catch (Exception e) {
             this.exception = e;
         }
@@ -80,8 +87,6 @@ public class DataSave implements Runnable {
     void onPostExecute() {
         if(this.exception == null) {
             callback.accept(true);
-        } else if (this.exception == this.sqliteConstraintException) {
-            sqlErrorCallback.accept((SQLiteConstraintException) this.exception);
         } else {
             errorCallback.accept(this.exception);
         }
