@@ -22,7 +22,8 @@ public class UsersInfo {
 
     public UsersInfo(String name,
                      String salt,
-                     String hash) {
+                     String hash)
+    {
         this.name = name;
         this.salt = salt;
         this.hash = hash;
