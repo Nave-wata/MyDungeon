@@ -13,14 +13,16 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import java.util.ArrayList;
+import org.jetbrains.annotations.Contract;
+
 import java.util.Objects;
 
 public class BaseStatusFragment extends Fragment {
     final String UserName;
     final String EXTRA_DATA = "com.example.mainproject";
-    public static ArrayList<Byte> DP = new ArrayList<Byte>();
-    public static ArrayList<Byte> MONEY = new ArrayList<Byte>();
+    public static final int SIZE = 18;
+    public static byte[] DP = new byte[18];
+    public static byte[] MONEY = new byte[18];
 
     private final Handler handler = new Handler(Looper.getMainLooper());
 
@@ -58,7 +60,44 @@ public class BaseStatusFragment extends Fragment {
     }
 
     public static void initDiffTime(long diffTime) { // アプリ起動時にする計算処理
-        Log.v("DiffTime", "" + diffTime);
-        Log.v("DP.size", "" + DP.size());
+        int num1 = 5; // DP test用 秒数にかける数
+        int num2 = 10; // MONEY test用 秒数にかける数
+
+        for (int i = 0; i < SIZE - 1; i++) {
+            long tmp = DP[i] * (num1 * diffTime);
+            DP[i + 1] += tmp;
+            tmp = MONEY[i] * (num2 * diffTime);
+            MONEY[i + 1] += tmp;
+        }
+
+        long DP_num = CastLong(DP);
+        long MONEY_num = CastLong(MONEY);
+
+        Log.v("DP_num", "" + DP_num);
+        Log.v("MONEY_num", "" + MONEY_num);
+    }
+
+    @NonNull
+    @Contract(pure = true)
+    public static byte[] CastByte(long L1) {
+        byte[] output = new byte[BaseStatusFragment.SIZE];
+
+        for (int i = 0; i < output.length; i++) {
+            output[i] = (byte) (L1 % 10);
+            L1 %= 10;
+        }
+        return output;
+    }
+
+    @NonNull
+    @Contract(pure = true)
+    public static long CastLong(byte[] ary) {
+        long output = 0;
+
+        for (int i = 0; i < 18; i++) {
+            output += ary[i] * Math.pow(10, i);
+        }
+
+        return output;
     }
 }

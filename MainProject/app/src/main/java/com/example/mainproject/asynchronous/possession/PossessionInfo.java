@@ -6,6 +6,8 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.example.mainproject.BaseStatusFragment;
+
 @Entity(tableName = "PossessionInfo", indices = {@Index(value = "Name", unique = true)})
 public class PossessionInfo {
     @PrimaryKey(autoGenerate = true)
@@ -26,23 +28,7 @@ public class PossessionInfo {
         this.Money_A_F = Money_A_F;
     }
 
-    public byte[] getDP() {
-        byte[] output = new byte[18];
+    public byte[] getDP() { return BaseStatusFragment.CastByte(this.DP_A_F); }
 
-        for (int i = 0; i < output.length; i++) {
-            output[i] = (byte) (this.DP_A_F % 10);
-            this.DP_A_F %= 10;
-        }
-        return output;
-    }
-
-    public byte[] getMoney() {
-        byte[] output = new byte[18];
-
-        for (int i = 0; i < output.length; i++) {
-            output[i] = (byte) (this.DP_A_F % 10);
-            this.DP_A_F %= 10;
-        }
-        return output;
-    }
+    public byte[] getMoney() { return BaseStatusFragment.CastByte(this.Money_A_F); }
 }
