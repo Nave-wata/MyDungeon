@@ -56,6 +56,7 @@ public class InitializeDatabase implements Runnable {
         int nowHour = nowTime.getHour();
         int nowMinute = nowTime.getMinute();
         int nowSecond = nowTime.getSecond();
+
         UsersInfoDao usersInfoDao = db.usersInfoDao();
 
         // ここに書いてるとチェックボックス外してもアプリ再起したら入力されてます
@@ -68,6 +69,7 @@ public class InitializeDatabase implements Runnable {
 
         try {
             usersInfoDao.signUpTask(name, salt, hash, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
+
             Log.v("Database Init", "OK");
         } catch (Exception ignored) {
             Log.v("Database Init", "NO");

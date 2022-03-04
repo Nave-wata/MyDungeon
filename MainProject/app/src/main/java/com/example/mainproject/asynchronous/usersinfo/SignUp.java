@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.database.sqlite.SQLiteConstraintException;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.userspossessioninfo.UsersPossessionInfo;
@@ -96,6 +97,7 @@ public class SignUp implements Runnable {
         try {
             usersInfoDao.signUpTask(name, salt, hash, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
             usersPossessionInfoDao.insetTask(new UsersPossessionInfo(name, 100, 100));
+            Log.v("HOGE", "" );
         } catch (SQLiteConstraintException e) {
             this.sqliteConstraintException = e;
             this.exception = e;
