@@ -45,7 +45,7 @@ public class InitializeDatabase implements Runnable {
         String DS_Flag = "Flag";
         String DS_Name = "Name";
         String DS_Passwd = "Password";
-        String name = "developer";
+        String name = "developer"; // 本番ではユーザー名の上限以上の長さで
         String password = "developer";
         String salt = "v1Kd6L6KxmoT4B0tOoDoSQj4qMXOOYVtvSZCw74Ed32PYqMDw1bvsm5nkrmfI1YliF0vjRrytFrJMtboCjKEnNCAIw2q7ap6639f3nzOl2yyADY7Cifh9VN6a7nyCq0Mqb0HdFlqtG9GVSX9gP1gIzYftd3lEezR61PxeP81lM0HotXkR3qdDk9mSCL2MH30KPkKYTahD74vYeeYG2MdFrngHd5xh5a8gTEtgTXnXsNEyf2JLCoFt1m02jIVXtWyLDDVR6aSI9sVoEyvNyYtHqqGStPcdONACMhOzDxOfYCfKKAxrXfs7XAMmnTbo8GeRYvJzdfTnY2IBpByJTP1gN3sh6qPj3BaJp867gocRkDWkFGMSgl157LlXskB6tg5C191p6LSxlQHAyCq81KX1B";
         String hash = "110f1b084876e5b287535b83abf3ad92a5a98caee21a22b5ff20e41b13a2efd0f031ae32372c85cff08bd15b0e7f3f2b818d33f1a04c5dc42bf141f43290cebe";

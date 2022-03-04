@@ -75,6 +75,7 @@ public class BaseStatusFragment extends Fragment {
             long tmp = DP[i] * (num1 * diffTime) + carry1;
             DP[i] = (byte) (tmp % 10);
             carry1 = tmp / 10;
+
             tmp = MONEY[i] * (num2 * diffTime) + carry2;
             MONEY[i] = (byte) (tmp % 10);
             carry2 = tmp / 10;
@@ -82,10 +83,6 @@ public class BaseStatusFragment extends Fragment {
 
         long DP_num = CastLong(DP);
         long MONEY_num = CastLong(MONEY);
-
-        Log.v("diffTime", "" + diffTime);
-        Log.v("DP_num", "" + DP_num);
-        Log.v("MONEY_num", "" + MONEY_num);
     }
 
     @NonNull
