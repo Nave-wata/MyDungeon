@@ -16,6 +16,7 @@ import com.example.mainproject.title.TitleActivity;
 
 import org.jetbrains.annotations.Contract;
 
+import java.text.NumberFormat;
 import java.util.Objects;
 
 public class BaseStatusFragment extends Fragment {
@@ -69,8 +70,11 @@ public class BaseStatusFragment extends Fragment {
         DP = Add(_DP, mul(Base_DP, num1 * diffTime));
         MONEY = Add(_MONEY, mul(Base_MONEY, num2 * diffTime));
 
-        text_DP.setText(String.valueOf(CastLong(DP)));
-        text_MONEY.setText(String.valueOf(CastLong(MONEY)));
+        String DP_str = NumberFormat.getNumberInstance().format(CastLong(DP));
+        String MONEY_str = NumberFormat.getNumberInstance().format(CastLong(MONEY));
+
+        text_DP.setText(DP_str);
+        text_MONEY.setText(MONEY_str);
     }
 
     public byte[] mul(byte[] ary, long a) {
