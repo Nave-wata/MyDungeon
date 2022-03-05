@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 
 
 public class UserDialog extends DialogFragment {
-    private final Consumer<Integer> callback;
+    final Consumer<Integer> callback;
 
     public UserDialog(Consumer<Integer> callback) {
         this.callback = callback;

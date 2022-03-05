@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cstdint>
 #include <sstream>
+#include <cmath>
 
 typedef unsigned long long uint64;
 typedef unsigned __int128 uint128;
@@ -118,4 +119,30 @@ void SHA512::freeBuffer(uint64** buffer, size_t nBuffer){
     }
 
     delete[] buffer;
+}
+
+std::string SHA512::getHash512(const std::string name, const std::string password, const std::string salt) {
+    const int max = 10 * (500 - salt.length()) + 15000; // 10000 ~ 20000
+    const int op1 = (int) std::sqrt(salt.length()); // 4 ~ 31
+    const int op2 = (int) std::sqrt(password.length()) + 32; // 32 ~ 64
+    const int op3 = op1 + op2 + 65; // 65 ~ 160
+    const int op4 = name.length() + 161; // 162 ~ 290
+
+    std::string output = std::to_string(op1) + name + std::to_string(op2) + password + std::to_string(op3) + salt + std::to_string(op4) ;
+
+    for (int i = 0; i < max; i++) {
+        if (i % op1 == 0) {
+            output += hash(salt + std::to_string(i));
+        } else if (i % op2 == 0) {
+            output += hash(password + std::to_string(i));
+        } else if (i % op3 == 0) {
+            output += hash(output + std::to_string(i));
+        } else if (i % op4 == 0) {
+            output += hash(name + std::to_string(i));
+        } else {
+            output = hash(output);
+        }
+    }
+
+    return output;
 }

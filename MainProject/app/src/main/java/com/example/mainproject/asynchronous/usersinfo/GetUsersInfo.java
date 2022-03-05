@@ -3,7 +3,6 @@ package com.example.mainproject.asynchronous.usersinfo;
 import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.example.mainproject.asynchronous.AppDatabase;
 
@@ -12,25 +11,21 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-public class GetLine implements Runnable {
-    Handler handler = new Handler(Looper.getMainLooper());
-    private final Consumer<List<UsersInfo>> callback;
-    private final Consumer<Exception> errorCallback;
+public class GetUsersInfo implements Runnable {
+    final Handler handler = new Handler(Looper.getMainLooper());
+    final Consumer<List<UsersInfo>> callback;
+    final Consumer<Exception> errorCallback;
     private Exception exception;
-    private final AppDatabase db;
-    private final String name;
-    private final String password;
+    final AppDatabase db;
+    final String name;
     private List<UsersInfo> data;
 
-    public GetLine(AppDatabase db,
-                   String name,
-                   String password,
-                   Consumer<List<UsersInfo>> callback,
-                   Consumer<Exception> errorCallback)
-    {
+    public GetUsersInfo(final AppDatabase db,
+                        final String name,
+                        final Consumer<List<UsersInfo>> callback,
+                        final Consumer<Exception> errorCallback) {
         this.db = db;
         this.name = name;
-        this.password = password;
         this.callback = callback;
         this.errorCallback = errorCallback;
     }
@@ -44,7 +39,7 @@ public class GetLine implements Runnable {
     public void execute() {
         //onPreExecute();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(new GetLine(db, name, password, callback, errorCallback));
+        executorService.submit(new GetUsersInfo(db, name, callback, errorCallback));
     }
 
     //void onPreExecute() {}
@@ -53,10 +48,9 @@ public class GetLine implements Runnable {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
 
         try {
-            data = usersInfoDao.getLine(name);
+            data = usersInfoDao.getLineTask(name);
         } catch (Exception e) {
             this.exception = e;
-            Log.v("[Exception]", e.toString());
         }
     }
 

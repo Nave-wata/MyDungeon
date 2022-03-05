@@ -26,7 +26,7 @@ import com.example.mainproject.R;
 import com.example.mainproject.SetImage;
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
-import com.example.mainproject.asynchronous.usersinfo.GetLine;
+import com.example.mainproject.asynchronous.usersinfo.GetUsersInfo;
 import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 
 import java.util.Objects;
@@ -140,10 +140,9 @@ public class SignInDialog extends DialogFragment {
 
                     if (flag) {
                         final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
-                        new GetLine(
+                        new GetUsersInfo(
                                 db,
                                 name,
-                                password,
                                 b-> {
                                     String salt = null;
                                     String hash = null;
@@ -154,7 +153,7 @@ public class SignInDialog extends DialogFragment {
                                             salt = ui.getSalt();
                                             hash = ui.getHash();
                                         }
-                                        String result = TitleActivity.HASH(password, salt);
+                                        String result = TitleActivity.HASH(name, password, salt);
                                         if (Objects.requireNonNull(hash).equals(result)) {
                                             TitleActivity.UserName = name;
                                             callback.accept(0);

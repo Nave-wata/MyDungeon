@@ -42,8 +42,10 @@ private:
     std::string digest(uint64* h);
     void freeBuffer(uint64** buffer, size_t nBuffer);
 
-public:
     std::string hash(const std::string input);
+
+public:
+    std::string getHash512(const std::string, const std::string, const std::string);
 
     SHA512();
     ~SHA512();
