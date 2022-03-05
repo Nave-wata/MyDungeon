@@ -35,6 +35,8 @@ public class BaseStatusFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
         Log.v("BaseStatusFragment", "onViewCreated");
 
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
@@ -47,8 +49,6 @@ public class BaseStatusFragment extends Fragment {
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_money, "base_menu/money.png");
-
-        Log.v("BaseStatusFragment", "onViewCreated");
     }
 
     @NonNull
@@ -80,6 +80,7 @@ public class BaseStatusFragment extends Fragment {
 
         text_DP.setText(String.valueOf(CastLong(DP)));
         text_MONEY.setText(String.valueOf(CastLong(MONEY)));
+        Log.v("BaseStatusFragment", "initDiffTime");
     }
 
     @NonNull

@@ -3,6 +3,7 @@ package com.example.mainproject;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import com.example.mainproject.title.TitleActivity;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -36,69 +38,32 @@ public class MainActivity extends AppCompatActivity {
         final AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
 
         new GetUsersInfo(
-                db,
-                UserName,
-                b->{
-                    new GetUsersPossessionInfo(
-                            db,
-                            UserName,
-                            c->{
-                                long diffSecond = 0;
-                                byte[] _DP = null;
-                                byte[] _MONEY = null;
-                                try {
-                                    LocalDateTime nowTime = LocalDateTime.now();
-                                    int nowYear = nowTime.getYear();
-                                    int nowMonth = nowTime.getMonthValue();
-                                    int nowDay = nowTime.getDayOfMonth();
-                                    int nowHour = nowTime.getHour();
-                                    int nowMinute = nowTime.getMinute();
-                                    int nowSecond = nowTime.getSecond();
-                                    int beforeYear = 0, beforeMonth = 0 , beforeDay = 0, beforeHour = 0, beforeMinute = 0, beforeSecond = 0;
-
-                                    for (UsersInfo pi: b) {
-                                        beforeYear = pi.getYear();
-                                        beforeMonth = pi.getMonth();
-                                        beforeDay = pi.getDay();
-                                        beforeHour = pi.getHour();
-                                        beforeMinute = pi.getMinute();
-                                        beforeSecond = pi.getSecond();
-                                    }
-                                    for (UsersPossessionInfo up: c) {
-                                        _DP = up.getDP();
-                                        _MONEY = up.getMoney();
-                                    }
-
-                                    LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
-                                    LocalDateTime NowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
-                                    Duration summerVacationDuration = Duration.between(BeforeTime, NowTime);
-                                    diffSecond = summerVacationDuration.getSeconds();
-                                } catch (Exception e) {
-                                    diffSecond = 0;
-                                } finally {
-                                    FragmentManager fragmentManager = getSupportFragmentManager();
-                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                    fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
-                                    fragmentTransaction.commit();
-                                    new BaseStatusFragment().initDiffTime(diffSecond, _DP, _MONEY);
-                                }
-                            },
-                            e->{
-                                // お問い合わせ画面でも出す？
-                                FragmentManager fragmentManager = getSupportFragmentManager();
-                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
-                                fragmentTransaction.commit();
+            db,
+            UserName,
+            b->{
+                new GetUsersPossessionInfo(
+                    db,
+                    UserName,
+                    c->{
+                        long diffSecond = 0;
+                        byte[] _DP = null;
+                        byte[] _MONEY = null;
+                        try {
+                            diffSecond = getTimeDiff(b);
+                            for (UsersPossessionInfo up: c) {
+                                _DP = up.getDP();
+                                _MONEY = up.getMoney();
                             }
-                    ).execute();
-                },
-                e->{
-                    // お問い合わせ画面でも出す？
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
-                    fragmentTransaction.commit();
-                }
+                        } catch (Exception e) {
+                            diffSecond = 0;
+                        } finally {
+                            new BaseStatusFragment().initDiffTime(diffSecond, _DP, _MONEY);
+                        }
+                    },
+                    e->{}
+            ).execute();
+            },
+            e->{}
         ).execute();
     }
 
@@ -116,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
+        Log.v("MainActivity", "onStop");
         AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
         LocalDateTime nowTime = LocalDateTime.now();
         int nowYear = nowTime.getYear();
@@ -137,5 +103,38 @@ public class MainActivity extends AppCompatActivity {
                 b->{},
                 e->{}
         ).execute();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public long getTimeDiff(List<UsersInfo> b) {
+        long diffSecond = 0;
+
+        try {
+            LocalDateTime nowTime = LocalDateTime.now();
+            int nowYear = nowTime.getYear();
+            int nowMonth = nowTime.getMonthValue();
+            int nowDay = nowTime.getDayOfMonth();
+            int nowHour = nowTime.getHour();
+            int nowMinute = nowTime.getMinute();
+            int nowSecond = nowTime.getSecond();
+            int beforeYear = 0, beforeMonth = 0 , beforeDay = 0, beforeHour = 0, beforeMinute = 0, beforeSecond = 0;
+
+            for (UsersInfo pi: b) {
+                beforeYear = pi.getYear();
+                beforeMonth = pi.getMonth();
+                beforeDay = pi.getDay();
+                beforeHour = pi.getHour();
+                beforeMinute = pi.getMinute();
+                beforeSecond = pi.getSecond();
+            }
+
+            LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
+            LocalDateTime NowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
+            Duration duration= Duration.between(BeforeTime, NowTime);
+            diffSecond = duration.getSeconds();
+        } catch (Exception e) {
+        } finally {
+            return diffSecond;
+        }
     }
 }
