@@ -16,6 +16,7 @@ import com.example.mainproject.asynchronous.usersinfo.GetUsersInfo;
 import com.example.mainproject.asynchronous.usersinfo.UpdateTime;
 import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 import com.example.mainproject.asynchronous.userspossessioninfo.GetUsersPossessionInfo;
+import com.example.mainproject.asynchronous.userspossessioninfo.UpdateUsersPossessionInfo;
 import com.example.mainproject.asynchronous.userspossessioninfo.UsersPossessionInfo;
 import com.example.mainproject.title.TitleActivity;
 
@@ -100,6 +101,15 @@ public class MainActivity extends AppCompatActivity {
                 nowHour,
                 nowMinute,
                 nowSecond,
+                b->{},
+                e->{}
+        ).execute();
+
+        new UpdateUsersPossessionInfo(
+                db,
+                UserName,
+                BaseStatusFragment.DP,
+                BaseStatusFragment.MONEY,
                 b->{},
                 e->{}
         ).execute();
