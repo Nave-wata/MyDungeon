@@ -1,5 +1,6 @@
 package com.example.mainproject;
 
+import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.res.AssetManager;
@@ -27,7 +28,16 @@ public class ShowDiffTimeDialog extends DialogFragment {
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_money, "base_menu/money.png");
         setImage.setImageViewBitmapFromAsset(up_DP, "base_menu/up_img.png");
-        setImage.setImageViewBitmapFromAsset(up_MONEY, "base_menu/up_img");
+        setImage.setImageViewBitmapFromAsset(up_MONEY, "base_menu/up_img.png");
+
+        ObjectAnimator DP_objectAnimator = ObjectAnimator.ofFloat(up_DP, "translationY", 20f, -20f);
+        DP_objectAnimator.setDuration(1000);
+        DP_objectAnimator.setRepeatCount(ObjectAnimator.INFINITE);
+        DP_objectAnimator.start();
+        ObjectAnimator MONEY_objectAnimator = ObjectAnimator.ofFloat(up_MONEY, "translationY", 20f, -20f);
+        MONEY_objectAnimator.setDuration(1000);
+        MONEY_objectAnimator.setRepeatCount(ObjectAnimator.INFINITE);
+        MONEY_objectAnimator.start();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
         builder.setPositiveButton(R.string.DialogPositiveText, null);
