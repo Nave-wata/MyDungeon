@@ -28,7 +28,7 @@ public class UsersPossessionInfo {
         this.Money_A_F = Money_A_F;
     }
 
-    public byte[] getDP() { return new BaseStatusFragment().CastByte(this.DP_A_F); }
+    public byte[] getDP() { return BaseStatusFragment.CastByte(this.DP_A_F); }
 
-    public byte[] getMoney() { return new BaseStatusFragment().CastByte(this.Money_A_F); }
+    public byte[] getMoney() { return BaseStatusFragment.CastByte(this.Money_A_F); }
 }
