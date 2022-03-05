@@ -12,19 +12,18 @@ import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 public class GetUsersInfo implements Runnable {
-    Handler handler = new Handler(Looper.getMainLooper());
-    private final Consumer<List<UsersInfo>> callback;
-    private final Consumer<Exception> errorCallback;
+    final Handler handler = new Handler(Looper.getMainLooper());
+    final Consumer<List<UsersInfo>> callback;
+    final Consumer<Exception> errorCallback;
     private Exception exception;
-    private final AppDatabase db;
-    private final String name;
+    final AppDatabase db;
+    final String name;
     private List<UsersInfo> data;
 
-    public GetUsersInfo(AppDatabase db,
-                        String name,
-                        Consumer<List<UsersInfo>> callback,
-                        Consumer<Exception> errorCallback)
-    {
+    public GetUsersInfo(final AppDatabase db,
+                        final String name,
+                        final Consumer<List<UsersInfo>> callback,
+                        final Consumer<Exception> errorCallback) {
         this.db = db;
         this.name = name;
         this.callback = callback;

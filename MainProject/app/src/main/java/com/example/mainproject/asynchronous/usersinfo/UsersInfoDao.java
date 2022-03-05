@@ -21,15 +21,6 @@ public interface UsersInfoDao {
             "WHERE Name = :name")
     void updateTimeTask(String name, int year, int month, int day, int hour, int minute, int second);
 
-    @Query("DELETE FROM UsersInfo WHERE Name = :name")
-    void deleteUserInfoTask(String name);
-
-    @Query("DELETE FROM UsersInfo")
-    void deleteAllTask();
-
     @Query("SELECT * FROM UsersInfo WHERE Name = :name")
     List<UsersInfo> getLineTask(String name);
-
-    @Query("SELECT * FROM UsersInfo")
-    List<UsersInfo> getAllTask();
 }

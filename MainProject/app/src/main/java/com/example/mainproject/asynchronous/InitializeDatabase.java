@@ -18,8 +18,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class InitializeDatabase implements Runnable {
-    private final AppDatabase db;
-    private final Activity activity;
+    final AppDatabase db;
+    final Activity activity;
 
     public InitializeDatabase(AppDatabase db, Activity activity) {
         this.db = db;

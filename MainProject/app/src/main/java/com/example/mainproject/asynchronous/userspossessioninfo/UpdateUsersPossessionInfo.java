@@ -12,22 +12,21 @@ import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 public class UpdateUsersPossessionInfo implements Runnable {
-    Handler handler = new Handler(Looper.getMainLooper());
-    private final Consumer<Boolean> callback;
-    private final Consumer<Exception> errorCallback;
+    final Handler handler = new Handler(Looper.getMainLooper());
+    final Consumer<Boolean> callback;
+    final Consumer<Exception> errorCallback;
     private Exception exception;
-    private final AppDatabase db;
-    private final String name;
-    private byte[] _DP;
-    private byte[] _MONEY;
+    final AppDatabase db;
+    final String name;
+    final byte[] _DP;
+    final byte[] _MONEY;
 
     public UpdateUsersPossessionInfo(AppDatabase db,
                                      String name,
                                      byte[] _DP,
                                      byte[] _MONEY,
                                      Consumer<Boolean> callback,
-                                     Consumer<Exception> errorCallback)
-    {
+                                     Consumer<Exception> errorCallback) {
         this.db = db;
         this.name = name;
         this._DP = _DP;

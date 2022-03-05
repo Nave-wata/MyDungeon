@@ -24,7 +24,7 @@ public class BaseTransitionFragment extends Fragment {
     private boolean homeFlag = false;
     private boolean dungeonFlag = true;
     private boolean monsterFlag = true;
-    private final String UserName;
+    final String UserName;
 
     public BaseTransitionFragment(String UserName) {
         this.UserName = UserName;

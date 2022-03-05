@@ -16,12 +16,12 @@ import java.util.function.Consumer;
 
 
 public class AsyncRunnable implements Runnable {
-    private final String url;
-    private final Consumer<byte[]> callback;
-    private final Consumer<Exception> errorCallback;
+    final String url;
+    final Consumer<byte[]> callback;
+    final Consumer<Exception> errorCallback;
     private Exception exception;
-    private byte[] response;
-    Handler handler = new Handler(Looper.getMainLooper());
+    byte[] response;
+    final Handler handler = new Handler(Looper.getMainLooper());
 
     /**
      　 * コンストラクタ
@@ -31,8 +31,7 @@ public class AsyncRunnable implements Runnable {
      　 */
     public AsyncRunnable(String url,
                          Consumer<byte[]> callback,
-                         Consumer<Exception> errorCallback)
-    {
+                         Consumer<Exception> errorCallback) {
         this.url = url;
         this.callback = callback;
         this.errorCallback = errorCallback;

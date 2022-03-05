@@ -15,37 +15,36 @@ import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 public class SignUp implements Runnable {
-    Handler handler = new Handler(Looper.getMainLooper());
-    private final Consumer<Boolean> callback;
-    private final Consumer<SQLiteConstraintException> sqlErrorCallback;
-    private final Consumer<Exception> errorCallback;
+    final Handler handler = new Handler(Looper.getMainLooper());
+    final Consumer<Boolean> callback;
+    final Consumer<SQLiteConstraintException> sqlErrorCallback;
+    final Consumer<Exception> errorCallback;
     private Exception exception;
     private SQLiteConstraintException sqliteConstraintException;
-    private final AppDatabase db;
-    private final String name;
-    private final String salt;
-    private final String hash;
-    private final int nowYear;
-    private final int nowMonth;
-    private final int nowDay;
-    private final int nowHour;
-    private final int nowMinute;
-    private final int nowSecond;
+    final AppDatabase db;
+    final String name;
+    final String salt;
+    final String hash;
+    final int nowYear;
+    final int nowMonth;
+    final int nowDay;
+    final int nowHour;
+    final int nowMinute;
+    final int nowSecond;
 
-    public SignUp(AppDatabase db,
-                  String name,
-                  String salt,
-                  String hash,
-                  int nowYear,
-                  int nowMonth,
-                  int nowDay,
-                  int nowHour,
-                  int nowMinute,
-                  int nowSecond,
-                  Consumer<Boolean> callback,
-                  Consumer<SQLiteConstraintException> sqlErrorCallback,
-                  Consumer<Exception> errorCallback)
-    {
+    public SignUp(final AppDatabase db,
+                  final String name,
+                  final String salt,
+                  final String hash,
+                  final int nowYear,
+                  final int nowMonth,
+                  final int nowDay,
+                  final int nowHour,
+                  final int nowMinute,
+                  final int nowSecond,
+                  final Consumer<Boolean> callback,
+                  final Consumer<SQLiteConstraintException> sqlErrorCallback,
+                  final Consumer<Exception> errorCallback) {
         this.db = db;
         this.name = name;
         this.salt = salt;

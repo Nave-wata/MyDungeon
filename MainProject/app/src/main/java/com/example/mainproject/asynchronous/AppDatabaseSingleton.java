@@ -12,7 +12,6 @@ public class AppDatabaseSingleton {
         if (instance != null) {
             return instance;
         }
-
         instance = Room.databaseBuilder(context, AppDatabase.class, "main.db").build();
         return instance;
     }
