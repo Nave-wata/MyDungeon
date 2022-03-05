@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 public class ShowDiffTimeDialog extends DialogFragment {
-    AlertDialog.Builder builder;
 
     @NonNull
     @Override
@@ -20,10 +19,10 @@ public class ShowDiffTimeDialog extends DialogFragment {
         AssetManager assetManager = getActivity().getAssets();
         SetImage setImage = new SetImage(assetManager);
 
-        ImageView ic_DP = view.findViewById(R.id.ic_DP);
-        ImageView ic_money = view.findViewById(R.id.ic_money);
+        ImageView ic_DP = view.findViewById(R.id.dialog_ic_DP);
+        ImageView ic_money = view.findViewById(R.id.dialog_ic_MONEY);
         ImageView up_DP = view.findViewById(R.id.up_DP);
-        ImageView up_MONEY = view.findViewById(R.id.up_money);
+        ImageView up_MONEY = view.findViewById(R.id.up_MONEY);
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_money, "base_menu/money.png");

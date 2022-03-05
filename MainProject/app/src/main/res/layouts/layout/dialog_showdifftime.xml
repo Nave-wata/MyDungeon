@@ -10,7 +10,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/ic_DP"
+            android:id="@+id/dialog_ic_DP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"/>
@@ -22,7 +22,7 @@
             android:layout_gravity="center_vertical"/>
 
         <TextView
-            android:id="@+id/Have_DP"
+            android:id="@+id/dialog_Have_DP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"/>
@@ -35,19 +35,19 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/ic_money"
+            android:id="@+id/dialog_ic_MONEY"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"/>
 
         <ImageView
-            android:id="@+id/up_money"
+            android:id="@+id/up_MONEY"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"/>
 
         <TextView
-            android:id="@+id/Have_money"
+            android:id="@+id/dialog_Have_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"/>
