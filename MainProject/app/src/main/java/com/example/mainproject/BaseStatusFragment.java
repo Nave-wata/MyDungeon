@@ -2,7 +2,6 @@ package com.example.mainproject;
 
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +11,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.mainproject.asynchronous.TimerPossession;
 import com.example.mainproject.title.TitleActivity;
 
 import org.jetbrains.annotations.Contract;
 
+import java.text.NumberFormat;
 import java.util.Objects;
 
 public class BaseStatusFragment extends Fragment {
     final static String UserName = TitleActivity.UserName;
     final String EXTRA_DATA = "com.example.mainproject";
     public static final int SIZE = 18;
-    private static TextView text_DP;
-    private static TextView text_MONEY;
+    public static TextView text_DP;
+    public static TextView text_MONEY;
     public static byte[] DP = new byte[18];
     public static byte[] MONEY = new byte[18];
 
@@ -36,8 +37,7 @@ public class BaseStatusFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-        Log.v("BaseStatusFragment", "onViewCreated");
+        new TimerPossession().Run();
 
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
@@ -69,8 +69,11 @@ public class BaseStatusFragment extends Fragment {
         DP = Add(_DP, mul(Base_DP, num1 * diffTime));
         MONEY = Add(_MONEY, mul(Base_MONEY, num2 * diffTime));
 
-        text_DP.setText(String.valueOf(CastLong(DP)));
-        text_MONEY.setText(String.valueOf(CastLong(MONEY)));
+        String DP_str = NumberFormat.getNumberInstance().format(CastLong(DP));
+        String MONEY_str = NumberFormat.getNumberInstance().format(CastLong(MONEY));
+
+        text_DP.setText(DP_str);
+        text_MONEY.setText(MONEY_str);
     }
 
     public byte[] mul(byte[] ary, long a) {
@@ -98,7 +101,7 @@ public class BaseStatusFragment extends Fragment {
 
     @NonNull
     @Contract(pure = true)
-    public byte[] CastByte(long L1) {
+    public static byte[] CastByte(long L1) {
         byte[] output = new byte[BaseStatusFragment.SIZE];
         for (int i = 0; i < output.length; i++) {
             output[i] = (byte) (L1 % 10);
@@ -109,7 +112,7 @@ public class BaseStatusFragment extends Fragment {
 
     @NonNull
     @Contract(pure = true)
-    public long CastLong(byte[] ary) {
+    public static long CastLong(byte[] ary) {
         long output = 0;
         for (int i = 0; i < 18; i++) {
             output += ary[i] * Math.pow(10, i);
