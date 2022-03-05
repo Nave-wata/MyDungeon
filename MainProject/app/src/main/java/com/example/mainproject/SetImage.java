@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class SetImage {
-    AssetManager assetManager;
+    final AssetManager assetManager;
 
     public SetImage(AssetManager assetManager) {
         this.assetManager = assetManager;
