@@ -6,13 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.mainproject.asynchronous.TimerPossession;
-import com.example.mainproject.title.TitleActivity;
 
 import org.jetbrains.annotations.Contract;
 
@@ -20,11 +18,9 @@ import java.text.NumberFormat;
 import java.util.Objects;
 
 public class BaseStatusFragment extends Fragment {
-    final static String UserName = TitleActivity.UserName;
+    final String UserName = MainActivity.UserName;
     final String EXTRA_DATA = "com.example.mainproject";
     public static final int SIZE = 18;
-    public static TextView text_DP;
-    public static TextView text_MONEY;
     public static byte[] DP = new byte[18];
     public static byte[] MONEY = new byte[18];
 
@@ -37,15 +33,15 @@ public class BaseStatusFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        new TimerPossession().Run();
-
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
 
         ImageView ic_DP = view.findViewById(R.id.ic_DP);
         ImageView ic_money = view.findViewById(R.id.ic_money);
-        text_DP = view.findViewById(R.id.Have_DP);
-        text_MONEY = view.findViewById(R.id.Have_money);
+        MainActivity.text_DP = view.findViewById(R.id.Have_DP);
+        MainActivity.text_MONEY = view.findViewById(R.id.Have_money);
+        MainActivity.timerPossession = new TimerPossession();
+        MainActivity.timerPossession.Run();
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_money, "base_menu/money.png");
@@ -72,8 +68,8 @@ public class BaseStatusFragment extends Fragment {
         String DP_str = NumberFormat.getNumberInstance().format(CastLong(DP));
         String MONEY_str = NumberFormat.getNumberInstance().format(CastLong(MONEY));
 
-        text_DP.setText(DP_str);
-        text_MONEY.setText(MONEY_str);
+        MainActivity.text_DP.setText(DP_str);
+        MainActivity.text_MONEY.setText(MONEY_str);
     }
 
     public byte[] mul(byte[] ary, long a) {
