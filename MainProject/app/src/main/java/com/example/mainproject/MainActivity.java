@@ -89,10 +89,11 @@ public class MainActivity extends AppCompatActivity {
 
         text_DP.setText(null);
         text_MONEY.setText(null);
+        timerPossession.Stop();
         text_DP = null;
         text_MONEY = null;
-        timerPossession.Stop();
         timerPossession = null;
+
         AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
         LocalDateTime nowTime = LocalDateTime.now();
         int nowYear = nowTime.getYear();
@@ -130,13 +131,13 @@ public class MainActivity extends AppCompatActivity {
         long diffSecond = 0;
 
         try {
-            LocalDateTime nowTime = LocalDateTime.now();
-            int nowYear = nowTime.getYear();
-            int nowMonth = nowTime.getMonthValue();
-            int nowDay = nowTime.getDayOfMonth();
-            int nowHour = nowTime.getHour();
-            int nowMinute = nowTime.getMinute();
-            int nowSecond = nowTime.getSecond();
+            final LocalDateTime nowTime = LocalDateTime.now();
+            final int nowYear = nowTime.getYear();
+            final int nowMonth = nowTime.getMonthValue();
+            final int nowDay = nowTime.getDayOfMonth();
+            final int nowHour = nowTime.getHour();
+            final int nowMinute = nowTime.getMinute();
+            final int nowSecond = nowTime.getSecond();
             int beforeYear = 0, beforeMonth = 0 , beforeDay = 0, beforeHour = 0, beforeMinute = 0, beforeSecond = 0;
 
             for (UsersInfo pi: b) {

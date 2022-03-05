@@ -45,6 +45,8 @@ public class BaseStatusFragment extends Fragment {
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_money, "base_menu/money.png");
+        ShowDiffTimeDialog showDiffTimeDialog = new ShowDiffTimeDialog();
+        showDiffTimeDialog.show(Objects.requireNonNull(getFragmentManager()), "ShowDiffTimeDialog");
     }
 
     @NonNull
