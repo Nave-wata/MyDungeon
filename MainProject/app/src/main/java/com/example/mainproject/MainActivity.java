@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                     fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
                                     fragmentTransaction.commit();
-                                    BaseStatusFragment.initDiffTime(diffSecond, _DP, _MONEY);
+                                    new BaseStatusFragment().initDiffTime(diffSecond, _DP, _MONEY);
                                 }
                             },
                             e->{

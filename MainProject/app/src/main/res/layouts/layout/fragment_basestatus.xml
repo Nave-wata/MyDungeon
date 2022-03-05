@@ -24,8 +24,7 @@
                 android:id="@+id/Have_DP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="HOGE" />
+                android:layout_gravity="center_vertical"/>
 
         </LinearLayout>
         <LinearLayout
@@ -41,8 +40,7 @@
                 android:id="@+id/Have_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="HOGE" />
+                android:layout_gravity="center_vertical"/>
 
         </LinearLayout>
 

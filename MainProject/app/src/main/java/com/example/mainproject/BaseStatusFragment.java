@@ -2,33 +2,30 @@ package com.example.mainproject;
 
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import com.example.mainproject.title.TitleActivity;
 
 import org.jetbrains.annotations.Contract;
 
 import java.util.Objects;
 
 public class BaseStatusFragment extends Fragment {
-    final String UserName;
+    final static String UserName = TitleActivity.UserName;
     final String EXTRA_DATA = "com.example.mainproject";
     public static final int SIZE = 18;
+    private static TextView text_DP;
+    private static TextView text_MONEY;
     public static byte[] DP = new byte[18];
     public static byte[] MONEY = new byte[18];
-
-    private final Handler handler = new Handler(Looper.getMainLooper());
-
-    public BaseStatusFragment(String UserName) {
-        this.UserName = UserName;
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,26 +42,29 @@ public class BaseStatusFragment extends Fragment {
 
         ImageView ic_DP = view.findViewById(R.id.ic_DP);
         ImageView ic_money = view.findViewById(R.id.ic_money);
+        text_DP = view.findViewById(R.id.Have_DP);
+        text_MONEY = view.findViewById(R.id.Have_money);
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_money, "base_menu/money.png");
+
+        Log.v("BaseStatusFragment", "onViewCreated");
     }
 
     @NonNull
     public static BaseStatusFragment newInstance(String UserName){
-        BaseStatusFragment fragment = new BaseStatusFragment(UserName);
+        BaseStatusFragment fragment = new BaseStatusFragment();
         Bundle barg = new Bundle();
         barg.putString(fragment.EXTRA_DATA, UserName);
         fragment.setArguments(barg);
         return fragment;
     }
 
-    public static void initDiffTime(long diffTime, byte[] _DP, byte[] _MONEY) { // アプリ起動時にする計算処理
+    public void initDiffTime(long diffTime, byte[] _DP, byte[] _MONEY) {
         int num1 = 5; // DP test用 秒数にかける数
         int num2 = 10; // MONEY test用 秒数にかける数
         long carry1 = 0;
         long carry2 = 0;
-
         DP = _DP;
         MONEY = _MONEY;
 
@@ -78,19 +78,14 @@ public class BaseStatusFragment extends Fragment {
             carry2 = tmp / 10;
         }
 
-        long DP_num = CastLong(DP);
-        long MONEY_num = CastLong(MONEY);
-
-        Log.v("DP_num", "" + DP_num);
-        Log.v("MONEY_num", "" + MONEY_num);
+        text_DP.setText(String.valueOf(CastLong(DP)));
+        text_MONEY.setText(String.valueOf(CastLong(MONEY)));
     }
 
     @NonNull
     @Contract(pure = true)
-    public static byte[] CastByte(long L1) {
+    public byte[] CastByte(long L1) {
         byte[] output = new byte[BaseStatusFragment.SIZE];
-
-
         for (int i = 0; i < output.length; i++) {
             output[i] = (byte) (L1 % 10);
             L1 /= 10;
@@ -100,13 +95,11 @@ public class BaseStatusFragment extends Fragment {
 
     @NonNull
     @Contract(pure = true)
-    public static long CastLong(byte[] ary) {
+    public long CastLong(byte[] ary) {
         long output = 0;
-
         for (int i = 0; i < 18; i++) {
             output += ary[i] * Math.pow(10, i);
         }
-
         return output;
     }
 }
