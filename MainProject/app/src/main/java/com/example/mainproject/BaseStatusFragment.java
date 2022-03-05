@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.mainproject.asynchronous.TimerPossession;
-import com.example.mainproject.title.SignInDialog;
 
 import org.jetbrains.annotations.Contract;
 
@@ -46,8 +45,8 @@ public class BaseStatusFragment extends Fragment {
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_money, "base_menu/money.png");
-        SignInDialog signInDialogFragment = new SignInDialog(b->{});
-        signInDialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userSelect");
+        ShowDiffTimeDialog showDiffTimeDialogFragment = new ShowDiffTimeDialog();
+        showDiffTimeDialogFragment.show(Objects.requireNonNull(getFragmentManager()), "ShowDiffTimeDialog");
     }
 
     @NonNull

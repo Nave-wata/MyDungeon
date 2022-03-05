@@ -15,7 +15,7 @@ public class ShowDiffTimeDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = getLayoutInflater().inflate(R.layout.dialog_showdifftime, null);
+        View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_showdifftime, null);
         AssetManager assetManager = getActivity().getAssets();
         SetImage setImage = new SetImage(assetManager);
 
@@ -32,6 +32,7 @@ public class ShowDiffTimeDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
         builder.setPositiveButton(R.string.DialogPositiveText, null);
         builder.setNeutralButton(R.string.DialogNegativeText, null);
+
         return builder.create();
     }
 }
