@@ -47,7 +47,6 @@ public class GetUsersPossessionInfo implements Runnable {
 
     void doInBackground() {
         UsersPossessionInfoDao usersPossessionInfoDao = db.possessionInfoDao();
-
         try {
             data = usersPossessionInfoDao.getLineTask(name);
         } catch (Exception e) {

@@ -61,26 +61,39 @@ public class BaseStatusFragment extends Fragment {
     }
 
     public void initDiffTime(long diffTime, byte[] _DP, byte[] _MONEY) {
-        int num1 = 5; // DP test用 秒数にかける数
-        int num2 = 10; // MONEY test用 秒数にかける数
-        long carry1 = 0;
-        long carry2 = 0;
-        DP = _DP;
-        MONEY = _MONEY;
+        long num1 = 1; // DP test用 秒数にかける数
+        long num2 = 2; // MONEY test用 秒数にかける数
+        byte[] Base_DP = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        byte[] Base_MONEY = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-        for (int i = 0; i < SIZE - 1; i++) {
-            long tmp = DP[i] * (num1 * diffTime) + carry1;
-            DP[i] = (byte) (tmp % 10);
-            carry1 = tmp / 10;
-
-            tmp = MONEY[i] * (num2 * diffTime) + carry2;
-            MONEY[i] = (byte) (tmp % 10);
-            carry2 = tmp / 10;
-        }
+        DP = Add(_DP, mul(Base_DP, num1 * diffTime));
+        MONEY = Add(_MONEY, mul(Base_MONEY, num2 * diffTime));
 
         text_DP.setText(String.valueOf(CastLong(DP)));
         text_MONEY.setText(String.valueOf(CastLong(MONEY)));
-        Log.v("BaseStatusFragment", "initDiffTime");
+    }
+
+    public byte[] mul(byte[] ary, long a) {
+        long carry = 0;
+        for (int i = 0; i < SIZE - 1; i++) {
+            long tmp = ary[i] * a + carry;
+            ary[i] = (byte) (tmp % 10);
+            carry = tmp /10;
+        }
+        return ary;
+    }
+
+    public byte[] Add(byte[] ary1, byte[] ary2) {
+        for (int i = 0; i < SIZE - 1; i++) {
+            byte tmp = (byte) (ary1[i] + ary2[i]);
+            if (tmp < 10) {
+                ary1[i] = tmp;
+            } else {
+                ary1[i] = (byte) (tmp - 10);
+                ary1[i + 1] += 1;
+            }
+        }
+        return ary1;
     }
 
     @NonNull
