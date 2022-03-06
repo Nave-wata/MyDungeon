@@ -17,7 +17,7 @@ public class TimerPossession {
         }
     };
 
-    public void Run() {
-        handler.post(runnable);
-    }
+    public void Run() { handler.post(runnable); }
+
+    public void Stop() { handler.removeCallbacks(runnable); }
 }
