@@ -143,6 +143,7 @@ std::string SHA512::getHash512(const std::string name, const std::string passwor
             output = hash(output);
         }
     }
+    output = hash(output);
 
     return output;
 }
