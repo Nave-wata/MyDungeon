@@ -1,6 +1,7 @@
 package com.example.mainproject;
 
 import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.res.AssetManager;
@@ -44,11 +45,14 @@ public class ShowDiffTimeDialog extends DialogFragment {
         setImage.setImageViewBitmapFromAsset(up_DP, "base_menu/up_img.png");
         setImage.setImageViewBitmapFromAsset(up_MONEY, "base_menu/up_img.png");
 
-        ObjectAnimator DP_objectAnimator = ObjectAnimator.ofFloat(up_DP, "translationY", 20f, -15f);
+        PropertyValuesHolder inFlatX = PropertyValuesHolder.ofFloat(View.SCALE_X, 0.5f, 1.5f);
+        PropertyValuesHolder inFlatY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.5f, 1.5f);
+        PropertyValuesHolder moveMode = PropertyValuesHolder.ofFloat("translationY", 20f, -1f);
+        ObjectAnimator DP_objectAnimator = ObjectAnimator.ofPropertyValuesHolder(up_DP, inFlatX, inFlatY, moveMode);
         DP_objectAnimator.setDuration(1000);
         DP_objectAnimator.setRepeatCount(ObjectAnimator.INFINITE);
         DP_objectAnimator.start();
-        ObjectAnimator MONEY_objectAnimator = ObjectAnimator.ofFloat(up_MONEY, "translationY", 20f, -15f);
+        ObjectAnimator MONEY_objectAnimator = ObjectAnimator.ofPropertyValuesHolder(up_MONEY, inFlatX, inFlatY, moveMode);
         MONEY_objectAnimator.setDuration(1000);
         MONEY_objectAnimator.setRepeatCount(ObjectAnimator.INFINITE);
         MONEY_objectAnimator.setRepeatMode(ObjectAnimator.RESTART);
@@ -56,7 +60,7 @@ public class ShowDiffTimeDialog extends DialogFragment {
 
         BaseStatusFragment bsf = new BaseStatusFragment();
         byte[] _DP = bsf.mul(Base_DP, num1 * diffTime);
-        byte[] _MONEY = bsf.mul(Base_MONEY, num1 * diffTime);
+        byte[] _MONEY = bsf.mul(Base_MONEY, num2 * diffTime);
         String DP_str = NumberFormat.getNumberInstance().format(bsf.CastLong(_DP));
         String MONEY_str = NumberFormat.getNumberInstance().format(bsf.CastLong(_MONEY));
 
