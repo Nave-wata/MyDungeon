@@ -105,7 +105,7 @@ public class BaseStatusFragment extends Fragment {
                                     diffSecond = duration.getSeconds();
                                     new BaseStatusFragment().initDiffTime(diffSecond, _DP, _MONEY);
                                     if (MainActivity.AppFirstFlag) {
-                                        ShowDiffTimeDialog showDiffTimeDialog = new ShowDiffTimeDialog();
+                                        ShowDiffTimeDialog showDiffTimeDialog = new ShowDiffTimeDialog(diffSecond);
                                         showDiffTimeDialog.show(getFragmentManager(), "showDiffTimeDialog");
                                     }
                                 } catch (Exception e) {}

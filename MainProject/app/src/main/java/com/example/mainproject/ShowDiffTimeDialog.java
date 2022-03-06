@@ -7,11 +7,19 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
+import java.text.NumberFormat;
+
 public class ShowDiffTimeDialog extends DialogFragment {
+    private final long diffTime;
+
+    public ShowDiffTimeDialog(long diffTime) {
+        this.diffTime = diffTime;
+    }
 
     @NonNull
     @Override
@@ -19,25 +27,41 @@ public class ShowDiffTimeDialog extends DialogFragment {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_showdifftime, null);
         AssetManager assetManager = getActivity().getAssets();
         SetImage setImage = new SetImage(assetManager);
+        long num1 = 1; // DP test用 秒数にかける数
+        long num2 = 2; // MONEY test用 秒数にかける数
+        byte[] Base_DP = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        byte[] Base_MONEY = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
         ImageView ic_DP = view.findViewById(R.id.dialog_ic_DP);
         ImageView ic_money = view.findViewById(R.id.dialog_ic_MONEY);
         ImageView up_DP = view.findViewById(R.id.up_DP);
         ImageView up_MONEY = view.findViewById(R.id.up_MONEY);
+        TextView up_diffDP = view.findViewById(R.id.dialog_Have_DP);
+        TextView up_diffMONEY = view.findViewById(R.id.dialog_Have_money);
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_money, "base_menu/money.png");
         setImage.setImageViewBitmapFromAsset(up_DP, "base_menu/up_img.png");
         setImage.setImageViewBitmapFromAsset(up_MONEY, "base_menu/up_img.png");
 
-        ObjectAnimator DP_objectAnimator = ObjectAnimator.ofFloat(up_DP, "translationY", 20f, -20f);
+        ObjectAnimator DP_objectAnimator = ObjectAnimator.ofFloat(up_DP, "translationY", 20f, -15f);
         DP_objectAnimator.setDuration(1000);
         DP_objectAnimator.setRepeatCount(ObjectAnimator.INFINITE);
         DP_objectAnimator.start();
-        ObjectAnimator MONEY_objectAnimator = ObjectAnimator.ofFloat(up_MONEY, "translationY", 20f, -20f);
+        ObjectAnimator MONEY_objectAnimator = ObjectAnimator.ofFloat(up_MONEY, "translationY", 20f, -15f);
         MONEY_objectAnimator.setDuration(1000);
         MONEY_objectAnimator.setRepeatCount(ObjectAnimator.INFINITE);
+        MONEY_objectAnimator.setRepeatMode(ObjectAnimator.RESTART);
         MONEY_objectAnimator.start();
+
+        BaseStatusFragment bsf = new BaseStatusFragment();
+        byte[] _DP = bsf.mul(Base_DP, num1 * diffTime);
+        byte[] _MONEY = bsf.mul(Base_MONEY, num1 * diffTime);
+        String DP_str = NumberFormat.getNumberInstance().format(bsf.CastLong(_DP));
+        String MONEY_str = NumberFormat.getNumberInstance().format(bsf.CastLong(_MONEY));
+
+        up_diffDP.setText(DP_str);
+        up_diffMONEY.setText(MONEY_str);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
         builder.setPositiveButton(R.string.DialogPositiveText, null);

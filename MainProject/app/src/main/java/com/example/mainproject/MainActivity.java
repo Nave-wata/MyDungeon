@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
 
         AppFirstFlag = false;
-
-        AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
         LocalDateTime nowTime = LocalDateTime.now();
         int nowYear = nowTime.getYear();
         int nowMonth = nowTime.getMonthValue();
@@ -56,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         int nowHour = nowTime.getHour();
         int nowMinute = nowTime.getMinute();
         int nowSecond = nowTime.getSecond();
+        AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
 
         new UpdateTime(
                 db,
