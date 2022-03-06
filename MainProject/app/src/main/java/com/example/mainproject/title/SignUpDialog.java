@@ -11,6 +11,7 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -187,6 +188,10 @@ public class SignUpDialog extends DialogFragment {
                                 b -> {
                                     Context context = getActivity().getApplicationContext();
                                     Toast.makeText(context, "登録完了しました", Toast.LENGTH_SHORT).show();
+                                    Log.v("name", name);
+                                    Log.v("pass", password);
+                                    Log.v("salt", salt);
+                                    Log.v("hash", hash);
                                     TitleActivity.UserName = name;
                                     if (nextAutoIn.isChecked()) {
                                         editor.putBoolean(DS_Flag, true);
