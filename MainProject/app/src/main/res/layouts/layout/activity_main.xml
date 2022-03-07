@@ -11,17 +11,24 @@
         android:id="@+id/BaseStatusContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintVertical_weight="0.1"
         app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:id="@+id/MainContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/BaseTransitionContainer"
+        app:layout_constraintTop_toBottomOf="@+id/BaseStatusContainer"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_weight="0.8"
+        tools:layout_editor_absoluteX="130dp" />
 
     <FrameLayout
         android:id="@+id/BaseTransitionContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintVertical_weight="0.1"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

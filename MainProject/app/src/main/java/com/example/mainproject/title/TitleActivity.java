@@ -50,7 +50,6 @@ public class TitleActivity extends AppCompatActivity {
                 Log.v("TitleActivity", "ACTION_CANCEL");
                 break;
         }
-
         return false;
     }
 
