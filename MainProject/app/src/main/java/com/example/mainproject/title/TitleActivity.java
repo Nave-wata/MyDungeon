@@ -2,6 +2,8 @@ package com.example.mainproject.title;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -30,6 +32,26 @@ public class TitleActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
         new InitializeDatabase(AppDatabaseSingleton.getInstance(getApplicationContext()), this).execute(); // 他の方法での初期データの登録を考える
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                Log.v("TitleActivity", "ACTION_DOWN");
+                break;
+            case MotionEvent.ACTION_UP:
+                Log.v("TitleActivity", "ACTION_UP");
+                break;
+            case MotionEvent.ACTION_MOVE:
+                Log.v("TitleActivity", "ACTION_MOVE");
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                Log.v("TitleActivity", "ACTION_CANCEL");
+                break;
+        }
+
+        return false;
     }
 
     public void ChangeActivity() {
