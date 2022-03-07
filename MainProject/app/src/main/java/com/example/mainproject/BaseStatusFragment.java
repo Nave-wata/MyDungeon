@@ -31,14 +31,13 @@ public class BaseStatusFragment extends Fragment {
     public static byte[] MONEY = new byte[18];
     public static TextView text_DP;
     public static TextView text_MONEY;
-    public TimerPossession timerPossession;
+    private final TimerPossession timerPossession = new TimerPossession();;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_basestatus, container, false);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -50,12 +49,15 @@ public class BaseStatusFragment extends Fragment {
         ImageView ic_money = view.findViewById(R.id.ic_money);
         text_DP = view.findViewById(R.id.Have_DP);
         text_MONEY = view.findViewById(R.id.Have_money);
-        timerPossession = new TimerPossession();
-        timerPossession.Run();
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_money, "base_menu/money.png");
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onStart() {
+        super.onStart();
         final AppDatabase db = AppDatabaseSingleton.getInstance(getActivity().getApplicationContext());
         new GetUsersInfo(
                 db,
@@ -96,13 +98,12 @@ public class BaseStatusFragment extends Fragment {
                 },
                 e->{}
         ).execute();
+        timerPossession.Run();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        text_DP.setText(null);
-        text_MONEY.setText(null);
         timerPossession.Stop();
     }
 

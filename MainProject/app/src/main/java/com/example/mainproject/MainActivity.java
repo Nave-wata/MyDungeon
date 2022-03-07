@@ -29,15 +29,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = this.getIntent();
         UserName = intent.getStringExtra(TitleActivity.EXTRA_DATA);
         AppFirstFlag = true;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
-        fragmentTransaction.add(R.id.BaseStatusContainer, BaseStatusFragment.newInstance(UserName));
+        fragmentTransaction.replace(R.id.BaseStatusContainer, BaseStatusFragment.newInstance(UserName));
         fragmentTransaction.commit();
     }
 
