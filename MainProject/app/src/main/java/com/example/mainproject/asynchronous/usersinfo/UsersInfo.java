@@ -5,6 +5,8 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.example.mainproject.BaseStatusFragment;
+
 
 @Entity(tableName = "UsersInfo", indices = {@Index(value = "Name", unique = true)})
 public class UsersInfo {
@@ -19,6 +21,12 @@ public class UsersInfo {
 
     @ColumnInfo(name = "Hash")
     public String hash;
+
+    @ColumnInfo(name = "DP")
+    public String _DP;
+
+    @ColumnInfo(name = "Money")
+    public String _Money;
 
     @ColumnInfo(name = "Year")
     public int year;
@@ -43,6 +51,10 @@ public class UsersInfo {
     public String getSalt() { return salt; }
 
     public String getHash() { return hash; }
+
+    public byte[] getDP() { return new BaseStatusFragment().CastByte(_DP); }
+
+    public byte[] getMoney() { return new BaseStatusFragment().CastByte(_Money); }
 
     public int getYear() { return year; }
 

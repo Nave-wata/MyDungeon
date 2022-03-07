@@ -19,8 +19,6 @@ import com.example.mainproject.asynchronous.AppDatabaseSingleton;
 import com.example.mainproject.asynchronous.TimerPossession;
 import com.example.mainproject.asynchronous.usersinfo.GetUsersInfo;
 import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
-import com.example.mainproject.asynchronous.userspossessioninfo.GetUsersPossessionInfo;
-import com.example.mainproject.asynchronous.userspossessioninfo.UsersPossessionInfo;
 
 import org.jetbrains.annotations.Contract;
 
@@ -69,49 +67,40 @@ public class BaseStatusFragment extends Fragment {
                 db,
                 UserName,
                 b->{
-                    new GetUsersPossessionInfo(
-                            db,
-                            UserName,
-                            c->{
-                                long diffSecond = 0;
-                                byte[] _DP = null;
-                                byte[] _MONEY = null;
-                                try {
-                                    final LocalDateTime nowTime = LocalDateTime.now();
-                                    final int nowYear = nowTime.getYear();
-                                    final int nowMonth = nowTime.getMonthValue();
-                                    final int nowDay = nowTime.getDayOfMonth();
-                                    final int nowHour = nowTime.getHour();
-                                    final int nowMinute = nowTime.getMinute();
-                                    final int nowSecond = nowTime.getSecond();
-                                    int beforeYear = 0, beforeMonth = 0 , beforeDay = 0, beforeHour = 0, beforeMinute = 0, beforeSecond = 0;
+                    long diffSecond = 0;
+                    byte[] _DP = null;
+                    byte[] _MONEY = null;
+                    try {
+                        final LocalDateTime nowTime = LocalDateTime.now();
+                        final int nowYear = nowTime.getYear();
+                        final int nowMonth = nowTime.getMonthValue();
+                        final int nowDay = nowTime.getDayOfMonth();
+                        final int nowHour = nowTime.getHour();
+                        final int nowMinute = nowTime.getMinute();
+                        final int nowSecond = nowTime.getSecond();
+                        int beforeYear = 0, beforeMonth = 0 , beforeDay = 0, beforeHour = 0, beforeMinute = 0, beforeSecond = 0;
 
-                                    for (UsersInfo pi: b) {
-                                        beforeYear = pi.getYear();
-                                        beforeMonth = pi.getMonth();
-                                        beforeDay = pi.getDay();
-                                        beforeHour = pi.getHour();
-                                        beforeMinute = pi.getMinute();
-                                        beforeSecond = pi.getSecond();
-                                    }
-                                    for (UsersPossessionInfo up: c) {
-                                        _DP = up.getDP();
-                                        _MONEY = up.getMoney();
-                                    }
+                        for (UsersInfo pi: b) {
+                            beforeYear = pi.getYear();
+                            beforeMonth = pi.getMonth();
+                            beforeDay = pi.getDay();
+                            beforeHour = pi.getHour();
+                            beforeMinute = pi.getMinute();
+                            beforeSecond = pi.getSecond();
+                            _DP = pi.getDP();
+                            _MONEY = pi.getMoney();
+                        }
 
-                                    LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
-                                    LocalDateTime NowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
-                                    Duration duration= Duration.between(BeforeTime, NowTime);
-                                    diffSecond = duration.getSeconds();
-                                    new BaseStatusFragment().initDiffTime(diffSecond, _DP, _MONEY);
-                                    if (MainActivity.AppFirstFlag) {
-                                        ShowDiffTimeDialog showDiffTimeDialog = new ShowDiffTimeDialog(diffSecond);
-                                        showDiffTimeDialog.show(getFragmentManager(), "showDiffTimeDialog");
-                                    }
-                                } catch (Exception e) {}
-                            },
-                            e->{}
-                    ).execute();
+                        LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
+                        LocalDateTime NowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
+                        Duration duration= Duration.between(BeforeTime, NowTime);
+                        diffSecond = duration.getSeconds();
+                        new BaseStatusFragment().initDiffTime(diffSecond, _DP, _MONEY);
+                        if (MainActivity.AppFirstFlag) {
+                            ShowDiffTimeDialog showDiffTimeDialog = new ShowDiffTimeDialog(diffSecond);
+                            showDiffTimeDialog.show(getFragmentManager(), "showDiffTimeDialog");
+                        }
+                    } catch (Exception e) {}
                 },
                 e->{}
         ).execute();
@@ -175,11 +164,11 @@ public class BaseStatusFragment extends Fragment {
 
     @NonNull
     @Contract(pure = true)
-    public byte[] CastByte(long L1) {
+    public byte[] CastByte(String _DP) {
+        final String[] _DPSplit = _DP.split("");
         byte[] output = new byte[BaseStatusFragment.SIZE];
-        for (int i = 0; i < output.length; i++) {
-            output[i] = (byte) (L1 % 10);
-            L1 /= 10;
+        for (int i = 0; i < _DPSplit.length; i++) {
+            output[i] = (byte) Integer.parseInt(_DPSplit[_DPSplit.length - 1 - i]);
         }
         return output;
     }

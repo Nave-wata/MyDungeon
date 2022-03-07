@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.mainproject.asynchronous.AppDatabase;
-import com.example.mainproject.asynchronous.userspossessioninfo.UsersPossessionInfo;
 import com.example.mainproject.asynchronous.userspossessioninfo.UsersPossessionInfoDao;
 
 import java.util.concurrent.ExecutorService;
@@ -25,6 +24,8 @@ public class SignUp implements Runnable {
     final String name;
     final String salt;
     final String hash;
+    final String DP;
+    final String Money;
     final int nowYear;
     final int nowMonth;
     final int nowDay;
@@ -36,6 +37,8 @@ public class SignUp implements Runnable {
                   final String name,
                   final String salt,
                   final String hash,
+                  final String DP,
+                  final String Money,
                   final int nowYear,
                   final int nowMonth,
                   final int nowDay,
@@ -49,6 +52,8 @@ public class SignUp implements Runnable {
         this.name = name;
         this.salt = salt;
         this.hash = hash;
+        this.DP = DP;
+        this.Money = Money;
         this.nowYear = nowYear;
         this.nowMonth = nowMonth;
         this.nowDay = nowDay;
@@ -75,6 +80,8 @@ public class SignUp implements Runnable {
                         name,
                         salt,
                         hash,
+                        DP,
+                        Money,
                         nowYear,
                         nowMonth,
                         nowDay,
@@ -93,8 +100,8 @@ public class SignUp implements Runnable {
         UsersPossessionInfoDao usersPossessionInfoDao = db.possessionInfoDao();
 
         try {
-            usersInfoDao.signUpTask(name, salt, hash, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
-            usersPossessionInfoDao.insetTask(new UsersPossessionInfo(name, 100, 100));
+            usersInfoDao.signUpTask(name, salt, hash, DP, Money, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
+            //usersPossessionInfoDao.insetTask(new UsersPossessionInfo(name, 100, 100));
         } catch (SQLiteConstraintException e) {
             this.sqliteConstraintException = e;
             this.exception = e;
