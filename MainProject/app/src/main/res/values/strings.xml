@@ -13,7 +13,7 @@
     <string name="DialogPositiveText">OK</string>
     <string name="DialogNegativeText">キャンセル</string>
     <string name="DialogNeutralText">あとで</string>
-    <string name="cancelText">キャンセル</string>
+    <string name="closeText">とじる</string>
     <string name="Name">ユーザー名</string>
     <string name="NotUserSelect">未選択</string>
     <string name="Password">パスワード</string>
