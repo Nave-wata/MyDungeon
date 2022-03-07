@@ -13,8 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
-import java.text.NumberFormat;
-
 public class ShowDiffTimeDialog extends DialogFragment {
     private final long diffTime;
 
@@ -67,8 +65,8 @@ public class ShowDiffTimeDialog extends DialogFragment {
         BaseStatusFragment bsf = new BaseStatusFragment();
         byte[] _DP = bsf.mul(Base_DP, num1 * diffTime);
         byte[] _MONEY = bsf.mul(Base_MONEY, num2 * diffTime);
-        String DP_str = NumberFormat.getNumberInstance().format(bsf.CastString(_DP));
-        String MONEY_str = NumberFormat.getNumberInstance().format(bsf.CastString(_MONEY));
+        String DP_str = bsf.CastString(_DP);
+        String MONEY_str = bsf.CastString(_MONEY);
 
         up_diffDP.setText(DP_str);
         up_diffMONEY.setText(MONEY_str);

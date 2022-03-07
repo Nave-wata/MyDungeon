@@ -3,7 +3,6 @@ package com.example.mainproject;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import com.example.mainproject.asynchronous.TimerPossession;
 import com.example.mainproject.asynchronous.usersinfo.GetUsersInfo;
 import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 
-import java.text.NumberFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -44,8 +42,6 @@ public class BaseStatusFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        Log.v("BaseStatusFragment", "onViewCreated");
 
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
@@ -77,7 +73,6 @@ public class BaseStatusFragment extends Fragment {
                         final int nowMinute = nowTime.getMinute();
                         final int nowSecond = nowTime.getSecond();
                         int beforeYear = 0, beforeMonth = 0 , beforeDay = 0, beforeHour = 0, beforeMinute = 0, beforeSecond = 0;
-
                         for (UsersInfo pi: b) {
                             beforeYear = pi.getYear();
                             beforeMonth = pi.getMonth();
@@ -88,7 +83,6 @@ public class BaseStatusFragment extends Fragment {
                             _DP = pi.getDP();
                             _MONEY = pi.getMoney();
                         }
-
                         LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
                         LocalDateTime NowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
                         Duration duration= Duration.between(BeforeTime, NowTime);
@@ -130,8 +124,8 @@ public class BaseStatusFragment extends Fragment {
         DP = Add(_DP, mul(Base_DP, num1 * diffTime));
         MONEY = Add(_MONEY, mul(Base_MONEY, num2 * diffTime));
 
-        String DP_str = NumberFormat.getNumberInstance().format(CastString(DP));
-        String MONEY_str = NumberFormat.getNumberInstance().format(CastString(MONEY));
+        String DP_str = CastString(DP);
+        String MONEY_str = CastString(MONEY);
 
         text_DP.setText(DP_str);
         text_MONEY.setText(MONEY_str);
@@ -161,7 +155,7 @@ public class BaseStatusFragment extends Fragment {
     }
 
     @NonNull
-    public byte[] CastByte(String _DP) {
+    public byte[] CastByte(@NonNull String _DP) {
         final String[] _DPSplit = _DP.split("");
         byte[] output = new byte[BaseStatusFragment.SIZE];
         for (int i = 0; i < _DPSplit.length; i++) {
@@ -173,8 +167,14 @@ public class BaseStatusFragment extends Fragment {
     @NonNull
     public String CastString(byte[] ary) {
         StringBuilder output = new StringBuilder();
-        for (int i = 0; i < BaseStatusFragment.SIZE; i++) {
-            output.append(ary[i] * Math.pow(10, i));
+        boolean flag = true;
+        for (int i = BaseStatusFragment.SIZE -1; i >= 0; i--) {
+            if (ary[i] == 0 && flag) {
+                continue;
+            } else {
+                flag = false;
+            }
+            output.append(ary[i]);
         }
         return output.toString();
     }
