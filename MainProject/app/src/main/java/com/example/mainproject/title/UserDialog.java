@@ -30,11 +30,9 @@ public class UserDialog extends DialogFragment {
 
         view.findViewById(R.id.SignInPage_button).setOnClickListener(clickListener);
         view.findViewById(R.id.SignUpPage_button).setOnClickListener(clickListener);
+        view.findViewById(R.id.dialog_user_cancel).setOnClickListener(clickListener);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
-        builder.setPositiveButton(R.string.DialogPositiveText, null);
-        builder.setNeutralButton(R.string.DialogNegativeText, null);
-
         return builder.create();
     }
 
@@ -54,6 +52,8 @@ public class UserDialog extends DialogFragment {
                     signUpDialogFragment.show(Objects.requireNonNull(getFragmentManager()), "userAdd");
                     dismiss();
                     break;
+                case R.id.dialog_user_cancel:
+                    dismiss();
                 default:
                     break;
             }
