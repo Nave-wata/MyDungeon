@@ -5,7 +5,6 @@ import static android.content.Context.MODE_PRIVATE;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -47,10 +46,10 @@ public class InitializeDatabase implements Runnable {
         String DS_Flag = "Flag";
         String DS_Name = "Name";
         String DS_Passwd = "Password";
-        String name = "developer"; // 本番ではユーザー名の上限以上の長さで
+        String name = "developer"; // 本番ではユーザー名の上限以上の長さで（なぜかある程度の長さのある名前が初期データにないと使えない）
         String password = "developer";
-        String salt = "v1Kd6L6KxmoT4B0tOoDoSQj4qMXOOYVtvSZCw74Ed32PYqMDw1bvsm5nkrmfI1YliF0vjRrytFrJMtboCjKEnNCAIw2q7ap6639f3nzOl2yyADY7Cifh9VN6a7nyCq0Mqb0HdFlqtG9GVSX9gP1gIzYftd3lEezR61PxeP81lM0HotXkR3qdDk9mSCL2MH30KPkKYTahD74vYeeYG2MdFrngHd5xh5a8gTEtgTXnXsNEyf2JLCoFt1m02jIVXtWyLDDVR6aSI9sVoEyvNyYtHqqGStPcdONACMhOzDxOfYCfKKAxrXfs7XAMmnTbo8GeRYvJzdfTnY2IBpByJTP1gN3sh6qPj3BaJp867gocRkDWkFGMSgl157LlXskB6tg5C191p6LSxlQHAyCq81KX1B";
-        String hash = "110f1b084876e5b287535b83abf3ad92a5a98caee21a22b5ff20e41b13a2efd0f031ae32372c85cff08bd15b0e7f3f2b818d33f1a04c5dc42bf141f43290cebe";
+        String salt = "VKBykbmtkHNngaOzCd5bnVfqvgCXPZ7MXz4G5i4QKad8yNxCIxRpCwGw9A5SEbkTVab3MyKaEcMDJHB5Sm2zWnrLYPW0I0iT9M1sboKizv6DgsXl8iLzZmWk5yObQKZLpvPhWyMNVywIh0TEMZGeddIHoXI1aYJk3FblYoY2HESnvAFfyF9srvnGO4MdiEPynypc7eIqqlqitZ8CfKQAyX2VJYqQDxyLjVbH9MEZmE4Z71RcnYy7GWLyaRHf0ETYeNwDPLT9ZARwncg9hzSsnft3rTOPveCad7RQqP7NFyGGhIdxhNeag8YvYb4iCJdWjLyrkFNwCMfe7EIBmCDiKAeTkRS7BeaThkoj0rB96PixYpYrMKSZ9R0TB3be2VTiqeGSaq3EY83lrwpLaYwrYeDHXgYXK5e8L4f79Sx14N1PAtG7Kf3Zd15dsRacS31inhWOHhsFJaQZd2S7VbyvMSfycTKWgBY38Yg3IACVsLBcmEOaYiqZQkzmzb1R3wORv3e1D30RCwhXYbe";
+        String hash = "133b3adcaaf48984475ebf2f357cf250579ca1862066f4e86e0c6f1de33e9bea415e67945e6c936cdae2da4ed8cc14afbf7e0f6816539b34419e2b402c9b9c53";
         LocalDateTime nowTime = LocalDateTime.now();
         int nowYear = nowTime.getYear();
         int nowMonth = nowTime.getMonthValue();
@@ -73,10 +72,7 @@ public class InitializeDatabase implements Runnable {
         try {
             usersInfoDao.signUpTask(name, salt, hash, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
             possessionInfoDao.insetTask(new UsersPossessionInfo(name, 100, 100));
-            Log.v("Database Init", "OK");
-        } catch (Exception ignored) {
-            Log.v("Database Init", "NO");
-        }
+        } catch (Exception ignored) {}
     }
 
     //void onPostExecute() {}

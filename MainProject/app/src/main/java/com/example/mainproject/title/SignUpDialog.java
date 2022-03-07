@@ -11,6 +11,7 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -102,7 +103,8 @@ public class SignUpDialog extends DialogFragment {
         public void onClick(@NonNull View v) {
             switch (v.getId()) {
                 case R.id.SignUp_button:
-                    final String regex = "[0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]";
+                    final String regexName = "[0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_]";
+                    final String regexPass = "[0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]";
                     final String name = etName.getText().toString();
                     final String password = etPass.getText().toString();
                     final String password2 = etPass2.getText().toString();
@@ -131,7 +133,7 @@ public class SignUpDialog extends DialogFragment {
                     }
                     if (nameFlag) {
                         for (String s : nameSplit) {
-                            if (!s.matches(regex)) {
+                            if (!s.matches(regexName)) {
                                 etName.setError(getString(R.string.errorNotInText));
                                 flag = false;
                                 break;
@@ -140,7 +142,7 @@ public class SignUpDialog extends DialogFragment {
                     }
                     if (passwordFlag) {
                         for (String s : passwordSplit) {
-                            if (!s.matches(regex)) {
+                            if (!s.matches(regexPass)) {
                                 etPass.setError(getString(R.string.errorNotInText));
                                 flag = false;
                                 break;
@@ -149,7 +151,7 @@ public class SignUpDialog extends DialogFragment {
                     }
                     if (passwordFlag2) {
                         for (String s : passwordSplit2) {
-                            if (!s.matches(regex)) {
+                            if (!s.matches(regexPass)) {
                                 etPass2.setError(getString(R.string.errorNotInText));
                                 flag = false;
                                 passwordFlag2 = false;
@@ -187,6 +189,10 @@ public class SignUpDialog extends DialogFragment {
                                 b -> {
                                     Context context = getActivity().getApplicationContext();
                                     Toast.makeText(context, "登録完了しました", Toast.LENGTH_SHORT).show();
+                                    Log.v("name", name);
+                                    Log.v("pass", password);
+                                    Log.v("salt", salt);
+                                    Log.v("hash", hash);
                                     TitleActivity.UserName = name;
                                     if (nextAutoIn.isChecked()) {
                                         editor.putBoolean(DS_Flag, true);
