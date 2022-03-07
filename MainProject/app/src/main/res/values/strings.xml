@@ -23,4 +23,5 @@
     <string name="errorNotSpace">空白が含まれています</string>
     <string name="errorNotInText">英数字以外が含まれています</string>
     <string name="CreateFlor">階層追加</string>
+    <string name="ConfirmCreateFlor">DPを消費して階層を追加します．よろしいですか？</string>
 </resources>
