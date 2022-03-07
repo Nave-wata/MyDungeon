@@ -11,8 +11,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
+import com.example.mainproject.asynchronous.usersinfo.UpdatePossession;
 import com.example.mainproject.asynchronous.usersinfo.UpdateTime;
-import com.example.mainproject.asynchronous.userspossessioninfo.UpdateUsersPossessionInfo;
 import com.example.mainproject.title.TitleActivity;
 
 import java.time.LocalDateTime;
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 e->{}
         ).execute();
 
-        new UpdateUsersPossessionInfo(
+        new UpdatePossession(
                 db,
                 UserName,
                 BaseStatusFragment.DP,

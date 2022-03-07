@@ -167,8 +167,6 @@ public class SignUpDialog extends DialogFragment {
                         final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
                         final String salt = getRandomString();
                         final String hash = TitleActivity.HASH(name, password, salt);
-                        final String DP = "100";
-                        final String Money = "100";
                         final LocalDateTime nowTime = LocalDateTime.now();
                         final int nowYear = nowTime.getYear();
                         final int nowMonth = nowTime.getMonthValue();
@@ -181,8 +179,6 @@ public class SignUpDialog extends DialogFragment {
                                 name,
                                 salt,
                                 hash,
-                                DP,
-                                Money,
                                 nowYear,
                                 nowMonth,
                                 nowDay,

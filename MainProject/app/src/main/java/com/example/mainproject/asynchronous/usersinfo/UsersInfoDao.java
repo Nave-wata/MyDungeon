@@ -21,6 +21,12 @@ public interface UsersInfoDao {
             "WHERE Name = :name")
     void updateTimeTask(String name, int year, int month, int day, int hour, int minute, int second);
 
+    @Query("UPDATE UsersInfo " +
+            "SET DP = :dp, " +
+                "Money = :money " +
+            "WHERE Name = :name")
+    void updatePossessionTask(String name, String dp, String money);
+
     @Query("SELECT * FROM UsersInfo WHERE Name = :name")
     List<UsersInfo> getLineTask(String name);
 }

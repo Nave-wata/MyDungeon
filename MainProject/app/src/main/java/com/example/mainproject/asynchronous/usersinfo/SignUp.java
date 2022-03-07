@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.mainproject.asynchronous.AppDatabase;
-import com.example.mainproject.asynchronous.userspossessioninfo.UsersPossessionInfoDao;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,8 +23,8 @@ public class SignUp implements Runnable {
     final String name;
     final String salt;
     final String hash;
-    final String DP;
-    final String Money;
+    final String DP = "100";
+    final String Money = "100";
     final int nowYear;
     final int nowMonth;
     final int nowDay;
@@ -37,8 +36,6 @@ public class SignUp implements Runnable {
                   final String name,
                   final String salt,
                   final String hash,
-                  final String DP,
-                  final String Money,
                   final int nowYear,
                   final int nowMonth,
                   final int nowDay,
@@ -52,8 +49,6 @@ public class SignUp implements Runnable {
         this.name = name;
         this.salt = salt;
         this.hash = hash;
-        this.DP = DP;
-        this.Money = Money;
         this.nowYear = nowYear;
         this.nowMonth = nowMonth;
         this.nowDay = nowDay;
@@ -80,8 +75,6 @@ public class SignUp implements Runnable {
                         name,
                         salt,
                         hash,
-                        DP,
-                        Money,
                         nowYear,
                         nowMonth,
                         nowDay,
@@ -97,7 +90,6 @@ public class SignUp implements Runnable {
 
     void doInBackground() {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
-        UsersPossessionInfoDao usersPossessionInfoDao = db.possessionInfoDao();
 
         try {
             usersInfoDao.signUpTask(name, salt, hash, DP, Money, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);

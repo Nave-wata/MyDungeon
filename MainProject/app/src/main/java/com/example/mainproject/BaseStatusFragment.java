@@ -20,8 +20,6 @@ import com.example.mainproject.asynchronous.TimerPossession;
 import com.example.mainproject.asynchronous.usersinfo.GetUsersInfo;
 import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 
-import org.jetbrains.annotations.Contract;
-
 import java.text.NumberFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -132,8 +130,8 @@ public class BaseStatusFragment extends Fragment {
         DP = Add(_DP, mul(Base_DP, num1 * diffTime));
         MONEY = Add(_MONEY, mul(Base_MONEY, num2 * diffTime));
 
-        String DP_str = NumberFormat.getNumberInstance().format(CastLong(DP));
-        String MONEY_str = NumberFormat.getNumberInstance().format(CastLong(MONEY));
+        String DP_str = NumberFormat.getNumberInstance().format(CastString(DP));
+        String MONEY_str = NumberFormat.getNumberInstance().format(CastString(MONEY));
 
         text_DP.setText(DP_str);
         text_MONEY.setText(MONEY_str);
@@ -163,7 +161,6 @@ public class BaseStatusFragment extends Fragment {
     }
 
     @NonNull
-    @Contract(pure = true)
     public byte[] CastByte(String _DP) {
         final String[] _DPSplit = _DP.split("");
         byte[] output = new byte[BaseStatusFragment.SIZE];
@@ -174,12 +171,11 @@ public class BaseStatusFragment extends Fragment {
     }
 
     @NonNull
-    @Contract(pure = true)
-    public long CastLong(byte[] ary) {
-        long output = 0;
-        for (int i = 0; i < 18; i++) {
-            output += ary[i] * Math.pow(10, i);
+    public String CastString(byte[] ary) {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < BaseStatusFragment.SIZE; i++) {
+            output.append(ary[i] * Math.pow(10, i));
         }
-        return output;
+        return output.toString();
     }
 }
