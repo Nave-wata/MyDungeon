@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -14,13 +15,13 @@ import java.util.Objects;
 
 public class DungeonFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
-    private String str;
+    private String UserName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
-        str = Objects.requireNonNull(args).getString(EXTRA_DATA);
+        UserName = Objects.requireNonNull(args).getString(EXTRA_DATA);
     }
 
     @Override
@@ -31,6 +32,15 @@ public class DungeonFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Button createFlorButton = view.findViewById(R.id.createFlorButton);
+        createFlorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ConfirmCreateDungeonDialog confirmCreateDungeonDialog = new ConfirmCreateDungeonDialog();
+                confirmCreateDungeonDialog.show(getFragmentManager(), "ConfirmCreateDungeonDialog");
+            }
+        });
     }
 
     @NonNull
