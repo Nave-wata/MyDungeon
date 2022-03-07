@@ -39,6 +39,12 @@ public class ShowDiffTimeDialog extends DialogFragment {
         ImageView up_MONEY = view.findViewById(R.id.up_MONEY);
         TextView up_diffDP = view.findViewById(R.id.dialog_Have_DP);
         TextView up_diffMONEY = view.findViewById(R.id.dialog_Have_money);
+        view.findViewById(R.id.dialog_ShowDiffTime_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_money, "base_menu/money.png");
@@ -68,8 +74,6 @@ public class ShowDiffTimeDialog extends DialogFragment {
         up_diffMONEY.setText(MONEY_str);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
-        builder.setPositiveButton(R.string.DialogPositiveText, null);
-        builder.setNeutralButton(R.string.DialogNegativeText, null);
 
         return builder.create();
     }
