@@ -23,8 +23,8 @@ public class SignUp implements Runnable {
     final String name;
     final String salt;
     final String hash;
-    final String DP = "100";
-    final String Money = "100";
+    final String DP = "1000";
+    final String Money = "1000";
     final int nowYear;
     final int nowMonth;
     final int nowDay;
@@ -93,7 +93,6 @@ public class SignUp implements Runnable {
 
         try {
             usersInfoDao.signUpTask(name, salt, hash, DP, Money, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
-            //usersPossessionInfoDao.insetTask(new UsersPossessionInfo(name, 100, 100));
         } catch (SQLiteConstraintException e) {
             this.sqliteConstraintException = e;
             this.exception = e;

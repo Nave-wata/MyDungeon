@@ -1,32 +1,18 @@
-package com.example.mainproject.asynchronous.usersinfo;
+package com.example.mainproject.asynchronous.usersapptimes;
+
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import com.example.mainproject.BaseStatusFragment;
-
-
-@Entity(tableName = "UsersInfo", indices = {@Index(value = "Name", unique = true)})
-public class UsersInfo {
+@Entity(tableName = "AppTimes", indices = {@Index(value = "Name", unique = true)})
+public class UsersAppTimes {
     @PrimaryKey(autoGenerate = true)
     public Integer id;
 
     @ColumnInfo(name = "Name")
     public String name;
-
-    @ColumnInfo(name = "Salt")
-    public String salt;
-
-    @ColumnInfo(name = "Hash")
-    public String hash;
-
-    @ColumnInfo(name = "DP")
-    public String _DP;
-
-    @ColumnInfo(name = "Money")
-    public String _Money;
 
     @ColumnInfo(name = "Year")
     public int year;
@@ -46,15 +32,21 @@ public class UsersInfo {
     @ColumnInfo(name = "Second")
     public int second;
 
-    public String getName() { return name; }
-
-    public String getSalt() { return salt; }
-
-    public String getHash() { return hash; }
-
-    public byte[] getDP() { return new BaseStatusFragment().CastByte(_DP); }
-
-    public byte[] getMoney() { return new BaseStatusFragment().CastByte(_Money); }
+    public UsersAppTimes(String name,
+                         int year,
+                         int month,
+                         int day,
+                         int hour,
+                         int minute,
+                         int second) {
+        this.name = name;
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
+    }
 
     public int getYear() { return year; }
 

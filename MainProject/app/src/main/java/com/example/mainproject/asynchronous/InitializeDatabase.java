@@ -48,8 +48,8 @@ public class InitializeDatabase implements Runnable {
         String password = "developer";
         String salt = "VKBykbmtkHNngaOzCd5bnVfqvgCXPZ7MXz4G5i4QKad8yNxCIxRpCwGw9A5SEbkTVab3MyKaEcMDJHB5Sm2zWnrLYPW0I0iT9M1sboKizv6DgsXl8iLzZmWk5yObQKZLpvPhWyMNVywIh0TEMZGeddIHoXI1aYJk3FblYoY2HESnvAFfyF9srvnGO4MdiEPynypc7eIqqlqitZ8CfKQAyX2VJYqQDxyLjVbH9MEZmE4Z71RcnYy7GWLyaRHf0ETYeNwDPLT9ZARwncg9hzSsnft3rTOPveCad7RQqP7NFyGGhIdxhNeag8YvYb4iCJdWjLyrkFNwCMfe7EIBmCDiKAeTkRS7BeaThkoj0rB96PixYpYrMKSZ9R0TB3be2VTiqeGSaq3EY83lrwpLaYwrYeDHXgYXK5e8L4f79Sx14N1PAtG7Kf3Zd15dsRacS31inhWOHhsFJaQZd2S7VbyvMSfycTKWgBY38Yg3IACVsLBcmEOaYiqZQkzmzb1R3wORv3e1D30RCwhXYbe";
         String hash = "133b3adcaaf48984475ebf2f357cf250579ca1862066f4e86e0c6f1de33e9bea415e67945e6c936cdae2da4ed8cc14afbf7e0f6816539b34419e2b402c9b9c53";
-        String DP = "100";
-        String Money = "100";
+        String DP = "1000";
+        String Money = "1000";
         LocalDateTime nowTime = LocalDateTime.now();
         int nowYear = nowTime.getYear();
         int nowMonth = nowTime.getMonthValue();
