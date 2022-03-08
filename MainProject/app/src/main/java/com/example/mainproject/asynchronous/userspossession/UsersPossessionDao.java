@@ -19,5 +19,5 @@ public interface UsersPossessionDao {
     void updatePossessionTask(String name, String dp, String money);
 
     @Query("SELECT * FROM UsersPossession WHERE Name = :name")
-    List<UsersPossession> getPossession(String name);
+    List<UsersPossession> getPossessionTask(String name);
 }
