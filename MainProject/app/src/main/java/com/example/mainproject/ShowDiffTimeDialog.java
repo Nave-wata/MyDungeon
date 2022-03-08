@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
-import java.text.NumberFormat;
+import java.util.Objects;
 
 public class ShowDiffTimeDialog extends DialogFragment {
     private final long diffTime;
@@ -26,7 +26,7 @@ public class ShowDiffTimeDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_showdifftime, null);
-        AssetManager assetManager = getActivity().getAssets();
+        AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
         long num1 = 1; // DP test用 秒数にかける数
         long num2 = 2; // MONEY test用 秒数にかける数
@@ -39,12 +39,7 @@ public class ShowDiffTimeDialog extends DialogFragment {
         ImageView up_MONEY = view.findViewById(R.id.up_MONEY);
         TextView up_diffDP = view.findViewById(R.id.dialog_Have_DP);
         TextView up_diffMONEY = view.findViewById(R.id.dialog_Have_money);
-        view.findViewById(R.id.dialog_ShowDiffTime_close).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-            }
-        });
+        view.findViewById(R.id.dialog_ShowDiffTime_close).setOnClickListener(view1 -> dismiss());
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_money, "base_menu/money.png");
@@ -67,8 +62,8 @@ public class ShowDiffTimeDialog extends DialogFragment {
         BaseStatusFragment bsf = new BaseStatusFragment();
         byte[] _DP = bsf.mul(Base_DP, num1 * diffTime);
         byte[] _MONEY = bsf.mul(Base_MONEY, num2 * diffTime);
-        String DP_str = NumberFormat.getNumberInstance().format(bsf.CastLong(_DP));
-        String MONEY_str = NumberFormat.getNumberInstance().format(bsf.CastLong(_MONEY));
+        String DP_str = bsf.CastString(_DP);
+        String MONEY_str = bsf.CastString(_MONEY);
 
         up_diffDP.setText(DP_str);
         up_diffMONEY.setText(MONEY_str);
