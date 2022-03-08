@@ -5,9 +5,9 @@ void testctl::getJson(
     std::function<void(const HttpResponsePtr &)> &&callback) const {
         Json::Value ret;
 
-        ret["Name"] = "Nave-wata";
-        ret["age"] = 19;
-        ret["live"] = "Osaka";
+        ret["Sample"]["Name"] = "Nave-wata";
+        ret["Sample"]["age"] = 19;
+        ret["Sample"]["live"] = "Osaka";
 
         auto resp = HttpResponse::newHttpJsonResponse(ret);
         callback(resp);
