@@ -137,8 +137,8 @@ public class BaseStatusFragment extends Fragment {
         DP = Add(_DP, mul(Base_DP, num1 * diffTime));
         MONEY = Add(_MONEY, mul(Base_MONEY, num2 * diffTime));
 
-        String DP_str = CastString(DP);
-        String MONEY_str = CastString(MONEY);
+        String DP_str = setStringNumber(CastString(DP));
+        String MONEY_str = setStringNumber(CastString(MONEY));
 
         text_DP.setText(DP_str);
         text_MONEY.setText(MONEY_str);
@@ -189,6 +189,19 @@ public class BaseStatusFragment extends Fragment {
             }
             output.append(ary[i]);
         }
+        return output.toString();
+    }
+
+    public String setStringNumber(@NonNull String str) {
+        StringBuilder output = new StringBuilder();
+        String[] strSplit = str.split("");
+        for (int i = strSplit.length - 1; i >= 0; i--) {
+            output.append(strSplit[i]);
+            if ((strSplit.length - i) % 3 == 0 && i != 0) {
+                output.append(",");
+            }
+        }
+        output.reverse();
         return output.toString();
     }
 }
