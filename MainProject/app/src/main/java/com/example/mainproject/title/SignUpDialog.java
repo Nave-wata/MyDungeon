@@ -26,7 +26,7 @@ import com.example.mainproject.R;
 import com.example.mainproject.SetImage;
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
-import com.example.mainproject.asynchronous.usersinfo.SignUp;
+import com.example.mainproject.asynchronous.SignUp;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

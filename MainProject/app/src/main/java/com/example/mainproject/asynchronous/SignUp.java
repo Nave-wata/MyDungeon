@@ -1,4 +1,4 @@
-package com.example.mainproject.asynchronous.usersinfo;
+package com.example.mainproject.asynchronous;
 
 
 import android.annotation.SuppressLint;
@@ -6,9 +6,10 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.usersapptimes.UsersAppTimes;
 import com.example.mainproject.asynchronous.usersapptimes.UsersAppTimesDao;
+import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
+import com.example.mainproject.asynchronous.usersinfo.UsersInfoDao;
 import com.example.mainproject.asynchronous.userspossession.UsersPossession;
 import com.example.mainproject.asynchronous.userspossession.UsersPossessionDao;
 
