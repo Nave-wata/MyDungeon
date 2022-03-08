@@ -7,6 +7,10 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.mainproject.asynchronous.AppDatabase;
+import com.example.mainproject.asynchronous.usersapptimes.UsersAppTimes;
+import com.example.mainproject.asynchronous.usersapptimes.UsersAppTimesDao;
+import com.example.mainproject.asynchronous.userspossession.UsersPossession;
+import com.example.mainproject.asynchronous.userspossession.UsersPossessionDao;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -90,9 +94,13 @@ public class SignUp implements Runnable {
 
     void doInBackground() {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
+        UsersAppTimesDao usersAppTimesDao = db.usersAppTimesDao();
+        UsersPossessionDao usersPossessionDao = db.usersPossessionDao();
 
         try {
-            usersInfoDao.signUpTask(name, salt, hash, DP, Money, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
+            usersInfoDao.signUpTask(new UsersInfo(name, salt, hash));
+            usersAppTimesDao.signUpTask(new UsersAppTimes(name, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond));
+            usersPossessionDao.signUpTask(new UsersPossession(name, DP, Money));
         } catch (SQLiteConstraintException e) {
             this.sqliteConstraintException = e;
             this.exception = e;

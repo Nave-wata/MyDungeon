@@ -45,7 +45,7 @@ public class UpdatePossession implements Runnable {
     public void execute() {
         //onPreExecute();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(new com.example.mainproject.asynchronous.usersinfo.UpdatePossession(db, name, _DP, _MONEY, callback, errorCallback));
+        executorService.submit(new com.example.mainproject.asynchronous.userspossession.UpdatePossession(db, name, _DP, _MONEY, callback, errorCallback));
     }
 
     //void onPreExecute() {}

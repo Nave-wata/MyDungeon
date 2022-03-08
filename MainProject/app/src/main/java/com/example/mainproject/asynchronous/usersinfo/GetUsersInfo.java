@@ -48,7 +48,7 @@ public class GetUsersInfo implements Runnable {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
 
         try {
-            data = usersInfoDao.getLineTask(name);
+            data = usersInfoDao.getUserInfoTask(name);
         } catch (Exception e) {
             this.exception = e;
         }

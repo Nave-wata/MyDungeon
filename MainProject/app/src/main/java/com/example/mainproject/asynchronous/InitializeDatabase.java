@@ -8,7 +8,12 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.mainproject.asynchronous.usersapptimes.UsersAppTimes;
+import com.example.mainproject.asynchronous.usersapptimes.UsersAppTimesDao;
+import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 import com.example.mainproject.asynchronous.usersinfo.UsersInfoDao;
+import com.example.mainproject.asynchronous.userspossession.UsersPossession;
+import com.example.mainproject.asynchronous.userspossession.UsersPossessionDao;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.ExecutorService;
@@ -59,6 +64,8 @@ public class InitializeDatabase implements Runnable {
         int nowSecond = nowTime.getSecond();
 
         UsersInfoDao usersInfoDao = db.usersInfoDao();
+        UsersAppTimesDao usersAppTimesDao = db.usersAppTimesDao();
+        UsersPossessionDao usersPossessionDao = db.usersPossessionDao();
 
         // ここに書いてるとチェックボックス外してもアプリ再起したら入力されてます
         SharedPreferences dataStore = activity.getSharedPreferences(NEXT_INFO, MODE_PRIVATE);
@@ -69,7 +76,9 @@ public class InitializeDatabase implements Runnable {
         editor.apply();
 
         try {
-            usersInfoDao.signUpTask(name, salt, hash, DP, Money, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
+            usersInfoDao.signUpTask(new UsersInfo(name, salt, hash));
+            usersAppTimesDao.signUpTask(new UsersAppTimes(name, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond));
+            usersPossessionDao.signUpTask(new UsersPossession(name, DP, Money));
         } catch (Exception ignored) {}
     }
 

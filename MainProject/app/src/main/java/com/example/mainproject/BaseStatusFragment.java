@@ -16,8 +16,10 @@ import androidx.fragment.app.Fragment;
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
 import com.example.mainproject.asynchronous.TimerPossession;
-import com.example.mainproject.asynchronous.usersinfo.GetUsersInfo;
-import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
+import com.example.mainproject.asynchronous.usersapptimes.GetAppTimes;
+import com.example.mainproject.asynchronous.usersapptimes.UsersAppTimes;
+import com.example.mainproject.asynchronous.userspossession.GetPossession;
+import com.example.mainproject.asynchronous.userspossession.UsersPossession;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -59,42 +61,51 @@ public class BaseStatusFragment extends Fragment {
     public void onStart() {
         super.onStart();
         final AppDatabase db = AppDatabaseSingleton.getInstance(getActivity().getApplicationContext());
-        new GetUsersInfo(
+        new GetAppTimes(
                 db,
                 UserName,
                 b->{
-                    long diffSecond = 0;
-                    byte[] _DP = null;
-                    byte[] _MONEY = null;
-                    try {
-                        final LocalDateTime nowTime = LocalDateTime.now();
-                        final int nowYear = nowTime.getYear();
-                        final int nowMonth = nowTime.getMonthValue();
-                        final int nowDay = nowTime.getDayOfMonth();
-                        final int nowHour = nowTime.getHour();
-                        final int nowMinute = nowTime.getMinute();
-                        final int nowSecond = nowTime.getSecond();
-                        int beforeYear = 0, beforeMonth = 0 , beforeDay = 0, beforeHour = 0, beforeMinute = 0, beforeSecond = 0;
-                        for (UsersInfo pi: b) {
-                            beforeYear = pi.getYear();
-                            beforeMonth = pi.getMonth();
-                            beforeDay = pi.getDay();
-                            beforeHour = pi.getHour();
-                            beforeMinute = pi.getMinute();
-                            beforeSecond = pi.getSecond();
-                            _DP = pi.getDP();
-                            _MONEY = pi.getMoney();
-                        }
-                        LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
-                        LocalDateTime NowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
-                        Duration duration= Duration.between(BeforeTime, NowTime);
-                        diffSecond = duration.getSeconds();
-                        new BaseStatusFragment().initDiffTime(diffSecond, _DP, _MONEY);
-                        if (MainActivity.AppFirstFlag) {
-                            ShowDiffTimeDialog showDiffTimeDialog = new ShowDiffTimeDialog(diffSecond);
-                            showDiffTimeDialog.show(getFragmentManager(), "showDiffTimeDialog");
-                        }
-                    } catch (Exception e) {}
+                    new GetPossession(
+                            db,
+                            UserName,
+                            c->{
+                                long diffSecond = 0;
+                                byte[] _DP = null;
+                                byte[] _MONEY = null;
+                                try {
+                                    final LocalDateTime nowTime = LocalDateTime.now();
+                                    final int nowYear = nowTime.getYear();
+                                    final int nowMonth = nowTime.getMonthValue();
+                                    final int nowDay = nowTime.getDayOfMonth();
+                                    final int nowHour = nowTime.getHour();
+                                    final int nowMinute = nowTime.getMinute();
+                                    final int nowSecond = nowTime.getSecond();
+                                    int beforeYear = 0, beforeMonth = 0 , beforeDay = 0, beforeHour = 0, beforeMinute = 0, beforeSecond = 0;
+                                    for (UsersAppTimes uat: b) {
+                                        beforeYear = uat.getYear();
+                                        beforeMonth = uat.getMonth();
+                                        beforeDay = uat.getDay();
+                                        beforeHour = uat.getHour();
+                                        beforeMinute = uat.getMinute();
+                                        beforeSecond = uat.getSecond();
+                                    }
+                                    for (UsersPossession up: c) {
+                                        _DP = up.getDP();
+                                        _MONEY = up.getMoney();
+                                    }
+                                    LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
+                                    LocalDateTime NowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
+                                    Duration duration= Duration.between(BeforeTime, NowTime);
+                                    diffSecond = duration.getSeconds();
+                                    new BaseStatusFragment().initDiffTime(diffSecond, _DP, _MONEY);
+                                    if (MainActivity.AppFirstFlag) {
+                                        ShowDiffTimeDialog showDiffTimeDialog = new ShowDiffTimeDialog(diffSecond);
+                                        showDiffTimeDialog.show(getFragmentManager(), "showDiffTimeDialog");
+                                    }
+                                } catch (Exception e) {}
+                            },
+                            e->{}
+                    ).execute();
                 },
                 e->{}
         ).execute();
