@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -25,6 +26,8 @@ public class ConfirmCreateDungeonDialog extends DialogFragment {
 
         ImageView ic_DP = view.findViewById(R.id.ConfirmCreateDungeonDialog_ic_DP);
         ImageView ic_right = view.findViewById(R.id.ConfirmCreateDungeonDialog_right_ic);
+        TextView before_DP_text = view.findViewById(R.id.ConfirmCreateDungeonDialog_before_DP);
+        TextView after_DP_text = view.findViewById(R.id.ConfirmCreateDungeonDialog_after_DP);
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_right, "dungeon/DP_change.png");
