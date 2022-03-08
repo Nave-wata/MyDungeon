@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "AppTimes", indices = {@Index(value = "Name", unique = true)})
+@Entity(tableName = "UsersAppTimes", indices = {@Index(value = "Name", unique = true)})
 public class UsersAppTimes {
     @PrimaryKey(autoGenerate = true)
     public Integer id;
