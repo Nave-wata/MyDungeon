@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
+import java.util.Objects;
+
 public class ShowDiffTimeDialog extends DialogFragment {
     private final long diffTime;
 
@@ -24,7 +26,7 @@ public class ShowDiffTimeDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_showdifftime, null);
-        AssetManager assetManager = getActivity().getAssets();
+        AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
         long num1 = 1; // DP test用 秒数にかける数
         long num2 = 2; // MONEY test用 秒数にかける数
@@ -37,12 +39,7 @@ public class ShowDiffTimeDialog extends DialogFragment {
         ImageView up_MONEY = view.findViewById(R.id.up_MONEY);
         TextView up_diffDP = view.findViewById(R.id.dialog_Have_DP);
         TextView up_diffMONEY = view.findViewById(R.id.dialog_Have_money);
-        view.findViewById(R.id.dialog_ShowDiffTime_close).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-            }
-        });
+        view.findViewById(R.id.dialog_ShowDiffTime_close).setOnClickListener(view1 -> dismiss());
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_money, "base_menu/money.png");

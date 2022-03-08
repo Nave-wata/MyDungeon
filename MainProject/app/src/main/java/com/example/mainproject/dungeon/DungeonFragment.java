@@ -34,12 +34,9 @@ public class DungeonFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Button createFlorButton = view.findViewById(R.id.createFlorButton);
-        createFlorButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ConfirmCreateDungeonDialog confirmCreateDungeonDialog = new ConfirmCreateDungeonDialog();
-                confirmCreateDungeonDialog.show(getFragmentManager(), "ConfirmCreateDungeonDialog");
-            }
+        createFlorButton.setOnClickListener(view1 -> {
+            ConfirmCreateDungeonDialog confirmCreateDungeonDialog = new ConfirmCreateDungeonDialog();
+            confirmCreateDungeonDialog.show(Objects.requireNonNull(getFragmentManager()), "ConfirmCreateDungeonDialog");
         });
     }
 

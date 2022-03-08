@@ -1,5 +1,6 @@
 package com.example.mainproject;
 
+import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,9 +32,11 @@ public class BaseStatusFragment extends Fragment {
     public static final int SIZE = 18;
     public static byte[] DP = new byte[18];
     public static byte[] MONEY = new byte[18];
+    @SuppressLint("StaticFieldLeak")
     public static TextView text_DP;
+    @SuppressLint("StaticFieldLeak")
     public static TextView text_MONEY;
-    private final TimerPossession timerPossession = new TimerPossession();;
+    private final TimerPossession timerPossession = new TimerPossession();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,53 +63,51 @@ public class BaseStatusFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        final AppDatabase db = AppDatabaseSingleton.getInstance(getActivity().getApplicationContext());
+        final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
         new GetAppTimes(
                 db,
                 UserName,
-                b->{
-                    new GetPossession(
-                            db,
-                            UserName,
-                            c->{
-                                long diffSecond = 0;
-                                byte[] _DP = null;
-                                byte[] _MONEY = null;
-                                try {
-                                    final LocalDateTime nowTime = LocalDateTime.now();
-                                    final int nowYear = nowTime.getYear();
-                                    final int nowMonth = nowTime.getMonthValue();
-                                    final int nowDay = nowTime.getDayOfMonth();
-                                    final int nowHour = nowTime.getHour();
-                                    final int nowMinute = nowTime.getMinute();
-                                    final int nowSecond = nowTime.getSecond();
-                                    int beforeYear = 0, beforeMonth = 0 , beforeDay = 0, beforeHour = 0, beforeMinute = 0, beforeSecond = 0;
-                                    for (UsersAppTimes uat: b) {
-                                        beforeYear = uat.getYear();
-                                        beforeMonth = uat.getMonth();
-                                        beforeDay = uat.getDay();
-                                        beforeHour = uat.getHour();
-                                        beforeMinute = uat.getMinute();
-                                        beforeSecond = uat.getSecond();
-                                    }
-                                    for (UsersPossession up: c) {
-                                        _DP = up.getDP();
-                                        _MONEY = up.getMoney();
-                                    }
-                                    LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
-                                    LocalDateTime NowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
-                                    Duration duration= Duration.between(BeforeTime, NowTime);
-                                    diffSecond = duration.getSeconds();
-                                    new BaseStatusFragment().initDiffTime(diffSecond, _DP, _MONEY);
-                                    if (MainActivity.AppFirstFlag) {
-                                        ShowDiffTimeDialog showDiffTimeDialog = new ShowDiffTimeDialog(diffSecond);
-                                        showDiffTimeDialog.show(getFragmentManager(), "showDiffTimeDialog");
-                                    }
-                                } catch (Exception e) {}
-                            },
-                            e->{}
-                    ).execute();
-                },
+                b-> new GetPossession(
+                        db,
+                        UserName,
+                        c->{
+                            long diffSecond;
+                            byte[] _DP = null;
+                            byte[] _MONEY = null;
+                            try {
+                                final LocalDateTime nowTime = LocalDateTime.now();
+                                final int nowYear = nowTime.getYear();
+                                final int nowMonth = nowTime.getMonthValue();
+                                final int nowDay = nowTime.getDayOfMonth();
+                                final int nowHour = nowTime.getHour();
+                                final int nowMinute = nowTime.getMinute();
+                                final int nowSecond = nowTime.getSecond();
+                                int beforeYear = 0, beforeMonth = 0 , beforeDay = 0, beforeHour = 0, beforeMinute = 0, beforeSecond = 0;
+                                for (UsersAppTimes uat: b) {
+                                    beforeYear = uat.getYear();
+                                    beforeMonth = uat.getMonth();
+                                    beforeDay = uat.getDay();
+                                    beforeHour = uat.getHour();
+                                    beforeMinute = uat.getMinute();
+                                    beforeSecond = uat.getSecond();
+                                }
+                                for (UsersPossession up: c) {
+                                    _DP = up.getDP();
+                                    _MONEY = up.getMoney();
+                                }
+                                LocalDateTime BeforeTime = LocalDateTime.of(beforeYear, beforeMonth, beforeDay, beforeHour, beforeMinute, beforeSecond);
+                                LocalDateTime NowTime = LocalDateTime.of(nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
+                                Duration duration= Duration.between(BeforeTime, NowTime);
+                                diffSecond = duration.getSeconds();
+                                new BaseStatusFragment().initDiffTime(diffSecond, _DP, _MONEY);
+                                if (MainActivity.AppFirstFlag) {
+                                    ShowDiffTimeDialog showDiffTimeDialog = new ShowDiffTimeDialog(diffSecond);
+                                    showDiffTimeDialog.show(Objects.requireNonNull(getFragmentManager()), "showDiffTimeDialog");
+                                }
+                            } catch (Exception ignored) {}
+                        },
+                        e->{}
+                ).execute(),
                 e->{}
         ).execute();
         timerPossession.Run();

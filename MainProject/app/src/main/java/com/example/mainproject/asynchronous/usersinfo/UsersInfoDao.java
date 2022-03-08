@@ -13,5 +13,5 @@ public interface UsersInfoDao {
     void signUpTask(UsersInfo usersInfo);
 
     @Query("SELECT * FROM UsersInfo WHERE Name = :name")
-    abstract List<UsersInfo> getUserInfoTask(String name);
+    List<UsersInfo> getUserInfoTask(String name);
 }
