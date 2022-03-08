@@ -1,4 +1,4 @@
-package com.example.mainproject.asynchronous.userspossessioninfo;
+package com.example.mainproject.asynchronous.usersapptimes;
 
 import android.annotation.SuppressLint;
 import android.os.Handler;
@@ -11,19 +11,19 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-public class GetUsersPossessionInfo implements Runnable {
+public class GetAppTimes implements Runnable {
     final Handler handler = new Handler(Looper.getMainLooper());
-    final Consumer<List<UsersPossessionInfo>> callback;
+    final Consumer<List<UsersAppTimes>> callback;
     final Consumer<Exception> errorCallback;
     private Exception exception;
     final AppDatabase db;
     final String name;
-    private List<UsersPossessionInfo> data;
+    private List<UsersAppTimes> data;
 
-    public GetUsersPossessionInfo(AppDatabase db,
-                                  String name,
-                                  Consumer<List<UsersPossessionInfo>> callback,
-                                  Consumer<Exception> errorCallback) {
+    public GetAppTimes(final AppDatabase db,
+                       final String name,
+                       final Consumer<List<UsersAppTimes>> callback,
+                       final Consumer<Exception> errorCallback) {
         this.db = db;
         this.name = name;
         this.callback = callback;
@@ -39,15 +39,16 @@ public class GetUsersPossessionInfo implements Runnable {
     public void execute() {
         //onPreExecute();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(new GetUsersPossessionInfo(db, name, callback, errorCallback));
+        executorService.submit(new GetAppTimes(db, name, callback, errorCallback));
     }
 
     //void onPreExecute() {}
 
     void doInBackground() {
-        UsersPossessionInfoDao usersPossessionInfoDao = db.possessionInfoDao();
+        UsersAppTimesDao usersAppTimesDao = db.usersAppTimesDao();
+
         try {
-            data = usersPossessionInfoDao.getLineTask(name);
+            data = usersAppTimesDao.getTimesTask(name);
         } catch (Exception e) {
             this.exception = e;
         }

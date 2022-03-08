@@ -11,7 +11,6 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -27,7 +26,7 @@ import com.example.mainproject.R;
 import com.example.mainproject.SetImage;
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
-import com.example.mainproject.asynchronous.usersinfo.SignUp;
+import com.example.mainproject.asynchronous.SignUp;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package com.example.mainproject.asynchronous.userspossessioninfo;
+package com.example.mainproject.asynchronous.userspossession;
 
 import android.annotation.SuppressLint;
 import android.os.Handler;
@@ -11,8 +11,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-public class UpdateUsersPossessionInfo implements Runnable {
-    final Handler handler = new Handler(Looper.getMainLooper());
+public class UpdatePossession implements Runnable {
+    final android.os.Handler handler = new Handler(Looper.getMainLooper());
     final Consumer<Boolean> callback;
     final Consumer<Exception> errorCallback;
     private Exception exception;
@@ -21,12 +21,12 @@ public class UpdateUsersPossessionInfo implements Runnable {
     final byte[] _DP;
     final byte[] _MONEY;
 
-    public UpdateUsersPossessionInfo(AppDatabase db,
-                                     String name,
-                                     byte[] _DP,
-                                     byte[] _MONEY,
-                                     Consumer<Boolean> callback,
-                                     Consumer<Exception> errorCallback) {
+    public UpdatePossession(AppDatabase db,
+                            String name,
+                            byte[] _DP,
+                            byte[] _MONEY,
+                            Consumer<Boolean> callback,
+                            Consumer<Exception> errorCallback) {
         this.db = db;
         this.name = name;
         this._DP = _DP;
@@ -34,6 +34,7 @@ public class UpdateUsersPossessionInfo implements Runnable {
         this.callback = callback;
         this.errorCallback = errorCallback;
     }
+
 
     @Override
     public void run() {
@@ -44,18 +45,17 @@ public class UpdateUsersPossessionInfo implements Runnable {
     public void execute() {
         //onPreExecute();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(new UpdateUsersPossessionInfo(db, name, _DP, _MONEY, callback, errorCallback));
+        executorService.submit(new com.example.mainproject.asynchronous.userspossession.UpdatePossession(db, name, _DP, _MONEY, callback, errorCallback));
     }
 
     //void onPreExecute() {}
 
     void doInBackground() {
-        UsersPossessionInfoDao usersPossessionInfoDao = db.possessionInfoDao();
-        long DP_A_F = new BaseStatusFragment().CastLong(_DP);
-        long MONEY_A_F = new BaseStatusFragment().CastLong(_MONEY);
+        UsersPossessionDao usersPossessionDao = db.usersPossessionDao();
+        BaseStatusFragment BSF = new BaseStatusFragment();
 
         try {
-            usersPossessionInfoDao.updateTask(name, DP_A_F, MONEY_A_F);
+            usersPossessionDao.updatePossessionTask(name, BSF.CastString(_DP), BSF.CastString(_MONEY));
         } catch (Exception e) {
             this.exception = e;
         }

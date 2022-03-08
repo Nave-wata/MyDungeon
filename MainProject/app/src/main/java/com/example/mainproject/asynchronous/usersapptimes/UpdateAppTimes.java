@@ -1,4 +1,4 @@
-package com.example.mainproject.asynchronous.usersinfo;
+package com.example.mainproject.asynchronous.usersapptimes;
 
 import android.annotation.SuppressLint;
 import android.os.Handler;
@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-public class UpdateTime implements Runnable {
+public class UpdateAppTimes implements Runnable {
     final Handler handler = new Handler(Looper.getMainLooper());
     final Consumer<Boolean> callback;
     final Consumer<Exception> errorCallback;
@@ -24,7 +24,7 @@ public class UpdateTime implements Runnable {
     final int nowMinute;
     final int nowSecond;
 
-    public UpdateTime(AppDatabase db,
+    public UpdateAppTimes(AppDatabase db,
                       String name,
                       int nowYear,
                       int nowMonth,
@@ -56,7 +56,7 @@ public class UpdateTime implements Runnable {
         //onPreExecute();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.submit(
-                new UpdateTime(
+                new UpdateAppTimes(
                         db,
                         name,
                         nowYear,
@@ -72,10 +72,10 @@ public class UpdateTime implements Runnable {
     //void onPreExecute() {}
 
     void doInBackground() {
-        UsersInfoDao usersInfoDao = db.usersInfoDao();
+        UsersAppTimesDao usersAppTimesDao = db.usersAppTimesDao();
 
         try {
-            usersInfoDao.updateTimeTask(name, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
+            usersAppTimesDao.updateTimeTask(name, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
         } catch (Exception e) {
             this.exception = e;
         }

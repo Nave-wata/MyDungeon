@@ -1,4 +1,4 @@
-package com.example.mainproject.asynchronous.usersinfo;
+package com.example.mainproject.asynchronous;
 
 
 import android.annotation.SuppressLint;
@@ -6,9 +6,12 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.mainproject.asynchronous.AppDatabase;
-import com.example.mainproject.asynchronous.userspossessioninfo.UsersPossessionInfo;
-import com.example.mainproject.asynchronous.userspossessioninfo.UsersPossessionInfoDao;
+import com.example.mainproject.asynchronous.usersapptimes.UsersAppTimes;
+import com.example.mainproject.asynchronous.usersapptimes.UsersAppTimesDao;
+import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
+import com.example.mainproject.asynchronous.usersinfo.UsersInfoDao;
+import com.example.mainproject.asynchronous.userspossession.UsersPossession;
+import com.example.mainproject.asynchronous.userspossession.UsersPossessionDao;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,6 +28,8 @@ public class SignUp implements Runnable {
     final String name;
     final String salt;
     final String hash;
+    final String DP = "1000";
+    final String Money = "1000";
     final int nowYear;
     final int nowMonth;
     final int nowDay;
@@ -90,11 +95,13 @@ public class SignUp implements Runnable {
 
     void doInBackground() {
         UsersInfoDao usersInfoDao = db.usersInfoDao();
-        UsersPossessionInfoDao usersPossessionInfoDao = db.possessionInfoDao();
+        UsersAppTimesDao usersAppTimesDao = db.usersAppTimesDao();
+        UsersPossessionDao usersPossessionDao = db.usersPossessionDao();
 
         try {
-            usersInfoDao.signUpTask(name, salt, hash, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
-            usersPossessionInfoDao.insetTask(new UsersPossessionInfo(name, 100, 100));
+            usersInfoDao.signUpTask(new UsersInfo(name, salt, hash));
+            usersAppTimesDao.signUpTask(new UsersAppTimes(name, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond));
+            usersPossessionDao.signUpTask(new UsersPossession(name, DP, Money));
         } catch (SQLiteConstraintException e) {
             this.sqliteConstraintException = e;
             this.exception = e;

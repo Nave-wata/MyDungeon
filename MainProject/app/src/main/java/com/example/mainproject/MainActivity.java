@@ -11,8 +11,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
-import com.example.mainproject.asynchronous.usersinfo.UpdateTime;
-import com.example.mainproject.asynchronous.userspossessioninfo.UpdateUsersPossessionInfo;
+import com.example.mainproject.asynchronous.usersapptimes.UpdateAppTimes;
+import com.example.mainproject.asynchronous.userspossession.UpdatePossession;
 import com.example.mainproject.title.TitleActivity;
 
 import java.time.LocalDateTime;
@@ -29,15 +29,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = this.getIntent();
         UserName = intent.getStringExtra(TitleActivity.EXTRA_DATA);
         AppFirstFlag = true;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
-        fragmentTransaction.add(R.id.BaseStatusContainer, BaseStatusFragment.newInstance(UserName));
+        fragmentTransaction.replace(R.id.BaseStatusContainer, BaseStatusFragment.newInstance(UserName));
         fragmentTransaction.commit();
     }
 
@@ -56,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         int nowSecond = nowTime.getSecond();
         AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
 
-        new UpdateTime(
+        new UpdateAppTimes(
                 db,
                 UserName,
                 nowYear,
@@ -69,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 e->{}
         ).execute();
 
-        new UpdateUsersPossessionInfo(
+        new UpdatePossession(
                 db,
                 UserName,
                 BaseStatusFragment.DP,

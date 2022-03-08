@@ -1,4 +1,4 @@
-package com.example.mainproject.asynchronous.usersinfo;
+package com.example.mainproject.asynchronous.userspossession;
 
 import android.annotation.SuppressLint;
 import android.os.Handler;
@@ -11,19 +11,19 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-public class GetUsersInfo implements Runnable {
-    final Handler handler = new Handler(Looper.getMainLooper());
-    final Consumer<List<UsersInfo>> callback;
+public class GetPossession implements Runnable {
+    final android.os.Handler handler = new Handler(Looper.getMainLooper());
+    final Consumer<List<UsersPossession>> callback;
     final Consumer<Exception> errorCallback;
     private Exception exception;
     final AppDatabase db;
     final String name;
-    private List<UsersInfo> data;
+    private List<UsersPossession> data;
 
-    public GetUsersInfo(final AppDatabase db,
-                        final String name,
-                        final Consumer<List<UsersInfo>> callback,
-                        final Consumer<Exception> errorCallback) {
+    public GetPossession(final AppDatabase db,
+                         final String name,
+                         final Consumer<List<UsersPossession>> callback,
+                         final Consumer<Exception> errorCallback) {
         this.db = db;
         this.name = name;
         this.callback = callback;
@@ -39,16 +39,16 @@ public class GetUsersInfo implements Runnable {
     public void execute() {
         //onPreExecute();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(new GetUsersInfo(db, name, callback, errorCallback));
+        executorService.submit(new GetPossession(db, name, callback, errorCallback));
     }
 
     //void onPreExecute() {}
 
     void doInBackground() {
-        UsersInfoDao usersInfoDao = db.usersInfoDao();
+        UsersPossessionDao usersPossessionDao = db.usersPossessionDao();
 
         try {
-            data = usersInfoDao.getUserInfoTask(name);
+            data = usersPossessionDao.getPossessionTask(name);
         } catch (Exception e) {
             this.exception = e;
         }

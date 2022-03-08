@@ -8,9 +8,12 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.mainproject.asynchronous.usersapptimes.UsersAppTimes;
+import com.example.mainproject.asynchronous.usersapptimes.UsersAppTimesDao;
+import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
 import com.example.mainproject.asynchronous.usersinfo.UsersInfoDao;
-import com.example.mainproject.asynchronous.userspossessioninfo.UsersPossessionInfo;
-import com.example.mainproject.asynchronous.userspossessioninfo.UsersPossessionInfoDao;
+import com.example.mainproject.asynchronous.userspossession.UsersPossession;
+import com.example.mainproject.asynchronous.userspossession.UsersPossessionDao;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.ExecutorService;
@@ -50,6 +53,8 @@ public class InitializeDatabase implements Runnable {
         String password = "developer";
         String salt = "VKBykbmtkHNngaOzCd5bnVfqvgCXPZ7MXz4G5i4QKad8yNxCIxRpCwGw9A5SEbkTVab3MyKaEcMDJHB5Sm2zWnrLYPW0I0iT9M1sboKizv6DgsXl8iLzZmWk5yObQKZLpvPhWyMNVywIh0TEMZGeddIHoXI1aYJk3FblYoY2HESnvAFfyF9srvnGO4MdiEPynypc7eIqqlqitZ8CfKQAyX2VJYqQDxyLjVbH9MEZmE4Z71RcnYy7GWLyaRHf0ETYeNwDPLT9ZARwncg9hzSsnft3rTOPveCad7RQqP7NFyGGhIdxhNeag8YvYb4iCJdWjLyrkFNwCMfe7EIBmCDiKAeTkRS7BeaThkoj0rB96PixYpYrMKSZ9R0TB3be2VTiqeGSaq3EY83lrwpLaYwrYeDHXgYXK5e8L4f79Sx14N1PAtG7Kf3Zd15dsRacS31inhWOHhsFJaQZd2S7VbyvMSfycTKWgBY38Yg3IACVsLBcmEOaYiqZQkzmzb1R3wORv3e1D30RCwhXYbe";
         String hash = "133b3adcaaf48984475ebf2f357cf250579ca1862066f4e86e0c6f1de33e9bea415e67945e6c936cdae2da4ed8cc14afbf7e0f6816539b34419e2b402c9b9c53";
+        String DP = "1000";
+        String Money = "1000";
         LocalDateTime nowTime = LocalDateTime.now();
         int nowYear = nowTime.getYear();
         int nowMonth = nowTime.getMonthValue();
@@ -59,7 +64,8 @@ public class InitializeDatabase implements Runnable {
         int nowSecond = nowTime.getSecond();
 
         UsersInfoDao usersInfoDao = db.usersInfoDao();
-        UsersPossessionInfoDao possessionInfoDao = db.possessionInfoDao();
+        UsersAppTimesDao usersAppTimesDao = db.usersAppTimesDao();
+        UsersPossessionDao usersPossessionDao = db.usersPossessionDao();
 
         // ここに書いてるとチェックボックス外してもアプリ再起したら入力されてます
         SharedPreferences dataStore = activity.getSharedPreferences(NEXT_INFO, MODE_PRIVATE);
@@ -70,8 +76,9 @@ public class InitializeDatabase implements Runnable {
         editor.apply();
 
         try {
-            usersInfoDao.signUpTask(name, salt, hash, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond);
-            possessionInfoDao.insetTask(new UsersPossessionInfo(name, 100, 100));
+            usersInfoDao.signUpTask(new UsersInfo(name, salt, hash));
+            usersAppTimesDao.signUpTask(new UsersAppTimes(name, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond));
+            usersPossessionDao.signUpTask(new UsersPossession(name, DP, Money));
         } catch (Exception ignored) {}
     }
 
