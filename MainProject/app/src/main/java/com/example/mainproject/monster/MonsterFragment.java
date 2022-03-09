@@ -10,19 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.mainproject.R;
+import com.example.mainproject.asynchronous.AsyncRunnable;
 
 import java.util.Objects;
 
 
 public class MonsterFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.monster";
-    private String str;
+    private String UserName;
+    final String URL = "https://zipcloud.ibsnet.co.jp/api/search?zipcode=0791143";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
-        str = Objects.requireNonNull(args).getString(EXTRA_DATA);
+        UserName = Objects.requireNonNull(args).getString(EXTRA_DATA);
     }
 
     @Override
@@ -35,7 +37,14 @@ public class MonsterFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         TextView mainText = view.findViewById(R.id.Monster_text);
 
-        mainText.setText(str);
+        new AsyncRunnable(
+                URL,
+                b->{
+                    String response = new String(b);
+                    mainText.setText(response);
+                },
+                e->{}
+        ).execute();
     }
 
     @NonNull
