@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import com.example.mainproject.R;
 import com.example.mainproject.asynchronous.AsyncRunnable;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,12 +46,8 @@ public class MonsterFragment extends Fragment {
                     String response = new String(b);
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        JSONArray jsonArray = jsonObject.getJSONArray("Sample");
-                        String address1 = null;
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonData = jsonArray.getJSONObject(i);
-                            address1 = jsonData.getString("Name");
-                        }
+                        JSONObject jsonData = jsonObject.getJSONObject("Sample");
+                        String address1 = jsonData.getString("Name");
                         mainText.setText(address1);
                     } catch (JSONException e) {
                         e.printStackTrace();
