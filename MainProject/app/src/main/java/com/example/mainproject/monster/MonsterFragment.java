@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment;
 import com.example.mainproject.R;
 import com.example.mainproject.asynchronous.AsyncRunnable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Objects;
 
 
@@ -41,7 +44,14 @@ public class MonsterFragment extends Fragment {
                 URL,
                 b->{
                     String response = new String(b);
-                    mainText.setText(response);
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String bb = jsonObject.getString("message");
+                        mainText.setText(bb);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        mainText.setText(response);
+                    }
                 },
                 e->{}
         ).execute();
