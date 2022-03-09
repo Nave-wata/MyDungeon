@@ -22,7 +22,7 @@ import java.util.Objects;
 public class MonsterFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.monster";
     private String UserName;
-    final String URL = "https://zipcloud.ibsnet.co.jp/api/search?zipcode=0791143";
+    final String URL = "http://192.168.3.101:8080/testctl/";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,11 +47,11 @@ public class MonsterFragment extends Fragment {
                     String response = new String(b);
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        JSONArray jsonArray = jsonObject.getJSONArray("results");
+                        JSONArray jsonArray = jsonObject.getJSONArray("Sample");
                         String address1 = null;
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonData = jsonArray.getJSONObject(i);
-                            address1 = jsonData.getString("address1");
+                            address1 = jsonData.getString("Name");
                         }
                         mainText.setText(address1);
                     } catch (JSONException e) {
