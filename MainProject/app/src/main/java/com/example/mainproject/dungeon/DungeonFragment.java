@@ -1,7 +1,9 @@
 package com.example.mainproject.dungeon;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,6 +18,7 @@ import java.util.Objects;
 public class DungeonFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
+    private int preDx, preDy;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,14 +32,33 @@ public class DungeonFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_dungeon, container, false);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         Button createFlorButton = view.findViewById(R.id.createFlorButton);
-        createFlorButton.setOnClickListener(view1 -> {
-            ConfirmCreateDungeonDialog confirmCreateDungeonDialog = new ConfirmCreateDungeonDialog();
-            confirmCreateDungeonDialog.show(Objects.requireNonNull(getFragmentManager()), "ConfirmCreateDungeonDialog");
+
+        createFlorButton.setOnTouchListener((view1, motionEvent) -> {
+            int newDx = (int)motionEvent.getRawX();
+            int newDy = (int)motionEvent.getRawY();
+
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_MOVE:
+                    view1.performClick();
+                    int dx = createFlorButton.getLeft() + (newDx - preDx);
+                    int dy = createFlorButton.getTop() + (newDy - preDy);
+                    int imgW = dx + createFlorButton.getWidth();
+                    int imgH = dy + createFlorButton.getHeight();
+
+                    createFlorButton.layout(dx, dy, imgW, imgH);
+                    break;
+            }
+
+            preDx = newDx;
+            preDy = newDy;
+
+            return true;
         });
     }
 
