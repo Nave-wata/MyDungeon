@@ -12,10 +12,10 @@ import com.example.mainproject.R;
 
 public class DungeonLayoutFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_dungeonlayout, container, false);
+        View view = inflater.inflate(R.layout.fragment_dungeonlayout, container, false);
+        return view;
     }
 
     @NonNull
