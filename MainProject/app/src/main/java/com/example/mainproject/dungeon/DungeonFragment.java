@@ -2,10 +2,12 @@ package com.example.mainproject.dungeon;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -18,8 +20,9 @@ import java.util.Objects;
 public class DungeonFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
-    private int fragment_w;
-    private int fragment_h;
+    private androidx.constraintlayout.widget.ConstraintLayout topContainer;
+    private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
+    private int X, Y;
     private int preDx, preDy;
 
     @Override
@@ -31,7 +34,26 @@ public class DungeonFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_dungeon, container, false);
+        View view = inflater.inflate(R.layout.fragment_dungeon, container, false);
+        topContainer = view.findViewById(R.id.fragment_dungeon);
+        Log.i("", "MainActivityFragment#onCreateView() " +
+                "Width = " + String.valueOf(topContainer.getWidth()) + ", " +
+                "Height = " + String.valueOf(topContainer.getHeight()));
+
+        globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Log.i("", "MainActivityFragment#onCreateView() " +
+                        "Width = " + String.valueOf(topContainer.getWidth()) + ", " +
+                        "Height = " + String.valueOf(topContainer.getHeight()));
+                X = topContainer.getWidth();
+                Y = topContainer.getHeight();
+                topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
+            }
+        };
+        topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
+
+        return view;
     }
 
     @SuppressLint({"ClickableViewAccessibility", "Range"})
@@ -51,11 +73,13 @@ public class DungeonFragment extends Fragment {
                     int dy = createFlorButton.getTop() + (newDy - preDy);
                     int imgW = dx + createFlorButton.getWidth();
                     int imgH = dy + createFlorButton.getHeight();
-                    if (500 > dx) {
+                    if (0 <= dx && dx < (X - 100) && 0 <= dy && dy < (Y - 100)) {
                         createFlorButton.layout(dx, dy, imgW, imgH);
                     }
                     break;
                 case MotionEvent.ACTION_DOWN:
+                    Log.v("", ""+ createFlorButton.getLeft());
+                    Log.v("", "" + createFlorButton.getTop());
                     // nothing to do
                     break;
                 case MotionEvent.ACTION_UP:
@@ -64,7 +88,6 @@ public class DungeonFragment extends Fragment {
             }
             preDx = newDx;
             preDy = newDy;
-
             return true;
         });
     }
