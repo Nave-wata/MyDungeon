@@ -18,6 +18,8 @@ import java.util.Objects;
 public class DungeonFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
+    private int fragment_w;
+    private int fragment_h;
     private int preDx, preDy;
 
     @Override
@@ -32,16 +34,15 @@ public class DungeonFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_dungeon, container, false);
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "Range"})
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         Button createFlorButton = view.findViewById(R.id.createFlorButton);
-
         createFlorButton.setOnTouchListener((view1, motionEvent) -> {
-            int newDx = (int)motionEvent.getRawX();
-            int newDy = (int)motionEvent.getRawY();
+            int newDx = (int) (motionEvent.getRawX() / 100) * 100;
+            int newDy = (int) (motionEvent.getRawY() / 100) * 100;
 
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_MOVE:
@@ -50,11 +51,17 @@ public class DungeonFragment extends Fragment {
                     int dy = createFlorButton.getTop() + (newDy - preDy);
                     int imgW = dx + createFlorButton.getWidth();
                     int imgH = dy + createFlorButton.getHeight();
-
-                    createFlorButton.layout(dx, dy, imgW, imgH);
+                    if (500 > dx) {
+                        createFlorButton.layout(dx, dy, imgW, imgH);
+                    }
+                    break;
+                case MotionEvent.ACTION_DOWN:
+                    // nothing to do
+                    break;
+                case MotionEvent.ACTION_UP:
+                    // nothing to do
                     break;
             }
-
             preDx = newDx;
             preDy = newDy;
 
