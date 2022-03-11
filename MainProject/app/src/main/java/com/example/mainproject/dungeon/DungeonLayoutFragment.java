@@ -1,6 +1,7 @@
 package com.example.mainproject.dungeon;
 
 import android.annotation.SuppressLint;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.mainproject.R;
+import com.example.mainproject.SetImage;
 
 import java.util.Objects;
 
@@ -35,7 +38,10 @@ public class DungeonLayoutFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ConstraintLayout layout = new ConstraintLayout(Objects.requireNonNull(getContext()));
         View view = inflater.inflate(R.layout.fragment_dungeonlayout, container, false);
+        AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
+        SetImage setImage = new SetImage(assetManager);
         topContainer = view.findViewById(R.id.fragment_dungeonLayout);
         globalLayoutListener = () -> {
             maxX = topContainer.getWidth();
@@ -44,12 +50,13 @@ public class DungeonLayoutFragment extends Fragment {
         };
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
 
-        ConstraintLayout layout = new ConstraintLayout(getContext());
-        layout.addView(view);
         ImageView imageView = new ImageView(getContext());
-        imageView.setImageResource(R.drawable.ic_launcher_background);
-        layout.addView(imageView);
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(200, 200);
+        imageView.setLayoutParams(layoutParams);
+        setImage.setImageViewBitmapFromAsset(imageView, "dungeon/wall.png");
 
+        layout.addView(view);
+        layout.addView(imageView);
         return layout.getRootView();
     }
 
