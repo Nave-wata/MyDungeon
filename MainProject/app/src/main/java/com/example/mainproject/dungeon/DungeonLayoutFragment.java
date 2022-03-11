@@ -3,13 +3,13 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,18 +42,31 @@ public class DungeonLayoutFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dungeonlayout, container, false);
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
+        ImageView imageView = new ImageView(getContext());
         topContainer = view.findViewById(R.id.fragment_dungeonLayout);
-        globalLayoutListener = () -> {
-            maxX = topContainer.getWidth();
-            maxY = topContainer.getHeight();
-            topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
+        Log.i("", "MainActivityFragment#onCreateView() " +
+                "Width = " + String.valueOf(topContainer.getWidth()) + ", " +
+                "Height = " + String.valueOf(topContainer.getHeight()));
+
+        globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Log.i("", "MainActivityFragment#onCreateView() " +
+                        "Width = " + String.valueOf(topContainer.getWidth()) + ", " +
+                        "Height = " + String.valueOf(topContainer.getHeight()));
+                maxX = topContainer.getWidth();
+                maxY = topContainer.getHeight();
+                Log.v("", "maxX = " + maxX);
+                topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
+
+                int oneSize = maxX / 20;
+                Log.v("oneSize", ""+ oneSize);
+                ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
+                imageView.setLayoutParams(layoutParams);
+                setImage.setImageViewBitmapFromAsset(imageView, "dungeon/wall.png");
+            }
         };
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
-
-        ImageView imageView = new ImageView(getContext());
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(200, 200);
-        imageView.setLayoutParams(layoutParams);
-        setImage.setImageViewBitmapFromAsset(imageView, "dungeon/wall.png");
 
         layout.addView(view);
         layout.addView(imageView);
