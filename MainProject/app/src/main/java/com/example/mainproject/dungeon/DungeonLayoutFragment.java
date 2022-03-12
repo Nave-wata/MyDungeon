@@ -28,6 +28,7 @@ public class DungeonLayoutFragment extends Fragment {
     private int preDx, preDy;
     private ImageView imageView;
     private int oneSize;
+    int widthNum = 20;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,6 @@ public class DungeonLayoutFragment extends Fragment {
         SetImage setImage = new SetImage(assetManager);
         imageView = new ImageView(getContext());
         topContainer = view.findViewById(R.id.fragment_dungeonLayout);
-        new DungeonFragment.ScrollStop();
         globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -53,10 +53,7 @@ public class DungeonLayoutFragment extends Fragment {
                 maxY = topContainer.getHeight();
                 topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
 
-                int widthNum = 20;
-                int S = maxX * maxY;
-                int I = (int) Math.sqrt(S / 100);
-                oneSize = I;
+                oneSize = maxX / widthNum;
                 ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
                 imageView.setLayoutParams(layoutParams);
                 setImage.setImageViewBitmapFromAsset(imageView, "dungeon/wall.png");
@@ -85,7 +82,7 @@ public class DungeonLayoutFragment extends Fragment {
                     int dy = imageView.getTop() + (newDy - preDy);
                     int imgW = dx + imageView.getWidth();
                     int imgH = dy + imageView.getHeight();
-                    if (0 <= dx && dx < maxX && 0 <= dy && dy < maxY) {
+                    if (0 <= dx && dx < oneSize * widthNum && 0 <= dy && dy < oneSize * widthNum) {
                         imageView.layout(dx, dy, imgW, imgH);
                     }
                     break;
