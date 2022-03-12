@@ -25,6 +25,8 @@ public class DungeonFragment extends Fragment {
         Bundle args = getArguments();
         UserName = Objects.requireNonNull(args).getString(EXTRA_DATA);
 
+
+
         FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         fragmentTransaction.replace(R.id.DungeonLayoutContainer, DungeonLayoutFragment.newInstance(UserName));
         fragmentTransaction.commit();
