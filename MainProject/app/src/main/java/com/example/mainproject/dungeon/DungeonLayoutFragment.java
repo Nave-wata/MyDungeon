@@ -24,11 +24,10 @@ public class DungeonLayoutFragment extends Fragment {
     private String UserName;
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
-    private int maxX, maxY;
     private int preDx, preDy;
-    private ImageView imageView;
     private int oneSize;
-    int widthNum = 20;
+    private int maxSize;
+    private final int widthNum = 20;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,46 +43,59 @@ public class DungeonLayoutFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dungeonlayout, container, false);
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
-        imageView = new ImageView(getContext());
+        ImageView wallImage = new ImageView(getContext());
         topContainer = view.findViewById(R.id.fragment_dungeonLayout);
         globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                maxX = topContainer.getWidth();
-                maxY = topContainer.getHeight();
+                int width = topContainer.getWidth();
                 topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
 
-                oneSize = maxX / widthNum;
+                oneSize = width / widthNum;
+                maxSize = oneSize * widthNum;
                 ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
-                imageView.setLayoutParams(layoutParams);
-                setImage.setImageViewBitmapFromAsset(imageView, "dungeon/wall.png");
+                wallImage.setLayoutParams(layoutParams);
+                setImage.setImageViewBitmapFromAsset(wallImage, "dungeon/wall.png");
+                wallImage.setOnTouchListener(new onTouchListener(wallImage));
             }
         };
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
 
         layout.addView(view);
-        layout.addView(imageView);
+        layout.addView(wallImage);
         return layout.getRootView();
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    @NonNull
+    public static DungeonLayoutFragment newInstance(String str){
+        DungeonLayoutFragment fragment = new DungeonLayoutFragment();
+        Bundle barg = new Bundle();
+        barg.putString(fragment.EXTRA_DATA, str);
+        fragment.setArguments(barg);
+        return fragment;
+    }
 
-        imageView.setOnTouchListener((view1, motionEvent) -> {
+    private class onTouchListener implements View.OnTouchListener {
+        ImageView wallImage;
+
+        public onTouchListener(ImageView wallImage) {
+            this.wallImage = wallImage;
+        }
+
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
             int newDx = (int) (motionEvent.getRawX() / oneSize) * oneSize;
             int newDy = (int) (motionEvent.getRawY() / oneSize) * oneSize;
 
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_MOVE:
-                    view1.performClick();
-                    int dx = imageView.getLeft() + (newDx - preDx);
-                    int dy = imageView.getTop() + (newDy - preDy);
-                    int imgW = dx + imageView.getWidth();
-                    int imgH = dy + imageView.getHeight();
-                    if (0 <= dx && dx < oneSize * widthNum && 0 <= dy && dy < oneSize * widthNum) {
-                        imageView.layout(dx, dy, imgW, imgH);
+                    view.performClick();
+                    int dx = wallImage.getLeft() + (newDx - preDx);
+                    int dy = wallImage.getTop() + (newDy - preDy);
+                    int imgW = dx + wallImage.getWidth();
+                    int imgH = dy + wallImage.getHeight();
+                    if (0 <= dx && dx < maxSize && 0 <= dy && dy < maxSize) {
+                        wallImage.layout(dx, dy, imgW, imgH);
                     }
                     break;
                 case MotionEvent.ACTION_DOWN:
@@ -97,15 +109,6 @@ public class DungeonLayoutFragment extends Fragment {
             preDx = newDx;
             preDy = newDy;
             return true;
-        });
-    }
-
-    @NonNull
-    public static DungeonLayoutFragment newInstance(String str){
-        DungeonLayoutFragment fragment = new DungeonLayoutFragment();
-        Bundle barg = new Bundle();
-        barg.putString(fragment.EXTRA_DATA, str);
-        fragment.setArguments(barg);
-        return fragment;
+        }
     }
 }
