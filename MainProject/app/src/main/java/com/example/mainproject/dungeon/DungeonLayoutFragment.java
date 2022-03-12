@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -27,6 +26,8 @@ public class DungeonLayoutFragment extends Fragment {
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
     private int maxX, maxY;
     private int preDx, preDy;
+    private ImageView imageView;
+    private int oneSize;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class DungeonLayoutFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dungeonlayout, container, false);
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
-        ImageView imageView = new ImageView(getContext());
+        imageView = new ImageView(getContext());
         topContainer = view.findViewById(R.id.fragment_dungeonLayout);
         globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -52,7 +53,9 @@ public class DungeonLayoutFragment extends Fragment {
                 topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
 
                 int widthNum = 20;
-                int oneSize = maxX / widthNum;
+                int S = maxX * maxY;
+                int I = (int) Math.sqrt(S / 100);
+                oneSize = I;
                 ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
                 imageView.setLayoutParams(layoutParams);
                 setImage.setImageViewBitmapFromAsset(imageView, "dungeon/wall.png");
@@ -70,20 +73,19 @@ public class DungeonLayoutFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView textView = view.findViewById(R.id.textView);
-        textView.setOnTouchListener((view1, motionEvent) -> {
-            int newDx = (int) (motionEvent.getRawX() / 50) * 50;
-            int newDy = (int) (motionEvent.getRawY() / 50) * 50;
+        imageView.setOnTouchListener((view1, motionEvent) -> {
+            int newDx = (int) (motionEvent.getRawX() / oneSize) * oneSize;
+            int newDy = (int) (motionEvent.getRawY() / oneSize) * oneSize;
 
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_MOVE:
                     view1.performClick();
-                    int dx = textView.getLeft() + (newDx - preDx);
-                    int dy = textView.getTop() + (newDy - preDy);
-                    int imgW = dx + textView.getWidth();
-                    int imgH = dy + textView.getHeight();
-                    if (-50 <= dx && dx < (maxX - 100) && 0 <= dy && dy < (maxY - 50)) {
-                        textView.layout(dx, dy, imgW, imgH);
+                    int dx = imageView.getLeft() + (newDx - preDx);
+                    int dy = imageView.getTop() + (newDy - preDy);
+                    int imgW = dx + imageView.getWidth();
+                    int imgH = dy + imageView.getHeight();
+                    if (0 <= dx && dx < maxX && 0 <= dy && dy < maxY) {
+                        imageView.layout(dx, dy, imgW, imgH);
                     }
                     break;
                 case MotionEvent.ACTION_DOWN:
