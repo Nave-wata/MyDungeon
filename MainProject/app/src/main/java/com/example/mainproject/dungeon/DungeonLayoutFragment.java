@@ -45,6 +45,7 @@ public class DungeonLayoutFragment extends Fragment {
         SetImage setImage = new SetImage(assetManager);
         imageView = new ImageView(getContext());
         topContainer = view.findViewById(R.id.fragment_dungeonLayout);
+        new DungeonFragment.ScrollStop();
         globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {

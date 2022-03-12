@@ -20,6 +20,7 @@ import java.util.Objects;
 public class DungeonFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
+    private static ScrollView dungeonScrollView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,19 +43,15 @@ public class DungeonFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ScrollView scrollView = view.findViewById(R.id.DungeonScrollView);
-        scrollView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return true;
-            }
-        });
+        dungeonScrollView = view.findViewById(R.id.DungeonScrollView);
         Button createFlorButton = view.findViewById(R.id.createFlorButton);
         createFlorButton.setOnClickListener(v-> {
         ConfirmCreateDungeonDialog confirmCreateDungeonDialog = new ConfirmCreateDungeonDialog();
         confirmCreateDungeonDialog.show(Objects.requireNonNull(getFragmentManager()), "ConfirmCreateDungeonDialog");
         });
     }
+
+
 
     @NonNull
     public static DungeonFragment newInstance(String str){
@@ -63,5 +60,33 @@ public class DungeonFragment extends Fragment {
         barg.putString(fragment.EXTRA_DATA, str);
         fragment.setArguments(barg);
         return fragment;
+    }
+
+    public static class ScrollStop implements View.OnTouchListener {
+
+        @SuppressLint("ClickableViewAccessibility")
+        public ScrollStop() {
+            dungeonScrollView.setOnTouchListener(this);
+        }
+
+        @SuppressLint("ClickableViewAccessibility")
+        @Override
+        public boolean onTouch(View v, MotionEvent motionEvent) {
+            return true;
+        }
+    }
+
+    public static class ScrollStart implements View.OnTouchListener {
+
+        @SuppressLint("ClickableViewAccessibility")
+        public ScrollStart() {
+            dungeonScrollView.setOnTouchListener(this);
+        }
+
+        @SuppressLint("ClickableViewAccessibility")
+        @Override
+        public boolean onTouch(View v, MotionEvent motionEvent) {
+            return false;
+        }
     }
 }
