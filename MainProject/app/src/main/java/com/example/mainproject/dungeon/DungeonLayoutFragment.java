@@ -3,6 +3,7 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -46,9 +47,12 @@ public class DungeonLayoutFragment extends Fragment {
         SetImage setImage = new SetImage(assetManager);
 
         for (int i = 0; i < widthNum; i++) {
-            dungeonPeaces[i] = new ImageView(getContext());
-            setImage.setImageViewBitmapFromAsset(dungeonPeaces[i], "dungeon/wall.png");
-            dungeonPeaces[i].setOnTouchListener(new onTouchListener(dungeonPeaces[i]));
+            for (int j = 0; j < widthNum; j++) {
+                Log.v("My", "" + (20 * i + j));
+                dungeonPeaces[20 * i + j] = new ImageView(getContext());
+                setImage.setImageViewBitmapFromAsset(dungeonPeaces[20 * i + j], "dungeon/wall.png");
+                dungeonPeaces[20 * i + j].setOnTouchListener(new onTouchListener(dungeonPeaces[20 * i + j]));
+            }
         }
 
         topContainer = view.findViewById(R.id.fragment_dungeonLayout);
@@ -62,15 +66,23 @@ public class DungeonLayoutFragment extends Fragment {
 
                 ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
                 for (int i = 0; i < widthNum; i++) {
-                    dungeonPeaces[i].setLayoutParams(layoutParams);
-                    dungeonPeaces[i].setX(oneSize * i);
+                    for (int j = 0; j < widthNum; j++) {
+                        dungeonPeaces[20 * i + j].setLayoutParams(layoutParams);
+                        dungeonPeaces[20 * i + j].setX(oneSize * j);
+                        dungeonPeaces[20 * i + j].setY(oneSize * i);
+                    }
                 }
             }
         };
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
 
         layout.addView(view);
-        for (int i = 0; i < widthNum; i++) { layout.addView(dungeonPeaces[i]); }
+        for (int i = 0; i < widthNum; i++) {
+            for (int j = 0; j < widthNum; j++) {
+                layout.addView(dungeonPeaces[20 * i + j]);
+
+            }
+        }
         return layout.getRootView();
     }
 
