@@ -44,6 +44,7 @@ public class DungeonLayoutFragment extends Fragment {
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
         ImageView wallImage = new ImageView(getContext());
+        ImageView imageView1 = new ImageView(getContext());
         topContainer = view.findViewById(R.id.fragment_dungeonLayout);
         globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -55,14 +56,19 @@ public class DungeonLayoutFragment extends Fragment {
                 maxSize = oneSize * widthNum;
                 ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
                 wallImage.setLayoutParams(layoutParams);
+                imageView1.setLayoutParams(layoutParams);
                 setImage.setImageViewBitmapFromAsset(wallImage, "dungeon/wall.png");
+                setImage.setImageViewBitmapFromAsset(imageView1, "dungeon/wall.png");
                 wallImage.setOnTouchListener(new onTouchListener(wallImage));
             }
         };
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
 
+
+
         layout.addView(view);
         layout.addView(wallImage);
+        layout.addView(imageView1);
         return layout.getRootView();
     }
 
