@@ -48,7 +48,6 @@ public class DungeonLayoutFragment extends Fragment {
         dungeonPeaces[0] = new ImageView(getContext());
         setImage.setImageViewBitmapFromAsset(dungeonPeaces[0], "dungeon/wall.png");
         dungeonPeaces[0].setOnTouchListener(new onTouchListener(dungeonPeaces[0]));
-        dungeonPeaces[0].setX(100);
 
         topContainer = view.findViewById(R.id.fragment_dungeonLayout);
         globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -60,6 +59,7 @@ public class DungeonLayoutFragment extends Fragment {
                 maxSize = oneSize * widthNum;
                 ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
                 dungeonPeaces[0].setLayoutParams(layoutParams);
+                dungeonPeaces[0].setY(100);
             }
         };
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
@@ -93,8 +93,8 @@ public class DungeonLayoutFragment extends Fragment {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_MOVE:
                     view.performClick();
-                    int dx = wallImage.getLeft() + (newDx - preDx);
-                    int dy = wallImage.getTop() + (newDy - preDy);
+                    int dx = wallImage.getLeft() + (newDx - preDx); // ここの0はsetXでかわってまう
+                    int dy = wallImage.getTop() + (newDy - preDy);  // ここの0はsetYでかわってまう
                     int imgW = dx + wallImage.getWidth();
                     int imgH = dy + wallImage.getHeight();
                     if (0 <= dx && dx < maxSize && 0 <= dy && dy < maxSize) {
