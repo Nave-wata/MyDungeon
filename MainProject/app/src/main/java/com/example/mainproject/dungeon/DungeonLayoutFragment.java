@@ -44,30 +44,28 @@ public class DungeonLayoutFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dungeonlayout, container, false);
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
+
         dungeonPeaces[0] = new ImageView(getContext());
-        dungeonPeaces[1] = new ImageView(getContext());
+        setImage.setImageViewBitmapFromAsset(dungeonPeaces[0], "dungeon/wall.png");
+        dungeonPeaces[0].setOnTouchListener(new onTouchListener(dungeonPeaces[0]));
+        dungeonPeaces[0].setX(100);
+
         topContainer = view.findViewById(R.id.fragment_dungeonLayout);
         globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 int width = topContainer.getWidth();
                 topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
-
                 oneSize = width / widthNum;
                 maxSize = oneSize * widthNum;
                 ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
                 dungeonPeaces[0].setLayoutParams(layoutParams);
-                dungeonPeaces[1].setLayoutParams(layoutParams);
-                setImage.setImageViewBitmapFromAsset(dungeonPeaces[0], "dungeon/wall.png");
-                setImage.setImageViewBitmapFromAsset(dungeonPeaces[1], "dungeon/wall.png");
-                dungeonPeaces[0].setOnTouchListener(new onTouchListener(dungeonPeaces[0]));
             }
         };
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
 
         layout.addView(view);
         layout.addView(dungeonPeaces[0]);
-        layout.addView(dungeonPeaces[1]);
         return layout.getRootView();
     }
 
