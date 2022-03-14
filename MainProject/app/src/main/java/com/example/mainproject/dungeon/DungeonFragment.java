@@ -29,6 +29,7 @@ public class DungeonFragment extends Fragment {
 
         FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         fragmentTransaction.replace(R.id.DungeonLayoutContainer, DungeonLayoutFragment.newInstance(UserName));
+        fragmentTransaction.replace(R.id.ChangeLayoutContainer, DisplayFloorFragment.newInstance(UserName));
         fragmentTransaction.commit();
     }
 
@@ -52,6 +53,9 @@ public class DungeonFragment extends Fragment {
             if (DungeonLayoutFragment.changeLayoutFlag) {
                 DungeonLayoutFragment.changeLayoutFlag = false;
                 changeLayoutButton.setText(getString(R.string.NotChangeLayout));
+                FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
+                fragmentTransaction.replace(R.id.ChangeLayoutContainer, DisplayFloorFragment.newInstance(UserName));
+                fragmentTransaction.commit();
             } else {
                 DungeonLayoutFragment.changeLayoutFlag = true;
                 changeLayoutButton.setText(getString(R.string.changeLayout));
