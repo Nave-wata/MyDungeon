@@ -3,10 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/drawable/frame_displayfloor.xml" value="0.3875" />
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/drawable/frame_dungeonsupport.xml" value="0.3875" />
         <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2095" />
         <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/drawable/splash.xml" value="0.377" />
         <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/dialog_confirmcreatedungeon.xml" value="0.33" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/fragment_dungeon.xml" value="0.3875" />
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/fragment_changelayoutmenu.xml" value="0.3875" />
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/fragment_displayfloor.xml" value="0.3875" />
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/fragment_dungeon.xml" value="0.33" />
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/fragment_dungeonlayout.xml" value="0.3875" />
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/fragment_scaledungeon.xml" value="0.3875" />
         <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/home/layout/fragment_home.xml" value="0.3875" />
         <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/layout/dialog_showdifftime.xml" value="0.33" />
