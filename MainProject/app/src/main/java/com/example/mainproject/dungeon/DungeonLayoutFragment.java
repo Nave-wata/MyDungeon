@@ -31,6 +31,7 @@ public class DungeonLayoutFragment extends Fragment {
     private final int widthNum = 20;
     private final ImageView[] dungeonPeaces = new ImageView[widthNum * widthNum];
     private final int[] dungeonPeacesId = new int[widthNum * widthNum];
+    public static boolean changeLayoutFlag = false;
     private boolean canMoveFlag = false;
     private int canMoveCount = 0;
     
@@ -119,37 +120,39 @@ public class DungeonLayoutFragment extends Fragment {
             int newDx = (int) (motionEvent.getRawX() / oneSize) * oneSize;
             int newDy = (int) (motionEvent.getRawY() / oneSize) * oneSize;
 
-            switch (motionEvent.getAction()) {
-                case MotionEvent.ACTION_MOVE:
-                    if (canMoveFlag) {
-                        view.performClick();
-                        int dx = wallImage.getLeft() + (newDx - preDx);
-                        int dy = wallImage.getTop() + (newDy - preDy);
-                        int imgW = dx + wallImage.getWidth();
-                        int imgH = dy + wallImage.getHeight();
-                        if (-minX <= dx && dx < maxSize - minX && -minY <= dy && dy < maxSize - minY) {
-                            wallImage.layout(dx, dy, imgW, imgH);
+            if (changeLayoutFlag) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_MOVE:
+                        if (canMoveFlag) {
+                            view.performClick();
+                            int dx = wallImage.getLeft() + (newDx - preDx);
+                            int dy = wallImage.getTop() + (newDy - preDy);
+                            int imgW = dx + wallImage.getWidth();
+                            int imgH = dy + wallImage.getHeight();
+                            if (-minX <= dx && dx < maxSize - minX && -minY <= dy && dy < maxSize - minY) {
+                                wallImage.layout(dx, dy, imgW, imgH);
+                            }
                         }
-                    }
-                    break;
-                case MotionEvent.ACTION_DOWN: // 押されたとき
-                    canMoveCount++;
-                    if (canMoveCount == 2) {
-                        canMoveFlag = true;
-                        setImage.setImageViewBitmapFromAsset(wallImage, "dungeon/selectWall.png");
-                    }
-                    break;
-                case MotionEvent.ACTION_UP: // 離されたとき
-                    if (canMoveCount == 2) {
-                        canMoveCount = 0;
-                        canMoveFlag = false;
-                        setImage.setImageViewBitmapFromAsset(wallImage, "dungeon/wall.png");
-                    }
-                    break;
-            }
+                        break;
+                    case MotionEvent.ACTION_DOWN: // 押されたとき
+                        canMoveCount++;
+                        if (canMoveCount == 2) {
+                            canMoveFlag = true;
+                            setImage.setImageViewBitmapFromAsset(wallImage, "dungeon/selectWall.png");
+                        }
+                        break;
+                    case MotionEvent.ACTION_UP: // 離されたとき
+                        if (canMoveCount == 2) {
+                            canMoveCount = 0;
+                            canMoveFlag = false;
+                            setImage.setImageViewBitmapFromAsset(wallImage, "dungeon/wall.png");
+                        }
+                        break;
+                }
 
-            preDx = newDx;
-            preDy = newDy;
+                preDx = newDx;
+                preDy = newDy;
+            }
             return true;
         }
     }

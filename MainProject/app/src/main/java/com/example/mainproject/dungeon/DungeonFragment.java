@@ -47,6 +47,10 @@ public class DungeonFragment extends Fragment {
             ConfirmCreateDungeonDialog confirmCreateDungeonDialog = new ConfirmCreateDungeonDialog();
             confirmCreateDungeonDialog.show(Objects.requireNonNull(getFragmentManager()), "ConfirmCreateDungeonDialog");
         });
+        Button changeLayoutButton = view.findViewById(R.id.changeLayout);
+        changeLayoutButton.setOnClickListener(v -> {
+            DungeonLayoutFragment.changeLayoutFlag = !DungeonLayoutFragment.changeLayoutFlag;
+        });
     }
 
     @NonNull
