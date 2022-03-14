@@ -51,7 +51,6 @@ public class DungeonLayoutFragment extends Fragment {
                 Log.v("My", "" + (20 * i + j));
                 dungeonPeaces[20 * i + j] = new ImageView(getContext());
                 setImage.setImageViewBitmapFromAsset(dungeonPeaces[20 * i + j], "dungeon/wall.png");
-                dungeonPeaces[20 * i + j].setOnTouchListener(new onTouchListener(dungeonPeaces[20 * i + j]));
             }
         }
 
@@ -70,6 +69,7 @@ public class DungeonLayoutFragment extends Fragment {
                         dungeonPeaces[20 * i + j].setLayoutParams(layoutParams);
                         dungeonPeaces[20 * i + j].setX(oneSize * j);
                         dungeonPeaces[20 * i + j].setY(oneSize * i);
+                        dungeonPeaces[20 * i + j].setOnTouchListener(new onTouchListener(dungeonPeaces[20 * i + j], oneSize * j, oneSize * i));
                     }
                 }
             }
@@ -80,7 +80,6 @@ public class DungeonLayoutFragment extends Fragment {
         for (int i = 0; i < widthNum; i++) {
             for (int j = 0; j < widthNum; j++) {
                 layout.addView(dungeonPeaces[20 * i + j]);
-
             }
         }
         return layout.getRootView();
@@ -96,10 +95,14 @@ public class DungeonLayoutFragment extends Fragment {
     }
 
     private class onTouchListener implements View.OnTouchListener {
-        ImageView wallImage;
+        final ImageView wallImage;
+        final int minX;
+        final int minY;
 
-        public onTouchListener(ImageView wallImage) {
+        public onTouchListener(ImageView wallImage, int minX, int minY) {
             this.wallImage = wallImage;
+            this.minX = minX;
+            this.minY = minY;
         }
 
         @Override
@@ -114,7 +117,7 @@ public class DungeonLayoutFragment extends Fragment {
                     int dy = wallImage.getTop() + (newDy - preDy);  // ここの0はsetYでかわってまう
                     int imgW = dx + wallImage.getWidth();
                     int imgH = dy + wallImage.getHeight();
-                    if (0 <= dx && dx < maxSize && 0 <= dy && dy < maxSize) {
+                    if (-minX <= dx && dx < maxSize + minX && -minY <= dy && dy < maxSize + minY) {
                         wallImage.layout(dx, dy, imgW, imgH);
                     }
                     break;
