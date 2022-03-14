@@ -3,6 +3,8 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,8 +30,10 @@ public class DungeonLayoutFragment extends Fragment {
     private int oneSize;
     private int maxSize;
     private final int widthNum = 20;
-    private ImageView[] dungeonPeaces = new ImageView[widthNum * widthNum];
-    private int[] dungeonPeacesId = new int[widthNum * widthNum];
+    private final ImageView[] dungeonPeaces = new ImageView[widthNum * widthNum];
+    private final int[] dungeonPeacesId = new int[widthNum * widthNum];
+    private boolean canMoveFlag = false;
+    private int canMoveCount = 0;
     
 
     @Override
@@ -81,12 +85,13 @@ public class DungeonLayoutFragment extends Fragment {
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
 
         layout.addView(view);
-        for (int i = 0; i < widthNum; i++) {
-            for (int j = 0; j < widthNum; j++) {
-                int num = 20 * i + j;
-                layout.addView(dungeonPeaces[num]);
-            }
-        }
+        //for (int i = 0; i < widthNum; i++) {
+        //    for (int j = 0; j < widthNum; j++) {
+        //        int num = 20 * i + j;
+        //        layout.addView(dungeonPeaces[num]);
+        //    }
+        //}
+        layout.addView(dungeonPeaces[0]);
         return layout.getRootView();
     }
 
@@ -99,7 +104,7 @@ public class DungeonLayoutFragment extends Fragment {
         return fragment;
     }
 
-    private class onTouchListener implements View.OnTouchListener {
+    private class onTouchListener implements View.OnTouchListener, GestureDetector.OnDoubleTapListener {
         final ImageView wallImage;
         final int minX;
         final int minY;
@@ -117,26 +122,52 @@ public class DungeonLayoutFragment extends Fragment {
 
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_MOVE:
-                    view.performClick();
-                    int dx = wallImage.getLeft() + (newDx - preDx); // ここの0はsetXでかわってまう
-                    int dy = wallImage.getTop() + (newDy - preDy);  // ここの0はsetYでかわってまう
-                    int imgW = dx + wallImage.getWidth();
-                    int imgH = dy + wallImage.getHeight();
-                    if (-minX <= dx && dx < maxSize - minX && -minY <= dy && dy < maxSize - minY) {
-                        wallImage.layout(dx, dy, imgW, imgH);
+                    if (canMoveFlag) {
+                        view.performClick();
+                        int dx = wallImage.getLeft() + (newDx - preDx);
+                        int dy = wallImage.getTop() + (newDy - preDy);
+                        int imgW = dx + wallImage.getWidth();
+                        int imgH = dy + wallImage.getHeight();
+                        if (-minX <= dx && dx < maxSize - minX && -minY <= dy && dy < maxSize - minY) {
+                            wallImage.layout(dx, dy, imgW, imgH);
+                        }
                     }
                     break;
-                case MotionEvent.ACTION_DOWN:
-                    // nothing to do
+                case MotionEvent.ACTION_DOWN: // 押されたとき
+                    canMoveCount++;
+                    if (canMoveCount == 2) {
+                        canMoveFlag = true;
+                    }
                     break;
-                case MotionEvent.ACTION_UP:
-                    // nothing to do
+                case MotionEvent.ACTION_UP: // 離されたとき
+                    if (canMoveCount == 2) {
+                        canMoveCount = 0;
+                        canMoveFlag = false;
+                    }
                     break;
             }
 
             preDx = newDx;
             preDy = newDy;
             return true;
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent motionEvent) {
+            Log.v("My", "onSingleTapConfirmed");
+            return false;
+        }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent motionEvent) {
+            Log.v("My", "onDoubleTap");
+            return false;
+        }
+
+        @Override
+        public boolean onDoubleTapEvent(MotionEvent motionEvent) {
+            Log.v("My", "onDoubleTapEvent");
+            return false;
         }
     }
 }
