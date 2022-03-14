@@ -55,6 +55,9 @@ public class DungeonFragment extends Fragment {
             } else {
                 DungeonLayoutFragment.changeLayoutFlag = true;
                 changeLayoutButton.setText(getString(R.string.changeLayout));
+                FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
+                fragmentTransaction.replace(R.id.ChangeLayoutContainer, ChangeLayoutMenuFragment.newInstance(UserName));
+                fragmentTransaction.commit();
             }
         });
     }
