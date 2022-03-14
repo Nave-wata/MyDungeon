@@ -62,23 +62,20 @@ public class DungeonLayoutFragment extends Fragment {
         }
 
         topContainer = view.findViewById(R.id.fragment_dungeonLayout);
-        globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                int width = topContainer.getWidth();
-                topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
-                oneSize = width / widthNum;
-                maxSize = oneSize * widthNum;
+        globalLayoutListener = () -> {
+            int width = topContainer.getWidth();
+            topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
+            oneSize = width / widthNum;
+            maxSize = oneSize * widthNum;
 
-                ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
-                for (int i = 0; i < widthNum; i++) {
-                    for (int j = 0; j < widthNum; j++) {
-                        int num = 20 * i + j;
-                        dungeonPeaces[num].setLayoutParams(layoutParams);
-                        dungeonPeaces[num].setX(oneSize * j);
-                        dungeonPeaces[num].setY(oneSize * i);
-                        dungeonPeaces[num].setOnTouchListener(new onTouchListener(dungeonPeaces[num], oneSize * j, oneSize * i));
-                    }
+            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
+            for (int i = 0; i < widthNum; i++) {
+                for (int j = 0; j < widthNum; j++) {
+                    int num = 20 * i + j;
+                    dungeonPeaces[num].setLayoutParams(layoutParams);
+                    dungeonPeaces[num].setX(oneSize * j);
+                    dungeonPeaces[num].setY(oneSize * i);
+                    dungeonPeaces[num].setOnTouchListener(new onTouchListener(dungeonPeaces[num], oneSize * j, oneSize * i));
                 }
             }
         };

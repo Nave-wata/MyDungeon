@@ -49,7 +49,13 @@ public class DungeonFragment extends Fragment {
         });
         Button changeLayoutButton = view.findViewById(R.id.changeLayout);
         changeLayoutButton.setOnClickListener(v -> {
-            DungeonLayoutFragment.changeLayoutFlag = !DungeonLayoutFragment.changeLayoutFlag;
+            if (DungeonLayoutFragment.changeLayoutFlag) {
+                DungeonLayoutFragment.changeLayoutFlag = false;
+                changeLayoutButton.setText(getString(R.string.NotChangeLayout));
+            } else {
+                DungeonLayoutFragment.changeLayoutFlag = true;
+                changeLayoutButton.setText(getString(R.string.changeLayout));
+            }
         });
     }
 
