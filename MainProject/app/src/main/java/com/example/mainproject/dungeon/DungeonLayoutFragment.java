@@ -3,8 +3,6 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,6 +24,7 @@ public class DungeonLayoutFragment extends Fragment {
     private String UserName;
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
+    private SetImage setImage;
     private int preDx, preDy;
     private int oneSize;
     private int maxSize;
@@ -49,7 +48,7 @@ public class DungeonLayoutFragment extends Fragment {
         ConstraintLayout layout = new ConstraintLayout(Objects.requireNonNull(getContext()));
         View view = inflater.inflate(R.layout.fragment_dungeonlayout, container, false);
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
-        SetImage setImage = new SetImage(assetManager);
+        setImage = new SetImage(assetManager);
 
         for (int i = 0; i < widthNum; i++) {
             for (int j = 0; j < widthNum; j++) {
@@ -104,7 +103,7 @@ public class DungeonLayoutFragment extends Fragment {
         return fragment;
     }
 
-    private class onTouchListener implements View.OnTouchListener, GestureDetector.OnDoubleTapListener {
+    private class onTouchListener implements View.OnTouchListener {
         final ImageView wallImage;
         final int minX;
         final int minY;
@@ -137,12 +136,14 @@ public class DungeonLayoutFragment extends Fragment {
                     canMoveCount++;
                     if (canMoveCount == 2) {
                         canMoveFlag = true;
+                        setImage.setImageViewBitmapFromAsset(wallImage, "dungeon/selectWall.png");
                     }
                     break;
                 case MotionEvent.ACTION_UP: // 離されたとき
                     if (canMoveCount == 2) {
                         canMoveCount = 0;
                         canMoveFlag = false;
+                        setImage.setImageViewBitmapFromAsset(wallImage, "dungeon/wall.png");
                     }
                     break;
             }
@@ -150,24 +151,6 @@ public class DungeonLayoutFragment extends Fragment {
             preDx = newDx;
             preDy = newDy;
             return true;
-        }
-
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent motionEvent) {
-            Log.v("My", "onSingleTapConfirmed");
-            return false;
-        }
-
-        @Override
-        public boolean onDoubleTap(MotionEvent motionEvent) {
-            Log.v("My", "onDoubleTap");
-            return false;
-        }
-
-        @Override
-        public boolean onDoubleTapEvent(MotionEvent motionEvent) {
-            Log.v("My", "onDoubleTapEvent");
-            return false;
         }
     }
 }
