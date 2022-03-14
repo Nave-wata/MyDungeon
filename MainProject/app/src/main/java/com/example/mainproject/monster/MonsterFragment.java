@@ -10,10 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.mainproject.R;
-import com.example.mainproject.asynchronous.AsyncRunnable;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Objects;
 
@@ -39,23 +35,6 @@ public class MonsterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView mainText = view.findViewById(R.id.Monster_text);
-
-        new AsyncRunnable(
-                URL,
-                b->{
-                    String response = new String(b);
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        JSONObject jsonData = jsonObject.getJSONObject("Sample");
-                        String address1 = jsonData.getString("Name");
-                        mainText.setText(address1);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        mainText.setText(response);
-                    }
-                },
-                e->{}
-        ).execute();
     }
 
     @NonNull
