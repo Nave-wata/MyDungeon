@@ -23,7 +23,9 @@ public class ChangeLayoutMenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_changelayoutmenu, container, false);
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
+
         ImageView dungeonWall = view.findViewById(R.id.dungeonLayout);
+        dungeonWall.setOnTouchListener(new DungeonFragment.onTouchListener(dungeonWall));
         setImage.setImageViewBitmapFromAsset(dungeonWall, "dungeon/dungeonWall.png");
 
         return view;

@@ -3,9 +3,11 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,6 +21,7 @@ public class DungeonFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
     private Button changeLayoutButton;
+    private static int preDx, preDy;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,5 +82,40 @@ public class DungeonFragment extends Fragment {
         barg.putString(fragment.EXTRA_DATA, str);
         fragment.setArguments(barg);
         return fragment;
+    }
+
+    public static class onTouchListener implements View.OnTouchListener {
+        final ImageView wallImage;
+
+        public onTouchListener(ImageView wallImage) {
+            this.wallImage = wallImage;
+        }
+
+        @Override
+        public boolean onTouch(View view, @NonNull MotionEvent motionEvent) {
+            int newDx = (int) motionEvent.getRawX();
+            int newDy = (int) motionEvent.getRawY();
+
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_MOVE:
+                    view.performClick();
+                    int dx = wallImage.getLeft() + (newDx - preDx); // ここの0はsetXでかわってまう
+                    int dy = wallImage.getTop() + (newDy - preDy);  // ここの0はsetYでかわってまう
+                    int imgW = dx + wallImage.getWidth();
+                    int imgH = dy + wallImage.getHeight();
+                    wallImage.layout(dx, dy, imgW, imgH);
+                    break;
+                case MotionEvent.ACTION_DOWN:
+                    // nothing to do
+                    break;
+                case MotionEvent.ACTION_UP:
+                    // nothing to do
+                    break;
+            }
+
+            preDx = newDx;
+            preDy = newDy;
+            return true;
+        }
     }
 }
