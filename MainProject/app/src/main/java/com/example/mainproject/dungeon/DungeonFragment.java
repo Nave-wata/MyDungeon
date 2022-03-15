@@ -51,12 +51,14 @@ public class DungeonFragment extends Fragment {
         changeLayoutButton.setOnClickListener(v -> {
             if (DungeonLayoutFragment.changeLayoutFlag) {
                 DungeonLayoutFragment.changeLayoutFlag = false;
+                new DungeonLayoutFragment().resetDungeonPeacesOnToucheListener();
                 changeLayoutButton.setText(getString(R.string.NotChangeLayout));
                 FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
                 fragmentTransaction.replace(R.id.ChangeLayoutContainer, DisplayFloorFragment.newInstance(UserName));
                 fragmentTransaction.commit();
             } else {
                 DungeonLayoutFragment.changeLayoutFlag = true;
+                new DungeonLayoutFragment().setDungeonPeacesOnToucheListener();
                 changeLayoutButton.setText(getString(R.string.saveLayout));
                 FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
                 fragmentTransaction.replace(R.id.ChangeLayoutContainer, ChangeLayoutMenuFragment.newInstance(UserName));

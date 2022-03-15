@@ -3,7 +3,6 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -55,9 +54,7 @@ public class ChangeLayoutMenuFragment extends Fragment {
                 case MotionEvent.ACTION_DOWN: // 押されたとき
                     break;
                 case MotionEvent.ACTION_UP: // 離されたとき
-                    Log.v("My", "start");
                     new DungeonLayoutFragment().setDungeonPeace();
-                    Log.v("My", "end");
                     break;
             }
             return true;
