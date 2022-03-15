@@ -28,4 +28,5 @@
     <string name="saveLayout">保存</string>
     <string name="deleteWall">DPを消費してダンジョンを拡張します．よろしいですか？</string>
     <string name="createDungeonWall">DPを消費して壁を設置します．</string>
+    <string name="dungeonWall">壁</string>
 </resources>
