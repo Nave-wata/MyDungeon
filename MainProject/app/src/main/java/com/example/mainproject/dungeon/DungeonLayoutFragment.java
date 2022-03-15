@@ -35,7 +35,7 @@ public class DungeonLayoutFragment extends Fragment {
     public static boolean changeLayoutFlag = false;
     private boolean canMoveFlag = false;
     private int canMoveCount = 0;
-    
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
