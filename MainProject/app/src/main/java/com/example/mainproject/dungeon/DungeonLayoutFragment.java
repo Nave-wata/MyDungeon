@@ -45,7 +45,13 @@ public class DungeonLayoutFragment extends Fragment {
 
         for (int i = 0; i < widthNum; i++) {
             for (int j = 0; j < heightNum; j++) {
-                if (i != 0) {
+                if (i == 1 || i == 2 || i == 3 || i == 4) {
+                    if (j == 8 || j == 9 || j == 10 || j == 11) {
+                        dungeonInfo[i][j] = 0;
+                    } else {
+                        dungeonInfo[i][j] = 1;
+                    }
+                } else if (j == 9 || j == 10) {
                     dungeonInfo[i][j] = 0;
                 } else {
                     dungeonInfo[i][j] = 1;
