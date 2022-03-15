@@ -21,6 +21,7 @@ public class DungeonFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
     private Button changeLayoutButton;
+    private static ImageView dungeonPeace;
     private static int preDx, preDy;
 
     @Override
@@ -44,6 +45,8 @@ public class DungeonFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        dungeonPeace = view.findViewById(R.id.dungeonPeace);
 
         Button createFlorButton = view.findViewById(R.id.createFlorButton);
         createFlorButton.setOnClickListener(v -> {
@@ -89,6 +92,7 @@ public class DungeonFragment extends Fragment {
 
         public onTouchListener(ImageView wallImage) {
             this.wallImage = wallImage;
+            dungeonPeace = wallImage;
         }
 
         @Override
@@ -99,11 +103,11 @@ public class DungeonFragment extends Fragment {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_MOVE:
                     view.performClick();
-                    int dx = wallImage.getLeft() + (newDx - preDx); // ここの0はsetXでかわってまう
-                    int dy = wallImage.getTop() + (newDy - preDy);  // ここの0はsetYでかわってまう
-                    int imgW = dx + wallImage.getWidth();
-                    int imgH = dy + wallImage.getHeight();
-                    wallImage.layout(dx, dy, imgW, imgH);
+                    int dx = dungeonPeace.getLeft() + (newDx - preDx); // ここの0はsetXでかわってまう
+                    int dy = dungeonPeace.getTop() + (newDy - preDy);  // ここの0はsetYでかわってまう
+                    int imgW = dx + dungeonPeace.getWidth();
+                    int imgH = dy + dungeonPeace.getHeight();
+                    dungeonPeace.layout(dx, dy, imgW, imgH);
                     break;
                 case MotionEvent.ACTION_DOWN:
                     // nothing to do
