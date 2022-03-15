@@ -21,7 +21,7 @@ import java.util.Objects;
 public class ChangeLayoutMenuFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
 
-    @SuppressLint("Range")
+    @SuppressLint({"Range", "ClickableViewAccessibility"})
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_changelayoutmenu, container, false);
@@ -29,15 +29,7 @@ public class ChangeLayoutMenuFragment extends Fragment {
         SetImage setImage = new SetImage(assetManager);
 
         ImageView dungeonWall = view.findViewById(R.id.dungeonLayout);
-        dungeonWall.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                Log.v("My", "hoge");
-                new DungeonLayoutFragment().setDungeonPeace();
-                Log.v("My", "hoge");
-                return true;
-            }
-        });
+        dungeonWall.setOnTouchListener(new onTouchListener());
         setImage.setImageViewBitmapFromAsset(dungeonWall, "dungeon/dungeonWall.png");
 
         return view;
@@ -50,5 +42,25 @@ public class ChangeLayoutMenuFragment extends Fragment {
         barg.putString(fragment.EXTRA_DATA, str);
         fragment.setArguments(barg);
         return fragment;
+    }
+
+    private class onTouchListener implements View.OnTouchListener {
+
+        @SuppressLint("ClickableViewAccessibility")
+        @Override
+        public boolean onTouch(View view, @NonNull MotionEvent motionEvent) {
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_MOVE:
+                    break;
+                case MotionEvent.ACTION_DOWN: // 押されたとき
+                    break;
+                case MotionEvent.ACTION_UP: // 離されたとき
+                    Log.v("My", "hoge");
+                    new DungeonLayoutFragment().setDungeonPeace();
+                    Log.v("My", "hoge");
+                    break;
+            }
+            return true;
+        }
     }
 }

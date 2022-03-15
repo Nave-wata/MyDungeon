@@ -3,6 +3,7 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,7 +25,7 @@ public class DungeonLayoutFragment extends Fragment {
     private String UserName;
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
-    private SetImage setImage;
+    private static SetImage setImage;
     private static ImageView dungeonPeace;
     private int preDx, preDy;
     private int oneSize;
@@ -68,6 +69,7 @@ public class DungeonLayoutFragment extends Fragment {
         setImage = new SetImage(assetManager);
 
         dungeonPeace = view.findViewById(R.id.dungeonPeace);
+        setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/dungeonWall.png");
 
         for (int i = 0; i < widthNum; i++) {
             for (int j = 0; j < heightNum; j++) {
@@ -103,8 +105,6 @@ public class DungeonLayoutFragment extends Fragment {
                 layout.addView(dungeonPeaces[i][j]);
             }
         }
-        //layout.addView(dungeonPeaces[0][0]);
-        //layout.addView(dungeonPeaces[10][10]);
         return layout.getRootView();
     }
 
@@ -162,15 +162,17 @@ public class DungeonLayoutFragment extends Fragment {
         public SetViewOnTouchListener(ImageView wallImage) {
             this.wallImage = wallImage;
             setImage.setImageViewBitmapFromAsset(this.wallImage, "dungeon/dungeonWall.png");
+            Log.v("My", "!!!!");
         }
 
         @Override
         public boolean onTouch(View view, @NonNull MotionEvent motionEvent) {
             int newDx = (int) (motionEvent.getRawX() / oneSize) * oneSize;
             int newDy = (int) (motionEvent.getRawY() / oneSize) * oneSize;
-
+            Log.v("My", "~~~~");
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_MOVE:
+                    Log.v("My", "~~~~");
                     view.performClick();
                     int dx = wallImage.getLeft() + (newDx - preDx); // ここの0はsetXでかわってまう
                     int dy = wallImage.getTop() + (newDy - preDy);  // ここの0はsetYでかわってまう
