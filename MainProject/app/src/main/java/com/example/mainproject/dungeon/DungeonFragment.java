@@ -58,7 +58,7 @@ public class DungeonFragment extends Fragment {
                 fragmentTransaction.commit();
             } else {
                 DungeonLayoutFragment.changeLayoutFlag = true;
-                changeLayoutButton.setText(getString(R.string.changeLayout));
+                changeLayoutButton.setText(getString(R.string.saveLayout));
                 FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
                 fragmentTransaction.replace(R.id.ChangeLayoutContainer, ChangeLayoutMenuFragment.newInstance(UserName));
                 fragmentTransaction.commit();

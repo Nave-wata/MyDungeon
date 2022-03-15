@@ -31,6 +31,7 @@ public class DungeonLayoutFragment extends Fragment {
     private final int widthNum = 20;
     private final int heightNum = 20;
     private final ImageView[][] dungeonPeaces = new ImageView[widthNum][heightNum];
+    private final int[][] dungeonInfo = new int[widthNum][heightNum];
     public static boolean changeLayoutFlag = false;
     private boolean canMoveFlag = false;
     private int canMoveCount = 0;
@@ -41,6 +42,16 @@ public class DungeonLayoutFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         UserName = Objects.requireNonNull(args).getString(EXTRA_DATA);
+
+        for (int i = 0; i < widthNum; i++) {
+            for (int j = 0; j < heightNum; j++) {
+                if (i != 0) {
+                    dungeonInfo[i][j] = 0;
+                } else {
+                    dungeonInfo[i][j] = 1;
+                }
+            }
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -53,8 +64,10 @@ public class DungeonLayoutFragment extends Fragment {
 
         for (int i = 0; i < widthNum; i++) {
             for (int j = 0; j < heightNum; j++) {
-                dungeonPeaces[i][j] = new ImageView(getContext());
-                setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/wall.png");
+                if (dungeonInfo[i][j] == 1) {
+                    dungeonPeaces[i][j] = new ImageView(getContext());
+                    setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/wall.png");
+                }
             }
         }
 
@@ -68,10 +81,12 @@ public class DungeonLayoutFragment extends Fragment {
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
             for (int i = 0; i < widthNum; i++) {
                 for (int j = 0; j < heightNum; j++) {
-                    dungeonPeaces[i][j].setLayoutParams(layoutParams);
-                    dungeonPeaces[i][j].setX(oneSize * j);
-                    dungeonPeaces[i][j].setY(oneSize * i);
-                    dungeonPeaces[i][j].setOnTouchListener(new onTouchListener(i, j));
+                    if (dungeonInfo[i][j] == 1) {
+                        dungeonPeaces[i][j].setLayoutParams(layoutParams);
+                        dungeonPeaces[i][j].setX(oneSize * j);
+                        dungeonPeaces[i][j].setY(oneSize * i);
+                        dungeonPeaces[i][j].setOnTouchListener(new onTouchListener(i, j));
+                    }
                 }
             }
         };
@@ -80,10 +95,13 @@ public class DungeonLayoutFragment extends Fragment {
         layout.addView(view);
         for (int i = 0; i < widthNum; i++) {
             for (int j = 0; j < heightNum; j++) {
-                layout.addView(dungeonPeaces[i][j]);
+                if (dungeonInfo[i][j] == 1) {
+                    layout.addView(dungeonPeaces[i][j]);
+                }
             }
         }
         //layout.addView(dungeonPeaces[0][0]);
+        //layout.addView(dungeonPeaces[10][10]);
         return layout.getRootView();
     }
 
