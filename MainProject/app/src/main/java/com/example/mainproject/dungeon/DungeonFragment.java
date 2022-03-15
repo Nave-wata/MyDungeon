@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,7 +18,7 @@ import java.util.Objects;
 public class DungeonFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
-    private static ScrollView dungeonScrollView;
+    private Button changeLayoutButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,7 @@ public class DungeonFragment extends Fragment {
             ConfirmCreateDungeonDialog confirmCreateDungeonDialog = new ConfirmCreateDungeonDialog();
             confirmCreateDungeonDialog.show(Objects.requireNonNull(getFragmentManager()), "ConfirmCreateDungeonDialog");
         });
-        Button changeLayoutButton = view.findViewById(R.id.changeLayout);
+        changeLayoutButton = view.findViewById(R.id.changeLayout);
         changeLayoutButton.setOnClickListener(v -> {
             if (DungeonLayoutFragment.changeLayoutFlag) {
                 DungeonLayoutFragment.changeLayoutFlag = false;
@@ -64,6 +63,13 @@ public class DungeonFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        DungeonLayoutFragment.changeLayoutFlag = false;
+        changeLayoutButton.setText(getString(R.string.NotChangeLayout));
     }
 
     @NonNull
