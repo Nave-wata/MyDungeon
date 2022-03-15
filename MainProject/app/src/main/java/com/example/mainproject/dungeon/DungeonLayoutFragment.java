@@ -70,6 +70,7 @@ public class DungeonLayoutFragment extends Fragment {
 
         dungeonPeace = view.findViewById(R.id.dungeonPeace);
         setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/dungeonWall.png");
+        dungeonPeace.setOnTouchListener(new SetViewOnTouchListener(dungeonPeace));
 
         for (int i = 0; i < widthNum; i++) {
             for (int j = 0; j < heightNum; j++) {
@@ -109,7 +110,7 @@ public class DungeonLayoutFragment extends Fragment {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    public void setDungeonPeace() {
+    public void setDungeonPeace() { // 引数でImage指定すればいい
         setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/dungeonWall.png");
         dungeonPeace.setOnTouchListener(new SetViewOnTouchListener(dungeonPeace));
     }
@@ -135,6 +136,7 @@ public class DungeonLayoutFragment extends Fragment {
         @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View view, @NonNull MotionEvent motionEvent) {
+            Log.v("My", "ABC");
             if (changeLayoutFlag) {
                 switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_MOVE:
@@ -161,7 +163,6 @@ public class DungeonLayoutFragment extends Fragment {
 
         public SetViewOnTouchListener(ImageView wallImage) {
             this.wallImage = wallImage;
-            setImage.setImageViewBitmapFromAsset(this.wallImage, "dungeon/dungeonWall.png");
             Log.v("My", "!!!!");
         }
 
@@ -169,7 +170,7 @@ public class DungeonLayoutFragment extends Fragment {
         public boolean onTouch(View view, @NonNull MotionEvent motionEvent) {
             int newDx = (int) (motionEvent.getRawX() / oneSize) * oneSize;
             int newDy = (int) (motionEvent.getRawY() / oneSize) * oneSize;
-            Log.v("My", "~~~~");
+            Log.v("My", "ABCD");
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_MOVE:
                     Log.v("My", "~~~~");

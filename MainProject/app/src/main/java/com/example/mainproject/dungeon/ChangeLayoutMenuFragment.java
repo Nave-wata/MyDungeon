@@ -55,9 +55,9 @@ public class ChangeLayoutMenuFragment extends Fragment {
                 case MotionEvent.ACTION_DOWN: // 押されたとき
                     break;
                 case MotionEvent.ACTION_UP: // 離されたとき
-                    Log.v("My", "hoge");
+                    Log.v("My", "start");
                     new DungeonLayoutFragment().setDungeonPeace();
-                    Log.v("My", "hoge");
+                    Log.v("My", "end");
                     break;
             }
             return true;
