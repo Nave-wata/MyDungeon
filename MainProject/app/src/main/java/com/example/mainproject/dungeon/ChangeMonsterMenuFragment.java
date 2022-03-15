@@ -10,21 +10,17 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mainproject.R;
 
-public class ChangeLayoutMenuFragment extends Fragment {
+public class ChangeMonsterMenuFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_changelayoutmenu, container, false);
-        View aa = view.findViewById(R.id.LayoutMonster);
-        LayoutMonsterTab layoutMonsterTab = new LayoutMonsterTab(this);
-        aa.
-        return view;
+        return inflater.inflate(R.layout.fragment_changemonstermenu, container, false);
     }
 
     @NonNull
-    public static ChangeLayoutMenuFragment newInstance(String str){
-        ChangeLayoutMenuFragment fragment = new ChangeLayoutMenuFragment();
+    public static ChangeMonsterMenuFragment newInstance(String str){
+        ChangeMonsterMenuFragment fragment = new ChangeMonsterMenuFragment();
         Bundle barg = new Bundle();
         barg.putString(fragment.EXTRA_DATA, str);
         fragment.setArguments(barg);
