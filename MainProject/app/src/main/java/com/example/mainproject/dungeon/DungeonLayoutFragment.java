@@ -109,6 +109,7 @@ public class DungeonLayoutFragment extends Fragment {
             this.minY = oneSize * i;
         }
 
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View view, @NonNull MotionEvent motionEvent) {
             int newDx = (int) (motionEvent.getRawX() / oneSize) * oneSize;
@@ -132,6 +133,7 @@ public class DungeonLayoutFragment extends Fragment {
                         canMoveCount++;
                         if (canMoveCount == 2) {
                             canMoveFlag = true;
+                            dungeonPeaces[i][j].setZ(1);
                             setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/selectWall.png");
                         }
                         break;
@@ -139,6 +141,7 @@ public class DungeonLayoutFragment extends Fragment {
                         if (canMoveCount == 2) {
                             canMoveCount = 0;
                             canMoveFlag = false;
+                            dungeonPeaces[i][j].setZ(0);
                             setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/wall.png");
                         }
                         break;
