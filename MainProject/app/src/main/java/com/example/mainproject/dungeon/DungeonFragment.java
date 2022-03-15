@@ -3,11 +3,9 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,8 +19,6 @@ public class DungeonFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
     private Button changeLayoutButton;
-    private static ImageView dungeonPeace;
-    private static int preDx, preDy;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,8 +41,6 @@ public class DungeonFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        dungeonPeace = view.findViewById(R.id.dungeonPeace);
 
         Button createFlorButton = view.findViewById(R.id.createFlorButton);
         createFlorButton.setOnClickListener(v -> {
@@ -85,41 +79,5 @@ public class DungeonFragment extends Fragment {
         barg.putString(fragment.EXTRA_DATA, str);
         fragment.setArguments(barg);
         return fragment;
-    }
-
-    public static class onTouchListener implements View.OnTouchListener {
-        final ImageView wallImage;
-
-        public onTouchListener(ImageView wallImage) {
-            this.wallImage = wallImage;
-            dungeonPeace = wallImage;
-        }
-
-        @Override
-        public boolean onTouch(View view, @NonNull MotionEvent motionEvent) {
-            int newDx = (int) motionEvent.getRawX();
-            int newDy = (int) motionEvent.getRawY();
-
-            switch (motionEvent.getAction()) {
-                case MotionEvent.ACTION_MOVE:
-                    view.performClick();
-                    int dx = dungeonPeace.getLeft() + (newDx - preDx); // ここの0はsetXでかわってまう
-                    int dy = dungeonPeace.getTop() + (newDy - preDy);  // ここの0はsetYでかわってまう
-                    int imgW = dx + dungeonPeace.getWidth();
-                    int imgH = dy + dungeonPeace.getHeight();
-                    dungeonPeace.layout(dx, dy, imgW, imgH);
-                    break;
-                case MotionEvent.ACTION_DOWN:
-                    // nothing to do
-                    break;
-                case MotionEvent.ACTION_UP:
-                    // nothing to do
-                    break;
-            }
-
-            preDx = newDx;
-            preDy = newDy;
-            return true;
-        }
     }
 }

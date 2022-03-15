@@ -1,5 +1,6 @@
 package com.example.mainproject.dungeon;
 
+import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import java.util.Objects;
 public class ChangeLayoutMenuFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
 
+    @SuppressLint("Range")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_changelayoutmenu, container, false);
@@ -25,7 +27,6 @@ public class ChangeLayoutMenuFragment extends Fragment {
         SetImage setImage = new SetImage(assetManager);
 
         ImageView dungeonWall = view.findViewById(R.id.dungeonLayout);
-        dungeonWall.setOnTouchListener(new DungeonFragment.onTouchListener(dungeonWall));
         setImage.setImageViewBitmapFromAsset(dungeonWall, "dungeon/dungeonWall.png");
 
         return view;

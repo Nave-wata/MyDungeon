@@ -25,6 +25,7 @@ public class DungeonLayoutFragment extends Fragment {
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
     private SetImage setImage;
+    private ImageView dungeonPeace;
     private int preDx, preDy;
     private int oneSize;
     private int maxSize;
@@ -65,6 +66,9 @@ public class DungeonLayoutFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dungeonlayout, container, false);
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
+
+        dungeonPeace = view.findViewById(R.id.dungeonPeace);
+        dungeonPeace.setOnTouchListener(new SetViewOnTouchListener(dungeonPeace));
 
         for (int i = 0; i < widthNum; i++) {
             for (int j = 0; j < heightNum; j++) {
@@ -142,6 +146,44 @@ public class DungeonLayoutFragment extends Fragment {
                         break;
                 }
             }
+            return true;
+        }
+    }
+
+
+    public class SetViewOnTouchListener implements View.OnTouchListener {
+        final ImageView wallImage;
+
+        public SetViewOnTouchListener(ImageView wallImage) {
+            this.wallImage = wallImage;
+        }
+
+        @Override
+        public boolean onTouch(View view, @NonNull MotionEvent motionEvent) {
+            int newDx = (int) (motionEvent.getRawX() / oneSize) * oneSize;
+            int newDy = (int) (motionEvent.getRawY() / oneSize) * oneSize;
+
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_MOVE:
+                    view.performClick();
+                    int dx = wallImage.getLeft() + (newDx - preDx); // ここの0はsetXでかわってまう
+                    int dy = wallImage.getTop() + (newDy - preDy);  // ここの0はsetYでかわってまう
+                    int imgW = dx + wallImage.getWidth();
+                    int imgH = dy + wallImage.getHeight();
+                    if (0 <= dx && dx < maxSize && 0 <= dy && dy < maxSize) {
+                        wallImage.layout(dx, dy, imgW, imgH);
+                    }
+                    break;
+                case MotionEvent.ACTION_DOWN:
+                    // nothing to do
+                    break;
+                case MotionEvent.ACTION_UP:
+                    // nothing to do
+                    break;
+            }
+
+            preDx = newDx;
+            preDy = newDy;
             return true;
         }
     }
