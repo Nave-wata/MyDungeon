@@ -33,7 +33,8 @@ public class ConfirmCreateDungeonDialog extends DialogFragment {
         setImage.setImageViewBitmapFromAsset(ic_right, "dungeon/DP_change.png");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
-        builder.setPositiveButton("test", null);
+        builder.setPositiveButton(getString(R.string.DialogPositiveText), null);
+        builder.setNeutralButton(getString(R.string.DialogNegativeText), null);
         return builder.create();
     }
 }
