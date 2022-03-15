@@ -26,4 +26,6 @@
     <string name="ConfirmCreateFlor">DPを消費して階層を追加します．よろしいですか？</string>
     <string name="NotChangeLayout">編集</string>
     <string name="saveLayout">保存</string>
+    <string name="deleteWall">DPを消費してダンジョンを拡張します．よろしいですか？</string>
+    <string name="createDungeonWall">DPを消費して壁を設置します．</string>
 </resources>
