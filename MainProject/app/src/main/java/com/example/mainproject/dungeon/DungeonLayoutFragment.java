@@ -25,7 +25,7 @@ public class DungeonLayoutFragment extends Fragment {
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
     private SetImage setImage;
-    private ImageView dungeonPeace;
+    private static ImageView dungeonPeace;
     private int preDx, preDy;
     private int oneSize;
     private int maxSize;
@@ -68,7 +68,6 @@ public class DungeonLayoutFragment extends Fragment {
         setImage = new SetImage(assetManager);
 
         dungeonPeace = view.findViewById(R.id.dungeonPeace);
-        dungeonPeace.setOnTouchListener(new SetViewOnTouchListener(dungeonPeace));
 
         for (int i = 0; i < widthNum; i++) {
             for (int j = 0; j < heightNum; j++) {
@@ -107,6 +106,12 @@ public class DungeonLayoutFragment extends Fragment {
         //layout.addView(dungeonPeaces[0][0]);
         //layout.addView(dungeonPeaces[10][10]);
         return layout.getRootView();
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    public void setDungeonPeace() {
+        setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/dungeonWall.png");
+        dungeonPeace.setOnTouchListener(new SetViewOnTouchListener(dungeonPeace));
     }
 
     @NonNull
@@ -156,6 +161,7 @@ public class DungeonLayoutFragment extends Fragment {
 
         public SetViewOnTouchListener(ImageView wallImage) {
             this.wallImage = wallImage;
+            setImage.setImageViewBitmapFromAsset(this.wallImage, "dungeon/dungeonWall.png");
         }
 
         @Override
