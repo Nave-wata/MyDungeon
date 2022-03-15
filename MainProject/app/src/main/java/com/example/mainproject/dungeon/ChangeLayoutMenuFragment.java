@@ -16,9 +16,6 @@ public class ChangeLayoutMenuFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_changelayoutmenu, container, false);
-        View aa = view.findViewById(R.id.LayoutMonster);
-        LayoutMonsterTab layoutMonsterTab = new LayoutMonsterTab(this);
-        aa.
         return view;
     }
 
