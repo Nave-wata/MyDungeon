@@ -25,6 +25,7 @@ public class DungeonLayoutFragment extends Fragment {
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
     private static SetImage setImage;
+    @SuppressLint("StaticFieldLeak")
     private static ImageView dungeonPeace;
     private int preDx, preDy;
     private int oneSize;

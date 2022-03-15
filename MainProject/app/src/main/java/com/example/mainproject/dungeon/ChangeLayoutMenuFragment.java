@@ -43,7 +43,7 @@ public class ChangeLayoutMenuFragment extends Fragment {
         return fragment;
     }
 
-    private class onTouchListener implements View.OnTouchListener {
+    private static class onTouchListener implements View.OnTouchListener {
 
         @SuppressLint("ClickableViewAccessibility")
         @Override
