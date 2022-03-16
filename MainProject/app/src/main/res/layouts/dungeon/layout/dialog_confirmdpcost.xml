@@ -5,12 +5,11 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/ConfirmCreateDungeonTitle"
+        android:id="@+id/ConfirmDPCostTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/ConfirmCreateFlor" />
+        android:layout_gravity="center_horizontal"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -19,27 +18,27 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/ConfirmCreateDungeonDialog_ic_DP"
+            android:id="@+id/ConfirmDPCost_ic_DP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"/>
 
         <TextView
-            android:id="@+id/ConfirmCreateDungeonDialog_before_DP"
+            android:id="@+id/ConfirmDPCost_before_DP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_gravity="center_vertical"/>
 
         <ImageView
-            android:id="@+id/ConfirmCreateDungeonDialog_right_ic"
+            android:id="@+id/ConfirmDPCost_right_ic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"/>
 
 
         <TextView
-            android:id="@+id/ConfirmCreateDungeonDialog_after_DP"
+            android:id="@+id/ConfirmDPCost_after_DP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"

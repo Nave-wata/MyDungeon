@@ -3,9 +3,11 @@ package com.example.mainproject;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -21,6 +23,8 @@ public class SetImage {
 
         try {
             istr = assetManager.open(strName);
+        } catch (FileNotFoundException ffe) {
+            Log.v("[Exception]", "FileNotFoundException");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,7 +38,9 @@ public class SetImage {
 
         try {
             istr = assetManager.open(strName);
-        } catch (IOException e) {
+        } catch (FileNotFoundException ffe) {
+            Log.v("[Exception]", "FileNotFoundException");
+        }  catch (IOException e) {
             e.printStackTrace();
         }
 
