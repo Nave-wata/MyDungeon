@@ -3,7 +3,6 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,7 +25,6 @@ public class DungeonLayoutFragment extends Fragment {
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
     private static SetImage setImage;
-    @SuppressLint("StaticFieldLeak")
     private static ImageView dungeonPeace;
     private int preDx, preDy;
     private int oneSize;
@@ -77,6 +75,7 @@ public class DungeonLayoutFragment extends Fragment {
                 }
             }
         }
+        dungeonPeace  = new ImageView(getContext());
 
         topContainer = view.findViewById(R.id.fragment_dungeonLayout);
         globalLayoutListener = () -> {
@@ -93,11 +92,13 @@ public class DungeonLayoutFragment extends Fragment {
                     dungeonPeaces[i][j].setY(oneSize * i);
                 }
             }
+
+            dungeonPeace.setLayoutParams(layoutParams);
+            dungeonPeace.setX((int) (maxSize / 2));
+            dungeonPeace.setY((int) (maxSize / 2));
+            dungeonPeace.setOnTouchListener(new SetViewOnTouchListener(dungeonPeace, maxSize / 2, maxSize / 2));
         };
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
-
-        dungeonPeace = view.findViewById(R.id.dungeonPeace);
-        dungeonPeace.setOnTouchListener(new SetViewOnTouchListener(dungeonPeace));
 
         layout.addView(view);
         for (int i = 0; i < widthNum; i++) {
@@ -105,6 +106,7 @@ public class DungeonLayoutFragment extends Fragment {
                 layout.addView(dungeonPeaces[i][j]);
             }
         }
+        layout.addView(dungeonPeace);
         return layout.getRootView();
     }
 
@@ -157,7 +159,6 @@ public class DungeonLayoutFragment extends Fragment {
                     case MotionEvent.ACTION_MOVE:
                         break;
                     case MotionEvent.ACTION_DOWN: // 押されたとき
-                        Log.v("onTouchListener", "ACTION_DOWN");
                         break;
                     case MotionEvent.ACTION_UP: // 離されたとき
                         if (changeLayoutFlag) {
@@ -176,9 +177,13 @@ public class DungeonLayoutFragment extends Fragment {
 
     public class SetViewOnTouchListener implements View.OnTouchListener {
         final ImageView wallImage;
+        final int setX;
+        final int setY;
 
-        public SetViewOnTouchListener(ImageView wallImage) {
+        public SetViewOnTouchListener(ImageView wallImage, int setX, int setY) {
             this.wallImage = wallImage;
+            this.setX = setX;
+            this.setY = setY;
         }
 
         @Override
@@ -188,20 +193,19 @@ public class DungeonLayoutFragment extends Fragment {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_MOVE:
                     view.performClick();
-                    int dx = wallImage.getLeft() + (newDx - preDx); // ここの0はsetXでかわってまう
-                    int dy = wallImage.getTop() + (newDy - preDy);  // ここの0はsetYでかわってまう
+                    int dx = wallImage.getLeft() + (newDx - preDx);
+                    int dy = wallImage.getTop() + (newDy - preDy);
                     int imgW = dx + wallImage.getWidth();
                     int imgH = dy + wallImage.getHeight();
-                    if (0 <= dx && dx < maxSize && 0 <= dy && dy < maxSize) {
+                    if (-setX <= dx && dx < maxSize - setX && -setY <= dy && dy < maxSize - setY) {
                         wallImage.layout(dx, dy, imgW, imgH);
                     }
                     break;
                 case MotionEvent.ACTION_DOWN:
-                    Log.v("SetOnTouchListener", "ACTION_DOWN");
                     // nothing to do
                     break;
                 case MotionEvent.ACTION_UP:
-                    // nothing to do
+                    //setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
                     break;
             }
 
