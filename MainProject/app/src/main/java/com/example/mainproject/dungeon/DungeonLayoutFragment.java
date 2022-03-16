@@ -160,8 +160,13 @@ public class DungeonLayoutFragment extends Fragment {
                     case MotionEvent.ACTION_UP: // 離されたとき
                         if (changeLayoutFlag) {
                             if (dungeonInfo[i][j] == 1) {
-                                DeleteWallDialog deleteWallDialog = new DeleteWallDialog(i, j);
-                                deleteWallDialog.show(Objects.requireNonNull(getFragmentManager()), "DeleteWallDialog");
+                                ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(n-> {
+                                    if (n == 0) {
+                                        setImage.setImageViewBitmapFromAsset(DungeonLayoutFragment.dungeonPeaces[i][j], "");
+                                        DungeonLayoutFragment.dungeonInfo[i][j] = 0;
+                                    }
+                                });
+                                confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), "deleteDungeonWall");
                             }
                         }
                         break;
@@ -204,7 +209,7 @@ public class DungeonLayoutFragment extends Fragment {
                     // nothing to do
                     break;
                 case MotionEvent.ACTION_UP:
-                    SetDungeonWallDialog setDungeonWallDialog = new SetDungeonWallDialog(
+                    SetDungeonPeaceDialog setDungeonPeaceDialog = new SetDungeonPeaceDialog(
                             b->{
                                 if (b) {
                                     setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
@@ -219,7 +224,7 @@ public class DungeonLayoutFragment extends Fragment {
                                 }
                             }
                     );
-                    setDungeonWallDialog.show(Objects.requireNonNull(getFragmentManager()), "SetDungeonWallDialog");
+                    setDungeonPeaceDialog.show(Objects.requireNonNull(getFragmentManager()), "SetDungeonWallDialog");
                     break;
             }
 

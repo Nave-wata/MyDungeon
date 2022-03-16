@@ -44,8 +44,8 @@ public class DungeonFragment extends Fragment {
 
         Button createFlorButton = view.findViewById(R.id.createFlorButton);
         createFlorButton.setOnClickListener(v -> {
-            ConfirmCreateDungeonDialog confirmCreateDungeonDialog = new ConfirmCreateDungeonDialog();
-            confirmCreateDungeonDialog.show(Objects.requireNonNull(getFragmentManager()), "ConfirmCreateDungeonDialog");
+            ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(n->{});
+            confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), "ConfirmCreateDungeonDialog");
         });
         changeLayoutButton = view.findViewById(R.id.changeLayout);
         changeLayoutButton.setOnClickListener(v -> {
