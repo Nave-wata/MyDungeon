@@ -1,5 +1,6 @@
 package com.example.mainproject.dungeon;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -30,6 +31,7 @@ public class DeleteWallDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        @SuppressLint("InflateParams")
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_deletewall, null);
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
