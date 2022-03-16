@@ -72,9 +72,12 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.0.0-alpha02'
 
     def room_version = "2.4.1"
+    //noinspection GradleDependency
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
-    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha06"
-    implementation "androidx.datastore:datastore-preferences-rxjava3:1.0.0-alpha06"
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "androidx.datastore:datastore-preferences-rxjava3:1.0.0"
+
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
 }

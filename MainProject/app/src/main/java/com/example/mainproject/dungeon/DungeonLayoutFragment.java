@@ -24,23 +24,41 @@ public class DungeonLayoutFragment extends Fragment {
     private String UserName;
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
-    private SetImage setImage;
+    @SuppressLint("StaticFieldLeak")
+    private static ImageView dungeonPeace;
+    private static SetImage setImage;
     private int preDx, preDy;
     private int oneSize;
     private int maxSize;
-    private final int widthNum = 20;
-    private final ImageView[] dungeonPeaces = new ImageView[widthNum * widthNum];
-    private final int[] dungeonPeacesId = new int[widthNum * widthNum];
+    private static final int widthNum = 20;
+    private static final int heightNum = 20;
+    public static final ImageView[][] dungeonPeaces = new ImageView[widthNum][heightNum];
+    public static final int[][] dungeonInfo = new int[widthNum][heightNum];
     public static boolean changeLayoutFlag = false;
-    private boolean canMoveFlag = false;
-    private int canMoveCount = 0;
-    
+    public static boolean moveLayoutFlag = false;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         UserName = Objects.requireNonNull(args).getString(EXTRA_DATA);
+
+        for (int i = 0; i < widthNum; i++) {
+            for (int j = 0; j < heightNum; j++) {
+                if (i == 1 || i == 2 || i == 3 || i == 4) {
+                    if (j == 8 || j == 9 || j == 10 || j == 11) {
+                        dungeonInfo[i][j] = 0;
+                    } else {
+                        dungeonInfo[i][j] = 1;
+                    }
+                } else if (j == 9 || j == 10) {
+                    dungeonInfo[i][j] = 0;
+                } else {
+                    dungeonInfo[i][j] = 1;
+                }
+            }
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -52,14 +70,14 @@ public class DungeonLayoutFragment extends Fragment {
         setImage = new SetImage(assetManager);
 
         for (int i = 0; i < widthNum; i++) {
-            for (int j = 0; j < widthNum; j++) {
-                int num = 20 * i + j;
-                dungeonPeacesId[num] = View.generateViewId();
-                dungeonPeaces[num] = new ImageView(getContext());
-                dungeonPeaces[num].setId(dungeonPeacesId[num]);
-                setImage.setImageViewBitmapFromAsset(dungeonPeaces[num], "dungeon/wall.png");
+            for (int j = 0; j < heightNum; j++) {
+                dungeonPeaces[i][j] = new ImageView(getContext());
+                if (dungeonInfo[i][j] == 1) {
+                    setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/wall.png");
+                }
             }
         }
+        dungeonPeace  = new ImageView(getContext());
 
         topContainer = view.findViewById(R.id.fragment_dungeonLayout);
         globalLayoutListener = () -> {
@@ -70,26 +88,48 @@ public class DungeonLayoutFragment extends Fragment {
 
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
             for (int i = 0; i < widthNum; i++) {
-                for (int j = 0; j < widthNum; j++) {
-                    int num = 20 * i + j;
-                    dungeonPeaces[num].setLayoutParams(layoutParams);
-                    dungeonPeaces[num].setX(oneSize * j);
-                    dungeonPeaces[num].setY(oneSize * i);
-                    dungeonPeaces[num].setOnTouchListener(new onTouchListener(dungeonPeaces[num], oneSize * j, oneSize * i));
+                for (int j = 0; j < heightNum; j++) {
+                    dungeonPeaces[i][j].setLayoutParams(layoutParams);
+                    dungeonPeaces[i][j].setX(oneSize * j);
+                    dungeonPeaces[i][j].setY(oneSize * i);
                 }
             }
+
+            dungeonPeace.setLayoutParams(layoutParams);
+            dungeonPeace.setX((int) (maxSize / 2));
+            dungeonPeace.setY((int) (maxSize / 2));
+            dungeonPeace.setOnTouchListener(new SetViewOnTouchListener(dungeonPeace, maxSize / 2, maxSize / 2));
         };
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
 
         layout.addView(view);
-        //for (int i = 0; i < widthNum; i++) {
-        //    for (int j = 0; j < widthNum; j++) {
-        //        int num = 20 * i + j;
-        //        layout.addView(dungeonPeaces[num]);
-        //    }
-        //}
-        layout.addView(dungeonPeaces[0]);
+        for (int i = 0; i < widthNum; i++) {
+            for (int j = 0; j < heightNum; j++) {
+                dungeonPeaces[i][j].setOnTouchListener(new onTouchListener(i, j));
+                layout.addView(dungeonPeaces[i][j]);
+            }
+        }
+        layout.addView(dungeonPeace);
         return layout.getRootView();
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    public void setDungeonPeace() { // 引数でImage指定すればいい
+        setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/dungeonWall.png");
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    public void setDungeonPeacesOnTouchListener() {
+        for (int i = 0; i < widthNum; i++) {
+            for (int j = 0; j < heightNum; j++) {
+                dungeonPeaces[i][j].setOnTouchListener(new onTouchListener(i, j)); } }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    public void resetDungeonPeacesOnTouchListener() {
+        for (int i = 0; i < widthNum; i++) {
+            for (int j = 0; j < heightNum; j++) {
+                dungeonPeaces[i][j].setOnTouchListener(null); } }
     }
 
     @NonNull
@@ -102,54 +142,103 @@ public class DungeonLayoutFragment extends Fragment {
     }
 
     private class onTouchListener implements View.OnTouchListener {
-        final ImageView wallImage;
-        final int minX;
-        final int minY;
+        final int i;
+        final int j;
 
-        public onTouchListener(ImageView wallImage, int minX, int minY) {
+        public onTouchListener(int i, int j) {
+            this.i = i;
+            this.j = j;
+        }
+
+        @SuppressLint("ClickableViewAccessibility")
+        @Override
+        public boolean onTouch(View view, @NonNull MotionEvent motionEvent) {
+            if (changeLayoutFlag) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_MOVE:
+                        break;
+                    case MotionEvent.ACTION_DOWN: // 押されたとき
+                        break;
+                    case MotionEvent.ACTION_UP: // 離されたとき
+                        if (changeLayoutFlag) {
+                            if (dungeonInfo[i][j] == 1) {
+                                ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(
+                                        "deleteWall",
+                                        n -> {
+                                            if (n == 0) {
+                                                setImage.setImageViewBitmapFromAsset(DungeonLayoutFragment.dungeonPeaces[i][j], "");
+                                                DungeonLayoutFragment.dungeonInfo[i][j] = 0;
+                                            }
+                                        });
+                                confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), "deleteDungeonWall");
+                            }
+                        }
+                        break;
+                }
+            }
+            return true;
+        }
+    }
+
+
+    public class SetViewOnTouchListener implements View.OnTouchListener {
+        final ImageView wallImage;
+        final int setX;
+        final int setY;
+        int dx;
+        int dy;
+
+        public SetViewOnTouchListener(ImageView wallImage, int setX, int setY) {
             this.wallImage = wallImage;
-            this.minX = minX;
-            this.minY = minY;
+            this.setX = setX;
+            this.setY = setY;
         }
 
         @Override
         public boolean onTouch(View view, @NonNull MotionEvent motionEvent) {
+            if (!moveLayoutFlag) { return true; }
+
             int newDx = (int) (motionEvent.getRawX() / oneSize) * oneSize;
             int newDy = (int) (motionEvent.getRawY() / oneSize) * oneSize;
-
-            if (changeLayoutFlag) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_MOVE:
-                        if (canMoveFlag) {
-                            view.performClick();
-                            int dx = wallImage.getLeft() + (newDx - preDx);
-                            int dy = wallImage.getTop() + (newDy - preDy);
-                            int imgW = dx + wallImage.getWidth();
-                            int imgH = dy + wallImage.getHeight();
-                            if (-minX <= dx && dx < maxSize - minX && -minY <= dy && dy < maxSize - minY) {
-                                wallImage.layout(dx, dy, imgW, imgH);
-                            }
-                        }
-                        break;
-                    case MotionEvent.ACTION_DOWN: // 押されたとき
-                        canMoveCount++;
-                        if (canMoveCount == 2) {
-                            canMoveFlag = true;
-                            setImage.setImageViewBitmapFromAsset(wallImage, "dungeon/selectWall.png");
-                        }
-                        break;
-                    case MotionEvent.ACTION_UP: // 離されたとき
-                        if (canMoveCount == 2) {
-                            canMoveCount = 0;
-                            canMoveFlag = false;
-                            setImage.setImageViewBitmapFromAsset(wallImage, "dungeon/wall.png");
-                        }
-                        break;
-                }
-
-                preDx = newDx;
-                preDy = newDy;
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_MOVE:
+                    view.performClick();
+                    dx = wallImage.getLeft() + (newDx - preDx);
+                    dy = wallImage.getTop() + (newDy - preDy);
+                    int imgW = dx + wallImage.getWidth();
+                    int imgH = dy + wallImage.getHeight();
+                    if (-setX <= dx && dx < maxSize - setX && -setY <= dy && dy < maxSize - setY) {
+                        wallImage.layout(dx, dy, imgW, imgH);
+                    }
+                    break;
+                case MotionEvent.ACTION_DOWN:
+                    // nothing to do
+                    break;
+                case MotionEvent.ACTION_UP:
+                    int j = (setX + dx) / oneSize;
+                    int i = (setY + dy) / oneSize;
+                    if (dungeonInfo[i][j] == 0) {
+                        SetDungeonPeaceDialog setDungeonPeaceDialog = new SetDungeonPeaceDialog(
+                                b -> {
+                                    if (b) {
+                                        setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
+                                        setDungeonPeacesOnTouchListener();
+                                        setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonWall.png");
+                                        dungeonInfo[i][j] = 2;
+                                    } else {
+                                        setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
+                                        setDungeonPeacesOnTouchListener();
+                                    }
+                                    moveLayoutFlag = false;
+                                }
+                        );
+                        setDungeonPeaceDialog.show(Objects.requireNonNull(getFragmentManager()), "SetDungeonWallDialog");
+                    }
+                    break;
             }
+
+            preDx = newDx;
+            preDy = newDy;
             return true;
         }
     }
