@@ -25,8 +25,8 @@ public class DungeonLayoutFragment extends Fragment {
     private String UserName;
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
-    private static SetImage setImage;
     private static ImageView dungeonPeace;
+    private static SetImage setImage;
     private int preDx, preDy;
     private int oneSize;
     private int maxSize;
@@ -207,10 +207,12 @@ public class DungeonLayoutFragment extends Fragment {
                 case MotionEvent.ACTION_UP:
                     setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
                     setDungeonPeacesOnToucheListener();
-                    Log.v("positionX", "" + (setX + dx));
-                    Log.v("positionY", "" + (setY + dy));
-                    Log.v("num I", "" + (setX + dx) / oneSize);
-                    Log.v("num J", "" + (setY + dy) / oneSize);
+                    int j = (setX + dx) / oneSize;
+                    int i = (setY + dy) / oneSize;
+                    Log.v("num I", "" + i);
+                    Log.v("num J", "" + j);
+                    setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonWall.png");
+                    dungeonInfo[i][j] = 1;
                     break;
             }
 
