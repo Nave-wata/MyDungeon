@@ -44,7 +44,8 @@ public class SetDungeonWallDialog  extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
         builder.setPositiveButton(getString(R.string.DialogPositiveText), new onClickListener(0));
-        builder.setNeutralButton(getString(R.string.DialogNegativeText), new onClickListener(1));
+        builder.setNegativeButton(getString(R.string.DialogNegativeText), new onClickListener(1));
+        builder.setNeutralButton(getString(R.string.DialogNeutralText), null);
         return builder.create();
     }
 
@@ -58,8 +59,13 @@ public class SetDungeonWallDialog  extends DialogFragment {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         public void onClick(DialogInterface dialogInterface, int n) {
-            if (Id == 0) {
-                callback.accept(true);
+            switch (Id) {
+                case 0:
+                    callback.accept(true);
+                    break;
+                case 1:
+                    callback.accept(false);
+                    break;
             }
         }
     }
