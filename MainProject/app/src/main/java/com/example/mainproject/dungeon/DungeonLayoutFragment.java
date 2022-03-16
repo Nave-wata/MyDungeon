@@ -103,6 +103,7 @@ public class DungeonLayoutFragment extends Fragment {
         layout.addView(view);
         for (int i = 0; i < widthNum; i++) {
             for (int j = 0; j < heightNum; j++) {
+                dungeonPeaces[i][j].setOnTouchListener(new onTouchListener(i, j));
                 layout.addView(dungeonPeaces[i][j]);
             }
         }
@@ -205,7 +206,8 @@ public class DungeonLayoutFragment extends Fragment {
                     // nothing to do
                     break;
                 case MotionEvent.ACTION_UP:
-                    //setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
+                    setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
+                    setDungeonPeacesOnToucheListener();
                     break;
             }
 
