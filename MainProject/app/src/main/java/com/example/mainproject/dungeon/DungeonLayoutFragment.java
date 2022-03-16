@@ -204,12 +204,17 @@ public class DungeonLayoutFragment extends Fragment {
                     // nothing to do
                     break;
                 case MotionEvent.ACTION_UP:
-                    setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
-                    setDungeonPeacesOnTouchListener();
-                    int j = (setX + dx) / oneSize;
-                    int i = (setY + dy) / oneSize;
-                    setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonWall.png");
-                    dungeonInfo[i][j] = 2;
+                    SetDungeonWallDialog setDungeonWallDialog = new SetDungeonWallDialog(
+                            b->{
+                                setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
+                                setDungeonPeacesOnTouchListener();
+                                int j = (setX + dx) / oneSize;
+                                int i = (setY + dy) / oneSize;
+                                setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonWall.png");
+                                dungeonInfo[i][j] = 2;
+                            }
+                    );
+                    setDungeonWallDialog.show(Objects.requireNonNull(getFragmentManager()), "SetDungeonWallDialog");
                     break;
             }
 
