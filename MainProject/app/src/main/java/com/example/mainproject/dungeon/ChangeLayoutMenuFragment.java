@@ -54,6 +54,7 @@ public class ChangeLayoutMenuFragment extends Fragment {
                 case MotionEvent.ACTION_DOWN:
                     break;
                 case MotionEvent.ACTION_UP:
+                    DungeonLayoutFragment.moveLayoutFlag = true;
                     new DungeonLayoutFragment().resetDungeonPeacesOnTouchListener();
                     new DungeonLayoutFragment().setDungeonPeace();
                     break;

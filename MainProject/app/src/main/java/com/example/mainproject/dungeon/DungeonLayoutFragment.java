@@ -24,6 +24,7 @@ public class DungeonLayoutFragment extends Fragment {
     private String UserName;
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
+    @SuppressLint("StaticFieldLeak")
     private static ImageView dungeonPeace;
     private static SetImage setImage;
     private int preDx, preDy;
@@ -34,6 +35,7 @@ public class DungeonLayoutFragment extends Fragment {
     public static final ImageView[][] dungeonPeaces = new ImageView[widthNum][heightNum];
     public static final int[][] dungeonInfo = new int[widthNum][heightNum];
     public static boolean changeLayoutFlag = false;
+    public static boolean moveLayoutFlag = false;
 
 
     @Override
@@ -194,6 +196,8 @@ public class DungeonLayoutFragment extends Fragment {
 
         @Override
         public boolean onTouch(View view, @NonNull MotionEvent motionEvent) {
+            if (!moveLayoutFlag) { return true; }
+
             int newDx = (int) (motionEvent.getRawX() / oneSize) * oneSize;
             int newDy = (int) (motionEvent.getRawY() / oneSize) * oneSize;
             switch (motionEvent.getAction()) {
@@ -225,6 +229,7 @@ public class DungeonLayoutFragment extends Fragment {
                                         setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
                                         setDungeonPeacesOnTouchListener();
                                     }
+                                    moveLayoutFlag = false;
                                 }
                         );
                         setDungeonPeaceDialog.show(Objects.requireNonNull(getFragmentManager()), "SetDungeonWallDialog");
