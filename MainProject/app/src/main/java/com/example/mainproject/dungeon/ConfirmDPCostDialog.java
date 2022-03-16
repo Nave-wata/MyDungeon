@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,9 +22,11 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class ConfirmDPCostDialog extends DialogFragment {
+    final int text;
     final Consumer<Integer> callback;
 
-    public ConfirmDPCostDialog(Consumer<Integer> callback) {
+    public ConfirmDPCostDialog(int text, Consumer<Integer> callback) {
+        this.text = text;
         this.callback = callback;
     }
 
@@ -37,8 +40,19 @@ public class ConfirmDPCostDialog extends DialogFragment {
 
         ImageView ic_DP = view.findViewById(R.id.ConfirmDPCost_ic_DP);
         ImageView ic_right = view.findViewById(R.id.ConfirmDPCost_right_ic);
+        TextView title = view.findViewById(R.id.ConfirmDPCostTitle);
         TextView before_DP_text = view.findViewById(R.id.ConfirmDPCost_before_DP);
         TextView after_DP_text = view.findViewById(R.id.ConfirmDPCost_after_DP);
+
+        Log.v("My Text", "" + text);
+        switch (text) {
+            case 0:
+                title.setText(getString(R.string.ConfirmCreateFlor));
+            case 1:
+                title.setText(getString(R.string.deleteWall));
+            default:
+                title.setText("hoge");
+        }
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_right, "dungeon/DP_change.png");

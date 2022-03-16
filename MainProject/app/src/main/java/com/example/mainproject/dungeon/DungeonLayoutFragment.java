@@ -160,12 +160,14 @@ public class DungeonLayoutFragment extends Fragment {
                     case MotionEvent.ACTION_UP: // 離されたとき
                         if (changeLayoutFlag) {
                             if (dungeonInfo[i][j] == 1) {
-                                ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(n-> {
-                                    if (n == 0) {
-                                        setImage.setImageViewBitmapFromAsset(DungeonLayoutFragment.dungeonPeaces[i][j], "");
-                                        DungeonLayoutFragment.dungeonInfo[i][j] = 0;
-                                    }
-                                });
+                                ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(
+                                        0,
+                                        n -> {
+                                            if (n == 0) {
+                                                setImage.setImageViewBitmapFromAsset(DungeonLayoutFragment.dungeonPeaces[i][j], "");
+                                                DungeonLayoutFragment.dungeonInfo[i][j] = 0;
+                                            }
+                                        });
                                 confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), "deleteDungeonWall");
                             }
                         }
