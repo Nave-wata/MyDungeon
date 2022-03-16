@@ -19,6 +19,7 @@ public class DungeonFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
     private Button changeLayoutButton;
+    private boolean changeLayoutFlag = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,15 +50,16 @@ public class DungeonFragment extends Fragment {
         });
         changeLayoutButton = view.findViewById(R.id.changeLayout);
         changeLayoutButton.setOnClickListener(v -> {
-            if (DungeonLayoutFragment.changeLayoutFlag) {
-                DungeonLayoutFragment.changeLayoutFlag = false;
-                new DungeonLayoutFragment().resetDungeonPeacesOnToucheListener();
+            if (changeLayoutFlag) {
+                changeLayoutFlag = false;
+                new DungeonLayoutFragment().resetDungeonPeacesOnTouchListener();
                 changeLayoutButton.setText(getString(R.string.NotChangeLayout));
                 FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
                 fragmentTransaction.replace(R.id.ChangeLayoutContainer, DisplayFloorFragment.newInstance(UserName));
                 fragmentTransaction.commit();
             } else {
-                DungeonLayoutFragment.changeLayoutFlag = true;
+                changeLayoutFlag = true;
+                new DungeonLayoutFragment().setDungeonPeacesOnTouchListener();
                 changeLayoutButton.setText(getString(R.string.saveLayout));
                 FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
                 fragmentTransaction.replace(R.id.ChangeLayoutContainer, ChangeLayoutMenuFragment.newInstance(UserName));
@@ -69,7 +71,7 @@ public class DungeonFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        DungeonLayoutFragment.changeLayoutFlag = false;
+        changeLayoutFlag = false;
         changeLayoutButton.setText(getString(R.string.NotChangeLayout));
     }
 
