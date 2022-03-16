@@ -3,6 +3,7 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -120,18 +121,14 @@ public class DungeonLayoutFragment extends Fragment {
     public void setDungeonPeacesOnToucheListener() {
         for (int i = 0; i < widthNum; i++) {
             for (int j = 0; j < heightNum; j++) {
-                dungeonPeaces[i][j].setOnTouchListener(new onTouchListener(i, j));
-            }
-        }
+                dungeonPeaces[i][j].setOnTouchListener(new onTouchListener(i, j)); } }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     public void resetDungeonPeacesOnToucheListener() {
         for (int i = 0; i < widthNum; i++) {
             for (int j = 0; j < heightNum; j++) {
-                dungeonPeaces[i][j].setOnTouchListener(null);
-            }
-        }
+                dungeonPeaces[i][j].setOnTouchListener(null); } }
     }
 
     @NonNull
@@ -180,6 +177,8 @@ public class DungeonLayoutFragment extends Fragment {
         final ImageView wallImage;
         final int setX;
         final int setY;
+        int dx;
+        int dy;
 
         public SetViewOnTouchListener(ImageView wallImage, int setX, int setY) {
             this.wallImage = wallImage;
@@ -194,8 +193,8 @@ public class DungeonLayoutFragment extends Fragment {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_MOVE:
                     view.performClick();
-                    int dx = wallImage.getLeft() + (newDx - preDx);
-                    int dy = wallImage.getTop() + (newDy - preDy);
+                    dx = wallImage.getLeft() + (newDx - preDx);
+                    dy = wallImage.getTop() + (newDy - preDy);
                     int imgW = dx + wallImage.getWidth();
                     int imgH = dy + wallImage.getHeight();
                     if (-setX <= dx && dx < maxSize - setX && -setY <= dy && dy < maxSize - setY) {
@@ -208,6 +207,10 @@ public class DungeonLayoutFragment extends Fragment {
                 case MotionEvent.ACTION_UP:
                     setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
                     setDungeonPeacesOnToucheListener();
+                    Log.v("positionX", "" + (setX + dx));
+                    Log.v("positionY", "" + (setY + dy));
+                    Log.v("num I", "" + (setX + dx) / oneSize);
+                    Log.v("num J", "" + (setY + dy) / oneSize);
                     break;
             }
 
