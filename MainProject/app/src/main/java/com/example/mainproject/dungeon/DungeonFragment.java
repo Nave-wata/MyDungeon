@@ -51,7 +51,6 @@ public class DungeonFragment extends Fragment {
         changeLayoutButton.setOnClickListener(v -> {
             if (DungeonLayoutFragment.changeLayoutFlag) {
                 DungeonLayoutFragment.changeLayoutFlag = false;
-                new DungeonLayoutFragment().resetDungeonPeacesOnTouchListener();
                 changeLayoutButton.setText(getString(R.string.NotChangeLayout));
                 FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
                 fragmentTransaction.replace(R.id.ChangeLayoutContainer, DisplayFloorFragment.newInstance(UserName));
