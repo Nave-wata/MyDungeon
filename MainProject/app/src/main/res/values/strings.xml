@@ -23,7 +23,7 @@
     <string name="errorNotSpace">空白が含まれています</string>
     <string name="errorNotInText">英数字以外が含まれています</string>
     <string name="CreateFlor">階層追加</string>
-    <string name="ConfirmCreateFlor">DPを消費して階層を追加します．よろしいですか？</string>
+    <string name="ConfirmCreateFloor">DPを消費して階層を追加します．よろしいですか？</string>
     <string name="NotChangeLayout">編集</string>
     <string name="saveLayout">保存</string>
     <string name="deleteWall">DPを消費してダンジョンを拡張します．よろしいですか？</string>

@@ -161,7 +161,7 @@ public class DungeonLayoutFragment extends Fragment {
                         if (changeLayoutFlag) {
                             if (dungeonInfo[i][j] == 1) {
                                 ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(
-                                        0,
+                                        "deleteWall",
                                         n -> {
                                             if (n == 0) {
                                                 setImage.setImageViewBitmapFromAsset(DungeonLayoutFragment.dungeonPeaces[i][j], "");
