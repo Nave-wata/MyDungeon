@@ -3,6 +3,7 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -96,7 +97,6 @@ public class DungeonLayoutFragment extends Fragment {
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
 
         dungeonPeace = view.findViewById(R.id.dungeonPeace);
-        setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/dungeonWall.png");
         dungeonPeace.setOnTouchListener(new SetViewOnTouchListener(dungeonPeace));
 
         layout.addView(view);
@@ -111,7 +111,6 @@ public class DungeonLayoutFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     public void setDungeonPeace() { // 引数でImage指定すればいい
         setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/dungeonWall.png");
-        dungeonPeace.setOnTouchListener(new SetViewOnTouchListener(dungeonPeace));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -158,6 +157,7 @@ public class DungeonLayoutFragment extends Fragment {
                     case MotionEvent.ACTION_MOVE:
                         break;
                     case MotionEvent.ACTION_DOWN: // 押されたとき
+                        Log.v("onTouchListener", "ACTION_DOWN");
                         break;
                     case MotionEvent.ACTION_UP: // 離されたとき
                         if (changeLayoutFlag) {
@@ -197,6 +197,7 @@ public class DungeonLayoutFragment extends Fragment {
                     }
                     break;
                 case MotionEvent.ACTION_DOWN:
+                    Log.v("SetOnTouchListener", "ACTION_DOWN");
                     // nothing to do
                     break;
                 case MotionEvent.ACTION_UP:
