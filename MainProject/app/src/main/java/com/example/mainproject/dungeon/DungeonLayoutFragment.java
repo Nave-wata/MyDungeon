@@ -176,13 +176,13 @@ public class DungeonLayoutFragment extends Fragment {
                         if (changeLayoutFlag) {
                             switch (dungeonInfo[i][j]) {
                                 case DungeonFragment.NOT_DUNGEON_WALL:
-                                    setConfirmDPCostDialog(dungeonPeaces[i][j], "deleteWall", i, j);
+                                    ShowConfirmDPCostDialog(dungeonPeaces[i][j], "deleteWall", i, j);
                                     break;
                                 case DungeonFragment.DUNGEON_WALL:
-                                    setConfirmDPCostDialog(dungeonPeaces[i][j], "deleteDungeonWall", i, j);
+                                    ShowConfirmDPCostDialog(dungeonPeaces[i][j], "deleteDungeonWall", i, j);
                                     break;
                                 case DungeonFragment.DUNGEON_TRAP1:
-                                    setConfirmDPCostDialog(dungeonPeaces[i][j], "deleteDungeonTrap1", i, j);
+                                    ShowConfirmDPCostDialog(dungeonPeaces[i][j], "deleteDungeonTrap1", i, j);
                                     break;
                             }
                         }
@@ -192,7 +192,7 @@ public class DungeonLayoutFragment extends Fragment {
             return true;
         }
 
-        private void setConfirmDPCostDialog(ImageView dungeonPeace, String text, int i, int j) {
+        private void ShowConfirmDPCostDialog(ImageView dungeonPeace, String text, int i, int j) {
             ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(
                     text,
                     n -> {
@@ -243,8 +243,15 @@ public class DungeonLayoutFragment extends Fragment {
                     int j = (setX + dx) / oneSize;
                     int i = (setY + dy) / oneSize;
                     if (dungeonInfo[i][j] == DungeonFragment.DUNGEON_NOTHING) {
-                        SetDungeonPeaceDialog setDungeonPeaceDialog = new SetDungeonPeaceDialog(b->setDungeonLayout(b, i, j));
-                        setDungeonPeaceDialog.show(Objects.requireNonNull(getFragmentManager()), "SetDungeonWallDialog");
+
+                        switch (dungeonPeaceType) {
+                            case DungeonFragment.DUNGEON_WALL:
+                                ShowSetDungeonPeaceDialog(i, j, "setDungeonWall");
+                                break;
+                            case DungeonFragment.DUNGEON_TRAP1:
+                                ShowSetDungeonPeaceDialog(i, j, "setDungeonTrap1");
+                        }
+
                     }
                     break;
             }
@@ -252,6 +259,11 @@ public class DungeonLayoutFragment extends Fragment {
             preDx = newDx;
             preDy = newDy;
             return true;
+        }
+
+        public void ShowSetDungeonPeaceDialog(int i, int j, String text) {
+            SetDungeonPeaceDialog setDungeonPeaceDialog = new SetDungeonPeaceDialog(text, b->setDungeonLayout(b, i, j));
+            setDungeonPeaceDialog.show(Objects.requireNonNull(getFragmentManager()), text);
         }
 
         public void setDungeonLayout(boolean b, int i, int j) {
