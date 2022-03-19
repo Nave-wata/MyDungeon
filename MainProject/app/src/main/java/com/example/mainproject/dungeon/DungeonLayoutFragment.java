@@ -164,12 +164,12 @@ public class DungeonLayoutFragment extends Fragment {
                             if (dungeonInfo[i][j] == 1) {
                                 ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(
                                         "deleteWall",
-                                        n -> {
-                                            if (n == 0) {
-                                                setImage.setImageViewBitmapFromAsset(DungeonLayoutFragment.dungeonPeaces[i][j], "");
-                                                DungeonLayoutFragment.dungeonInfo[i][j] = 0;
-                                            }
-                                        });
+                                        n -> deleteDungeonPeaces(n, dungeonPeaces[i][j]));
+                                confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), "deleteWall");
+                            } else if (dungeonInfo[i][j] == 2) {
+                                ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(
+                                        "deleteDungeonWall",
+                                        n -> deleteDungeonPeaces(n, dungeonPeaces[i][j]));
                                 confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), "deleteDungeonWall");
                             }
                         }
@@ -177,6 +177,13 @@ public class DungeonLayoutFragment extends Fragment {
                 }
             }
             return true;
+        }
+
+        private void deleteDungeonPeaces(int n, ImageView dungeonPeace) {
+            if (n == 0) {
+                setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
+                DungeonLayoutFragment.dungeonInfo[i][j] = 0;
+            }
         }
     }
 

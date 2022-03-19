@@ -43,10 +43,16 @@ public class ConfirmDPCostDialog extends DialogFragment {
         TextView before_DP_text = view.findViewById(R.id.ConfirmDPCost_before_DP);
         TextView after_DP_text = view.findViewById(R.id.ConfirmDPCost_after_DP);
 
-        if (text.equals("deleteWall")) {
-            title.setText(getString(R.string.deleteWall));
-        } else if (text.equals("ConfirmCreateFloor")) {
-            title.setText(getString(R.string.ConfirmCreateFloor));
+        switch (text) {
+            case "deleteWall":
+                title.setText(getString(R.string.deleteWall));
+                break;
+            case "ConfirmCreateFloor":
+                title.setText(getString(R.string.ConfirmCreateFloor));
+                break;
+            case "deleteDungeonWall":
+                title.setText(getString(R.string.deleteDungeonWall));
+                break;
         }
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
