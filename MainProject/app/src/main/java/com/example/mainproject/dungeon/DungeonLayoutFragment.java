@@ -174,21 +174,16 @@ public class DungeonLayoutFragment extends Fragment {
                         break;
                     case MotionEvent.ACTION_UP: // 離されたとき
                         if (changeLayoutFlag) {
-                            if (dungeonInfo[i][j] == DungeonFragment.NOT_DUNGEON_WALL) {
-                                ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(
-                                        "deleteWall",
-                                        n -> deleteDungeonPeaces(n, dungeonPeaces[i][j]));
-                                confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), "deleteWall");
-                            } else if (dungeonInfo[i][j] == DungeonFragment.DUNGEON_WALL) {
-                                ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(
-                                        "deleteDungeonWall",
-                                        n -> deleteDungeonPeaces(n, dungeonPeaces[i][j]));
-                                confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), "deleteDungeonWall");
-                            } else if (dungeonInfo[i][j] == DungeonFragment.DUNGEON_TRAP1) {
-                                ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(
-                                        "deleteDungeonTrap1",
-                                        n -> deleteDungeonPeaces(n, dungeonPeaces[i][j]));
-                                confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), "deleteDungeonTrap1");
+                            switch (dungeonInfo[i][j]) {
+                                case DungeonFragment.NOT_DUNGEON_WALL:
+                                    setConfirmDPCostDialog(dungeonPeaces[i][j], "deleteWall", i, j);
+                                    break;
+                                case DungeonFragment.DUNGEON_WALL:
+                                    setConfirmDPCostDialog(dungeonPeaces[i][j], "deleteDungeonWall", i, j);
+                                    break;
+                                case DungeonFragment.DUNGEON_TRAP1:
+                                    setConfirmDPCostDialog(dungeonPeaces[i][j], "deleteDungeonTrap1", i, j);
+                                    break;
                             }
                         }
                         break;
@@ -197,11 +192,16 @@ public class DungeonLayoutFragment extends Fragment {
             return true;
         }
 
-        private void deleteDungeonPeaces(int n, ImageView dungeonPeace) { // 全てまとめる
-            if (n == 0) {
-                setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
-                DungeonLayoutFragment.dungeonInfo[i][j] = 0;
-            }
+        private void setConfirmDPCostDialog(ImageView dungeonPeace, String text, int i, int j) {
+            ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(
+                    text,
+                    n -> {
+                        if (n == 0) {
+                            setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
+                            DungeonLayoutFragment.dungeonInfo[i][j] = 0;
+                        }
+                    });
+            confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), text);
         }
     }
 
