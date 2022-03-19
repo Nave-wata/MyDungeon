@@ -21,23 +21,35 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class SetDungeonPeaceDialog extends DialogFragment {
+    final String text;
     final Consumer<Boolean> callback;
 
-    public SetDungeonPeaceDialog(Consumer<Boolean> callback) {
+    public SetDungeonPeaceDialog(String text, Consumer<Boolean> callback) {
+        this.text = text;
         this.callback = callback;
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_setdungeonwall, null);
+        View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_setdungeonpeace, null);
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
 
-        ImageView ic_DP = view.findViewById(R.id.setDungeonWall_ic_DP);
-        ImageView ic_right = view.findViewById(R.id.setDungeonWall_right_ic);
-        TextView before_DP_text = view.findViewById(R.id.setDungeonWall_before_DP);
-        TextView after_DP_text = view.findViewById(R.id.setDungeonWall_after_DP);
+        ImageView ic_DP = view.findViewById(R.id.setDungeonPeace_ic_DP);
+        ImageView ic_right = view.findViewById(R.id.setDungeonPeace_right_ic);
+        TextView title = view.findViewById(R.id.setDungeonPeaceTitle);
+        TextView before_DP_text = view.findViewById(R.id.setDungeonPeace_before_DP);
+        TextView after_DP_text = view.findViewById(R.id.setDungeonPeace_after_DP);
+
+        switch (text) {
+            case "setDungeonWall":
+                title.setText(getString(R.string.setDungeonWall));
+                break;
+            case "setDungeonTrap1":
+                title.setText(getString(R.string.setDungeonTrap1));
+                break;
+        }
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_right, "dungeon/DP_change.png");
