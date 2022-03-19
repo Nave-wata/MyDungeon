@@ -3,7 +3,6 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,8 +30,8 @@ public class ChangeLayoutMenuFragment extends Fragment {
         ImageView dungeonWall = view.findViewById(R.id.dungeonWall);
         ImageView dungeonTrap1 = view.findViewById(R.id.dungeonTrap1);
 
-        dungeonWall.setOnTouchListener(new onTouchListener(0));
-        dungeonTrap1.setOnTouchListener(new onTouchListener(1));
+        dungeonWall.setOnTouchListener(new onTouchListener(DungeonFragment.DUNGEON_WALL));
+        dungeonTrap1.setOnTouchListener(new onTouchListener(DungeonFragment.DUNGEON_TRAP1));
 
         setImage.setImageViewBitmapFromAsset(dungeonWall, "dungeon/dungeonWall.png");
         setImage.setImageViewBitmapFromAsset(dungeonTrap1, "dungeon/dungeonTrap1.png");
@@ -66,7 +65,6 @@ public class ChangeLayoutMenuFragment extends Fragment {
                     break;
                 case MotionEvent.ACTION_UP:
                     DungeonLayoutFragment.moveLayoutFlag = true;
-                    Log.v("My",  "" + op);
                     new DungeonLayoutFragment().resetDungeonPeacesOnTouchListener();
                     new DungeonLayoutFragment().setDungeonPeace(op);
                     break;
