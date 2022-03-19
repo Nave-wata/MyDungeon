@@ -114,8 +114,14 @@ public class DungeonLayoutFragment extends Fragment {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    public void setDungeonPeace() { // 引数でImage指定すればいい
-        setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/dungeonWall.png");
+    public void setDungeonPeace(int op) { // 引数でImage指定すればいい
+        switch (op) {
+            case 0:
+                setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/dungeonWall.png");
+                break;
+            case 1:
+                setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/dungeonTrap1.png");
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

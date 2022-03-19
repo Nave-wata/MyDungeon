@@ -30,9 +30,8 @@ public class ChangeLayoutMenuFragment extends Fragment {
         ImageView dungeonWall = view.findViewById(R.id.dungeonWall);
         ImageView dungeonTrap1 = view.findViewById(R.id.dungeonTrap1);
 
-        onTouchListener touchListener = new onTouchListener();
-        dungeonWall.setOnTouchListener(touchListener);
-        dungeonTrap1.setOnTouchListener(touchListener);
+        dungeonWall.setOnTouchListener(new onTouchListener(0));
+        dungeonTrap1.setOnTouchListener(new onTouchListener(1));
 
         setImage.setImageViewBitmapFromAsset(dungeonWall, "dungeon/dungeonWall.png");
         setImage.setImageViewBitmapFromAsset(dungeonTrap1, "dungeon/dungeonTrap1.png");
@@ -50,6 +49,11 @@ public class ChangeLayoutMenuFragment extends Fragment {
     }
 
     private static class onTouchListener implements View.OnTouchListener {
+        final int op;
+
+        public onTouchListener(int op) {
+            this.op = op;
+        }
 
         @SuppressLint("ClickableViewAccessibility")
         @Override
@@ -62,7 +66,7 @@ public class ChangeLayoutMenuFragment extends Fragment {
                 case MotionEvent.ACTION_UP:
                     DungeonLayoutFragment.moveLayoutFlag = true;
                     new DungeonLayoutFragment().resetDungeonPeacesOnTouchListener();
-                    new DungeonLayoutFragment().setDungeonPeace();
+                    new DungeonLayoutFragment().setDungeonPeace(op);
                     break;
             }
             return true;
