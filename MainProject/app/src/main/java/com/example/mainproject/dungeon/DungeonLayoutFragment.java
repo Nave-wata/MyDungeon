@@ -26,6 +26,7 @@ public class DungeonLayoutFragment extends Fragment {
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
     @SuppressLint("StaticFieldLeak")
     private static ImageView dungeonPeace;
+    private int dungeonPeaceType;
     private static SetImage setImage;
     private int preDx, preDy;
     private int oneSize;
@@ -115,6 +116,7 @@ public class DungeonLayoutFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     public void setDungeonPeace(int op) { // 引数でImage指定すればいい
+        dungeonPeaceType = op;
         switch (op) {
             case 0:
                 setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/dungeonWall.png");
@@ -194,7 +196,7 @@ public class DungeonLayoutFragment extends Fragment {
     }
 
 
-    public class SetViewOnTouchListener implements View.OnTouchListener {
+    private class SetViewOnTouchListener implements View.OnTouchListener {
         final ImageView wallImage;
         final int setX;
         final int setY;
@@ -231,20 +233,7 @@ public class DungeonLayoutFragment extends Fragment {
                     int j = (setX + dx) / oneSize;
                     int i = (setY + dy) / oneSize;
                     if (dungeonInfo[i][j] == 0) {
-                        SetDungeonPeaceDialog setDungeonPeaceDialog = new SetDungeonPeaceDialog(
-                                b -> {
-                                    if (b) {
-                                        setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
-                                        setDungeonPeacesOnTouchListener();
-                                        setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonWall.png");
-                                        dungeonInfo[i][j] = 2;
-                                    } else {
-                                        setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
-                                        setDungeonPeacesOnTouchListener();
-                                    }
-                                    moveLayoutFlag = false;
-                                }
-                        );
+                        SetDungeonPeaceDialog setDungeonPeaceDialog = new SetDungeonPeaceDialog(b->setDungeonLayout(b, i, j));
                         setDungeonPeaceDialog.show(Objects.requireNonNull(getFragmentManager()), "SetDungeonWallDialog");
                     }
                     break;
@@ -253,6 +242,26 @@ public class DungeonLayoutFragment extends Fragment {
             preDx = newDx;
             preDy = newDy;
             return true;
+        }
+
+        public void setDungeonLayout(boolean b, int i, int j) {
+            if (b) {
+                setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
+                setDungeonPeacesOnTouchListener();
+
+                switch (dungeonPeaceType) {
+                    case 0:
+                        setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonWall.png");
+                    case 1:
+                        setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonTrap1.png");
+                }
+
+                dungeonInfo[i][j] = 2;
+            } else {
+                setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
+                setDungeonPeacesOnTouchListener();
+            }
+            moveLayoutFlag = false;
         }
     }
 }

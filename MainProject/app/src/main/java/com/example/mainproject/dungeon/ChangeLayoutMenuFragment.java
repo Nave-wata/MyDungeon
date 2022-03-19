@@ -3,6 +3,7 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -49,7 +50,7 @@ public class ChangeLayoutMenuFragment extends Fragment {
     }
 
     private static class onTouchListener implements View.OnTouchListener {
-        final int op;
+        int op;
 
         public onTouchListener(int op) {
             this.op = op;
@@ -65,6 +66,7 @@ public class ChangeLayoutMenuFragment extends Fragment {
                     break;
                 case MotionEvent.ACTION_UP:
                     DungeonLayoutFragment.moveLayoutFlag = true;
+                    Log.v("My",  "" + op);
                     new DungeonLayoutFragment().resetDungeonPeacesOnTouchListener();
                     new DungeonLayoutFragment().setDungeonPeace(op);
                     break;
