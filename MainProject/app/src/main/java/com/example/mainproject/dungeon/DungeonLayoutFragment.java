@@ -184,6 +184,11 @@ public class DungeonLayoutFragment extends Fragment {
                                         "deleteDungeonWall",
                                         n -> deleteDungeonPeaces(n, dungeonPeaces[i][j]));
                                 confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), "deleteDungeonWall");
+                            } else if (dungeonInfo[i][j] == DungeonFragment.DUNGEON_TRAP1) {
+                                ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(
+                                        "deleteDungeonTrap1",
+                                        n -> deleteDungeonPeaces(n, dungeonPeaces[i][j]));
+                                confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), "deleteDungeonTrap1");
                             }
                         }
                         break;
@@ -192,7 +197,7 @@ public class DungeonLayoutFragment extends Fragment {
             return true;
         }
 
-        private void deleteDungeonPeaces(int n, ImageView dungeonPeace) {
+        private void deleteDungeonPeaces(int n, ImageView dungeonPeace) { // 全てまとめる
             if (n == 0) {
                 setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
                 DungeonLayoutFragment.dungeonInfo[i][j] = 0;

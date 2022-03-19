@@ -53,6 +53,8 @@ public class ConfirmDPCostDialog extends DialogFragment {
             case "deleteDungeonWall":
                 title.setText(getString(R.string.deleteDungeonWall));
                 break;
+            case "deleteDungeonTrap1":
+                title.setText(getString(R.string.deleteDungeonTrap1));
         }
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
