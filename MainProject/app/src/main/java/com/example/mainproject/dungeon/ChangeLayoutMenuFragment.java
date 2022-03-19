@@ -27,9 +27,15 @@ public class ChangeLayoutMenuFragment extends Fragment {
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
 
-        ImageView dungeonWall = view.findViewById(R.id.dungeonLayout);
-        dungeonWall.setOnTouchListener(new onTouchListener());
+        ImageView dungeonWall = view.findViewById(R.id.dungeonWall);
+        ImageView dungeonTrap1 = view.findViewById(R.id.dungeonTrap1);
+
+        onTouchListener touchListener = new onTouchListener();
+        dungeonWall.setOnTouchListener(touchListener);
+        dungeonTrap1.setOnTouchListener(touchListener);
+
         setImage.setImageViewBitmapFromAsset(dungeonWall, "dungeon/dungeonWall.png");
+        setImage.setImageViewBitmapFromAsset(dungeonTrap1, "dungeon/dungeonTrap1.png");
 
         return view;
     }

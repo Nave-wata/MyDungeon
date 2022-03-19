@@ -30,4 +30,5 @@
     <string name="setDungeonWall">DPを消費して壁を追加します．よろしいですか？</string>
     <string name="deleteDungeonWall">DPを消費して壁を取り除きます．よろしいですか？</string>
     <string name="dungeonWall">壁</string>
+    <string name="dungeonTrap1">罠1</string>
 </resources>
