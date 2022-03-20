@@ -31,6 +31,7 @@ public class DungeonLayoutFragment extends Fragment {
     private int preDx, preDy;
     private int oneSize;
     private int maxSize;
+    private int count = 0;
     private static final int widthNum = 20;
     private static final int heightNum = 20;
     public static final ImageView[][] dungeonPeaces = new ImageView[widthNum][heightNum];
@@ -238,7 +239,12 @@ public class DungeonLayoutFragment extends Fragment {
                     }
                     break;
                 case MotionEvent.ACTION_DOWN:
-                    // nothing to do
+                    count++;
+                    if (5 <= count) {
+                        count = 0;
+                        setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
+                        setDungeonPeacesOnTouchListener();
+                    }
                     break;
                 case MotionEvent.ACTION_UP:
                     int j = (setX + dx) / oneSize;
