@@ -23,8 +23,8 @@ public class DungeonFragment extends Fragment {
 
     public static final int NOT_DUNGEON_WALL = 0;
     public static final int DUNGEON_NOTHING = 1;
-    public static final int DUNGEON_I_DOOR = 2;
-    public static final int DUNGEON_O_DOOR = 3;
+    public static final int DUNGEON_I_DOOR = 2; // start
+    public static final int DUNGEON_O_DOOR = 3; // end
     public static final int DUNGEON_BOSE = 4;
     public static final int DUNGEON_DOOR = 5;
     public static final int DUNGEON_WALL = 6;

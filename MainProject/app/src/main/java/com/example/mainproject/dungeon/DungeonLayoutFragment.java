@@ -57,11 +57,11 @@ public class DungeonLayoutFragment extends Fragment {
                 } else if (i != 0 && i != 4 && i != 19 && j == 9) {
                     dungeonInfo[i][j] = DungeonFragment.DUNGEON_NOTHING;
                 } else if (j == 9 && i == 0) {
-                    dungeonInfo[i][j] = DungeonFragment.DUNGEON_I_DOOR;
+                    dungeonInfo[i][j] = DungeonFragment.DUNGEON_O_DOOR;
                 } else if (j == 9 && i == 4) {
                     dungeonInfo[i][j] = DungeonFragment.DUNGEON_DOOR;
                 } else if (j == 9) {
-                    dungeonInfo[i][j] = DungeonFragment.DUNGEON_O_DOOR;
+                    dungeonInfo[i][j] = DungeonFragment.DUNGEON_I_DOOR;
                 }
             }
         }
