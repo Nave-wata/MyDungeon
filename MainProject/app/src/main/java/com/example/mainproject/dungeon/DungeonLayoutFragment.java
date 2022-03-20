@@ -193,6 +193,8 @@ public class DungeonLayoutFragment extends Fragment {
                                 case DungeonFragment.DUNGEON_TRAP1:
                                     ShowConfirmDPCostDialog(dungeonPeaces[i][j], "deleteDungeonTrap1", i, j);
                                     break;
+                                case DungeonFragment.DUNGEON_DOOR:
+                                    ShowConfirmDPCostDialog(dungeonPeaces[i][j], "deleteDungeonDoor", i, j);
                             }
                         }
                         break;
