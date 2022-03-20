@@ -3,7 +3,6 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -45,10 +44,6 @@ public class DungeonLayoutFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         UserName = Objects.requireNonNull(args).getString(EXTRA_DATA);
-        Log.v("MY", "" + DungeonFragment.DUNGEON_NOTHING);
-        Log.v("MY", "" + DungeonFragment.NOT_DUNGEON_WALL);
-        Log.v("MY", "" + DungeonFragment.DUNGEON_WALL);
-        Log.v("MY", "" + DungeonFragment.DUNGEON_TRAP1);
 
         for (int i = 0; i < widthNum; i++) {
             for (int j = 0; j < heightNum; j++) {
@@ -196,9 +191,9 @@ public class DungeonLayoutFragment extends Fragment {
             ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(
                     text,
                     n -> {
-                        if (n == 0) {
+                        if (n == ConfirmDPCostDialog.POSITIVE_BUTTON) {
                             setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
-                            DungeonLayoutFragment.dungeonInfo[i][j] = 0;
+                            DungeonLayoutFragment.dungeonInfo[i][j] = DungeonFragment.DUNGEON_NOTHING;
                         }
                     });
             confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), text);
@@ -262,12 +257,12 @@ public class DungeonLayoutFragment extends Fragment {
         }
 
         public void ShowSetDungeonPeaceDialog(int i, int j, String text) {
-            SetDungeonPeaceDialog setDungeonPeaceDialog = new SetDungeonPeaceDialog(text, b->setDungeonLayout(b, i, j));
+            SetDungeonPeaceDialog setDungeonPeaceDialog = new SetDungeonPeaceDialog(text, n->setDungeonLayout(n, i, j));
             setDungeonPeaceDialog.show(Objects.requireNonNull(getFragmentManager()), text);
         }
 
-        public void setDungeonLayout(boolean b, int i, int j) {
-            if (b) {
+        public void setDungeonLayout(int n, int i, int j) {
+            if (n == SetDungeonPeaceDialog.POSITIVE_BUTTON) {
                 setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
                 setDungeonPeacesOnTouchListener();
 
