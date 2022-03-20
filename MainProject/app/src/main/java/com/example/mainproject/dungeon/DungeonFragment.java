@@ -26,8 +26,9 @@ public class DungeonFragment extends Fragment {
     public static final int DUNGEON_I_DOOR = 2;
     public static final int DUNGEON_O_DOOR = 3;
     public static final int DUNGEON_BOSE = 4;
-    public static final int DUNGEON_WALL = 5;
-    public static final int DUNGEON_TRAP1 = 6;
+    public static final int DUNGEON_DOOR = 5;
+    public static final int DUNGEON_WALL = 6;
+    public static final int DUNGEON_TRAP1 = 7;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

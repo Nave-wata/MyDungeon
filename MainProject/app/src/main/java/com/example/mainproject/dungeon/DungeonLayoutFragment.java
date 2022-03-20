@@ -35,7 +35,7 @@ public class DungeonLayoutFragment extends Fragment {
     private static final int widthNum = 20;
     private static final int heightNum = 20;
     public static final ImageView[][] dungeonPeaces = new ImageView[widthNum][heightNum];
-    public static final int[][] dungeonInfo = new int[widthNum][heightNum]; // 0->dungeon.nothing, 1->notDungeon.wall, 2->dungeon.wall, 3->dungeon.trap1
+    public static final int[][] dungeonInfo = new int[widthNum][heightNum];
     public static boolean changeLayoutFlag = false;
     public static boolean moveLayoutFlag = false;
 
@@ -54,10 +54,12 @@ public class DungeonLayoutFragment extends Fragment {
                     } else {
                         dungeonInfo[i][j] = DungeonFragment.NOT_DUNGEON_WALL;
                     }
-                } else if (i != 0 && j == 9 && i != 19) {
+                } else if (i != 0 && i != 4 && i != 19 && j == 9) {
                     dungeonInfo[i][j] = DungeonFragment.DUNGEON_NOTHING;
                 } else if (j == 9 && i == 0) {
                     dungeonInfo[i][j] = DungeonFragment.DUNGEON_I_DOOR;
+                } else if (j == 9 && i == 4) {
+                    dungeonInfo[i][j] = DungeonFragment.DUNGEON_DOOR;
                 } else if (j == 9) {
                     dungeonInfo[i][j] = DungeonFragment.DUNGEON_O_DOOR;
                 }
@@ -82,6 +84,8 @@ public class DungeonLayoutFragment extends Fragment {
                     setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeon_I_Door.png");
                 } else if (dungeonInfo[i][j] == DungeonFragment.DUNGEON_O_DOOR) {
                     setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeon_O_Door.png");
+                } else if (dungeonInfo[i][j] == DungeonFragment.DUNGEON_DOOR) {
+                    setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/door.png");
                 }
             }
         }
