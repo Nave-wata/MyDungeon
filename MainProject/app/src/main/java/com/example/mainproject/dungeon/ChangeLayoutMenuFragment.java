@@ -29,12 +29,15 @@ public class ChangeLayoutMenuFragment extends Fragment {
 
         ImageView dungeonWall = view.findViewById(R.id.dungeonWall);
         ImageView dungeonTrap1 = view.findViewById(R.id.dungeonTrap1);
+        ImageView dungeonDoor = view.findViewById(R.id.dungeonDoor);
 
         dungeonWall.setOnTouchListener(new onTouchListener(DungeonFragment.DUNGEON_WALL));
         dungeonTrap1.setOnTouchListener(new onTouchListener(DungeonFragment.DUNGEON_TRAP1));
+        dungeonDoor.setOnTouchListener(new onTouchListener(DungeonFragment.DUNGEON_DOOR));
 
         setImage.setImageViewBitmapFromAsset(dungeonWall, "dungeon/dungeonWall.png");
         setImage.setImageViewBitmapFromAsset(dungeonTrap1, "dungeon/dungeonTrap1.png");
+        setImage.setImageViewBitmapFromAsset(dungeonDoor, "dungeon/door.png");
 
         return view;
     }

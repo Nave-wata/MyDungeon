@@ -40,6 +40,18 @@
                 android:layout_gravity="center_vertical"
                 android:text="@string/dungeonTrap1" />
 
+            <ImageView
+                android:id="@+id/dungeonDoor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/dungeonDoor" />
+
         </LinearLayout>
 
     </LinearLayout>

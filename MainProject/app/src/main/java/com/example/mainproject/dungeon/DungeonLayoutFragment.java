@@ -134,6 +134,9 @@ public class DungeonLayoutFragment extends Fragment {
                 break;
             case DungeonFragment.DUNGEON_TRAP1:
                 setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/dungeonTrap1.png");
+                break;
+            case DungeonFragment.DUNGEON_DOOR:
+                setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/door.png");
         }
     }
 
@@ -261,6 +264,9 @@ public class DungeonLayoutFragment extends Fragment {
                                 break;
                             case DungeonFragment.DUNGEON_TRAP1:
                                 ShowSetDungeonPeaceDialog(i, j, "setDungeonTrap1");
+                                break;
+                            case DungeonFragment.DUNGEON_DOOR:
+                                ShowSetDungeonPeaceDialog(i, j, "setDungeonDoor");
                         }
 
                     }
@@ -288,6 +294,9 @@ public class DungeonLayoutFragment extends Fragment {
                 } else if (dungeonPeaceType == DungeonFragment.DUNGEON_TRAP1) {
                     setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonTrap1.png");
                     dungeonInfo[i][j] = DungeonFragment.DUNGEON_TRAP1;
+                } else if (dungeonPeaceType == DungeonFragment.DUNGEON_DOOR) {
+                    setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/door.png");
+                    dungeonInfo[i][j] = DungeonFragment.DUNGEON_DOOR;
                 }
 
             } else {

@@ -29,8 +29,11 @@
     <string name="deleteWall">DPを消費してダンジョンを拡張します．よろしいですか？</string>
     <string name="setDungeonWall">DPを消費して壁を設置します．よろしいですか？</string>
     <string name="setDungeonTrap1">DPを消費して罠1を設置します．よろしいですか？</string>
+    <string name="setDungeonDoor">DPを消費して扉を設置します．よろしいですか？</string>
     <string name="deleteDungeonWall">DPを消費して壁を取り除きます．よろしいですか？</string>
     <string name="deleteDungeonTrap1">DPを消費して罠1を取り除きます．よろしいですか？</string>
+    <string name="deleteDungeonDoor">DPを消費して扉を取り除きます．よろしいですか？</string>
     <string name="dungeonWall">壁</string>
     <string name="dungeonTrap1">罠1</string>
+    <string name="dungeonDoor">扉</string>
 </resources>

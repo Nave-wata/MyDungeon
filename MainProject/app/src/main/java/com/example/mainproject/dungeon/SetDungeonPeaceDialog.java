@@ -51,6 +51,8 @@ public class SetDungeonPeaceDialog extends DialogFragment {
             case "setDungeonTrap1":
                 title.setText(getString(R.string.setDungeonTrap1));
                 break;
+            case "setDungeonDoor":
+                title.setText(getString(R.string.setDungeonDoor));
         }
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
