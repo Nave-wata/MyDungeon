@@ -3,6 +3,7 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,6 +17,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mainproject.R;
 import com.example.mainproject.SetImage;
+import com.example.mainproject.asynchronous.AppDatabase;
+import com.example.mainproject.asynchronous.AppDatabaseSingleton;
+import com.example.mainproject.asynchronous.dungeonlayout.GetDungeonLayout;
 
 import java.util.Objects;
 
@@ -45,26 +49,37 @@ public class DungeonLayoutFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         UserName = Objects.requireNonNull(args).getString(EXTRA_DATA);
+        final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
 
-        for (int i = 0; i < widthNum; i++) {
-            for (int j = 0; j < heightNum; j++) {
-                if (i == 1 || i == 2 || i == 3) {
-                    if (j == 8 || j == 9 || j == 10) {
-                        dungeonInfo[i][j] = DungeonFragment.DUNGEON_NOTHING;
-                    } else {
-                        dungeonInfo[i][j] = DungeonFragment.NOT_DUNGEON_WALL;
+        new GetDungeonLayout(
+                db,
+                UserName,
+                b->{
+                    Log.v("GetDungeonLayout", "OK");
+                    for (int i = 0; i < widthNum; i++) {
+                        for (int j = 0; j < heightNum; j++) {
+                            if (i == 1 || i == 2 || i == 3) {
+                                if (j == 8 || j == 9 || j == 10) {
+                                    dungeonInfo[i][j] = DungeonFragment.DUNGEON_NOTHING;
+                                } else {
+                                    dungeonInfo[i][j] = DungeonFragment.NOT_DUNGEON_WALL;
+                                }
+                            } else if (i != 0 && i != 4 && i != 19 && j == 9) {
+                                dungeonInfo[i][j] = DungeonFragment.DUNGEON_NOTHING;
+                            } else if (j == 9 && i == 0) {
+                                dungeonInfo[i][j] = DungeonFragment.DUNGEON_O_DOOR;
+                            } else if (j == 9 && i == 4) {
+                                dungeonInfo[i][j] = DungeonFragment.DUNGEON_DOOR;
+                            } else if (j == 9) {
+                                dungeonInfo[i][j] = DungeonFragment.DUNGEON_I_DOOR;
+                            }
+                        }
                     }
-                } else if (i != 0 && i != 4 && i != 19 && j == 9) {
-                    dungeonInfo[i][j] = DungeonFragment.DUNGEON_NOTHING;
-                } else if (j == 9 && i == 0) {
-                    dungeonInfo[i][j] = DungeonFragment.DUNGEON_O_DOOR;
-                } else if (j == 9 && i == 4) {
-                    dungeonInfo[i][j] = DungeonFragment.DUNGEON_DOOR;
-                } else if (j == 9) {
-                    dungeonInfo[i][j] = DungeonFragment.DUNGEON_I_DOOR;
+                },
+                e->{
+                    Log.v("GetDungeonLayout", "NO");
                 }
-            }
-        }
+        ).execute();
     }
 
     @SuppressLint("ClickableViewAccessibility")
