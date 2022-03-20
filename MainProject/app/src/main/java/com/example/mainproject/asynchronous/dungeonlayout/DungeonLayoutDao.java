@@ -34,28 +34,28 @@ public interface DungeonLayoutDao {
             "    Row18 = :row18, " +
             "    Row19 = :row19 " +
             "WHERE Name = :name")
-    void updateDungeonLayout(String name,
-                             String row0,
-                             String row1,
-                             String row2,
-                             String row3,
-                             String row4,
-                             String row5,
-                             String row6,
-                             String row7,
-                             String row8,
-                             String row9,
-                             String row10,
-                             String row11,
-                             String row12,
-                             String row13,
-                             String row14,
-                             String row15,
-                             String row16,
-                             String row17,
-                             String row18,
-                             String row19);
+    void updateDungeonLayoutTask(String name,
+                                 String row0,
+                                 String row1,
+                                 String row2,
+                                 String row3,
+                                 String row4,
+                                 String row5,
+                                 String row6,
+                                 String row7,
+                                 String row8,
+                                 String row9,
+                                 String row10,
+                                 String row11,
+                                 String row12,
+                                 String row13,
+                                 String row14,
+                                 String row15,
+                                 String row16,
+                                 String row17,
+                                 String row18,
+                                 String row19);
 
     @Query("SELECT * FROM DungeonLayout WHERE Name = :name")
-    List<DungeonLayout> getDungeonLayout(String name);
+    List<DungeonLayout> getDungeonLayoutTask(String name);
 }
