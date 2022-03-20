@@ -15,15 +15,18 @@ import com.example.mainproject.R;
 
 import java.util.Objects;
 
+
 public class DungeonFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
     private Button changeLayoutButton;
 
-    public static final int NOT_DUNGEON_WALL = 1;
-    public static final int DUNGEON_NOTHING = 0;
-    public static final int DUNGEON_WALL = 2;
-    public static final int DUNGEON_TRAP1 = 3;
+    public static final int NOT_DUNGEON_WALL = 0;
+    public static final int DUNGEON_NOTHING = 1;
+    public static final int DUNGEON_I_DOOR = 2;
+    public static final int DUNGEON_O_DOOR = 3;
+    public static final int DUNGEON_WALL = 3;
+    public static final int DUNGEON_TRAP1 = 4;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
