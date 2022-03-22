@@ -23,6 +23,8 @@ import java.util.function.Consumer;
 public class ConfirmDPCostDialog extends DialogFragment {
     final String text;
     final Consumer<Integer> callback;
+    public final static int POSITIVE_BUTTON = 0;
+    public final static int NEUTRAL_BUTTON = 1;
 
     public ConfirmDPCostDialog(String text, Consumer<Integer> callback) {
         this.text = text;
@@ -55,14 +57,17 @@ public class ConfirmDPCostDialog extends DialogFragment {
                 break;
             case "deleteDungeonTrap1":
                 title.setText(getString(R.string.deleteDungeonTrap1));
+                break;
+            case "deleteDungeonDoor":
+                title.setText(getString(R.string.deleteDungeonDoor));
         }
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_right, "dungeon/DP_change.png");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
-        builder.setPositiveButton(getString(R.string.DialogPositiveText), new onClickListener(0));
-        builder.setNeutralButton(getString(R.string.DialogNegativeText), new onClickListener(1));
+        builder.setPositiveButton(getString(R.string.DialogPositiveText), new onClickListener(POSITIVE_BUTTON));
+        builder.setNeutralButton(getString(R.string.DialogNegativeText), new onClickListener(NEUTRAL_BUTTON));
         return builder.create();
     }
 
@@ -78,11 +83,11 @@ public class ConfirmDPCostDialog extends DialogFragment {
         @Override
         public void onClick(DialogInterface dialogInterface, int n) {
             switch (Id) {
-                case 0:
-                    callback.accept(0);
+                case POSITIVE_BUTTON:
+                    callback.accept(POSITIVE_BUTTON);
                     break;
-                case 1:
-                    callback.accept(1);
+                case NEUTRAL_BUTTON:
+                    callback.accept(NEUTRAL_BUTTON);
                     break;
             }
         }
