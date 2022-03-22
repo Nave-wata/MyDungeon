@@ -19,6 +19,7 @@ import com.example.mainproject.R;
 import com.example.mainproject.SetImage;
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
+import com.example.mainproject.asynchronous.dungeonlayout.DungeonLayout;
 import com.example.mainproject.asynchronous.dungeonlayout.GetDungeonLayout;
 
 import java.util.Objects;
@@ -36,8 +37,8 @@ public class DungeonLayoutFragment extends Fragment {
     private int oneSize;
     private int maxSize;
     private int count = 0;
-    private static final int widthNum = 20;
-    private static final int heightNum = 20;
+    public static final int widthNum = 20;
+    public static final int heightNum = 20;
     public static final ImageView[][] dungeonPeaces = new ImageView[widthNum][heightNum];
     public static final int[][] dungeonInfo = new int[widthNum][heightNum];
     public static boolean changeLayoutFlag = false;
@@ -95,7 +96,34 @@ public class DungeonLayoutFragment extends Fragment {
                 db,
                 UserName,
                 b->{
-                    Log.v("GetDungeonLayout", "OK");
+                    String[] dungeonLayouts = new String[widthNum * heightNum];
+                    for (DungeonLayout dl: b) {
+                        dungeonLayouts[0] = dl.getRow0();
+                        dungeonLayouts[1] = dl.getRow1();
+                        dungeonLayouts[2] = dl.getRow2();
+                        dungeonLayouts[3] = dl.getRow3();
+                        dungeonLayouts[4] = dl.getRow4();
+                        dungeonLayouts[5] = dl.getRow5();
+                        dungeonLayouts[6] = dl.getRow6();
+                        dungeonLayouts[7] = dl.getRow7();
+                        dungeonLayouts[8] = dl.getRow8();
+                        dungeonLayouts[9] = dl.getRow9();
+                        dungeonLayouts[10] = dl.getRow10();
+                        dungeonLayouts[11] = dl.getRow11();
+                        dungeonLayouts[12] = dl.getRow12();
+                        dungeonLayouts[13] = dl.getRow13();
+                        dungeonLayouts[14] = dl.getRow14();
+                        dungeonLayouts[15] = dl.getRow15();
+                        dungeonLayouts[16] = dl.getRow16();
+                        dungeonLayouts[17] = dl.getRow17();
+                        dungeonLayouts[18] = dl.getRow18();
+                        dungeonLayouts[19] = dl.getRow19();
+                    }
+
+                    for (int i = 0; i < 20; i++) {
+                        Log.v("My Row" + i, dungeonLayouts[i]);
+                    }
+
                     for (int i = 0; i < widthNum; i++) {
                         for (int j = 0; j < heightNum; j++) {
                             if (i == 1 || i == 2 || i == 3) {

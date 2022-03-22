@@ -24,7 +24,7 @@ public class SetImage {
         try {
             istr = assetManager.open(strName);
         } catch (FileNotFoundException ffe) {
-            Log.v("[Exception]", "FileNotFoundException");
+            //Log.v("[Exception]", "FileNotFoundException");
         } catch (IOException e) {
             e.printStackTrace();
         }
