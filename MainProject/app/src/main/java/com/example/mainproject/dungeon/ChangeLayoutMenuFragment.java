@@ -65,6 +65,7 @@ public class ChangeLayoutMenuFragment extends Fragment {
                 case MotionEvent.ACTION_MOVE:
                     break;
                 case MotionEvent.ACTION_DOWN:
+                    // nothing to do
                     break;
                 case MotionEvent.ACTION_UP:
                     DungeonLayoutFragment.moveLayoutFlag = true;

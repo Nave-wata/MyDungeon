@@ -24,6 +24,7 @@ import com.example.mainproject.asynchronous.dungeonlayout.GetDungeonLayout;
 
 import java.util.Objects;
 
+
 public class DungeonLayoutFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
@@ -53,6 +54,7 @@ public class DungeonLayoutFragment extends Fragment {
     }
 
     @SuppressLint("ClickableViewAccessibility")
+    @SuppressWarnings("ALL")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ConstraintLayout layout = new ConstraintLayout(Objects.requireNonNull(getContext()));
@@ -86,7 +88,7 @@ public class DungeonLayoutFragment extends Fragment {
             }
 
             dungeonPeace.setLayoutParams(layoutParams);
-            dungeonPeace.setX((int) (maxSize / 2));
+            dungeonPeace.setX(maxSize / 2);
             dungeonPeace.setY((int) (maxSize / 2));
             dungeonPeace.setOnTouchListener(new SetViewOnTouchListener(dungeonPeace, maxSize / 2, maxSize / 2));
         };
@@ -121,13 +123,11 @@ public class DungeonLayoutFragment extends Fragment {
                     }
 
                     for (int i = 0; i < heightNum; i++) {
-                        Log.v("My", dungeonLayouts[i]);
                         String[] strSplit = dungeonLayouts[i].split(",");
                         for (int j = 0; j < widthNum; j++) {
                             dungeonInfo[i][j] = Integer.parseInt(strSplit[j]);
                         }
                     }
-                    Log.v("My", "END");
 
                     for (int i = 0; i < widthNum; i++) {
                         for (int j = 0; j < heightNum; j++) {
@@ -139,12 +139,16 @@ public class DungeonLayoutFragment extends Fragment {
                                 setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeon_O_Door.png");
                             } else if (dungeonInfo[i][j] == DungeonFragment.DUNGEON_DOOR) {
                                 setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/door.png");
+                            } else if (dungeonInfo[i][j] == DungeonFragment.DUNGEON_WALL) {
+                                setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonWall.png");
+                            } else if (dungeonInfo[i][j] == DungeonFragment.DUNGEON_TRAP1) {
+                                setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonTrap1.png");
                             }
                         }
                     }
                 },
                 e->{
-                    Log.v("GetDungeonLayout", "NO");
+                    Log.v("DungeonLayoutFragment[Exception]", "" + e);
                 }
         ).execute();
 
