@@ -2,6 +2,7 @@ package com.example.mainproject.dungeon;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mainproject.R;
+import com.example.mainproject.asynchronous.AppDatabase;
+import com.example.mainproject.asynchronous.AppDatabaseSingleton;
+import com.example.mainproject.asynchronous.dungeonlayout.UpdateDungeonLayout;
 
 import java.util.Objects;
 
@@ -62,6 +66,14 @@ public class DungeonFragment extends Fragment {
         changeLayoutButton = view.findViewById(R.id.changeLayout);
         changeLayoutButton.setOnClickListener(v -> {
             if (DungeonLayoutFragment.changeLayoutFlag) {
+                final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
+                new UpdateDungeonLayout(
+                        db,
+                        UserName,
+                        DungeonLayoutFragment.dungeonInfo,
+                        b-> Log.v("My", "OK"),
+                        e-> Log.v("My", "" + e)
+                ).execute();
                 DungeonLayoutFragment.changeLayoutFlag = false;
                 changeLayoutButton.setText(getString(R.string.NotChangeLayout));
                 FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
