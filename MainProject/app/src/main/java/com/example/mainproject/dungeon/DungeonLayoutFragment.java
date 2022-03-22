@@ -120,12 +120,17 @@ public class DungeonLayoutFragment extends Fragment {
                         dungeonLayouts[19] = dl.getRow19();
                     }
 
-                    for (int i = 0; i < 20; i++) {
-                        Log.v("My Row" + i, dungeonLayouts[i]);
+                    for (int i = 0; i < 1; i++) {
+                        String[] strSplit = dungeonLayouts[i].split(",");
+                        StringBuilder sb = new StringBuilder();
+
+                        for (int j = 0; j < widthNum; j++) {
+                            Log.v("My", strSplit[j]);
+                        }
                     }
 
-                    for (int i = 0; i < widthNum; i++) {
-                        for (int j = 0; j < heightNum; j++) {
+                    for (int i = 0; i < heightNum; i++) {
+                        for (int j = 0; j < widthNum; j++) {
                             if (i == 1 || i == 2 || i == 3) {
                                 if (j == 8 || j == 9 || j == 10) {
                                     dungeonInfo[i][j] = DungeonFragment.DUNGEON_NOTHING;
@@ -164,8 +169,8 @@ public class DungeonLayoutFragment extends Fragment {
         ).execute();
 
         layout.addView(view);
-        for (int i = 0; i < widthNum; i++) {
-            for (int j = 0; j < heightNum; j++) {
+        for (int i = 0; i < heightNum; i++) {
+            for (int j = 0; j < widthNum; j++) {
                 dungeonPeaces[i][j].setOnTouchListener(new onTouchListener(i, j));
                 layout.addView(dungeonPeaces[i][j]);
             }
@@ -191,15 +196,15 @@ public class DungeonLayoutFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     public void setDungeonPeacesOnTouchListener() {
-        for (int i = 0; i < widthNum; i++) {
-            for (int j = 0; j < heightNum; j++) {
+        for (int i = 0; i < heightNum; i++) {
+            for (int j = 0; j < widthNum; j++) {
                 dungeonPeaces[i][j].setOnTouchListener(new onTouchListener(i, j)); } }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     public void resetDungeonPeacesOnTouchListener() {
-        for (int i = 0; i < widthNum; i++) {
-            for (int j = 0; j < heightNum; j++) {
+        for (int i = 0; i < heightNum; i++) {
+            for (int j = 0; j < widthNum; j++) {
                 dungeonPeaces[i][j].setOnTouchListener(null); } }
     }
 
