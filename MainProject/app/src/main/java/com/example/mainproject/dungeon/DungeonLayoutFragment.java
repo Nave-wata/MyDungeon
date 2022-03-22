@@ -121,11 +121,13 @@ public class DungeonLayoutFragment extends Fragment {
                     }
 
                     for (int i = 0; i < heightNum; i++) {
+                        Log.v("My", dungeonLayouts[i]);
                         String[] strSplit = dungeonLayouts[i].split(",");
                         for (int j = 0; j < widthNum; j++) {
                             dungeonInfo[i][j] = Integer.parseInt(strSplit[j]);
                         }
                     }
+                    Log.v("My", "END");
 
                     for (int i = 0; i < widthNum; i++) {
                         for (int j = 0; j < heightNum; j++) {
