@@ -60,7 +60,7 @@ public class UpdateDungeonLayout implements Runnable {
     }
 
     public void execute() {
-        onPreExecute();
+        //onPreExecute();
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.submit(new UpdateDungeonLayout(
                 db,
@@ -70,7 +70,10 @@ public class UpdateDungeonLayout implements Runnable {
                 errorCallback));
     }
 
-    void onPreExecute() {
+    //void onPreExecute() {}
+
+    void doInBackground() {
+        DungeonLayoutDao dungeonLayoutDao = db.dungeonLayoutDao();
         data = new String[rows.length];
 
         for (int i = 0; i < rows.length; i++) {
@@ -103,13 +106,8 @@ public class UpdateDungeonLayout implements Runnable {
         row17 = data[17];
         row18 = data[18];
         row19 = data[19];
-    }
-
-    void doInBackground() {
-        DungeonLayoutDao dungeonLayoutDao = db.dungeonLayoutDao();
 
         try {
-
             dungeonLayoutDao.updateDungeonLayoutTask(
                     name,
                     row0,
