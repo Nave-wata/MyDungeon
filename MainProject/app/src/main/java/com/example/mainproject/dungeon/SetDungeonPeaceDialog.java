@@ -22,9 +22,11 @@ import java.util.function.Consumer;
 
 public class SetDungeonPeaceDialog extends DialogFragment {
     final String text;
-    final Consumer<Boolean> callback;
+    final Consumer<Integer> callback;
+    public final static int POSITIVE_BUTTON = 0;
+    public final static int NEGATIVE_BUTTON = 1;
 
-    public SetDungeonPeaceDialog(String text, Consumer<Boolean> callback) {
+    public SetDungeonPeaceDialog(String text, Consumer<Integer> callback) {
         this.text = text;
         this.callback = callback;
     }
@@ -49,14 +51,16 @@ public class SetDungeonPeaceDialog extends DialogFragment {
             case "setDungeonTrap1":
                 title.setText(getString(R.string.setDungeonTrap1));
                 break;
+            case "setDungeonDoor":
+                title.setText(getString(R.string.setDungeonDoor));
         }
 
         setImage.setImageViewBitmapFromAsset(ic_DP, "base_menu/dungeonpower.png");
         setImage.setImageViewBitmapFromAsset(ic_right, "dungeon/DP_change.png");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(view);
-        builder.setPositiveButton(getString(R.string.DialogPositiveText), new onClickListener(0));
-        builder.setNegativeButton(getString(R.string.DialogNegativeText), new onClickListener(1));
+        builder.setPositiveButton(getString(R.string.DialogPositiveText), new onClickListener(POSITIVE_BUTTON));
+        builder.setNegativeButton(getString(R.string.DialogNegativeText), new onClickListener(NEGATIVE_BUTTON));
         builder.setNeutralButton(getString(R.string.DialogNeutralText), null);
         return builder.create();
     }
@@ -72,11 +76,11 @@ public class SetDungeonPeaceDialog extends DialogFragment {
         @Override
         public void onClick(DialogInterface dialogInterface, int n) {
             switch (Id) {
-                case 0:
-                    callback.accept(true);
+                case POSITIVE_BUTTON:
+                    callback.accept(POSITIVE_BUTTON);
                     break;
-                case 1:
-                    callback.accept(false);
+                case NEGATIVE_BUTTON:
+                    callback.accept(NEGATIVE_BUTTON);
                     break;
             }
         }
