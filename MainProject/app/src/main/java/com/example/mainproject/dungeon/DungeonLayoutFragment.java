@@ -120,32 +120,10 @@ public class DungeonLayoutFragment extends Fragment {
                         dungeonLayouts[19] = dl.getRow19();
                     }
 
-                    for (int i = 0; i < 1; i++) {
-                        String[] strSplit = dungeonLayouts[i].split(",");
-                        StringBuilder sb = new StringBuilder();
-
-                        for (int j = 0; j < widthNum; j++) {
-                            Log.v("My", strSplit[j]);
-                        }
-                    }
-
                     for (int i = 0; i < heightNum; i++) {
+                        String[] strSplit = dungeonLayouts[i].split(",");
                         for (int j = 0; j < widthNum; j++) {
-                            if (i == 1 || i == 2 || i == 3) {
-                                if (j == 8 || j == 9 || j == 10) {
-                                    dungeonInfo[i][j] = DungeonFragment.DUNGEON_NOTHING;
-                                } else {
-                                    dungeonInfo[i][j] = DungeonFragment.NOT_DUNGEON_WALL;
-                                }
-                            } else if (i != 0 && i != 4 && i != 19 && j == 9) {
-                                dungeonInfo[i][j] = DungeonFragment.DUNGEON_NOTHING;
-                            } else if (j == 9 && i == 0) {
-                                dungeonInfo[i][j] = DungeonFragment.DUNGEON_O_DOOR;
-                            } else if (j == 9 && i == 4) {
-                                dungeonInfo[i][j] = DungeonFragment.DUNGEON_DOOR;
-                            } else if (j == 9) {
-                                dungeonInfo[i][j] = DungeonFragment.DUNGEON_I_DOOR;
-                            }
+                            dungeonInfo[i][j] = Integer.parseInt(strSplit[j]);
                         }
                     }
 
