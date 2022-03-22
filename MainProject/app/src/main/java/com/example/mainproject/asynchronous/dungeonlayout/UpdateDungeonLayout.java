@@ -3,6 +3,7 @@ package com.example.mainproject.asynchronous.dungeonlayout;
 import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.example.mainproject.asynchronous.AppDatabase;
 
@@ -66,30 +67,71 @@ public class UpdateDungeonLayout implements Runnable {
 
     void doInBackground() {
         DungeonLayoutDao dungeonLayoutDao = db.dungeonLayoutDao();
+        String row0 = data[0];
+        String row1 = data[1];
+        String row2 = data[2];
+        String row3 = data[3];
+        String row4 = data[4];
+        String row5 = data[5];
+        String row6 = data[6];
+        String row7 = data[7];
+        String row8 = data[8];
+        String row9 = data[9];
+        String row10 = data[10];
+        String row11 = data[11];
+        String row12 = data[12];
+        String row13 = data[13];
+        String row14 = data[14];
+        String row15 = data[15];
+        String row16 = data[16];
+        String row17 = data[17];
+        String row18 = data[18];
+        String row19 = data[19];
+
 
         try {
+            Log.v("My", "" + row0);
+            Log.v("My", "" + row1);
+            Log.v("My", "" + row2);
+            Log.v("My", "" + row3);
+            Log.v("My", "" + row4);
+            Log.v("My", "" + row5);
+            Log.v("My", "" + row6);
+            Log.v("My", "" + row7);
+            Log.v("My", "" + row8);
+            Log.v("My", "" + row9);
+            Log.v("My", "" + row10);
+            Log.v("My", "" + row11);
+            Log.v("My", "" + row12);
+            Log.v("My", "" + row13);
+            Log.v("My", "" + row14);
+            Log.v("My", "" + row15);
+            Log.v("My", "" + row16);
+            Log.v("My", "" + row17);
+            Log.v("My", "" + row18);
+            Log.v("My", "" + row19);
             dungeonLayoutDao.updateDungeonLayoutTask(
                     name,
-                    data[0],
-                    data[1],
-                    data[2],
-                    data[3],
-                    data[4],
-                    data[5],
-                    data[6],
-                    data[7],
-                    data[8],
-                    data[9],
-                    data[10],
-                    data[11],
-                    data[12],
-                    data[13],
-                    data[14],
-                    data[15],
-                    data[16],
-                    data[17],
-                    data[18],
-                    data[19]);
+                    row0,
+                    row1,
+                    row2,
+                    row3,
+                    row4,
+                    row5,
+                    row6,
+                    row7,
+                    row8,
+                    row9,
+                    row10,
+                    row11,
+                    row12,
+                    row13,
+                    row14,
+                    row15,
+                    row16,
+                    row17,
+                    row18,
+                    row19);
         } catch (Exception e) {
             this.exception = e;
         }
