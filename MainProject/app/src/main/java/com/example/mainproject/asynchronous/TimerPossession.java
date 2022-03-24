@@ -3,21 +3,18 @@ package com.example.mainproject.asynchronous;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.mainproject.BaseStatusFragment;
-
 public class TimerPossession {
     final android.os.Handler handler = new Handler(Looper.getMainLooper());
-    final Runnable runnable = new Runnable() {
+    final Runnable characterPosition_runnable = new Runnable() {
         @Override
         public void run() {
-            BaseStatusFragment baseStatusFragment = new BaseStatusFragment();
-            baseStatusFragment.initDiffTime(1, BaseStatusFragment.DP, BaseStatusFragment.MONEY);
+            // something
             handler.removeCallbacks(this);
-            handler.postDelayed(this, 1000);
+            handler.postDelayed(this, 2000);
         }
     };
 
-    public void Run() { handler.post(runnable); }
+    public void Run() { handler.post(characterPosition_runnable); }
 
-    public void Stop() { handler.removeCallbacks(runnable); }
+    public void Stop() { handler.removeCallbacks(characterPosition_runnable); }
 }

@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int widthNum = 20;
     public static final int heightNum = 20;
     public static final int[][] dungeonInfo = new int[widthNum][heightNum];
+    public static final int[][] characterInfo = new int[widthNum][heightNum];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void CharacterPositionsInfo() {
-        Log.v("My", "CharacterPositionsInfo");
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

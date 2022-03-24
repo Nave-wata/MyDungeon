@@ -3,7 +3,6 @@ package com.example.mainproject.dungeon;
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -72,8 +71,6 @@ public class DungeonLayoutFragment extends Fragment {
             topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
             oneSize = width / MainActivity.widthNum;
             maxSize = oneSize * MainActivity.widthNum;
-            Log.v("My oneSize", "" + oneSize);
-            Log.v("My maxSize", "" + maxSize);
 
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
             for (int i = 0; i < MainActivity.widthNum; i++) {
@@ -257,7 +254,6 @@ public class DungeonLayoutFragment extends Fragment {
                     int j = (setX + dx) / oneSize;
                     int i = (setY + dy) / oneSize;
                     if (MainActivity.dungeonInfo[i][j] == DungeonFragment.DUNGEON_NOTHING) {
-
                         switch (dungeonPeaceType) {
                             case DungeonFragment.DUNGEON_WALL:
                                 ShowSetDungeonPeaceDialog(i, j, "setDungeonWall");
@@ -268,7 +264,6 @@ public class DungeonLayoutFragment extends Fragment {
                             case DungeonFragment.DUNGEON_DOOR:
                                 ShowSetDungeonPeaceDialog(i, j, "setDungeonDoor");
                         }
-
                     }
                     break;
             }

@@ -1,7 +1,6 @@
 package com.example.mainproject.dungeon;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +43,6 @@ public class SetCharacterImageFragment extends Fragment {
             topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
             oneSize = width / widthNum;
             maxSize = oneSize * widthNum;
-            Log.v("My oneSize", "" + oneSize);
-            Log.v("My maxSize", "" + maxSize);
         };
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
 
