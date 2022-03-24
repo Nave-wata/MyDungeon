@@ -16,6 +16,7 @@ import com.example.mainproject.asynchronous.dungeonlayout.DungeonLayout;
 import com.example.mainproject.asynchronous.dungeonlayout.GetDungeonLayout;
 import com.example.mainproject.asynchronous.usersapptimes.UpdateAppTimes;
 import com.example.mainproject.asynchronous.userspossession.UpdatePossession;
+import com.example.mainproject.dungeon.DungeonFragment;
 import com.example.mainproject.title.TitleActivity;
 
 import java.time.LocalDateTime;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int widthNum = 20;
     public static final int heightNum = 20;
     public static final int[][] dungeonInfo = new int[widthNum][heightNum];
-    public static final int[][] characterInfo = new int[widthNum][heightNum];
+    public static final int[][] characterInfo = new int[widthNum][heightNum]/*[status_column]*/;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,17 +78,26 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
                     fragmentTransaction.replace(R.id.BaseStatusContainer, BaseStatusFragment.newInstance(UserName));
                     fragmentTransaction.commit();
+
+                    CharacterPositionsInfo();
                 },
                 e->{
                     Log.v("MainActivity[Exception]", "" + e);
                 }
         ).execute();
-
-        CharacterPositionsInfo();
     }
 
     private void CharacterPositionsInfo() {
-
+        int X = 0;
+        int Y = 0;
+        for (int i = 0; i < widthNum; i++) {
+            for (int j = 0; j < heightNum; j++) {
+                if (dungeonInfo[i][j] == DungeonFragment.DUNGEON_I_DOOR) {
+                    X = i;
+                    Y = j;
+                }
+            }
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
