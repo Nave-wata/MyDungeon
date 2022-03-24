@@ -76,6 +76,8 @@ public class DungeonLayoutFragment extends Fragment {
             topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
             oneSize = width / widthNum;
             maxSize = oneSize * widthNum;
+            Log.v("My oneSize", "" + oneSize);
+            Log.v("My maxSize", "" + maxSize);
 
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
             for (int i = 0; i < widthNum; i++) {
