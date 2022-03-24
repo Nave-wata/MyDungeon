@@ -8,6 +8,8 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.mainproject.asynchronous.dungeonlayout.DungeonLayout;
+import com.example.mainproject.asynchronous.dungeonlayout.DungeonLayoutDao;
 import com.example.mainproject.asynchronous.usersapptimes.UsersAppTimes;
 import com.example.mainproject.asynchronous.usersapptimes.UsersAppTimesDao;
 import com.example.mainproject.asynchronous.usersinfo.UsersInfo;
@@ -62,10 +64,31 @@ public class InitializeDatabase implements Runnable {
         int nowHour = nowTime.getHour();
         int nowMinute = nowTime.getMinute();
         int nowSecond = nowTime.getSecond();
+        final String row0  = "0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0";
+        final String row1  = "0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0";
+        final String row2  = "0,0,0,0,0,0,0,0,1,4,1,0,0,0,0,0,0,0,0,0";
+        final String row3  = "0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0";
+        final String row4  = "0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0";
+        final String row5  = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+        final String row6  = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+        final String row7  = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+        final String row8  = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+        final String row9  = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+        final String row10 = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+        final String row11 = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+        final String row12 = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+        final String row13 = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+        final String row14 = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+        final String row15 = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+        final String row16 = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+        final String row17 = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+        final String row18 = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+        final String row19 = "0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0";
 
         UsersInfoDao usersInfoDao = db.usersInfoDao();
         UsersAppTimesDao usersAppTimesDao = db.usersAppTimesDao();
         UsersPossessionDao usersPossessionDao = db.usersPossessionDao();
+        DungeonLayoutDao dungeonLayoutDao = db.dungeonLayoutDao();
 
         // ここに書いてるとチェックボックス外してもアプリ再起したら入力されてます
         SharedPreferences dataStore = activity.getSharedPreferences(NEXT_INFO, MODE_PRIVATE);
@@ -79,6 +102,28 @@ public class InitializeDatabase implements Runnable {
             usersInfoDao.signUpTask(new UsersInfo(name, salt, hash));
             usersAppTimesDao.signUpTask(new UsersAppTimes(name, nowYear, nowMonth, nowDay, nowHour, nowMinute, nowSecond));
             usersPossessionDao.signUpTask(new UsersPossession(name, DP, Money));
+            dungeonLayoutDao.signUpTask(new DungeonLayout(
+                    name,
+                    row0,
+                    row1,
+                    row2,
+                    row3,
+                    row4,
+                    row5,
+                    row6,
+                    row7,
+                    row8,
+                    row9,
+                    row10,
+                    row11,
+                    row12,
+                    row13,
+                    row14,
+                    row15,
+                    row16,
+                    row17,
+                    row18,
+                    row19));
         } catch (Exception ignored) {}
     }
 
