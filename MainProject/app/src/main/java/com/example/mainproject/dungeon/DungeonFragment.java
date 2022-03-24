@@ -42,6 +42,7 @@ public class DungeonFragment extends Fragment {
 
         FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         fragmentTransaction.replace(R.id.DungeonLayoutContainer, DungeonLayoutFragment.newInstance(UserName));
+        fragmentTransaction.add(R.id.DungeonLayoutContainer, CharacterPositionFragment.newInstance(UserName));
         fragmentTransaction.replace(R.id.ChangeLayoutContainer, DisplayFloorFragment.newInstance(UserName));
         fragmentTransaction.commit();
     }
