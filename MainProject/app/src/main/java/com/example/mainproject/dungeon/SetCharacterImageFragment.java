@@ -11,11 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import com.example.mainproject.MainActivity;
 import com.example.mainproject.R;
 
 import java.util.Objects;
 
-public class CharacterPositionFragment extends Fragment {
+public class SetCharacterImageFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
@@ -23,8 +24,8 @@ public class CharacterPositionFragment extends Fragment {
     private int preDx, preDy;
     private int oneSize;
     private int maxSize;
-    final int widthNum = DungeonLayoutFragment.widthNum;
-    final int heightNum = DungeonLayoutFragment.heightNum;
+    final int widthNum = MainActivity.widthNum;
+    final int heightNum = MainActivity.heightNum;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +36,9 @@ public class CharacterPositionFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ConstraintLayout layout = new ConstraintLayout(Objects.requireNonNull(getContext()));
-        View view = inflater.inflate(R.layout.fragment_characterposition, container, false);
+        View view = inflater.inflate(R.layout.fragment_setcharacterimage, container, false);
 
-        topContainer = view.findViewById(R.id.fragment_characterPosition);
+        topContainer = view.findViewById(R.id.fragment_setCharacterImage);
         globalLayoutListener = () -> {
             int width = topContainer.getWidth();
             topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
@@ -53,8 +54,8 @@ public class CharacterPositionFragment extends Fragment {
     }
 
     @NonNull
-    public static CharacterPositionFragment newInstance(String str){
-        CharacterPositionFragment fragment = new CharacterPositionFragment();
+    public static SetCharacterImageFragment newInstance(String str){
+        SetCharacterImageFragment fragment = new SetCharacterImageFragment();
         Bundle barg = new Bundle();
         barg.putString(fragment.EXTRA_DATA, str);
         fragment.setArguments(barg);

@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mainproject.MainActivity;
 import com.example.mainproject.R;
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
@@ -42,7 +43,7 @@ public class DungeonFragment extends Fragment {
 
         FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         fragmentTransaction.replace(R.id.DungeonLayoutContainer, DungeonLayoutFragment.newInstance(UserName));
-        fragmentTransaction.add(R.id.DungeonLayoutContainer, CharacterPositionFragment.newInstance(UserName));
+        fragmentTransaction.add(R.id.DungeonLayoutContainer, SetCharacterImageFragment.newInstance(UserName));
         fragmentTransaction.replace(R.id.ChangeLayoutContainer, DisplayFloorFragment.newInstance(UserName));
         fragmentTransaction.commit();
     }
@@ -71,7 +72,7 @@ public class DungeonFragment extends Fragment {
                 new UpdateDungeonLayout(
                         db,
                         UserName,
-                        DungeonLayoutFragment.dungeonInfo,
+                        MainActivity.dungeonInfo,
                         b-> Log.v("My", "OK"),
                         e-> Log.v("My", "" + e)
                 ).execute();
@@ -99,7 +100,7 @@ public class DungeonFragment extends Fragment {
         new UpdateDungeonLayout(
                 db,
                 UserName,
-                DungeonLayoutFragment.dungeonInfo,
+                MainActivity.dungeonInfo,
                 b-> Log.v("My", "OK"),
                 e-> Log.v("My", "" + e)
         ).execute();
