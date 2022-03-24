@@ -50,10 +50,18 @@ public class SetCharacterImageFragment extends Fragment {
             topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
             oneSize = width / widthNum;
             maxSize = oneSize * widthNum;
+
+            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
+            imageView.setLayoutParams(layoutParams);
+            imageView.setX(oneSize * 9);
+            imageView.setY(oneSize * 19);
         };
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
 
+        setImage.setImageViewBitmapFromAsset(imageView, "character/enemy/hito.png");
+
         layout.addView(view);
+        layout.addView(imageView);
         return  layout.getRootView();
     }
 
