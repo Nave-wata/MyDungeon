@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.mainproject.MainActivity;
+import com.example.mainproject.DungeonsInfo;
 import com.example.mainproject.R;
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
@@ -72,7 +72,7 @@ public class DungeonFragment extends Fragment {
                 new UpdateDungeonLayout(
                         db,
                         UserName,
-                        MainActivity.dungeonInfo,
+                        DungeonsInfo.dungeonInfo,
                         b-> Log.v("My", "OK"),
                         e-> Log.v("My", "" + e)
                 ).execute();
@@ -100,7 +100,7 @@ public class DungeonFragment extends Fragment {
         new UpdateDungeonLayout(
                 db,
                 UserName,
-                MainActivity.dungeonInfo,
+                DungeonsInfo.dungeonInfo,
                 b-> Log.v("My", "OK"),
                 e-> Log.v("My", "" + e)
         ).execute();

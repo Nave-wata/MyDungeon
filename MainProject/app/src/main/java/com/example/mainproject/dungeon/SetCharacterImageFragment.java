@@ -1,17 +1,20 @@
 package com.example.mainproject.dungeon;
 
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
-import com.example.mainproject.MainActivity;
+import com.example.mainproject.DungeonsInfo;
 import com.example.mainproject.R;
+import com.example.mainproject.SetImage;
 
 import java.util.Objects;
 
@@ -23,8 +26,8 @@ public class SetCharacterImageFragment extends Fragment {
     private int preDx, preDy;
     private int oneSize;
     private int maxSize;
-    final int widthNum = MainActivity.widthNum;
-    final int heightNum = MainActivity.heightNum;
+    final int widthNum = DungeonsInfo.widthNum;
+    final int heightNum = DungeonsInfo.heightNum;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,10 @@ public class SetCharacterImageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ConstraintLayout layout = new ConstraintLayout(Objects.requireNonNull(getContext()));
         View view = inflater.inflate(R.layout.fragment_setcharacterimage, container, false);
+        AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
+        SetImage setImage = new SetImage(assetManager);
+
+        ImageView imageView = new ImageView(getContext());
 
         topContainer = view.findViewById(R.id.fragment_setCharacterImage);
         globalLayoutListener = () -> {
