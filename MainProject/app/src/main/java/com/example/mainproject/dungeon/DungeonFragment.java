@@ -95,6 +95,14 @@ public class DungeonFragment extends Fragment {
         super.onStop();
         DungeonLayoutFragment.changeLayoutFlag = false;
         changeLayoutButton.setText(getString(R.string.NotChangeLayout));
+        final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
+        new UpdateDungeonLayout(
+                db,
+                UserName,
+                DungeonLayoutFragment.dungeonInfo,
+                b-> Log.v("My", "OK"),
+                e-> Log.v("My", "" + e)
+        ).execute();
     }
 
     @NonNull
