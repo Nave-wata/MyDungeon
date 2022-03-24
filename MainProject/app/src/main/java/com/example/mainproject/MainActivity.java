@@ -85,7 +85,9 @@ public class MainActivity extends AppCompatActivity {
         CharacterPositionsInfo();
     }
 
-    private void CharacterPositionsInfo() {}
+    private void CharacterPositionsInfo() {
+        Log.v("My", "CharacterPositionsInfo");
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override

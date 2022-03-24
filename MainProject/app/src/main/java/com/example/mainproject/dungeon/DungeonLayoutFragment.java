@@ -63,20 +63,6 @@ public class DungeonLayoutFragment extends Fragment {
         for (int i = 0; i < MainActivity.widthNum; i++ ) {
             for (int j = 0; j < MainActivity.heightNum; j++) {
                 dungeonPeaces[i][j] = new ImageView(getContext());
-
-                if (MainActivity.dungeonInfo[i][j] == DungeonFragment.NOT_DUNGEON_WALL) {
-                    setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/wall.png");
-                } else if (MainActivity.dungeonInfo[i][j] == DungeonFragment.DUNGEON_I_DOOR) {
-                    setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeon_I_Door.png");
-                } else if (MainActivity.dungeonInfo[i][j] == DungeonFragment.DUNGEON_O_DOOR) {
-                    setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeon_O_Door.png");
-                } else if (MainActivity.dungeonInfo[i][j] == DungeonFragment.DUNGEON_DOOR) {
-                    setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/door.png");
-                } else if (MainActivity.dungeonInfo[i][j] == DungeonFragment.DUNGEON_WALL) {
-                    setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonWall.png");
-                } else if (MainActivity.dungeonInfo[i][j] == DungeonFragment.DUNGEON_TRAP1) {
-                    setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonTrap1.png");
-                }
             }
         }
 
@@ -95,7 +81,27 @@ public class DungeonLayoutFragment extends Fragment {
                     dungeonPeaces[i][j].setLayoutParams(layoutParams);
                     dungeonPeaces[i][j].setX(oneSize * j);
                     dungeonPeaces[i][j].setY(oneSize * i);
-                    setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "");
+
+                    switch (MainActivity.dungeonInfo[i][j]) {
+                        case DungeonFragment.NOT_DUNGEON_WALL:
+                            setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/wall.png");
+                            break;
+                        case DungeonFragment.DUNGEON_I_DOOR:
+                            setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeon_I_Door.png");
+                            break;
+                        case DungeonFragment.DUNGEON_O_DOOR:
+                            setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeon_O_Door.png");
+                            break;
+                        case DungeonFragment.DUNGEON_DOOR:
+                            setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/door.png");
+                            break;
+                        case DungeonFragment.DUNGEON_WALL:
+                            setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonWall.png");
+                            break;
+                        case DungeonFragment.DUNGEON_TRAP1:
+                            setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonTrap1.png");
+                            break;
+                    }
                 }
             }
 
