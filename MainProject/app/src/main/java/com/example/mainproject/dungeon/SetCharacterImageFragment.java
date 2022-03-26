@@ -25,9 +25,7 @@ public class SetCharacterImageFragment extends Fragment {
     TimerPossession timerPossession;
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
-    private int preDx, preDy;
     private int oneSize;
-    private int maxSize;
     private ImageView imageView;
     final int widthNum = DungeonsInfo.widthNum;
     final int heightNum = DungeonsInfo.heightNum;
@@ -52,7 +50,6 @@ public class SetCharacterImageFragment extends Fragment {
             int width = topContainer.getWidth();
             topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
             oneSize = width / widthNum;
-            maxSize = oneSize * widthNum;
 
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
             moveCharacterImage(imageView);
