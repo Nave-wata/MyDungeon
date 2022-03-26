@@ -3,38 +3,43 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/drawable/frame_changelayout.xml" value="0.383" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/drawable/frame_displayfloor.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/drawable/frame_dungeonsupport.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2095" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/drawable/splash.xml" value="0.377" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/dialog_confirmcreatedungeon.xml" value="0.33" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/dialog_confirmdpcost.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/dialog_confirmsetdungeonwall.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/dialog_deletewall.xml" value="0.33" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/dialog_setdungeonpeace.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/dialog_setdungeonwall.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/fragment_changelayoutmenu.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/fragment_changemonstermenu.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/fragment_displayfloor.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/fragment_dungeon.xml" value="0.33" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/fragment_dungeonlayout.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/fragment_scaledungeon.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/tab_layoutmonster.xml" value="0.33" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/home/layout/fragment_home.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/layout/dialog_showdifftime.xml" value="0.33" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/layout/fragment_base.xml" value="0.20208333333333334" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/layout/fragment_basestatus.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/layout/fragment_basetransition.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/monster/layout/fragment_monster.xml" value="0.20208333333333334" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/title/layout/activity_title.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/title/layout/dialog_signin.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/title/layout/dialog_signup.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/title/layout/dialog_user.xml" value="0.20208333333333334" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/title/layout/dialog_user2.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/title/layout/fragment_title.xml" value="0.3875" />
-        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/title/layout/fragmnet_title2.xml" value="0.20208333333333334" />
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/fragment_charactersinfo.xml" value="0.3875" />
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/fragment_setcharacterimage.xml" value="0.3875" />
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/dungeon/layout/fragment_setcharacterposition.xml" value="0.32971014492753625" />
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/layout/activity_main.xml" value="0.3875" />
+        <entry key="..\:/Users/pr0gr/StudioProjects/MyDungeon/MainProject/app/src/main/res/layouts/layout/null_fragment_characterpositioninfo.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/frame_changelayout.xml" value="0.383" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/frame_displayfloor.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/frame_dungeonsupport.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2095" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/drawable/splash.xml" value="0.377" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/dungeon/layout/dialog_confirmcreatedungeon.xml" value="0.33" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/dungeon/layout/dialog_confirmdpcost.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/dungeon/layout/dialog_confirmsetdungeonwall.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/dungeon/layout/dialog_deletewall.xml" value="0.33" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/dungeon/layout/dialog_setdungeonwall.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/dungeon/layout/fragment_changelayoutmenu.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/dungeon/layout/fragment_changemonstermenu.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/dungeon/layout/fragment_characterposition.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/dungeon/layout/fragment_displayfloor.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/dungeon/layout/fragment_dungeon.xml" value="0.33" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/dungeon/layout/fragment_dungeonlayout.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/dungeon/layout/fragment_scaledungeon.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/dungeon/layout/tab_layoutmonster.xml" value="0.33" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/home/layout/fragment_home.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/layout/activity_main.xml" value="0.33" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/layout/dialog_showdifftime.xml" value="0.33" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/layout/fragment_base.xml" value="0.20208333333333334" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/layout/fragment_basestatus.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/layout/fragment_basetransition.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/monster/layout/fragment_monster.xml" value="0.20208333333333334" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/title/layout/activity_title.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/title/layout/dialog_signin.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/title/layout/dialog_signup.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/title/layout/dialog_user.xml" value="0.20208333333333334" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/title/layout/dialog_user2.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/title/layout/fragment_title.xml" value="0.3875" />
+        <entry key="$PROJECT_DIR$/app/src/main/res/layouts/title/layout/fragmnet_title2.xml" value="0.20208333333333334" />
       </map>
     </option>
   </component>

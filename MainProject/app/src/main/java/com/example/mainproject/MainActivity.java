@@ -29,10 +29,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = this.getIntent();
         UserName = intent.getStringExtra(TitleActivity.EXTRA_DATA);
         AppFirstFlag = true;
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.BaseTransitionContainer, BaseTransitionFragment.newInstance(UserName));
         fragmentTransaction.replace(R.id.BaseStatusContainer, BaseStatusFragment.newInstance(UserName));
+        fragmentTransaction.replace(R.id.null_Container, DungeonsInfo.newInstance(UserName));
         fragmentTransaction.commit();
     }
 

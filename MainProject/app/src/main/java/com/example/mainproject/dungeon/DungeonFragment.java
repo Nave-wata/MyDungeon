@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mainproject.DungeonsInfo;
 import com.example.mainproject.R;
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
@@ -42,6 +43,7 @@ public class DungeonFragment extends Fragment {
 
         FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         fragmentTransaction.replace(R.id.DungeonLayoutContainer, DungeonLayoutFragment.newInstance(UserName));
+        fragmentTransaction.add(R.id.DungeonLayoutContainer, SetCharacterImageFragment.newInstance(UserName));
         fragmentTransaction.replace(R.id.ChangeLayoutContainer, DisplayFloorFragment.newInstance(UserName));
         fragmentTransaction.commit();
     }
@@ -58,10 +60,10 @@ public class DungeonFragment extends Fragment {
 
         Button createFlorButton = view.findViewById(R.id.createFlorButton);
         createFlorButton.setOnClickListener(v -> {
-            ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(
-                    "ConfirmCreateFloor",
-                    n->{});
-            confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), "ConfirmCreateDungeonDialog");
+            //ConfirmDPCostDialog confirmDPCostDialog = new ConfirmDPCostDialog(
+            //        "ConfirmCreateFloor",
+            //        n->{});
+            //confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), "ConfirmCreateDungeonDialog");
         });
         changeLayoutButton = view.findViewById(R.id.changeLayout);
         changeLayoutButton.setOnClickListener(v -> {
@@ -70,7 +72,7 @@ public class DungeonFragment extends Fragment {
                 new UpdateDungeonLayout(
                         db,
                         UserName,
-                        DungeonLayoutFragment.dungeonInfo,
+                        DungeonsInfo.dungeonInfo,
                         b-> Log.v("My", "OK"),
                         e-> Log.v("My", "" + e)
                 ).execute();
@@ -94,6 +96,14 @@ public class DungeonFragment extends Fragment {
         super.onStop();
         DungeonLayoutFragment.changeLayoutFlag = false;
         changeLayoutButton.setText(getString(R.string.NotChangeLayout));
+        final AppDatabase db = AppDatabaseSingleton.getInstance(Objects.requireNonNull(getActivity()).getApplicationContext());
+        new UpdateDungeonLayout(
+                db,
+                UserName,
+                DungeonsInfo.dungeonInfo,
+                b-> Log.v("My", "OK"),
+                e-> Log.v("My", "" + e)
+        ).execute();
     }
 
     @NonNull
