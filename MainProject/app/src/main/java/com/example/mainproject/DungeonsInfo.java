@@ -21,7 +21,7 @@ import java.util.Objects;
 public class DungeonsInfo extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject";
     private String UserName;
-    TimerPossession timerPossession;
+    private TimerPossession timerPossession;
     public static int X;
     public static int Y;
     public static final int widthNum = 20;
