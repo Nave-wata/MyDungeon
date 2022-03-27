@@ -24,8 +24,8 @@ public class DungeonsInfo extends Fragment {
     private TimerPossession timerPossession;
     public static final int widthNum = 20;
     public static final int heightNum = 20;
-    public static final int[][] dungeonInfo = new int[widthNum][heightNum];
-    public static final int[][] characterInfo = new int[widthNum][heightNum]/*[status_column]*/;
+    public static final int[][] dungeonInfo = new int[heightNum][widthNum];
+    public static final int[][] characterInfo = new int[heightNum][widthNum]/*[status_column]*/;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

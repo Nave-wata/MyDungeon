@@ -6,8 +6,14 @@ import android.widget.ImageView;
 
 import com.example.mainproject.DungeonsInfo;
 
+import java.util.Random;
+
 public class TimerPossession {
     final android.os.Handler handler = new Handler(Looper.getMainLooper());
+    int bX;
+    int bY;
+    int aX;
+    int aY;
 
 
     public TimerPossession() {}
@@ -24,15 +30,58 @@ public class TimerPossession {
                     }
                 }
             }
-            if (0 < Y) {
+
+            try {
+                Random random = new Random();
+                int randomInt = random.nextInt(3);
                 int tmp = DungeonsInfo.characterInfo[Y][X];
-                DungeonsInfo.characterInfo[Y - 1][X] = tmp;
-                DungeonsInfo.characterInfo[Y][X] = 0;
-            } else {
-                int tmp = DungeonsInfo.characterInfo[Y][X];
-                DungeonsInfo.characterInfo[19][X] = tmp;
-                DungeonsInfo.characterInfo[Y][X] = 0;
+
+                if (X == 9 && Y == 0) {
+                    DungeonsInfo.characterInfo[19][X] = tmp;
+                    DungeonsInfo.characterInfo[Y][X] = 0;
+                } else if (X - bX < 0) {
+                    if (randomInt == 0) {
+                        DungeonsInfo.characterInfo[Y + 1][X] = tmp;
+                    } else if (randomInt == 1) {
+                        DungeonsInfo.characterInfo[Y][X - 1] = tmp;
+                    } else {
+                        DungeonsInfo.characterInfo[Y - 1][X] = tmp;
+                    }
+                    DungeonsInfo.characterInfo[Y][X] = 0;
+                } else if (0 < X - bX) {
+                    if (randomInt == 0) {
+                        DungeonsInfo.characterInfo[Y + 1][X] = tmp;
+                    } else if (randomInt == 1) {
+                        DungeonsInfo.characterInfo[Y][X + 1] = tmp;
+                    } else {
+                        DungeonsInfo.characterInfo[Y - 1][X] = tmp;
+                    }
+                    DungeonsInfo.characterInfo[Y][X] = 0;
+                } else if (Y - bY < 0) {
+                    if (randomInt == 0) {
+                        DungeonsInfo.characterInfo[Y - 1][X] = tmp;
+                    } else if (randomInt == 1) {
+                        DungeonsInfo.characterInfo[Y][X + 1] = tmp;
+                    } else {
+                        DungeonsInfo.characterInfo[Y][X - 1] = tmp;
+                    }
+                    DungeonsInfo.characterInfo[Y][X] = 0;
+                } else if (0 < Y - bY) {
+                    if (randomInt == 0) {
+                        DungeonsInfo.characterInfo[Y + 1][X] = tmp;
+                    } else if (randomInt == 1) {
+                        DungeonsInfo.characterInfo[Y][X + 1] = tmp;
+                    } else {
+                        DungeonsInfo.characterInfo[Y][X - 1] = tmp;
+                    }
+                    DungeonsInfo.characterInfo[Y][X] = 0;
+                }
+            } catch (Exception e) {
+                //
             }
+
+            bX = X;
+            bY = Y;
             handler.removeCallbacks(this);
             handler.postDelayed(this, 1000);
         }
