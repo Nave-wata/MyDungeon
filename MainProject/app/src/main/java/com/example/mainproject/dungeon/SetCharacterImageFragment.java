@@ -15,17 +15,18 @@ import androidx.fragment.app.Fragment;
 import com.example.mainproject.DungeonsInfo;
 import com.example.mainproject.R;
 import com.example.mainproject.SetImage;
+import com.example.mainproject.asynchronous.TimerPossession;
 
 import java.util.Objects;
 
 public class SetCharacterImageFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
+    TimerPossession timerPossession;
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
-    private int preDx, preDy;
     private int oneSize;
-    private int maxSize;
+    private ImageView imageView;
     final int widthNum = DungeonsInfo.widthNum;
     final int heightNum = DungeonsInfo.heightNum;
 
@@ -42,19 +43,17 @@ public class SetCharacterImageFragment extends Fragment {
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         SetImage setImage = new SetImage(assetManager);
 
-        ImageView imageView = new ImageView(getContext());
+        imageView = new ImageView(getContext());
 
         topContainer = view.findViewById(R.id.fragment_setCharacterImage);
         globalLayoutListener = () -> {
             int width = topContainer.getWidth();
             topContainer.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
             oneSize = width / widthNum;
-            maxSize = oneSize * widthNum;
 
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
+            moveCharacterImage(imageView);
             imageView.setLayoutParams(layoutParams);
-            imageView.setX(oneSize * 9);
-            imageView.setY(oneSize * 19);
         };
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
 
@@ -62,7 +61,21 @@ public class SetCharacterImageFragment extends Fragment {
 
         layout.addView(view);
         layout.addView(imageView);
+
         return  layout.getRootView();
+    }
+
+    private void moveCharacterImage(ImageView imageView) {
+        imageView.setX(DungeonsInfo.X * oneSize);
+        imageView.setY(DungeonsInfo.Y * oneSize);
+        timerPossession = new TimerPossession(imageView, oneSize);
+        timerPossession.setCharacterImage_runnable_Run();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        timerPossession.setCharacterImage_runnable_Stop();
     }
 
     @NonNull
