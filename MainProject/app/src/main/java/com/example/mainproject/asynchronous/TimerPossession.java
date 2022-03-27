@@ -5,6 +5,7 @@ import android.os.Looper;
 import android.widget.ImageView;
 
 import com.example.mainproject.DungeonsInfo;
+import com.example.mainproject.dungeon.DungeonFragment;
 
 import java.util.Random;
 
@@ -38,52 +39,66 @@ public class TimerPossession {
 
                 if (X == 9 && Y == 0) {
                     DungeonsInfo.characterInfo[19][X] = tmp;
-                    DungeonsInfo.characterInfo[Y][X] = 0;
+                } else if (X == 9 && Y == 19) {
+                    DungeonsInfo.characterInfo[18][X] = tmp;
                 } else if (X - bX < 0) {
-                    if (randomInt == 0) {
+                    if (randomInt == 0 && (DungeonsInfo.dungeonInfo[Y + 1][X] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y + 1][X] == DungeonFragment.DUNGEON_O_DOOR)) {
                         DungeonsInfo.characterInfo[Y + 1][X] = tmp;
-                    } else if (randomInt == 1) {
+                    } else if (randomInt == 1 && (DungeonsInfo.dungeonInfo[Y][X - 1] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y][X - 1] == DungeonFragment.DUNGEON_O_DOOR)) {
+                        DungeonsInfo.characterInfo[Y][X - 1] = tmp;
+                    } else if (randomInt == 2 && (DungeonsInfo.dungeonInfo[Y - 1][X] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y - 1][X] == DungeonFragment.DUNGEON_O_DOOR)) {
+                        DungeonsInfo.characterInfo[Y - 1][X] = tmp;
+                    } else if (DungeonsInfo.dungeonInfo[Y][X - 1] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y][X - 1] == DungeonFragment.DUNGEON_O_DOOR) {
                         DungeonsInfo.characterInfo[Y][X - 1] = tmp;
                     } else {
-                        DungeonsInfo.characterInfo[Y - 1][X] = tmp;
+                        DungeonsInfo.characterInfo[Y][X + 1] = tmp;
                     }
-                    DungeonsInfo.characterInfo[Y][X] = 0;
                 } else if (0 < X - bX) {
-                    if (randomInt == 0) {
+                    if (randomInt == 0 && (DungeonsInfo.dungeonInfo[Y + 1][X] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y + 1][X] == DungeonFragment.DUNGEON_O_DOOR)) {
                         DungeonsInfo.characterInfo[Y + 1][X] = tmp;
-                    } else if (randomInt == 1) {
+                    } else if (randomInt == 1 && (DungeonsInfo.dungeonInfo[Y][X + 1] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y][X + 1] == DungeonFragment.DUNGEON_O_DOOR)) {
+                        DungeonsInfo.characterInfo[Y][X + 1] = tmp;
+                    } else if (randomInt == 2 && (DungeonsInfo.dungeonInfo[Y - 1][X] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y - 1][X] == DungeonFragment.DUNGEON_O_DOOR)) {
+                        DungeonsInfo.characterInfo[Y - 1][X] = tmp;
+                    } else if (DungeonsInfo.dungeonInfo[Y][X + 1] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y][X + 1] == DungeonFragment.DUNGEON_O_DOOR) {
                         DungeonsInfo.characterInfo[Y][X + 1] = tmp;
                     } else {
-                        DungeonsInfo.characterInfo[Y - 1][X] = tmp;
+                        DungeonsInfo.characterInfo[Y][X - 1] = tmp;
                     }
-                    DungeonsInfo.characterInfo[Y][X] = 0;
                 } else if (Y - bY < 0) {
-                    if (randomInt == 0) {
+                    if (randomInt == 0 && (DungeonsInfo.dungeonInfo[Y - 1][X] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y - 1][X] == DungeonFragment.DUNGEON_O_DOOR)) {
                         DungeonsInfo.characterInfo[Y - 1][X] = tmp;
-                    } else if (randomInt == 1) {
+                    } else if (randomInt == 1 && (DungeonsInfo.dungeonInfo[Y][X + 1] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y][X + 1] == DungeonFragment.DUNGEON_O_DOOR)) {
                         DungeonsInfo.characterInfo[Y][X + 1] = tmp;
-                    } else {
+                    } else if (randomInt == 2 && (DungeonsInfo.dungeonInfo[Y][X - 1] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y][X - 1] == DungeonFragment.DUNGEON_O_DOOR)) {
                         DungeonsInfo.characterInfo[Y][X - 1] = tmp;
-                    }
-                    DungeonsInfo.characterInfo[Y][X] = 0;
-                } else if (0 < Y - bY) {
-                    if (randomInt == 0) {
+                    } else if (DungeonsInfo.dungeonInfo[Y - 1][X] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y - 1][X] == DungeonFragment.DUNGEON_O_DOOR) {
+                        DungeonsInfo.characterInfo[Y - 1][X] = tmp;
+                    } else {
                         DungeonsInfo.characterInfo[Y + 1][X] = tmp;
-                    } else if (randomInt == 1) {
-                        DungeonsInfo.characterInfo[Y][X + 1] = tmp;
-                    } else {
-                        DungeonsInfo.characterInfo[Y][X - 1] = tmp;
                     }
-                    DungeonsInfo.characterInfo[Y][X] = 0;
+                } else if (0 < Y - bY) {
+                    if (randomInt == 0 && (DungeonsInfo.dungeonInfo[Y + 1][X] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y + 1][X] == DungeonFragment.DUNGEON_O_DOOR)) {
+                        DungeonsInfo.characterInfo[Y + 1][X] = tmp;
+                    } else if (randomInt == 1 && (DungeonsInfo.dungeonInfo[Y][X + 1] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y][X + 1] == DungeonFragment.DUNGEON_O_DOOR)) {
+                        DungeonsInfo.characterInfo[Y][X + 1] = tmp;
+                    } else if (randomInt == 2 && (DungeonsInfo.dungeonInfo[Y][X - 1] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y][X - 1] == DungeonFragment.DUNGEON_O_DOOR)) {
+                        DungeonsInfo.characterInfo[Y][X - 1] = tmp;
+                    } else if (DungeonsInfo.dungeonInfo[Y + 1][X] == DungeonFragment.DUNGEON_NOTHING || DungeonsInfo.dungeonInfo[Y + 1][X] == DungeonFragment.DUNGEON_O_DOOR) {
+                        DungeonsInfo.characterInfo[Y + 1][X] = tmp;
+                    } else {
+                        DungeonsInfo.characterInfo[Y - 1][X] = tmp;
+                    }
                 }
             } catch (Exception e) {
                 //
+            } finally {
+                bX = X;
+                bY = Y;
+                DungeonsInfo.characterInfo[Y][X] = 0;
+                handler.removeCallbacks(this);
+                handler.postDelayed(this, 1000);
             }
-
-            bX = X;
-            bY = Y;
-            handler.removeCallbacks(this);
-            handler.postDelayed(this, 1000);
         }
     };
     public void characterPosition_runnable_Run() { handler.post(characterPosition_runnable); }
