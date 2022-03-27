@@ -86,6 +86,9 @@ public class DungeonLayoutFragment extends Fragment {
                         case DungeonFragment.DUNGEON_O_DOOR:
                             setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeon_O_Door.png");
                             break;
+                        case DungeonFragment.DUNGEON_BOSE:
+                            setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonBoss.png");
+                            break;
                         case DungeonFragment.DUNGEON_DOOR:
                             setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/door.png");
                             break;

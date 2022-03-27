@@ -27,6 +27,7 @@ public class SetCharacterImageFragment extends Fragment {
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
     private int oneSize;
     private ImageView imageView;
+    private ImageView dungeonBoss;
     final int widthNum = DungeonsInfo.widthNum;
     final int heightNum = DungeonsInfo.heightNum;
 
@@ -44,6 +45,7 @@ public class SetCharacterImageFragment extends Fragment {
         SetImage setImage = new SetImage(assetManager);
 
         imageView = new ImageView(getContext());
+        dungeonBoss = new ImageView(getContext());
 
         topContainer = view.findViewById(R.id.fragment_setCharacterImage);
         globalLayoutListener = () -> {
@@ -54,13 +56,25 @@ public class SetCharacterImageFragment extends Fragment {
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
             moveCharacterImage(imageView);
             imageView.setLayoutParams(layoutParams);
+            dungeonBoss.setLayoutParams(layoutParams);
+
+            for (int i = 0; i < heightNum; i++) {
+                for (int j = 0; j < widthNum; j++) {
+                    if (DungeonsInfo.dungeonInfo[i][j] == DungeonFragment.DUNGEON_BOSE) {
+                        dungeonBoss.setX(j * oneSize);
+                        dungeonBoss.setY(i * oneSize);
+                    }
+                }
+            }
         };
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
 
         setImage.setImageViewBitmapFromAsset(imageView, "character/enemy/hito.png");
+        setImage.setImageViewBitmapFromAsset(dungeonBoss, "character/monster/maou.png");
 
         layout.addView(view);
         layout.addView(imageView);
+        layout.addView(dungeonBoss);
 
         return  layout.getRootView();
     }
