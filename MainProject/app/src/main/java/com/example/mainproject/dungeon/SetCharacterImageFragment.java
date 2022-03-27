@@ -66,8 +66,8 @@ public class SetCharacterImageFragment extends Fragment {
     }
 
     private void moveCharacterImage(ImageView imageView) {
-        imageView.setX(DungeonsInfo.X * oneSize);
-        imageView.setY(DungeonsInfo.Y * oneSize);
+        imageView.setX(9 * oneSize);
+        imageView.setY(19 * oneSize);
         timerPossession = new TimerPossession(imageView, oneSize);
         timerPossession.setCharacterImage_runnable_Run();
     }
