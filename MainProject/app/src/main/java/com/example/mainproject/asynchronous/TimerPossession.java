@@ -14,13 +14,24 @@ public class TimerPossession {
     final Runnable characterPosition_runnable = new Runnable() {
         @Override
         public void run() {
-            int tmp = DungeonsInfo.dungeonInfo[DungeonsInfo.X][DungeonsInfo.Y];
-            DungeonsInfo.dungeonInfo[DungeonsInfo.X][DungeonsInfo.Y] = 0;
-            DungeonsInfo.dungeonInfo[DungeonsInfo.X][DungeonsInfo.Y] = tmp;
-            if (0 < DungeonsInfo.Y) {
-                DungeonsInfo.Y--;
+            int X = 0;
+            int Y = 0;
+            for (int i = 0; i < DungeonsInfo.heightNum; i++) {
+                for (int j = 0; j < DungeonsInfo.widthNum; j++) {
+                    if (DungeonsInfo.characterInfo[i][j] == 1) {
+                        X = j;
+                        Y = i;
+                    }
+                }
+            }
+            if (0 < Y) {
+                int tmp = DungeonsInfo.characterInfo[Y][X];
+                DungeonsInfo.characterInfo[Y - 1][X] = tmp;
+                DungeonsInfo.characterInfo[Y][X] = 0;
             } else {
-                DungeonsInfo.Y = DungeonsInfo.widthNum - 1;
+                int tmp = DungeonsInfo.characterInfo[Y][X];
+                DungeonsInfo.characterInfo[19][X] = tmp;
+                DungeonsInfo.characterInfo[Y][X] = 0;
             }
             handler.removeCallbacks(this);
             handler.postDelayed(this, 1000);
@@ -40,8 +51,18 @@ public class TimerPossession {
     final Runnable setCharacterImage_runnable = new Runnable() {
         @Override
         public void run() {
-            imageView.setX(DungeonsInfo.X * oneSize);
-            imageView.setY(DungeonsInfo.Y * oneSize);
+            int X = 0;
+            int Y = 0;
+            for (int i = 0; i < DungeonsInfo.heightNum; i++) {
+                for (int j = 0; j < DungeonsInfo.widthNum; j++) {
+                    if (DungeonsInfo.characterInfo[i][j] == 1) {
+                        X = j;
+                        Y = i;
+                    }
+                }
+            }
+            imageView.setX(X * oneSize);
+            imageView.setY(Y * oneSize);
             handler.removeCallbacks(this);
             handler.postDelayed(this, 1000);
         }

@@ -22,8 +22,6 @@ public class DungeonsInfo extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject";
     private String UserName;
     private TimerPossession timerPossession;
-    public static int X;
-    public static int Y;
     public static final int widthNum = 20;
     public static final int heightNum = 20;
     public static final int[][] dungeonInfo = new int[widthNum][heightNum];
@@ -88,8 +86,7 @@ public class DungeonsInfo extends Fragment {
         for (int i = 0; i < widthNum; i++) {
             for (int j = 0; j < heightNum; j++) {
                 if (dungeonInfo[i][j] == DungeonFragment.DUNGEON_I_DOOR) {
-                    X = j;
-                    Y = i;
+                    characterInfo[i][j] = 1;
                 }
             }
         }
