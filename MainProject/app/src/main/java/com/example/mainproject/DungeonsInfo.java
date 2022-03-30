@@ -14,18 +14,26 @@ import com.example.mainproject.asynchronous.AppDatabaseSingleton;
 import com.example.mainproject.asynchronous.TimerPossession;
 import com.example.mainproject.asynchronous.dungeonlayout.DungeonLayout;
 import com.example.mainproject.asynchronous.dungeonlayout.GetDungeonLayout;
-import com.example.mainproject.dungeon.DungeonFragment;
 
 import java.util.Objects;
 
 public class DungeonsInfo extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject";
     private String UserName;
-    private TimerPossession timerPossession;
+    private TimerPossession.CharacterPosition_Runnable characterPosition_runnable;
     public static final int widthNum = 20;
     public static final int heightNum = 20;
     public static final int[][] dungeonInfo = new int[heightNum][widthNum];
     public static final int[][] characterInfo = new int[heightNum][widthNum]/*[status_column]*/;
+
+    public static final int NOT_DUNGEON_WALL = 0;
+    public static final int DUNGEON_NOTHING = 1;
+    public static final int DUNGEON_I_DOOR = 2; // start
+    public static final int DUNGEON_O_DOOR = 3; // end
+    public static final int DUNGEON_BOSE = 4;
+    public static final int DUNGEON_DOOR = 5;
+    public static final int DUNGEON_WALL = 6;
+    public static final int DUNGEON_TRAP1 = 7;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,9 +79,7 @@ public class DungeonsInfo extends Fragment {
 
                     CharacterPositionsInfo();
                 },
-                e->{
-                    Log.v("MainActivity[Exception]", "" + e);
-                }
+                e-> Log.v("MainActivity[Exception]", "" + e)
         ).execute();
     }
 
@@ -85,19 +91,19 @@ public class DungeonsInfo extends Fragment {
     private void CharacterPositionsInfo() {
         for (int i = 0; i < widthNum; i++) {
             for (int j = 0; j < heightNum; j++) {
-                if (dungeonInfo[i][j] == DungeonFragment.DUNGEON_I_DOOR) {
+                if (dungeonInfo[i][j] == DUNGEON_I_DOOR) {
                     characterInfo[i][j] = 1;
                 }
             }
         }
-        timerPossession = new TimerPossession();
-        timerPossession.characterPosition_runnable_Run();
+        characterPosition_runnable = new TimerPossession.CharacterPosition_Runnable();
+        characterPosition_runnable.run();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        timerPossession.characterPosition_runnable_Stop();
+        characterPosition_runnable.stop();
     }
 
     @NonNull

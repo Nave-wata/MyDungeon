@@ -65,9 +65,9 @@ public class InitializeDatabase implements Runnable {
         int nowMinute = nowTime.getMinute();
         int nowSecond = nowTime.getSecond();
         final String row0  = "0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0";
-        final String row1  = "0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0";
-        final String row2  = "0,0,0,0,0,0,0,0,1,4,1,0,0,0,0,0,0,0,0,0";
-        final String row3  = "0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0";
+        final String row1  = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+        final String row2  = "0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0";
+        final String row3  = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
         final String row4  = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
         final String row5  = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
         final String row6  = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";

@@ -22,11 +22,12 @@ import java.util.Objects;
 public class SetCharacterImageFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
-    TimerPossession timerPossession;
+    TimerPossession.SetCharacterImage_Runnable setCharacterImage_runnable;
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
     private int oneSize;
     private ImageView imageView;
+    private ImageView dungeonBoss;
     final int widthNum = DungeonsInfo.widthNum;
     final int heightNum = DungeonsInfo.heightNum;
 
@@ -44,6 +45,7 @@ public class SetCharacterImageFragment extends Fragment {
         SetImage setImage = new SetImage(assetManager);
 
         imageView = new ImageView(getContext());
+        dungeonBoss = new ImageView(getContext());
 
         topContainer = view.findViewById(R.id.fragment_setCharacterImage);
         globalLayoutListener = () -> {
@@ -52,34 +54,46 @@ public class SetCharacterImageFragment extends Fragment {
             oneSize = width / widthNum;
 
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
-            moveCharacterImage(imageView);
+            moveCharacterImage(setImage);
             imageView.setLayoutParams(layoutParams);
+            dungeonBoss.setLayoutParams(layoutParams);
+
+            for (int i = 0; i < heightNum; i++) {
+                for (int j = 0; j < widthNum; j++) {
+                    if (DungeonsInfo.dungeonInfo[i][j] == DungeonsInfo.DUNGEON_BOSE) {
+                        dungeonBoss.setX(j * oneSize);
+                        dungeonBoss.setY(i * oneSize);
+                    }
+                }
+            }
         };
         topContainer.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
 
         setImage.setImageViewBitmapFromAsset(imageView, "character/enemy/hito.png");
+        setImage.setImageViewBitmapFromAsset(dungeonBoss, "character/monster/maou.png");
 
         layout.addView(view);
         layout.addView(imageView);
+        layout.addView(dungeonBoss);
 
-        return  layout.getRootView();
+        return layout.getRootView();
     }
 
-    private void moveCharacterImage(ImageView imageView) {
+    public void moveCharacterImage(SetImage setImage) {
         imageView.setX(9 * oneSize);
         imageView.setY(19 * oneSize);
-        timerPossession = new TimerPossession(imageView, oneSize);
-        timerPossession.setCharacterImage_runnable_Run();
+        setCharacterImage_runnable = new TimerPossession.SetCharacterImage_Runnable(setImage, imageView, oneSize);
+        setCharacterImage_runnable.run();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        timerPossession.setCharacterImage_runnable_Stop();
+        setCharacterImage_runnable.stop();
     }
 
     @NonNull
-    public static SetCharacterImageFragment newInstance(String str){
+    public static SetCharacterImageFragment newInstance(String str) {
         SetCharacterImageFragment fragment = new SetCharacterImageFragment();
         Bundle barg = new Bundle();
         barg.putString(fragment.EXTRA_DATA, str);

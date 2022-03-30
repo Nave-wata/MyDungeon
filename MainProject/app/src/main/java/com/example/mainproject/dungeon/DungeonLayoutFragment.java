@@ -20,7 +20,6 @@ import com.example.mainproject.SetImage;
 
 import java.util.Objects;
 
-
 public class DungeonLayoutFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
@@ -38,7 +37,6 @@ public class DungeonLayoutFragment extends Fragment {
     public static boolean changeLayoutFlag = false;
     public static boolean moveLayoutFlag = false;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +53,8 @@ public class DungeonLayoutFragment extends Fragment {
         AssetManager assetManager = Objects.requireNonNull(getActivity()).getAssets();
         setImage = new SetImage(assetManager);
 
-        dungeonPeace  = new ImageView(getContext());
-        for (int i = 0; i < DungeonsInfo.widthNum; i++ ) {
+        dungeonPeace = new ImageView(getContext());
+        for (int i = 0; i < DungeonsInfo.widthNum; i++) {
             for (int j = 0; j < DungeonsInfo.heightNum; j++) {
                 dungeonPeaces[i][j] = new ImageView(getContext());
             }
@@ -77,22 +75,25 @@ public class DungeonLayoutFragment extends Fragment {
                     dungeonPeaces[i][j].setY(oneSize * i);
 
                     switch (DungeonsInfo.dungeonInfo[i][j]) {
-                        case DungeonFragment.NOT_DUNGEON_WALL:
+                        case DungeonsInfo.NOT_DUNGEON_WALL:
                             setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/wall.png");
                             break;
-                        case DungeonFragment.DUNGEON_I_DOOR:
+                        case DungeonsInfo.DUNGEON_I_DOOR:
                             setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeon_I_Door.png");
                             break;
-                        case DungeonFragment.DUNGEON_O_DOOR:
+                        case DungeonsInfo.DUNGEON_O_DOOR:
                             setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeon_O_Door.png");
                             break;
-                        case DungeonFragment.DUNGEON_DOOR:
+                        case DungeonsInfo.DUNGEON_BOSE:
+                            setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonBoss.png");
+                            break;
+                        case DungeonsInfo.DUNGEON_DOOR:
                             setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/door.png");
                             break;
-                        case DungeonFragment.DUNGEON_WALL:
+                        case DungeonsInfo.DUNGEON_WALL:
                             setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonWall.png");
                             break;
-                        case DungeonFragment.DUNGEON_TRAP1:
+                        case DungeonsInfo.DUNGEON_TRAP1:
                             setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonTrap1.png");
                             break;
                     }
@@ -121,13 +122,13 @@ public class DungeonLayoutFragment extends Fragment {
     public void setDungeonPeace(int op) { // 引数でImage指定すればいい
         dungeonPeaceType = op;
         switch (op) {
-            case DungeonFragment.DUNGEON_WALL:
+            case DungeonsInfo.DUNGEON_WALL:
                 setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/dungeonWall.png");
                 break;
-            case DungeonFragment.DUNGEON_TRAP1:
+            case DungeonsInfo.DUNGEON_TRAP1:
                 setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/dungeonTrap1.png");
                 break;
-            case DungeonFragment.DUNGEON_DOOR:
+            case DungeonsInfo.DUNGEON_DOOR:
                 setImage.setImageViewBitmapFromAsset(dungeonPeace, "dungeon/door.png");
         }
     }
@@ -136,18 +137,22 @@ public class DungeonLayoutFragment extends Fragment {
     public void setDungeonPeacesOnTouchListener() {
         for (int i = 0; i < DungeonsInfo.heightNum; i++) {
             for (int j = 0; j < DungeonsInfo.widthNum; j++) {
-                dungeonPeaces[i][j].setOnTouchListener(new onTouchListener(i, j)); } }
+                dungeonPeaces[i][j].setOnTouchListener(new onTouchListener(i, j));
+            }
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     public void resetDungeonPeacesOnTouchListener() {
         for (int i = 0; i < DungeonsInfo.heightNum; i++) {
             for (int j = 0; j < DungeonsInfo.widthNum; j++) {
-                dungeonPeaces[i][j].setOnTouchListener(null); } }
+                dungeonPeaces[i][j].setOnTouchListener(null);
+            }
+        }
     }
 
     @NonNull
-    public static DungeonLayoutFragment newInstance(String str){
+    public static DungeonLayoutFragment newInstance(String str) {
         DungeonLayoutFragment fragment = new DungeonLayoutFragment();
         Bundle barg = new Bundle();
         barg.putString(fragment.EXTRA_DATA, str);
@@ -176,16 +181,16 @@ public class DungeonLayoutFragment extends Fragment {
                     case MotionEvent.ACTION_UP: // 離されたとき
                         if (changeLayoutFlag) {
                             switch (DungeonsInfo.dungeonInfo[i][j]) {
-                                case DungeonFragment.NOT_DUNGEON_WALL:
+                                case DungeonsInfo.NOT_DUNGEON_WALL:
                                     ShowConfirmDPCostDialog(dungeonPeaces[i][j], "deleteWall", i, j);
                                     break;
-                                case DungeonFragment.DUNGEON_WALL:
+                                case DungeonsInfo.DUNGEON_WALL:
                                     ShowConfirmDPCostDialog(dungeonPeaces[i][j], "deleteDungeonWall", i, j);
                                     break;
-                                case DungeonFragment.DUNGEON_TRAP1:
+                                case DungeonsInfo.DUNGEON_TRAP1:
                                     ShowConfirmDPCostDialog(dungeonPeaces[i][j], "deleteDungeonTrap1", i, j);
                                     break;
-                                case DungeonFragment.DUNGEON_DOOR:
+                                case DungeonsInfo.DUNGEON_DOOR:
                                     ShowConfirmDPCostDialog(dungeonPeaces[i][j], "deleteDungeonDoor", i, j);
                             }
                         }
@@ -201,13 +206,12 @@ public class DungeonLayoutFragment extends Fragment {
                     n -> {
                         if (n == ConfirmDPCostDialog.POSITIVE_BUTTON) {
                             setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
-                            DungeonsInfo.dungeonInfo[i][j] = DungeonFragment.DUNGEON_NOTHING;
+                            DungeonsInfo.dungeonInfo[i][j] = DungeonsInfo.DUNGEON_NOTHING;
                         }
                     });
             confirmDPCostDialog.show(Objects.requireNonNull(getFragmentManager()), text);
         }
     }
-
 
     private class SetViewOnTouchListener implements View.OnTouchListener {
         final ImageView wallImage;
@@ -224,7 +228,9 @@ public class DungeonLayoutFragment extends Fragment {
 
         @Override
         public boolean onTouch(View view, @NonNull MotionEvent motionEvent) {
-            if (!moveLayoutFlag) { return true; }
+            if (!moveLayoutFlag) {
+                return true;
+            }
 
             int newDx = (int) (motionEvent.getRawX() / oneSize) * oneSize;
             int newDy = (int) (motionEvent.getRawY() / oneSize) * oneSize;
@@ -250,15 +256,15 @@ public class DungeonLayoutFragment extends Fragment {
                 case MotionEvent.ACTION_UP:
                     int j = (setX + dx) / oneSize;
                     int i = (setY + dy) / oneSize;
-                    if (DungeonsInfo.dungeonInfo[i][j] == DungeonFragment.DUNGEON_NOTHING) {
+                    if (DungeonsInfo.dungeonInfo[i][j] == DungeonsInfo.DUNGEON_NOTHING) {
                         switch (dungeonPeaceType) {
-                            case DungeonFragment.DUNGEON_WALL:
+                            case DungeonsInfo.DUNGEON_WALL:
                                 ShowSetDungeonPeaceDialog(i, j, "setDungeonWall");
                                 break;
-                            case DungeonFragment.DUNGEON_TRAP1:
+                            case DungeonsInfo.DUNGEON_TRAP1:
                                 ShowSetDungeonPeaceDialog(i, j, "setDungeonTrap1");
                                 break;
-                            case DungeonFragment.DUNGEON_DOOR:
+                            case DungeonsInfo.DUNGEON_DOOR:
                                 ShowSetDungeonPeaceDialog(i, j, "setDungeonDoor");
                         }
                     }
@@ -271,7 +277,8 @@ public class DungeonLayoutFragment extends Fragment {
         }
 
         public void ShowSetDungeonPeaceDialog(int i, int j, String text) {
-            SetDungeonPeaceDialog setDungeonPeaceDialog = new SetDungeonPeaceDialog(text, n->setDungeonLayout(n, i, j));
+            SetDungeonPeaceDialog setDungeonPeaceDialog = new SetDungeonPeaceDialog(text,
+                    n -> setDungeonLayout(n, i, j));
             setDungeonPeaceDialog.show(Objects.requireNonNull(getFragmentManager()), text);
         }
 
@@ -280,15 +287,15 @@ public class DungeonLayoutFragment extends Fragment {
                 setImage.setImageViewBitmapFromAsset(dungeonPeace, "");
                 setDungeonPeacesOnTouchListener();
 
-                if (dungeonPeaceType == DungeonFragment.DUNGEON_WALL) {
+                if (dungeonPeaceType == DungeonsInfo.DUNGEON_WALL) {
                     setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonWall.png");
-                    DungeonsInfo.dungeonInfo[i][j] = DungeonFragment.DUNGEON_WALL;
-                } else if (dungeonPeaceType == DungeonFragment.DUNGEON_TRAP1) {
+                    DungeonsInfo.dungeonInfo[i][j] = DungeonsInfo.DUNGEON_WALL;
+                } else if (dungeonPeaceType == DungeonsInfo.DUNGEON_TRAP1) {
                     setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/dungeonTrap1.png");
-                    DungeonsInfo.dungeonInfo[i][j] = DungeonFragment.DUNGEON_TRAP1;
-                } else if (dungeonPeaceType == DungeonFragment.DUNGEON_DOOR) {
+                    DungeonsInfo.dungeonInfo[i][j] = DungeonsInfo.DUNGEON_TRAP1;
+                } else if (dungeonPeaceType == DungeonsInfo.DUNGEON_DOOR) {
                     setImage.setImageViewBitmapFromAsset(dungeonPeaces[i][j], "dungeon/door.png");
-                    DungeonsInfo.dungeonInfo[i][j] = DungeonFragment.DUNGEON_DOOR;
+                    DungeonsInfo.dungeonInfo[i][j] = DungeonsInfo.DUNGEON_DOOR;
                 }
 
             } else {

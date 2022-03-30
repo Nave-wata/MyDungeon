@@ -26,15 +26,6 @@ public class DungeonFragment extends Fragment {
     private String UserName;
     private Button changeLayoutButton;
 
-    public static final int NOT_DUNGEON_WALL = 0;
-    public static final int DUNGEON_NOTHING = 1;
-    public static final int DUNGEON_I_DOOR = 2; // start
-    public static final int DUNGEON_O_DOOR = 3; // end
-    public static final int DUNGEON_BOSE = 4;
-    public static final int DUNGEON_DOOR = 5;
-    public static final int DUNGEON_WALL = 6;
-    public static final int DUNGEON_TRAP1 = 7;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
