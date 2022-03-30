@@ -2,9 +2,9 @@ package com.example.mainproject.asynchronous;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.widget.ImageView;
 
+import com.example.mainproject.BaseStatusFragment;
 import com.example.mainproject.DungeonsInfo;
 import com.example.mainproject.SetImage;
 
@@ -31,8 +31,6 @@ public class TimerPossession {
                         }
                     }
                 }
-                Log.v("My", "" + Y);
-
                 try {
                     Random random = new Random();
                     int randomInt = random.nextInt(3);
@@ -202,10 +200,20 @@ public class TimerPossession {
                     imageView.setY(19 * oneSize);
                     imageView.setZ(0);
 
+                    byte[] add_DP = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+                    byte[] add_MONEY = {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+                    BaseStatusFragment.DP = new BaseStatusFragment().Add(BaseStatusFragment.DP, add_DP);
+                    BaseStatusFragment.MONEY = new BaseStatusFragment().Add(BaseStatusFragment.MONEY, add_MONEY);
+                    String DP = new BaseStatusFragment().CastString(BaseStatusFragment.DP);
+                    String MONEY = new BaseStatusFragment().CastString(BaseStatusFragment.MONEY);
+                    DP = new BaseStatusFragment().setStringNumber(DP);
+                    MONEY = new BaseStatusFragment().setStringNumber(MONEY);
+                    BaseStatusFragment.text_DP.setText(DP);
+                    BaseStatusFragment.text_MONEY.setText(MONEY);
+
                     CharacterPosition_Runnable characterPosition_runnable = new CharacterPosition_Runnable();
                     characterPosition_runnable.run();
-                    SetCharacterImage_Runnable setCharacterImage_runnable = new SetCharacterImage_Runnable(setImage, imageView, oneSize);
-                    setCharacterImage_runnable.run();
+                    new SetCharacterImage_Runnable(setImage, imageView, oneSize).setCharacterImage_runnable.run();
 
                     handler.removeCallbacks(this);
                 }

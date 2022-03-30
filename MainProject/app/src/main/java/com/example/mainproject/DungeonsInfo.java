@@ -96,8 +96,7 @@ public class DungeonsInfo extends Fragment {
                 }
             }
         }
-        characterPosition_runnable = new TimerPossession.CharacterPosition_Runnable();
-        characterPosition_runnable.run();
+        new TimerPossession.CharacterPosition_Runnable().run();
     }
 
     @Override
