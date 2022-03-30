@@ -10,9 +10,11 @@ import com.example.mainproject.dungeon.DungeonFragment;
 
 import java.util.Random;
 
+
 public class TimerPossession {
     static final android.os.Handler handler = new Handler(Looper.getMainLooper());
     static boolean flag = false;
+
 
     public static class CharacterPosition_Runnable {
         int bX;
@@ -42,7 +44,6 @@ public class TimerPossession {
                     } else if (X == 9 && Y == 19) {
                         DungeonsInfo.characterInfo[18][X] = tmp;
                     } else if (DungeonsInfo.dungeonInfo[Y][X] == DungeonFragment.DUNGEON_BOSE) {
-                        //DungeonsInfo.characterInfo[19][9] = tmp; // ボスとの戦闘画像に切り替えて
                         flag = true;
                         handler.removeCallbacks(characterPosition_runnable);
 
@@ -144,7 +145,7 @@ public class TimerPossession {
                 }
                 if (flag) {
                     imageView.setZ(1);
-                    setImage.setImageViewBitmapFromAsset(imageView, "dungeon/fight1.png");
+                    new setFightImage(setImage, imageView).run();
                 } else {
                     imageView.setX(X * oneSize);
                     imageView.setY(Y * oneSize);
@@ -157,5 +158,39 @@ public class TimerPossession {
 
         public void run() { handler.post(setCharacterImage_runnable); }
         public void stop() { handler.removeCallbacks(setCharacterImage_runnable); }
+    }
+
+    public static class setFightImage {
+        SetImage setImage;
+        ImageView imageView;
+        int imageFlag = 0;
+
+        public setFightImage(SetImage setImage, ImageView imageView) {
+            this.setImage = setImage;
+            this.imageView = imageView;
+        }
+
+        final Runnable setFightImage_runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (imageFlag == 0) {
+                    setImage.setImageViewBitmapFromAsset(imageView, "dungeon/fight1.png");
+                    imageFlag = 1;
+                    handler.removeCallbacks(this);
+                    handler.postDelayed(this, 1000);
+                } else if (imageFlag == 1) {
+                    setImage.setImageViewBitmapFromAsset(imageView, "dungeon/fight2.png");
+                    imageFlag = 2;
+                    handler.removeCallbacks(this);
+                    handler.postDelayed(this, 1000);
+                } else if (imageFlag == 2) {
+                    setImage.setImageViewBitmapFromAsset(imageView, "");
+                    handler.removeCallbacks(this);
+                    flag = true;
+                }
+            }
+        };
+
+        public void run() { handler.post(setFightImage_runnable); }
     }
 }

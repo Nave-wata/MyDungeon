@@ -39,8 +39,8 @@ public class SignUp implements Runnable {
     final int nowMinute;
     final int nowSecond;
     final String row0  = "0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0";
-    final String row1  = "0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0";
-    final String row2  = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+    final String row1  = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
+    final String row2  = "0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0";
     final String row3  = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
     final String row4  = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
     final String row5  = "0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0";
