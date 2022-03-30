@@ -54,7 +54,7 @@ public class SetCharacterImageFragment extends Fragment {
             oneSize = width / widthNum;
 
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(oneSize, oneSize);
-            moveCharacterImage(imageView);
+            moveCharacterImage(setImage);
             imageView.setLayoutParams(layoutParams);
             dungeonBoss.setLayoutParams(layoutParams);
 
@@ -79,10 +79,10 @@ public class SetCharacterImageFragment extends Fragment {
         return  layout.getRootView();
     }
 
-    private void moveCharacterImage(ImageView imageView) {
+    private void moveCharacterImage(SetImage setImage) {
         imageView.setX(9 * oneSize);
         imageView.setY(19 * oneSize);
-        timerPossession = new TimerPossession(imageView, oneSize);
+        timerPossession = new TimerPossession(setImage, imageView, oneSize);
         timerPossession.setCharacterImage_runnable_Run();
     }
 
