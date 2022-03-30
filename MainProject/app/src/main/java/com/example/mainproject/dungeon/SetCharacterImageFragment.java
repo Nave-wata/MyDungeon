@@ -22,7 +22,7 @@ import java.util.Objects;
 public class SetCharacterImageFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
-    TimerPossession.setCharacterImage_Runnable setCharacterImage_runnable;
+    TimerPossession.SetCharacterImage_Runnable setCharacterImage_runnable;
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
     private int oneSize;
@@ -60,7 +60,7 @@ public class SetCharacterImageFragment extends Fragment {
 
             for (int i = 0; i < heightNum; i++) {
                 for (int j = 0; j < widthNum; j++) {
-                    if (DungeonsInfo.dungeonInfo[i][j] == DungeonFragment.DUNGEON_BOSE) {
+                    if (DungeonsInfo.dungeonInfo[i][j] == DungeonsInfo.DUNGEON_BOSE) {
                         dungeonBoss.setX(j * oneSize);
                         dungeonBoss.setY(i * oneSize);
                     }
@@ -76,13 +76,13 @@ public class SetCharacterImageFragment extends Fragment {
         layout.addView(imageView);
         layout.addView(dungeonBoss);
 
-        return  layout.getRootView();
+        return layout.getRootView();
     }
 
-    private void moveCharacterImage(SetImage setImage) {
+    public void moveCharacterImage(SetImage setImage) {
         imageView.setX(9 * oneSize);
         imageView.setY(19 * oneSize);
-        setCharacterImage_runnable = new TimerPossession.setCharacterImage_Runnable(setImage, imageView, oneSize);
+        setCharacterImage_runnable = new TimerPossession.SetCharacterImage_Runnable(setImage, imageView, oneSize);
         setCharacterImage_runnable.run();
     }
 
@@ -93,7 +93,7 @@ public class SetCharacterImageFragment extends Fragment {
     }
 
     @NonNull
-    public static SetCharacterImageFragment newInstance(String str){
+    public static SetCharacterImageFragment newInstance(String str) {
         SetCharacterImageFragment fragment = new SetCharacterImageFragment();
         Bundle barg = new Bundle();
         barg.putString(fragment.EXTRA_DATA, str);

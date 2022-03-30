@@ -2,19 +2,17 @@ package com.example.mainproject.asynchronous;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.mainproject.DungeonsInfo;
 import com.example.mainproject.SetImage;
-import com.example.mainproject.dungeon.DungeonFragment;
 
 import java.util.Random;
-
 
 public class TimerPossession {
     static final android.os.Handler handler = new Handler(Looper.getMainLooper());
     static boolean flag = false;
-
 
     public static class CharacterPosition_Runnable {
         int bX;
@@ -33,6 +31,7 @@ public class TimerPossession {
                         }
                     }
                 }
+                Log.v("My", "" + Y);
 
                 try {
                     Random random = new Random();
@@ -43,10 +42,9 @@ public class TimerPossession {
                         DungeonsInfo.characterInfo[19][X] = tmp;
                     } else if (X == 9 && Y == 19) {
                         DungeonsInfo.characterInfo[18][X] = tmp;
-                    } else if (DungeonsInfo.dungeonInfo[Y][X] == DungeonFragment.DUNGEON_BOSE) {
+                    } else if (DungeonsInfo.dungeonInfo[Y][X] == DungeonsInfo.DUNGEON_BOSE) {
                         flag = true;
                         handler.removeCallbacks(characterPosition_runnable);
-
                     } else if (X - bX < 0) {
                         if (randomInt == 0 && conditions1(X, Y + 1)) {
                             DungeonsInfo.characterInfo[Y + 1][X] = tmp;
@@ -109,22 +107,26 @@ public class TimerPossession {
         };
 
         public boolean conditions1(int X, int Y) {
-            return DungeonsInfo.dungeonInfo[Y][X] == DungeonFragment.DUNGEON_NOTHING ||
-                    DungeonsInfo.dungeonInfo[Y][X] == DungeonFragment.DUNGEON_O_DOOR ||
-                    DungeonsInfo.dungeonInfo[Y][X] == DungeonFragment.DUNGEON_BOSE;
+            return DungeonsInfo.dungeonInfo[Y][X] == DungeonsInfo.DUNGEON_NOTHING ||
+                    DungeonsInfo.dungeonInfo[Y][X] == DungeonsInfo.DUNGEON_O_DOOR ||
+                    DungeonsInfo.dungeonInfo[Y][X] == DungeonsInfo.DUNGEON_BOSE;
         }
 
-        public void run() { handler.post(characterPosition_runnable); }
-        public void stop() { handler.removeCallbacks(characterPosition_runnable); }
+        public void run() {
+            handler.post(characterPosition_runnable);
+        }
+
+        public void stop() {
+            handler.removeCallbacks(characterPosition_runnable);
+        }
     }
 
-
-    public static class setCharacterImage_Runnable {
+    public static class SetCharacterImage_Runnable {
         SetImage setImage;
         ImageView imageView;
         int oneSize;
 
-        public setCharacterImage_Runnable(SetImage setImage, ImageView imageView, int oneSize) {
+        public SetCharacterImage_Runnable(SetImage setImage, ImageView imageView, int oneSize) {
             this.setImage = setImage;
             this.imageView = imageView;
             this.oneSize = oneSize;
@@ -145,29 +147,36 @@ public class TimerPossession {
                 }
                 if (flag) {
                     imageView.setZ(1);
-                    new setFightImage(setImage, imageView).run();
+                    new setFightImage(setImage, imageView, oneSize).run();
+                    handler.removeCallbacks(this);
                 } else {
                     imageView.setX(X * oneSize);
                     imageView.setY(Y * oneSize);
+                    handler.removeCallbacks(this);
+                    handler.postDelayed(this, 1000);
                 }
-
-                handler.removeCallbacks(this);
-                handler.postDelayed(this, 1000);
             }
         };
 
-        public void run() { handler.post(setCharacterImage_runnable); }
-        public void stop() { handler.removeCallbacks(setCharacterImage_runnable); }
+        public void run() {
+            handler.post(setCharacterImage_runnable);
+        }
+
+        public void stop() {
+            handler.removeCallbacks(setCharacterImage_runnable);
+        }
     }
 
     public static class setFightImage {
         SetImage setImage;
         ImageView imageView;
+        int oneSize;
         int imageFlag = 0;
 
-        public setFightImage(SetImage setImage, ImageView imageView) {
+        public setFightImage(SetImage setImage, ImageView imageView, int oneSize) {
             this.setImage = setImage;
             this.imageView = imageView;
+            this.oneSize = oneSize;
         }
 
         final Runnable setFightImage_runnable = new Runnable() {
@@ -185,12 +194,26 @@ public class TimerPossession {
                     handler.postDelayed(this, 1000);
                 } else if (imageFlag == 2) {
                     setImage.setImageViewBitmapFromAsset(imageView, "");
+                    flag = false;
+
+                    setImage.setImageViewBitmapFromAsset(imageView, "character/enemy/hito.png");
+                    DungeonsInfo.characterInfo[19][9] = 1;
+                    imageView.setX(9 * oneSize);
+                    imageView.setY(19 * oneSize);
+                    imageView.setZ(0);
+
+                    CharacterPosition_Runnable characterPosition_runnable = new CharacterPosition_Runnable();
+                    characterPosition_runnable.run();
+                    SetCharacterImage_Runnable setCharacterImage_runnable = new SetCharacterImage_Runnable(setImage, imageView, oneSize);
+                    setCharacterImage_runnable.run();
+
                     handler.removeCallbacks(this);
-                    flag = true;
                 }
             }
         };
 
-        public void run() { handler.post(setFightImage_runnable); }
+        public void run() {
+            handler.post(setFightImage_runnable);
+        }
     }
 }
