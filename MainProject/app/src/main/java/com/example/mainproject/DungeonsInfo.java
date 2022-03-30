@@ -79,9 +79,7 @@ public class DungeonsInfo extends Fragment {
 
                     CharacterPositionsInfo();
                 },
-                e->{
-                    Log.v("MainActivity[Exception]", "" + e);
-                }
+                e-> Log.v("MainActivity[Exception]", "" + e)
         ).execute();
     }
 
