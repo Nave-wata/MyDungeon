@@ -21,7 +21,7 @@ import java.util.Objects;
 public class DungeonsInfo extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject";
     private String UserName;
-    private TimerPossession timerPossession;
+    private TimerPossession.CharacterPosition_Runnable characterPosition_runnable;
     public static final int widthNum = 20;
     public static final int heightNum = 20;
     public static final int[][] dungeonInfo = new int[heightNum][widthNum];
@@ -90,14 +90,14 @@ public class DungeonsInfo extends Fragment {
                 }
             }
         }
-        timerPossession = new TimerPossession();
-        timerPossession.characterPosition_runnable_Run();
+        characterPosition_runnable = new TimerPossession.CharacterPosition_Runnable();
+        characterPosition_runnable.run();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        timerPossession.characterPosition_runnable_Stop();
+        characterPosition_runnable.stop();
     }
 
     @NonNull

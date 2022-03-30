@@ -22,7 +22,7 @@ import java.util.Objects;
 public class SetCharacterImageFragment extends Fragment {
     final String EXTRA_DATA = "com.example.mainproject.dungeon";
     private String UserName;
-    TimerPossession timerPossession;
+    TimerPossession.setCharacterImage_Runnable setCharacterImage_runnable;
     private androidx.constraintlayout.widget.ConstraintLayout topContainer;
     private ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener;
     private int oneSize;
@@ -82,14 +82,14 @@ public class SetCharacterImageFragment extends Fragment {
     private void moveCharacterImage(SetImage setImage) {
         imageView.setX(9 * oneSize);
         imageView.setY(19 * oneSize);
-        timerPossession = new TimerPossession(setImage, imageView, oneSize);
-        timerPossession.setCharacterImage_runnable_Run();
+        setCharacterImage_runnable = new TimerPossession.setCharacterImage_Runnable(setImage, imageView, oneSize);
+        setCharacterImage_runnable.run();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        timerPossession.setCharacterImage_runnable_Stop();
+        setCharacterImage_runnable.stop();
     }
 
     @NonNull
