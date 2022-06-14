@@ -12,7 +12,7 @@ public class AppDatabaseSingleton {
         if (instance != null) {
             return instance;
         }
-        instance = Room.databaseBuilder(context, AppDatabase.class, "app.db").fallbackToDestructiveMigrationOnDowngrade().build();
+        instance = Room.databaseBuilder(context, AppDatabase.class, "main.db").fallbackToDestructiveMigrationOnDowngrade().build();
         return instance;
     }
 }

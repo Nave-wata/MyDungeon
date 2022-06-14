@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mainproject.asynchronous.AppDatabase;
 import com.example.mainproject.asynchronous.AppDatabaseSingleton;
+import com.example.mainproject.asynchronous.TimerPossession;
 import com.example.mainproject.asynchronous.usersapptimes.GetAppTimes;
 import com.example.mainproject.asynchronous.usersapptimes.UsersAppTimes;
 import com.example.mainproject.asynchronous.userspossession.GetPossession;
@@ -35,6 +36,7 @@ public class BaseStatusFragment extends Fragment {
     public static TextView text_DP;
     @SuppressLint("StaticFieldLeak")
     public static TextView text_MONEY;
+    private final TimerPossession timerPossession = new TimerPossession();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -108,11 +110,13 @@ public class BaseStatusFragment extends Fragment {
                 ).execute(),
                 e->{}
         ).execute();
+        timerPossession.Run();
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        timerPossession.Stop();
     }
 
     @NonNull
